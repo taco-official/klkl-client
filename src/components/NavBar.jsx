@@ -1,6 +1,7 @@
 import React from 'react'
 import { styled } from 'styled-components'
 import images from '../images/navbar/navImages'
+import theme from '../style/theme'
 
 const Header = styled.header`
   border-bottom: 1px solid #cccccc;
@@ -21,23 +22,23 @@ const MyNav = styled.nav`
     cursor: pointer;
 
     img {
-      width: 50px;
+      width: 30px;
     }
 
     h1 {
       margin-left: 10px;
-      font-size: 36px;
-      font-family: PartialSansKR;
+      font-size: ${theme.fontSize.titleXL};
+      font-family: ${theme.fontStyle.logo};
     }
   }
 
   button {
     width: 60px;
     height: 36px;
-    font-family: NanumSquareNeoExtraBold;
-    font-size: 14px;
+    font-family: ${theme.fontStyle.mainEB};
+    font-size: ${theme.fontSize.textMD};
     color: white;
-    background-color: #2fa7ff;
+    background-color: ${theme.color.main};
     border-radius: 8px;
     border: none;
     cursor: pointer;
@@ -50,10 +51,10 @@ const NavList = styled.ul`
   flex-grow: 0.9;
 
   li {
-    font-family: NanumSquareNeoBold;
+    font-family: ${theme.fontStyle.mainBold};
     display: flex;
     align-items: center;
-    font-size: 16px;
+    font-size: ${theme.fontSize.textMD};
     margin-left: 10px;
     cursor: pointer;
 
