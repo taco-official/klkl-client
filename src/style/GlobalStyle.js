@@ -45,6 +45,7 @@ const GlobalStyle = createGlobalStyle`
 	body {
 		font-family: NanumSquareNeo;
 	}
+
 `
 
 export default GlobalStyle

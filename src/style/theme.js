@@ -6,7 +6,7 @@ const theme = {
     lineGrey: '#CCCCCC',
     textGrey: '#8F8F8F',
   },
-  fontSize: {
+  size: {
     titleXL: '24px',
     titleLG: '21px',
     titleMD: '18px',
@@ -15,7 +15,7 @@ const theme = {
     textXS: '12px',
     text2XS: '10px',
   },
-  fontStyle: {
+  style: {
     main: 'NanumSquareNeo',
     mainBold: 'NanumSquareNeoBold',
     mainEB: 'NanumSquareNeoExtraBold',
