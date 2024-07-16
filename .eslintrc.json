@@ -6,6 +6,10 @@
   },
   "extends": ["eslint:recommended", "airbnb", "plugin:prettier/recommended"],
   "rules": {
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
+    "no-alert": "off",
+    "no-console": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".jsx"] }],
+    "react/require-default-props": "off",
+    "jsx-a11y/alt-text": ["off"]
   }
 }
