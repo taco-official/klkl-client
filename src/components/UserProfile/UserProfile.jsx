@@ -2,6 +2,7 @@ import { React, useState } from 'react'
 import styled from 'styled-components'
 import ProfileImage from './ProfileImage'
 import theme from '../../style/theme'
+import FollowButton from '../Common/Button'
 
 const testUser = {
   nickname: '귤락',
@@ -76,25 +77,4 @@ const SimpleUserInfo = styled.div`
     color: ${theme.color.textGrey};
     font-size: ${theme.size.textSM};
   }
-`
-
-const FollowButton = styled.button`
-  font-family: ${theme.style.mainBold};
-  font-size: ${theme.size.textSM};
-  padding: 10px 15px;
-  border-radius: 10px;
-  cursor: pointer;
-
-  justify-self: flex-end;
-
-  ${(props) =>
-    props.$state
-      ? `color: white;
-		background-color: ${theme.color.main};
-		border: none;
-	`
-      : `color: ${theme.color.main};
-		background-color: white;
-		border: 1px solid ${theme.color.main};
-	 `};
 `
