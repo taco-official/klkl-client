@@ -1,28 +1,25 @@
-/* eslint-disable prettier/prettier */
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { FaHeart } from 'react-icons/fa6'
-import LikeButton from '../Icons/LikeButton'
-import MoreButton from '../Icons/MoreButton'
-import Tag from '../Tag/Tag'
+import LikeButton from '../icons/LikeButton'
+import MoreButton from '../icons/MoreButton'
+import Tag from '../tag/Tag'
 
 const StyledReview = styled.div`
-  width: 240px;
-  height: 320px;
+  width: 13rem;
   background-color: white;
-  border: 1px solid #000000;
-  padding: 5px;
-  margin: 2px;
+  border: 0.1rem solid #000000;
+  padding: 0.5rem;
+  margin: 0.5rem;
   display: flex inline-block;
   flex-direction: column;
   justify-content: center;
 `
 
 const ThumbnailDiv = styled.div`
-  width: 240px;
-  height: 210px;
-  margin-bottom: 4px;
+  height: 13rem;
+  margin-bottom: 0.25rem;
   position: relative;
   justify-content: center;
 `
@@ -30,48 +27,52 @@ const ThumbnailDiv = styled.div`
 const LikeDiv = styled.div`
   display: inline-block;
   position: absolute;
-  bottom: 5px;
-  right: 15px;
-  :first-child {
-    font-weight:;
-  }
+  bottom: 0.3rem;
+  right: 0.7rem;
 `
 
-const DescriptionDiv = styled.div``
+const DescriptionDiv = styled.div`
+  padding: 0.1rem 0.1rem 0rem 0.1rem;
+`
 
 const SubDesDiv = styled.div`
+  padding-left: 0.1rem;
+  font-size: 0.8rem;
   display: flex;
   justify-content: space-between;
 `
 
 const CategoryDiv = styled.div`
   color: #8d8d8d;
-  font-size: 0.8rem;
-  margin-right: 4px;
   display: flex;
   align-items: center;
 `
 
 const TitleDiv = styled.div`
   font-size: 1.2rem;
-  margin-bottom: 3px;
-  margin-right: 1px;
+  margin-bottom: 0.1rem;
 `
 
 const TagsDiv = styled.div`
-  margin-bottom: 5px;
+  margin-bottom: 0.4rem;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
+  :nth-child(n) {
+    margin-right: 0.3rem;
+  }
+  :last-child {
+    margin-right: 0rem;
+  }
 `
 
 const LikeCountDiv = styled.div`
-  margin-top: 6px;
-  margin-right: 2px;
   display: flex;
+  font-size: 0.8rem;
+  color: red;
   align-items: flex-start;
   :first-child {
-    margin-right: 5px;
+    margin-right: 0.2rem;
   }
 `
 
@@ -97,7 +98,7 @@ function PreviewContent({
           <LikeButton
             userId={userId}
             productId={productId}
-            size={25}
+            size={22}
           />
         </LikeDiv>
       </ThumbnailDiv>
@@ -106,7 +107,7 @@ function PreviewContent({
           <CategoryDiv>
             {city} {subcategory}
           </CategoryDiv>
-          <MoreButton size={18} />
+          <MoreButton size="0.8rem" />
         </SubDesDiv>
         <TitleDiv id="productName">
           <b>{name}</b>
@@ -120,10 +121,7 @@ function PreviewContent({
           ))}
         </TagsDiv>
         <LikeCountDiv>
-          <FaHeart
-            color="red"
-            size={16}
-          />
+          <FaHeart color="red" />
           {likeCount}
         </LikeCountDiv>
       </DescriptionDiv>
