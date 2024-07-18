@@ -27,7 +27,7 @@ function MoreButton({ size = 22 }) {
 }
 
 MoreButton.propTypes = {
-  size: PropTypes.number,
+  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 }
 
 export default MoreButton
