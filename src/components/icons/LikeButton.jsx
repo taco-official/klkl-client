@@ -16,7 +16,7 @@ function postLikeContent() {}
 function deleteLikeContent() {}
 // likeId
 
-function LikeButton({ productId, userId = undefined, size = 24, text }) {
+function LikeButton({ productId, userId = undefined, size = 22, text }) {
   let isLiked
   let likeId
   if (userId === undefined) {
@@ -69,7 +69,7 @@ function LikeButton({ productId, userId = undefined, size = 24, text }) {
 LikeButton.propTypes = {
   productId: PropTypes.number.isRequired,
   userId: PropTypes.number,
-  size: PropTypes.number,
+  size: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   text: PropTypes.string,
 }
 
