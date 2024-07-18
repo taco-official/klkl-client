@@ -2,7 +2,7 @@ import { React, useState } from 'react'
 import styled from 'styled-components'
 import ProfileImage from './ProfileImage'
 import theme from '../../style/theme'
-import FollowButton from '../Common/Button'
+import StyledButton from '../Common/StyledButton'
 
 const testUser = {
   nickname: '귤락',
@@ -26,20 +26,20 @@ export default function UserProfile() {
         </div>
         <div className="profile--user__introduce">{testUser.introduce}</div>
       </SimpleUserInfo>
-      <FollowButton
+      <StyledButton
         onClick={() => {
           changeFollow(!isFollowed)
         }}
         $state={isFollowed}
       >
         {isFollowed ? '팔로우' : '팔로우 취소'}
-      </FollowButton>
+      </StyledButton>
     </ProfileBox>
   )
 }
 
 const ProfileBox = styled.div`
-  width: 80%;
+  width: 60%;
   height: 120px;
 
   margin: auto;

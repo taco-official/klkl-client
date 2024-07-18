@@ -1,6 +1,7 @@
 const theme = {
   color: {
     main: '#2FA7FF',
+    mainDark: '#1f87df',
     category: '#82CAFF',
     tag: '#DDF1FF',
     lineGrey: '#CCCCCC',
