@@ -4,10 +4,8 @@ import PropTypes from 'prop-types'
 // import axios from 'axios'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 
-const IconButton = styled.button`
-  width: 24px;
-  height: 24px;
-  border: 0px;
+const IconButton = styled.div`
+  border: 0rem;
   background-color: transparent;
 `
 
