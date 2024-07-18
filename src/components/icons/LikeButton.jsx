@@ -9,9 +9,12 @@ const IconButton = styled.div`
   background-color: transparent;
 `
 
-function getLikeContent(productId, userId) {}
-function postLikeContent(productId, userId) {}
-function deleteLikeContent(likeId) {}
+function getLikeContent() {}
+// productId, userId
+function postLikeContent() {}
+// productId, userId
+function deleteLikeContent() {}
+// likeId
 
 function LikeButton({ productId, userId = undefined, size = 24, text }) {
   let isLiked
@@ -57,7 +60,7 @@ function LikeButton({ productId, userId = undefined, size = 24, text }) {
           color="#8D8D8D"
           size={size}
         />
-      )}{' '}
+      )}
       {text || null}
     </IconButton>
   )
