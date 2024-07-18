@@ -3,10 +3,9 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 const StyleTag = styled.span`
-  font-size: 0.8rem;
-  padding: 5px 8px;
-  border-radius: 5px;
-  margin: 1px 3px;
+  font-size: 0.625rem;
+  padding: 0.25rem 0.3rem;
+  border-radius: 0.3rem;
   display: flex;
   justify-content: center;
   algn-items: center;
