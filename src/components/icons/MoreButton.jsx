@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { IoMdMore } from 'react-icons/io'
 
 const IconButton = styled.button`
-  border: 0px;
+  border: 0rem;
   background-color: transparent;
 `
 
