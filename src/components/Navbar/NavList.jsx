@@ -1,10 +1,19 @@
 import { React, useState } from 'react'
 import { styled } from 'styled-components'
-import { navImages } from '../../images/navbar/navImages'
+import { IoSearchSharp } from 'react-icons/io5'
+import { HiPaperAirplane } from 'react-icons/hi2'
+import { FaHeart } from 'react-icons/fa6'
+import { TbBellFilled } from 'react-icons/tb'
 import theme from '../../style/theme'
 
 export default function NavList() {
   const texts = ['둘러보기', '검색', '좋아요', '알림']
+  const icons = [
+    <HiPaperAirplane />,
+    <IoSearchSharp />,
+    <FaHeart />,
+    <TbBellFilled />,
+  ]
   const [currentPage, changePage] = useState('')
 
   return (
@@ -18,7 +27,7 @@ export default function NavList() {
               changePage(text)
             }}
           >
-            <NavButtonImage src={navImages[i]} />
+            {icons[i]}
             <p>{text}</p>
           </NavButtonLi>
         )
@@ -31,12 +40,6 @@ const NavUl = styled.ul`
   display: flex;
   flex-grow: 0.9;
   height: 100%;
-`
-
-const NavButtonImage = styled.img`
-  width: ${theme.size.textMD};
-  margin-right: 5px;
-  cursor: pointer;
 `
 
 const NavButtonLi = styled.li`
@@ -54,12 +57,16 @@ const NavButtonLi = styled.li`
   cursor: pointer;
 
   &:nth-child(3) {
-    margin-left: auto; // 3번째와 4번째 li만 오른쪽으로 밀어내기
+    margin-left: auto;
   }
 
   &:hover {
     font-family: ${theme.style.mainEB};
     color: ${theme.color.main};
     border-bottom: 2px solid ${theme.color.main};
+  }
+
+  p {
+    margin-left: 3px;
   }
 `
