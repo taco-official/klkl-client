@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 const ProfileImage = styled.img`
-  height: ${(props) => props.size};
+  height: ${(props) => props.$size};
   aspect-ratio: 1 / 1;
   background-color: lightgrey;
   border-radius: 50%;
