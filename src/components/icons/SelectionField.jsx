@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { MdClose as CloseIcon } from 'react-icons/md'
+import { IoClose as CloseIcon } from 'react-icons/io5'
 
 const StyledField = styled.div`
   padding: 0.3rem 0.35rem 0.25rem 0.35rem;
@@ -14,17 +14,18 @@ const StyledField = styled.div`
   display: flex inline;
   justify-content: space-between;
   align-items: center;
-  :first-child {
+  :nth-child(n) {
     margin-top: 0.05358rem;
+    margin-right: 0.3rem;
   }
-  :nth-child(2) {
-    margin-left: 0.3rem;
+  :last-child {
+    margin-top: 0rem;
+    margin-right: 0rem;
   }
 `
 
-function SelectionField({ text }) {
+function SelectionField({ text = '도쿄' }) {
   const [selected, setSelected] = useState(false)
-
   const handleSelect = useCallback(() => {
     setSelected((current) => !current)
   }, [])
@@ -37,7 +38,7 @@ function SelectionField({ text }) {
       <span>{text}</span>
       {selected ? (
         <CloseIcon
-          size="1rem"
+          size="0.8rem"
           onClick={handleSelect}
         />
       ) : null}
@@ -46,7 +47,7 @@ function SelectionField({ text }) {
 }
 
 SelectionField.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 }
 
 export default SelectionField
