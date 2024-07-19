@@ -1,6 +1,7 @@
 import React from 'react'
 import PreviewContent from './components/preview/PreviewContent'
 import SelectionField from './components/icons/SelectionField'
+import TabletButton from './components/icons/TabletButton'
 
 const userId = 54329
 const product = {
@@ -26,6 +27,11 @@ function App() {
         likeCount={product.likeCount}
       />
       <SelectionField text="서울" />
+      <TabletButton
+        text="서울"
+        size="0.8rem"
+        ChildComponent={SelectionField}
+      />
     </div>
   )
 }
