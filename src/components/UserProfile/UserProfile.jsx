@@ -17,7 +17,7 @@ export default function UserProfile() {
     <ProfileBox>
       <ProfileImage
         src="https://cdn.download.ams.birds.cornell.edu/api/v1/asset/140329191/1800"
-        size="80%"
+        $size="80%"
       />
       <SimpleUserInfo>
         <div className="profile--user__nickname">{testUser.nickname}</div>
