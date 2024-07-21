@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { FaHeart } from 'react-icons/fa6'
-import LikeButton from '../icons/LikeButton'
-import MoreButton from '../icons/MoreButton'
+import LikeButton from '../Button/LikeButton'
+import MoreButton from '../Button/MoreButton'
 import Tag from '../tag/Tag'
 
 const StyledReview = styled.div`
