@@ -8,7 +8,7 @@ const StyleTag = styled.span`
   border-radius: 0.3rem;
   display: flex;
   justify-content: center;
-  algn-items: center;
+  align-items: center;
 `
 const BlueTag = styled(StyleTag)`
   color: #2fa7ff;
