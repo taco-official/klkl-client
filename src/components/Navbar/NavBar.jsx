@@ -16,7 +16,14 @@ export default function NavBar() {
           <h1>끼룩끼룩</h1>
         </Logo>
         <NavList />
-        <button type="button">로그인</button>
+        <button
+          type="button"
+          onClick={() => {
+            document.getElementById('login-modal').showModal()
+          }}
+        >
+          로그인
+        </button>
       </MyNav>
     </Header>
   )
@@ -27,7 +34,8 @@ const Header = styled.header`
 `
 
 const MyNav = styled.nav`
-  padding: 0px 100px;
+  width: 80%;
+  margin: 0 auto;
   height: 60px;
   min-width: 637px;
 
