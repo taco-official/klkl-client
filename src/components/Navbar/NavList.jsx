@@ -48,12 +48,11 @@ const NavButtonLi = styled.li`
   height: 100%;
   margin-left: 10px;
 
-  font-family: ${(props) =>
-    props.$isbold ? theme.style.mainEB : theme.style.mainBold};
+  font-family: ${theme.style.mainBold};
+  font-size: ${theme.size.textSM};
   color: ${(props) => (props.$isbold ? theme.color.main : 'black')};
   border-bottom: ${(props) =>
     props.$isbold ? `2px solid ${theme.color.main}` : null};
-
   cursor: pointer;
 
   &:nth-child(3) {
@@ -61,7 +60,6 @@ const NavButtonLi = styled.li`
   }
 
   &:hover {
-    font-family: ${theme.style.mainEB};
     color: ${theme.color.main};
     border-bottom: 2px solid ${theme.color.main};
   }

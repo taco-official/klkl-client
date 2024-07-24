@@ -44,8 +44,8 @@ const MyNav = styled.nav`
   justify-content: space-between;
 
   button {
-    width: 60px;
-    height: 36px;
+    width: 3.5rem;
+    height: 1.875rem;
     font-family: ${theme.style.mainBold};
     font-size: ${theme.size.textXS};
     color: white;
