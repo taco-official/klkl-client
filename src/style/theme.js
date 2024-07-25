@@ -20,6 +20,7 @@ const theme = {
     main: 'NanumSquareNeo',
     mainBold: 'NanumSquareNeoBold',
     mainEB: 'NanumSquareNeoExtraBold',
+    pen: 'ContinuousEN',
     logo: 'PartialSansKR',
   },
 }
