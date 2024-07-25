@@ -1,15 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-// import PropTypes from 'prop-types'
 import { IoIosClose } from 'react-icons/io'
 import { KakaoLogo, NaverLogo } from '../../images/logos'
 import theme from '../../style/theme'
 
 export default function LoginModal() {
   const closeModalButton = () => document.getElementById('login-modal').close()
+  const closeModalAway = (e) => {
+    if (e.target === e.currentTarget)
+      document.getElementById('login-modal').close()
+  }
 
   return (
-    <ModalWindow onClick={closeModalButton}>
+    <ModalWindow onClick={closeModalAway}>
       <ModalInside>
         <IoIosClose onClick={closeModalButton} />
         <h2>로그인</h2>
