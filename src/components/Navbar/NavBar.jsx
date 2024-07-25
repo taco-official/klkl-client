@@ -35,9 +35,10 @@ const Header = styled.header`
 
 const MyNav = styled.nav`
   width: 80%;
-  margin: 0 auto;
+  min-width: 1100px;
+
+  padding: 0 5%;
   height: 60px;
-  min-width: 637px;
 
   display: flex;
   align-items: center;
