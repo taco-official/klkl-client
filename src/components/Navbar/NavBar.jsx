@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import imgLogo from '../../images/navbar/navImages'
 import theme from '../../style/theme'
+import LoginModal from '../Common/LoginModal'
 import NavList from './NavList'
 
 export default function NavBar() {
@@ -16,8 +17,16 @@ export default function NavBar() {
           <h1>끼룩끼룩</h1>
         </Logo>
         <NavList />
-        <button type="button">로그인</button>
+        <button
+          type="button"
+          onClick={() => {
+            document.getElementById('login-modal').showModal()
+          }}
+        >
+          로그인
+        </button>
       </MyNav>
+      <LoginModal />
     </Header>
   )
 }
@@ -27,17 +36,20 @@ const Header = styled.header`
 `
 
 const MyNav = styled.nav`
-  padding: 0px 100px;
+  width: 80%;
+  min-width: 1100px;
+
+  padding: 0 5%;
+  margin: 0 auto;
   height: 60px;
-  min-width: 637px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   button {
-    width: 60px;
-    height: 36px;
+    width: 3.5rem;
+    height: 1.875rem;
     font-family: ${theme.style.mainBold};
     font-size: ${theme.size.textXS};
     color: white;

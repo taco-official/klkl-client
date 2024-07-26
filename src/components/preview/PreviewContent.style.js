@@ -7,7 +7,7 @@ const PreviewContainer = styled.div`
   border: 0.1rem solid black;
   padding: 0.5rem;
   margin: 0.5rem;
-  display: flex inline-block;
+  display: flex;
   flex-direction: column;
   justify-content: center;
 `

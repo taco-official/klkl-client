@@ -44,6 +44,7 @@ const GlobalStyle = createGlobalStyle`
 
 	body {
 		font-family: NanumSquareNeo;
+		user-select: none;
 	}
 
 `

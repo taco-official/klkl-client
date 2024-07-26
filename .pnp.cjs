@@ -40,10 +40,12 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.2.1"],\
           ["eslint-plugin-react", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:7.35.0"],\
           ["eslint-plugin-react-hooks", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:4.6.2"],\
+          ["flickity", "npm:2.3.0"],\
           ["prettier", "npm:3.3.2"],\
           ["prop-types", "npm:15.8.1"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:18.3.1"],\
+          ["react-flickity-component", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:4.0.7"],\
           ["react-icons", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.2.1"],\
           ["react-router-dom", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:6.25.1"],\
           ["react-scripts", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.0.1"],\
@@ -8038,6 +8040,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["desandro-matches-selector", [\
+      ["npm:2.0.2", {\
+        "packageLocation": "./.yarn/cache/desandro-matches-selector-npm-2.0.2-a090716f80-f4b1f42e6c.zip/node_modules/desandro-matches-selector/",\
+        "packageDependencies": [\
+          ["desandro-matches-selector", "npm:2.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["destroy", [\
       ["npm:1.2.0", {\
         "packageLocation": "./.yarn/cache/destroy-npm-1.2.0-6a511802e2-bd7633942f.zip/node_modules/destroy/",\
@@ -9393,6 +9404,15 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["ev-emitter", [\
+      ["npm:1.1.1", {\
+        "packageLocation": "./.yarn/cache/ev-emitter-npm-1.1.1-2ff3287350-332dcb444d.zip/node_modules/ev-emitter/",\
+        "packageDependencies": [\
+          ["ev-emitter", "npm:1.1.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["eventemitter3", [\
       ["npm:4.0.7", {\
         "packageLocation": "./.yarn/cache/eventemitter3-npm-4.0.7-7afcdd74ae-5f6d97cbcb.zip/node_modules/eventemitter3/",\
@@ -9720,6 +9740,16 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["fizzy-ui-utils", [\
+      ["npm:2.0.7", {\
+        "packageLocation": "./.yarn/cache/fizzy-ui-utils-npm-2.0.7-9aeef3d5b1-4c36d45db4.zip/node_modules/fizzy-ui-utils/",\
+        "packageDependencies": [\
+          ["fizzy-ui-utils", "npm:2.0.7"],\
+          ["desandro-matches-selector", "npm:2.0.2"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["flat-cache", [\
       ["npm:3.2.0", {\
         "packageLocation": "./.yarn/cache/flat-cache-npm-3.2.0-9a887f084e-b76f611bd5.zip/node_modules/flat-cache/",\
@@ -9737,6 +9767,21 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/flatted-npm-3.3.1-458870f59b-324166b125.zip/node_modules/flatted/",\
         "packageDependencies": [\
           ["flatted", "npm:3.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["flickity", [\
+      ["npm:2.3.0", {\
+        "packageLocation": "./.yarn/cache/flickity-npm-2.3.0-f8dbb34ca5-75922e9e01.zip/node_modules/flickity/",\
+        "packageDependencies": [\
+          ["flickity", "npm:2.3.0"],\
+          ["desandro-matches-selector", "npm:2.0.2"],\
+          ["ev-emitter", "npm:1.1.1"],\
+          ["fizzy-ui-utils", "npm:2.0.7"],\
+          ["get-size", "npm:2.0.3"],\
+          ["unidragger", "npm:2.4.0"],\
+          ["unipointer", "npm:2.4.0"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -10026,6 +10071,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/get-package-type-npm-0.1.0-6c70cdc8ab-e34cdf447f.zip/node_modules/get-package-type/",\
         "packageDependencies": [\
           ["get-package-type", "npm:0.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["get-size", [\
+      ["npm:2.0.3", {\
+        "packageLocation": "./.yarn/cache/get-size-npm-2.0.3-79d8722c4b-c9703caa61.zip/node_modules/get-size/",\
+        "packageDependencies": [\
+          ["get-size", "npm:2.0.3"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -10622,6 +10676,16 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/ignore-npm-5.3.1-f6947c5df7-703f7f45ff.zip/node_modules/ignore/",\
         "packageDependencies": [\
           ["ignore", "npm:5.3.1"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["imagesloaded", [\
+      ["npm:4.1.4", {\
+        "packageLocation": "./.yarn/cache/imagesloaded-npm-4.1.4-e6d88db668-06d5195f9d.zip/node_modules/imagesloaded/",\
+        "packageDependencies": [\
+          ["imagesloaded", "npm:4.1.4"],\
+          ["ev-emitter", "npm:1.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -12257,10 +12321,12 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-prettier", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.2.1"],\
           ["eslint-plugin-react", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:7.35.0"],\
           ["eslint-plugin-react-hooks", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:4.6.2"],\
+          ["flickity", "npm:2.3.0"],\
           ["prettier", "npm:3.3.2"],\
           ["prop-types", "npm:15.8.1"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:18.3.1"],\
+          ["react-flickity-component", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:4.0.7"],\
           ["react-icons", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.2.1"],\
           ["react-router-dom", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:6.25.1"],\
           ["react-scripts", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.0.1"],\
@@ -15688,6 +15754,38 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
+    ["react-flickity-component", [\
+      ["npm:4.0.7", {\
+        "packageLocation": "./.yarn/cache/react-flickity-component-npm-4.0.7-732412228c-f66eacc817.zip/node_modules/react-flickity-component/",\
+        "packageDependencies": [\
+          ["react-flickity-component", "npm:4.0.7"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:4.0.7", {\
+        "packageLocation": "./.yarn/__virtual__/react-flickity-component-virtual-333e21ce6c/0/cache/react-flickity-component-npm-4.0.7-732412228c-f66eacc817.zip/node_modules/react-flickity-component/",\
+        "packageDependencies": [\
+          ["react-flickity-component", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:4.0.7"],\
+          ["@types/flickity", null],\
+          ["@types/react", null],\
+          ["@types/react-dom", null],\
+          ["flickity", "npm:2.3.0"],\
+          ["imagesloaded", "npm:4.1.4"],\
+          ["prop-types", "npm:15.8.1"],\
+          ["react", "npm:18.3.1"],\
+          ["react-dom", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/flickity",\
+          "@types/react-dom",\
+          "@types/react",\
+          "flickity",\
+          "react-dom",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
     ["react-icons", [\
       ["npm:5.2.1", {\
         "packageLocation": "./.yarn/cache/react-icons-npm-5.2.1-e27cbb9ccf-9d52b975af.zip/node_modules/react-icons/",\
@@ -17926,6 +18024,26 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/unicode-property-aliases-ecmascript-npm-2.1.0-46779595f4-50ded3f8c9.zip/node_modules/unicode-property-aliases-ecmascript/",\
         "packageDependencies": [\
           ["unicode-property-aliases-ecmascript", "npm:2.1.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["unidragger", [\
+      ["npm:2.4.0", {\
+        "packageLocation": "./.yarn/cache/unidragger-npm-2.4.0-55c3fce496-108d519d2a.zip/node_modules/unidragger/",\
+        "packageDependencies": [\
+          ["unidragger", "npm:2.4.0"],\
+          ["unipointer", "npm:2.4.0"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["unipointer", [\
+      ["npm:2.4.0", {\
+        "packageLocation": "./.yarn/cache/unipointer-npm-2.4.0-69e11e2e23-cb824e5dce.zip/node_modules/unipointer/",\
+        "packageDependencies": [\
+          ["unipointer", "npm:2.4.0"],\
+          ["ev-emitter", "npm:1.1.1"]\
         ],\
         "linkType": "HARD"\
       }]\
