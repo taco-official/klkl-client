@@ -47,6 +47,7 @@ const NavButtonLi = styled.li`
   align-items: center;
   height: 100%;
   margin-left: 10px;
+  padding: 0 7px;
 
   font-family: ${theme.style.mainBold};
   font-size: ${theme.size.textSM};

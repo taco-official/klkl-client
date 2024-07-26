@@ -7,7 +7,7 @@ const flickityOptions = {
   wrapAround: true,
   setGallerySize: false,
   autoPlay: true,
-  pauseAutoPlayOnHover: false,
+  pauseAutoPlayOnHover: true,
 }
 
 export default function Banner({ contents }) {

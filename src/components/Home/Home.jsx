@@ -3,8 +3,9 @@ import styled from 'styled-components'
 import Navbar from '../Navbar/NavBar'
 import Contries from './Contries'
 import Banner from './MainBanner'
-import { ReviewCarousels, ReviewCarousels2 } from './ReviewCarousel'
+import ReviewCarousels from './ReviewCarousel'
 import theme from '../../style/theme'
+import Footer from '../Footer/Footer'
 
 const arr = [
   'https://i.ytimg.com/vi/bLj_mR4Fnls/maxresdefault.jpg',
@@ -14,106 +15,135 @@ const arr = [
 
 const Test = [
   {
-    key: 'content.name',
+    key: 'name',
     userId: 1,
     productId: 1,
-    city: 'content.city',
-    subcategory: 'content.subcategory',
-    name: 'content.name',
-    tags: ['content.tags'],
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
     likeCount: 42,
   },
   {
-    key: 'content.name',
+    key: 'name',
     userId: 1,
     productId: 1,
-    city: 'content.city',
-    subcategory: 'content.subcategory',
-    name: 'content.name',
-    tags: ['content.tags'],
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
     likeCount: 42,
   },
   {
-    key: 'content.name',
+    key: 'name',
     userId: 1,
     productId: 1,
-    city: 'content.city',
-    subcategory: 'content.subcategory',
-    name: 'content.name',
-    tags: ['content.tags'],
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
     likeCount: 42,
   },
   {
-    key: 'content.name',
+    key: 'name',
     userId: 1,
     productId: 1,
-    city: 'content.city',
-    subcategory: 'content.subcategory',
-    name: 'content.name',
-    tags: ['content.tags'],
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
     likeCount: 42,
   },
   {
-    key: 'content.name',
+    key: 'name',
     userId: 1,
     productId: 1,
-    city: 'content.city',
-    subcategory: 'content.subcategory',
-    name: 'content.name',
-    tags: ['content.tags'],
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
     likeCount: 42,
   },
   {
-    key: 'content.name',
+    key: 'name',
     userId: 1,
     productId: 1,
-    city: 'content.city',
-    subcategory: 'content.subcategory',
-    name: 'content.name',
-    tags: ['content.tags'],
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
     likeCount: 42,
   },
   {
-    key: 'content.name',
+    key: 'name',
     userId: 1,
     productId: 1,
-    city: 'content.city',
-    subcategory: 'content.subcategory',
-    name: 'content.name',
-    tags: ['content.tags'],
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
     likeCount: 42,
   },
   {
-    key: 'content.name',
+    key: 'name',
     userId: 1,
     productId: 1,
-    city: 'content.city',
-    subcategory: 'content.subcategory',
-    name: 'content.name',
-    tags: ['content.tags'],
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
     likeCount: 42,
   },
   {
-    key: 'content.name',
+    key: 'name',
     userId: 1,
     productId: 1,
-    city: 'content.city',
-    subcategory: 'content.subcategory',
-    name: 'content.name',
-    tags: ['content.tags'],
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
     likeCount: 42,
   },
   {
-    key: 'content.name',
+    key: 'name',
     userId: 1,
     productId: 1,
-    city: 'content.city',
-    subcategory: 'content.subcategory',
-    name: 'content.name',
-    tags: ['content.tags'],
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
+    likeCount: 42,
+  },
+  {
+    key: 'name',
+    userId: 1,
+    productId: 1,
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
+    likeCount: 42,
+  },
+  {
+    key: 'name',
+    userId: 1,
+    productId: 1,
+    city: 'city',
+    subcategory: 'subcategory',
+    name: 'name',
+    tags: ['tags'],
     likeCount: 42,
   },
 ]
+
+const flickityOptions = {
+  wrapAround: false,
+  setGallerySize: false,
+  groupCells: 4,
+  pageDots: false,
+  resize: true,
+  contain: true,
+}
 
 export default function Home() {
   return (
@@ -123,10 +153,17 @@ export default function Home() {
         <Contries />
         <Banner contents={arr} />
         <h2>인기 리뷰</h2>
-        <ReviewCarousels contents={Test} />
-        <h1>인기 리뷰</h1>
-        <ReviewCarousels2 contents={Test} />
+        <ReviewCarousels
+          contents={Test}
+          options={flickityOptions}
+        />
+        <h2>신규 리뷰</h2>
+        <ReviewCarousels
+          contents={Test}
+          options={flickityOptions}
+        />
       </MainArea>
+      <Footer />
     </>
   )
 }
@@ -139,12 +176,6 @@ const MainArea = styled.main`
   h2 {
     padding: 20px 0;
     border-bottom: 1px solid ${theme.color.lineGrey};
-    font-family: ${theme.style.mainEB};
-    font-size: ${theme.size.titleLG};
-  }
-
-  h1 {
-    padding: 10px 0;
     font-family: ${theme.style.mainEB};
     font-size: ${theme.size.titleLG};
   }

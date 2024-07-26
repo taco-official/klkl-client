@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import imgLogo from '../../images/navbar/navImages'
 import theme from '../../style/theme'
+import LoginModal from '../Common/LoginModal'
 import NavList from './NavList'
 
 export default function NavBar() {
@@ -25,6 +26,7 @@ export default function NavBar() {
           로그인
         </button>
       </MyNav>
+      <LoginModal />
     </Header>
   )
 }
@@ -38,6 +40,7 @@ const MyNav = styled.nav`
   min-width: 1100px;
 
   padding: 0 5%;
+  margin: 0 auto;
   height: 60px;
 
   display: flex;

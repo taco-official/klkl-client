@@ -2,7 +2,7 @@ import Flickity from 'react-flickity-component'
 import styled from 'styled-components'
 
 const StyledFlickity = styled(Flickity)`
-  width: 80%;
+  width: 100%;
   height: 18.75rem;
   min-width: 68.75rem;
 
@@ -95,6 +95,10 @@ const StyledFlickity = styled(Flickity)`
 
   .previous {
     left: 0.625rem;
+  }
+
+  .flickity-button:disabled {
+    display: none;
   }
 `
 

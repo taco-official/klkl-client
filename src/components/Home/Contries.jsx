@@ -43,7 +43,8 @@ const ImageWrapper = styled.div`
   width: 100%;
   height: 300px;
   display: flex;
-  margin: 30px 0;
+  justify-content: space-evenly;
+  margin: 30px auto;
 
   :nth-child(even) {
     align-self: flex-end;
@@ -55,7 +56,7 @@ const ImageWrapper = styled.div`
 `
 
 const CountryImgae = styled.div`
-  width: 13.75rem;
+  width: 250px;
   aspect-ratio: 1 / 1;
   border-radius: 50%;
 

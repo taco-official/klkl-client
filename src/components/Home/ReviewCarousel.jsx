@@ -4,29 +4,24 @@ import styled from 'styled-components'
 import StyledFlickity from '../Common/Carousel'
 import PreviewContent from '../preview/PreviewContent'
 
-const flickityOptions = {
-  wrapAround: false,
-  setGallerySize: false,
-  groupCells: 4,
-  pageDots: false,
-}
-
-function ReviewCarousels({ contents }) {
+export default function ReviewCarousels({ contents, options }) {
   return (
-    <ReviewCarousel options={flickityOptions}>
+    <ReviewCarousel options={options}>
       {contents.map((info) => {
         return (
-          <PreviewContent
-            className="carousel-cell"
-            key={info.name}
-            userId={info.id}
-            productId={info.id}
-            city={info.city}
-            subcategory={info.subcategory}
-            name={info.name}
-            tags={info.tags}
-            likeCount={info.likeCount}
-          />
+          <div className="carousel-cell">
+            <PreviewContent
+              key={info.name}
+              userId={info.id}
+              productId={info.id}
+              city={info.city}
+              subcategory={info.subcategory}
+              name={info.name}
+              tags={info.tags}
+              likeCount={info.likeCount}
+              style={{ transform: 'scale(1.5, 1.5)' }}
+            />
+          </div>
         )
       })}
     </ReviewCarousel>
@@ -34,40 +29,8 @@ function ReviewCarousels({ contents }) {
 }
 ReviewCarousels.propTypes = {
   contents: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.objectOf().isRequired,
 }
-
-const flickityOptions2 = {
-  wrapAround: false,
-  setGallerySize: false,
-  pageDots: false,
-}
-
-function ReviewCarousels2({ contents }) {
-  return (
-    <ReviewCarousel options={flickityOptions2}>
-      {contents.map((info) => {
-        return (
-          <PreviewContent
-            className="carousel-cell"
-            key={info.name}
-            userId={info.id}
-            productId={info.id}
-            city={info.city}
-            subcategory={info.subcategory}
-            name={info.name}
-            tags={info.tags}
-            likeCount={info.likeCount}
-          />
-        )
-      })}
-    </ReviewCarousel>
-  )
-}
-ReviewCarousels2.propTypes = {
-  contents: PropTypes.arrayOf(PropTypes.string).isRequired,
-}
-
-export { ReviewCarousels, ReviewCarousels2 }
 
 const ReviewCarousel = styled(StyledFlickity)`
   width: 100%;
@@ -76,11 +39,9 @@ const ReviewCarousel = styled(StyledFlickity)`
   margin: 20px 0;
 
   .carousel-cell {
-    width: 100%;
+    width: 250px;
     height: 100%;
-    border-radius: 5px;
-    border-radius: 8px;
-    object-fit: cover;
+    margin: 0 10px;
     cursor: pointer;
   }
 
