@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import { IconContext } from 'react-icons'
 // import axios from 'axios'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
+import IconTextButton from './IconTextButton'
 import theme from '../../style/theme'
 
 function getLikeContent() {}
@@ -12,12 +12,7 @@ function postLikeContent() {}
 function deleteLikeContent() {}
 // likeId
 
-function LikeButton({
-  productId,
-  userId = undefined,
-  iconSize = '1.3rem',
-  text = null,
-}) {
+function LikeButton({ productId, userId = undefined, iconSize = '1.3rem' }) {
   const [likeId, setLikeId] = useState(undefined)
   const [isLiked, setIsLiked] = useState(false)
 
@@ -54,12 +49,10 @@ function LikeButton({
   )
 
   return (
-    <IconContext.Provider value={iconValue}>
-      <div>
-        {isLiked ? <FaHeart /> : <FaRegHeart />}
-        {text || null}
-      </div>
-    </IconContext.Provider>
+    <IconTextButton
+      iconValue={iconValue}
+      Icon={isLiked ? <FaHeart /> : <FaRegHeart />}
+    />
   )
 }
 
@@ -67,7 +60,6 @@ LikeButton.propTypes = {
   productId: PropTypes.number.isRequired,
   userId: PropTypes.number,
   iconSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  text: PropTypes.string,
 }
 
 export default LikeButton
