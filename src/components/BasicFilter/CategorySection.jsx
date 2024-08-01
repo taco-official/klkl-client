@@ -1,17 +1,15 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
-import {
-  useSelectedCategory,
-  useSelectedSubCategory,
-} from './BasicFilterContext'
+import useSelectedCategory from '../../hooks/useSelectedCategory'
+import useSelectedSubCategory from '../../hooks/useSelectedSubCategory'
+import SubCategoryContainer from './SubCategoryContainer'
 import {
   SectionContainer,
   Title,
   CheckboxContainer,
   CheckboxWrapper,
 } from './BasicFilter.style'
-import SubCategoryContainer from './SubCategoryContainer'
 
 function CategoryCheckBox({ category }) {
   const { selectedCategory, setSelectedCategory } = useSelectedCategory()

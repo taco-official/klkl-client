@@ -1,10 +1,4 @@
-import React, {
-  createContext,
-  useState,
-  useCallback,
-  useMemo,
-  useContext,
-} from 'react'
+import React, { createContext, useState, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 
 const BasicFilterContext = createContext()
@@ -60,41 +54,4 @@ BasicFilterProvider.propTypes = {
   children: PropTypes.element.isRequired,
 }
 
-const useBasicFilter = () => {
-  const context = useContext(BasicFilterContext)
-  if (context === undefined) {
-    throw new Error('useBasicFilter must be used within a BasicFilterProvider')
-  }
-  return context
-}
-
-const useSelectedCountry = () => {
-  const { selectedCountry, setSelectedCountry } = useBasicFilter()
-  return { selectedCountry, setSelectedCountry }
-}
-
-const useSelectedCity = () => {
-  const { selectedCity, setSelectedCity } = useBasicFilter()
-  return { selectedCity, setSelectedCity }
-}
-
-const useSelectedCategory = () => {
-  const { selectedCategory, setSelectedCategory } = useBasicFilter()
-  return { selectedCategory, setSelectedCategory }
-}
-
-const useSelectedSubCategory = () => {
-  const { selectedSubCategory, setSelectedSubCategory } = useBasicFilter()
-  return { selectedSubCategory, setSelectedSubCategory }
-}
-
-export {
-  BasicFilterProvider,
-  useBasicFilter,
-  useSelectedCountry,
-  useSelectedCity,
-  useSelectedCategory,
-  useSelectedSubCategory,
-}
-
-export default BasicFilterContext
+export { BasicFilterContext, BasicFilterProvider }
