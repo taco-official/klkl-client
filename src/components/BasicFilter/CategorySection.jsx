@@ -5,8 +5,13 @@ import {
   useSelectedCategory,
   useSelectedSubCategory,
 } from './BasicFilterContext'
-import SubCategoryCheckbox from './SubCategoryContainer'
-import { FilterContainer, SubTitle } from './BasicFilter.style'
+import {
+  SectionContainer,
+  Title,
+  CheckboxContainer,
+  CheckboxWrapper,
+} from './BasicFilter.style'
+import SubCategoryContainer from './SubCategoryContainer'
 
 function CategoryCheckBox({ category }) {
   const { selectedCategory, setSelectedCategory } = useSelectedCategory()
@@ -47,18 +52,20 @@ function CategoryCheckBox({ category }) {
 
   return (
     <>
-      <Checkbox
-        checked={selectedCategory.some(
-          (selected) => selected.id === category.categoryId
-        )}
-        onChange={handleCategoryCheckboxChange}
-      >
-        {category.name}
-      </Checkbox>
+      <CheckboxWrapper>
+        <Checkbox
+          checked={selectedCategory.some(
+            (selected) => selected.id === category.categoryId
+          )}
+          onChange={handleCategoryCheckboxChange}
+        >
+          {category.name}
+        </Checkbox>
+      </CheckboxWrapper>
       {selectedCategory.some(
         (selected) => selected.id === category.categoryId
       ) ? (
-        <SubCategoryCheckbox categoryId={category.categoryId} />
+        <SubCategoryContainer categoryId={category.categoryId} />
       ) : null}
     </>
   )
@@ -94,26 +101,26 @@ function CategoryContainer() {
   }, [fetchCategories])
 
   if (categories.length === 0)
-    return <FilterContainer>카테고리가 없습니다.</FilterContainer>
+    return <CheckboxContainer>카테고리가 없습니다.</CheckboxContainer>
 
   return (
-    <FilterContainer>
+    <CheckboxContainer>
       {categories.map((category) => (
         <CategoryCheckBox
           key={category.categoryId}
           category={category}
         />
       ))}
-    </FilterContainer>
+    </CheckboxContainer>
   )
 }
 
 function CategorySection() {
   return (
-    <div>
-      <SubTitle>상품</SubTitle>
+    <SectionContainer>
+      <Title>상품</Title>
       <CategoryContainer />
-    </div>
+    </SectionContainer>
   )
 }
 

@@ -1,13 +1,16 @@
-import React, { useState, useCallback, useEffect, Fragment } from 'react'
-import { Checkbox } from 'antd'
+import React, { useState, useCallback, useEffect } from 'react'
+import { Radio } from 'antd'
 import PropTypes from 'prop-types'
 // import useAxios from 'use-axios-client'
 import { useSelectedCountry, useSelectedCity } from './BasicFilterContext'
 import ShowHideButton from '../Button/ShowHideButton'
 import {
-  FilterContainer,
+  SectionContainer,
+  Title,
+  RegionContainer,
   SubTitle,
   RegionBox,
+  CheckboxContainer,
   CheckboxWrapper,
 } from './BasicFilter.style'
 
@@ -32,12 +35,14 @@ function CountryBox({ country }) {
   }, [selectedCountry])
 
   return (
-    <Checkbox
-      checked={selectedCountry && selectedCountry.id === country.countryId}
-      onChange={handleCheckboxChange}
-    >
-      {country.name}
-    </Checkbox>
+    <CheckboxWrapper>
+      <Radio
+        checked={selectedCountry && selectedCountry.id === country.countryId}
+        onChange={handleCheckboxChange}
+      >
+        {country.name}
+      </Radio>
+    </CheckboxWrapper>
   )
 }
 
@@ -84,18 +89,18 @@ function CountryCheckbox({ regionId }) {
   }, [regionId, fetchCountries])
 
   if (countries.length === 0) {
-    return <CheckboxWrapper>나라가 없습니다.</CheckboxWrapper>
+    return <CheckboxContainer>나라가 없습니다.</CheckboxContainer>
   }
 
   return (
-    <CheckboxWrapper>
+    <CheckboxContainer>
       {countries.map((country) => (
         <CountryBox
           key={country.countryId}
           country={country}
         />
       ))}
-    </CheckboxWrapper>
+    </CheckboxContainer>
   )
 }
 
@@ -144,37 +149,37 @@ function RegionCollapse() {
   }
 
   if (regions.length === 0) {
-    return <FilterContainer>지역이 없습니다.</FilterContainer>
+    return <RegionContainer>지역이 없습니다.</RegionContainer>
   }
 
   return (
-    <FilterContainer>
+    <RegionContainer>
       {regions.map((region) => (
-        <Fragment key={region.regionId}>
-          <RegionBox style={{ display: 'flex' }}>
-            <div>{region.name}</div>
+        <RegionBox key={region.regionId}>
+          <SubTitle style={{ display: 'flex' }}>
+            <div style={{ display: 'inline-block' }}>{region.name}</div>
             <ShowHideButton
               handleClick={() =>
                 updateElement(region.regionId, !isOpen[region.regionId])
               }
               isOption={isOpen[region.regionId]}
             />
-          </RegionBox>
+          </SubTitle>
           {isOpen[region.regionId] && (
             <CountryCheckbox regionId={region.regionId} />
           )}
-        </Fragment>
+        </RegionBox>
       ))}
-    </FilterContainer>
+    </RegionContainer>
   )
 }
 
 function CountrySection() {
   return (
-    <div>
-      <SubTitle>국가</SubTitle>
+    <SectionContainer>
+      <Title>국가</Title>
       <RegionCollapse />
-    </div>
+    </SectionContainer>
   )
 }
 

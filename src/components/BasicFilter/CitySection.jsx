@@ -2,7 +2,12 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
 import { useSelectedCountry, useSelectedCity } from './BasicFilterContext'
-import { FilterContainer, SubTitle } from './BasicFilter.style'
+import {
+  SectionContainer,
+  Title,
+  CheckboxContainer,
+  CheckboxWrapper,
+} from './BasicFilter.style'
 
 function CityCheckBox({ city }) {
   const { selectedCity, setSelectedCity } = useSelectedCity()
@@ -22,12 +27,14 @@ function CityCheckBox({ city }) {
   }, [selectedCity])
 
   return (
-    <Checkbox
-      checked={selectedCity.some((selected) => selected.id === city.cityId)}
-      onChange={handleCheckboxChange}
-    >
-      {city.name}
-    </Checkbox>
+    <CheckboxWrapper>
+      <Checkbox
+        checked={selectedCity.some((selected) => selected.id === city.cityId)}
+        onChange={handleCheckboxChange}
+      >
+        {city.name}
+      </Checkbox>
+    </CheckboxWrapper>
   )
 }
 
@@ -80,28 +87,28 @@ function CityContainer() {
   }, [selectedCountry, fetchCities])
 
   if (!selectedCountry || !selectedCountry.id)
-    return <FilterContainer>국가를 선택하세요.</FilterContainer>
+    return <CheckboxContainer>국가를 선택하세요.</CheckboxContainer>
   if (cities.length === 0)
-    return <FilterContainer>도시가 없습니다.</FilterContainer>
+    return <CheckboxContainer>도시가 없습니다.</CheckboxContainer>
 
   return (
-    <FilterContainer>
+    <CheckboxContainer>
       {cities.map((city) => (
         <CityCheckBox
           key={city.cityId}
           city={city}
         />
       ))}
-    </FilterContainer>
+    </CheckboxContainer>
   )
 }
 
 function CitySection() {
   return (
-    <div>
-      <SubTitle>도시</SubTitle>
+    <SectionContainer>
+      <Title>도시</Title>
       <CityContainer />
-    </div>
+    </SectionContainer>
   )
 }
 
