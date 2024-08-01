@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Checkbox } from 'antd'
 import { useSelectedSubCategory } from './BasicFilterContext'
-import { FilterContainer } from './BasicFilter.style'
+import { CheckboxContainer, CheckboxWrapper } from './BasicFilter.style'
 
 function SubCategoryCheckbox({ subCategory }) {
   const { selectedSubCategory, setSelectedSubCategory } =
@@ -36,14 +36,16 @@ function SubCategoryCheckbox({ subCategory }) {
   }, [selectedSubCategory])
 
   return (
-    <Checkbox
-      checked={selectedSubCategory.some(
-        (selected) => selected.id === subCategory.subCategoryId
-      )}
-      onChange={handleCheckboxChange}
-    >
-      {subCategory.name}
-    </Checkbox>
+    <CheckboxWrapper>
+      <Checkbox
+        checked={selectedSubCategory.some(
+          (selected) => selected.id === subCategory.subCategoryId
+        )}
+        onChange={handleCheckboxChange}
+      >
+        {subCategory.name}
+      </Checkbox>
+    </CheckboxWrapper>
   )
 }
 
@@ -107,14 +109,14 @@ function SubCategoryContainer({ categoryId }) {
   }, [fetchSubCategories, categoryId])
 
   return (
-    <FilterContainer>
+    <CheckboxContainer>
       {subCategories.map((subCategory) => (
         <SubCategoryCheckbox
           key={subCategory.subCategoryId}
           subCategory={subCategory}
         />
       ))}
-    </FilterContainer>
+    </CheckboxContainer>
   )
 }
 
