@@ -2,7 +2,8 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
 // import useAxios from 'use-axios-client'
-import { useSelectedCountry, useSelectedCity } from './BasicFilterContext'
+import useSelectedCountry from '../../hooks/useSelectedCountry'
+import useSelectedCity from '../../hooks/useSelectedCity'
 import ShowHideButton from '../Button/ShowHideButton'
 import {
   SectionContainer,

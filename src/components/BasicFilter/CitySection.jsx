@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
-import { useSelectedCountry, useSelectedCity } from './BasicFilterContext'
+import useSelectedCountry from '../../hooks/useSelectedCountry'
+import useSelectedCity from '../../hooks/useSelectedCity'
 import {
   SectionContainer,
   Title,
