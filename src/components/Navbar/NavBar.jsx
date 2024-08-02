@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import imgLogo from '../../images/navbar/navImages'
 import theme from '../../style/theme'
@@ -6,6 +6,11 @@ import LoginModal from '../Common/LoginModal'
 import NavList from './NavList'
 
 export default function NavBar() {
+  const [isModalOpen, changeModalState] = useState(false)
+
+  const openModal = () => changeModalState(true)
+  const closeModal = useCallback(() => changeModalState(false), [])
+
   return (
     <Header>
       <MyNav>
@@ -19,14 +24,15 @@ export default function NavBar() {
         <NavList />
         <button
           type="button"
-          onClick={() => {
-            document.getElementById('login-modal').showModal()
-          }}
+          onClick={openModal}
         >
           로그인
         </button>
       </MyNav>
-      <LoginModal />
+      <LoginModal
+        isModalOpen={isModalOpen}
+        closeModal={closeModal}
+      />
     </Header>
   )
 }
