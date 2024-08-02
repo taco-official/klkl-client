@@ -10,6 +10,8 @@
     "no-console": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/require-default-props": "off",
-    "jsx-a11y/alt-text": ["off"]
+    "jsx-a11y/alt-text": "off",
+    "guard-for-in": "off",
+    "no-plusplus": "off"
   }
 }
