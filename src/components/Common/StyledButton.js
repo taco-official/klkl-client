@@ -4,19 +4,23 @@ import theme from '../../style/theme'
 const StyledButton = styled.button`
   font-family: ${theme.style.mainBold};
   font-size: ${theme.size.textSM};
-  padding: 10px 15px;
-  border-radius: 10px;
+  padding: 0.625rem 0.9375rem;
+  border-radius: 0.625rem;
   cursor: pointer;
 
   justify-self: flex-end;
+  transition:
+    background-color 0.3s ease-in-out,
+    opacity 0.3s ease-in-out;
+
+  margin-right: 0.625rem;
 
   &:hover {
     background: ${theme.color.mainDark};
-    transition: background-color 0.3s ease;
   }
 
-  ${(props) =>
-    props.$state
+  ${({ $state }) =>
+    $state
       ? `color: white;
 		background-color: ${theme.color.main};
 		border: none;
@@ -26,15 +30,36 @@ const StyledButton = styled.button`
 			transition: background-color 0.3s ease;
 		}
 	`
-      : `color: ${theme.color.main};
+      : `color: ${theme.color.textGrey};
 		background-color: white;
-		border: 1px solid ${theme.color.main};
+		border: 1px solid ${theme.color.lineGrey};
 	
 		&:hover {
 			background: #eeeeee;
 			transition: background-color 0.3s ease;
 		}
 	`};
+
+  width: ${({ $width }) => $width};
+
+  &:disabled {
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  @keyframes anime {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  animation: anime ease-in 0.3s;
 `
 
 export default StyledButton

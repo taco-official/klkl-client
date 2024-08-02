@@ -47,6 +47,9 @@ const GlobalStyle = createGlobalStyle`
 		user-select: none;
 	}
 
+	body::-webkit-scrollbar {
+		display: none;
+	}
 `
 
 export default GlobalStyle
