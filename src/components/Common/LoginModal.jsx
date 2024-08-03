@@ -46,12 +46,14 @@ const ModalWindow = styled.div`
   top: 0;
   left: 0;
 
+  z-index: 100;
+
   background-color: rgba(0, 0, 0, 0.1);
 `
 
 const ModalInside = styled.div`
   width: 25rem;
-  height: 30rem;
+  height: 21.875rem;
 
   display: flex;
   flex-direction: column;
