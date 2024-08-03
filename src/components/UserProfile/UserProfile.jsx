@@ -1,8 +1,8 @@
 import { React, useState } from 'react'
 import styled from 'styled-components'
+import { Button, ConfigProvider } from 'antd'
 import ProfileImage from './ProfileImage'
 import theme from '../../style/theme'
-import StyledButton from '../Common/StyledButton'
 
 const testUser = {
   nickname: '귤락',
@@ -16,8 +16,8 @@ export default function UserProfile() {
   return (
     <ProfileBox>
       <ProfileImage
-        src="https://cdn.download.ams.birds.cornell.edu/api/v1/asset/140329191/1800"
-        $size="80%"
+        src="https://i.ytimg.com/vi/Hoi0IAl74wY/maxresdefault.jpg"
+        $size="100%"
       />
       <SimpleUserInfo>
         <div className="profile--user__nickname">{testUser.nickname}</div>
@@ -26,25 +26,22 @@ export default function UserProfile() {
         </div>
         <div className="profile--user__introduce">{testUser.introduce}</div>
       </SimpleUserInfo>
-      <StyledButton
-        onClick={() => {
-          changeFollow(!isFollowed)
-        }}
-        $state={isFollowed}
-      >
-        {isFollowed ? '팔로우' : '팔로우 취소'}
-      </StyledButton>
+      <ConfigProvider theme={{ token: { colorPrimary: theme.color.main } }}>
+        <Button
+          onClick={() => changeFollow(!isFollowed)}
+          type={isFollowed ? 'primary' : 'default'}
+          style={{ fontFamily: theme.style.mainBold }}
+        >
+          {isFollowed ? '팔로우' : '팔로우 취소'}
+        </Button>
+      </ConfigProvider>
     </ProfileBox>
   )
 }
 
 const ProfileBox = styled.div`
-  width: 60%;
-  height: 120px;
-
-  margin: auto;
-  border-bottom: 1px solid ${theme.color.lineGrey};
-  padding: 0 30px;
+  width: 100%;
+  height: 80px;
 
   display: flex;
   align-items: center;
@@ -52,21 +49,21 @@ const ProfileBox = styled.div`
 
 const SimpleUserInfo = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-direction: column;
   flex-grow: 1;
 
-  height: 55%;
+  height: 100%;
 
   margin-left: 15px;
 
   .profile--user__nickname {
     font-family: ${theme.style.mainBold};
-    font-size: ${theme.size.titleLG};
+    font-size: ${theme.size.titleSM};
   }
 
   .profile--user__like {
-    font-size: ${theme.size.textSM};
+    font-size: ${theme.size.textXS};
     color: ${theme.color.textGrey};
     span {
       color: red;
@@ -75,6 +72,6 @@ const SimpleUserInfo = styled.div`
 
   .profile--user__introduce {
     color: ${theme.color.textGrey};
-    font-size: ${theme.size.textSM};
+    font-size: ${theme.size.textXS};
   }
 `
