@@ -7,9 +7,8 @@ import NumberInputForm from './Commons/NumberInputForm'
 import { SmoothAnimation } from './Commons/CommonVariable'
 import { reviewDataType } from './Commons/reviewReducer'
 
-const { TextArea } = Input
-
 export default function InfoSubmitPage({ review, setReviewContent }) {
+  console.log(review)
   return (
     <>
       <h2>
@@ -19,33 +18,33 @@ export default function InfoSubmitPage({ review, setReviewContent }) {
       <Wrapper>
         <h3>상품명</h3>
         <Input
+          showCount
           maxLength={50}
           defaultValue={review.name}
           placeholder="상품명을 입력해주세요"
-          onChange={(e) => setReviewContent('SET_NAME', e.target.value)}
-          style={{ fontSize: theme.size.textSM, fontFamily: theme.style.main }}
+          onBlur={(e) => setReviewContent('SET_NAME', e.target.value)}
+          style={{ fontSize: theme.size.textSM }}
           size="large"
         />
-        <span>{`${review.name.length}/50`}</span>
       </Wrapper>
       <Wrapper>
         <h3>후기</h3>
-        <TextArea
+        <Input.TextArea
+          showCount
           maxLength={1000}
-          rows={6}
           defaultValue={review.description}
           placeholder="리뷰를 입력해 주세요"
-          onChange={(e) => setReviewContent('SET_DESCRIPTION', e.target.value)}
+          onBlur={(e) => setReviewContent('SET_DESCRIPTION', e.target.value)}
           size="large"
-          style={{ fontSize: theme.size.textSM, fontFamily: theme.style.main }}
+          autoSize={{ minRows: 3 }}
+          style={{ fontSize: theme.size.textSM }}
         />
-        <span>{`${review.description.length}/1000`}</span>
       </Wrapper>
       <Wrapper>
         <h3>구매가격</h3>
         <NumberInputForm
           setPrice={(num) => setReviewContent('SET_PRICE', num)}
-          defaultValue={review.price}
+          defaultValue={review.price ? review.price : null}
         />
       </Wrapper>
       <Wrapper>
@@ -70,12 +69,7 @@ const Wrapper = styled.div`
 
   ${SmoothAnimation}
 
-  & > span {
-    font-size: 0.625rem;
-    color: ${theme.color.textGrey};
-
-    position: absolute;
-    right: 0.3125rem;
-    bottom: -0.9375rem;
+  span > span {
+    font-size: 10px;
   }
 `
