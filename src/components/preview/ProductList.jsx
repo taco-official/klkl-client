@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import PreviewContent from './PreviewContent'
 import LoadingContent from './LoadingContent'
 
-const StyledList = styled.div`
+const StyledList = styled.article`
   display: inline-grid;
   grid-template-columns: repeat(3, minmax(auto, 13rem));
 `
@@ -21,6 +21,7 @@ const dummyProductList = [
     city: 'Seoul',
     subcategory: 'Portrait',
     tags: ['귤락', '10기', '레노버', '42Guest'],
+    rates: 4.5,
     likeCount: 100,
   },
   {
@@ -29,6 +30,7 @@ const dummyProductList = [
     city: 'Olympic',
     subcategory: 'Ohhamma',
     tags: ['오야붕', '함대장', '망치'],
+    rates: 4.5,
     likeCount: 101,
   },
   {
@@ -37,6 +39,7 @@ const dummyProductList = [
     city: 'Naksungdae',
     subcategory: 'Fxck-end',
     tags: ['100m', '패럴림픽'],
+    rates: 4.5,
     likeCount: 101,
   },
 ]
@@ -72,6 +75,13 @@ function ProductList() {
     getProductList()
   }, [])
 
+  // productId={content.id}
+  // city={content.city}
+  // subcategory={content.subcategory}
+  // name={content.name}
+  // tags={content.tags}
+  // likeCount={content.likeCount}
+
   return (
     <StyledList>
       {loading ? (
@@ -81,12 +91,7 @@ function ProductList() {
           <PreviewContent
             key={content.name}
             userId={user.id}
-            productId={content.id}
-            city={content.city}
-            subcategory={content.subcategory}
-            name={content.name}
-            tags={content.tags}
-            likeCount={content.likeCount}
+            productData={content}
           />
         ))
       )}
