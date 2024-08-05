@@ -27,14 +27,15 @@ function LikeButton({ productId, userId = undefined, iconSize = '1.3rem' }) {
   const handleLiked = useCallback(() => {
     if (userId === undefined) {
       alert('로그인이 필요합니다.')
-    } else if (!isLiked) {
-      postLikeContent(productId, userId)
-      // axios.post('POST API', { product_id: productId, user_id: userId })
-      setIsLiked(true)
     } else {
-      deleteLikeContent(likeId)
-      // axios.delete(`DELETE API/${likeId}`)
-      setIsLiked(false)
+      if (!isLiked) {
+        postLikeContent(productId, userId)
+        // axios.post('POST API', { product_id: productId, user_id: userId })
+      } else {
+        deleteLikeContent(likeId)
+        // axios.delete(`DELETE API/${likeId}`)
+      }
+      setIsLiked((current) => !current)
     }
   }, [isLiked, userId, productId, likeId])
 
