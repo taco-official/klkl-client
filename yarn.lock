@@ -63,7 +63,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@ant-design/icons@npm:^5.3.7":
+"@ant-design/icons@npm:^5.3.7, @ant-design/icons@npm:^5.4.0":
   version: 5.4.0
   resolution: "@ant-design/icons@npm:5.4.0"
   dependencies:
