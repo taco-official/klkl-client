@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-const FilterContainer = styled.div`
+const FilterContainer = styled.aside`
   display: flex;
   flex-direction: column;
-  width: 13.375rem;
+  width: 10.625rem;
 `
 
 const SectionContainer = styled.div``
@@ -12,7 +12,13 @@ const Title = styled.div``
 
 const RegionContainer = styled.div``
 
-const SubTitle = styled.div``
+const SubTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  .inBlock {
+    display: inline-block;
+  }
+`
 
 const RegionBox = styled.div``
 
