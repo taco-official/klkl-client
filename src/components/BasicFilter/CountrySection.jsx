@@ -157,8 +157,8 @@ function RegionCollapse() {
     <RegionContainer>
       {regions.map((region) => (
         <RegionBox key={region.regionId}>
-          <SubTitle style={{ display: 'flex' }}>
-            <div style={{ display: 'inline-block' }}>{region.name}</div>
+          <SubTitle>
+            <div className="inBlock">{region.name}</div>
             <ShowHideButton
               handleClick={() =>
                 updateElement(region.regionId, !isOpen[region.regionId])
