@@ -20,14 +20,10 @@ function CountryBox({ country }) {
   const { setSelectedCity } = useSelectedCity()
 
   const handleCheckboxChange = useCallback(() => {
-    if (selectedCountry && selectedCountry.id === country.countryId) {
-      setSelectedCountry({})
-    } else {
-      setSelectedCountry({
-        id: country.countryId,
-        name: country.name,
-      })
-    }
+    setSelectedCountry({
+      id: country.countryId,
+      name: country.name,
+    })
     setSelectedCity([])
   }, [selectedCountry, setSelectedCountry, country])
 
@@ -38,7 +34,7 @@ function CountryBox({ country }) {
   return (
     <CheckboxWrapper>
       <Radio
-        checked={selectedCountry && selectedCountry.id === country.countryId}
+        checked={selectedCountry.id === country.countryId}
         onChange={handleCheckboxChange}
       >
         {country.name}
