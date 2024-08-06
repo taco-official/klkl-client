@@ -4,7 +4,7 @@ import { StarFilled } from '@ant-design/icons'
 import { FaHeart } from 'react-icons/fa6'
 import LikeButton from '../Button/LikeButton'
 import MoreButton from '../Button/MoreButton'
-import Tag from '../tag/Tag'
+import { BlueTag } from '../tag/Tags.style'
 import {
   PreviewContainer,
   ThumbnailContainer,
@@ -47,10 +47,7 @@ function PreviewContent({ userId = undefined, productData }) {
         </TitleContainer>
         <TagsContainer>
           {productData.tags.map((tag) => (
-            <Tag
-              key={tag}
-              tagName={tag}
-            />
+            <BlueTag key={tag}>{tag}</BlueTag>
           ))}
         </TagsContainer>
         <IconContainer>
