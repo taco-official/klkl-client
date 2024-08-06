@@ -1,15 +1,13 @@
 import React from 'react'
-import { BasicFilterProvider } from '../../contexts/BasicFilterContext'
-import { AdditionalFilterProvider } from '../../contexts/AdditionalFilterContext'
 import FilterSection from './FilterSection'
+import { FilterContainer } from './AdditionalFilter.style'
 
 function AdditionalFilter() {
   return (
-    <BasicFilterProvider>
-      <AdditionalFilterProvider>
-        <FilterSection />
-      </AdditionalFilterProvider>
-    </BasicFilterProvider>
+    <FilterContainer>
+      <h5>추가 필터</h5>
+      <FilterSection />
+    </FilterContainer>
   )
 }
 

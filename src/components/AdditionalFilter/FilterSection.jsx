@@ -2,12 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Switch } from 'antd'
 import useSelectedFilter from '../../hooks/useSelectedFilter'
-import {
-  FilterContainer,
-  Title,
-  FilterBox,
-  SubTitle,
-} from './AdditionalFilter.style'
+import { FilterBox, SubTitle } from './AdditionalFilter.style'
 
 function FilterSelect({ filter }) {
   const { selectedFilter, setSelectedFilter } = useSelectedFilter()
@@ -87,15 +82,14 @@ function FilterSection() {
   }
 
   return (
-    <FilterContainer>
-      <Title>추가 필터</Title>
+    <>
       {filters.map((filter) => (
         <FilterSelect
           key={filter.filterId}
           filter={filter}
         />
       ))}
-    </FilterContainer>
+    </>
   )
 }
 
