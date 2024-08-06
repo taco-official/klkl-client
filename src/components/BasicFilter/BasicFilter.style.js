@@ -1,9 +1,13 @@
 import styled from 'styled-components'
 
 const FilterContainer = styled.aside`
+  width: 10.625rem;
   display: flex;
   flex-direction: column;
-  width: 10.625rem;
+  :nth-child(n) {
+    flex-basis: content;
+    flex-shrink: 0;
+  }
 `
 
 const SectionContainer = styled.div``
