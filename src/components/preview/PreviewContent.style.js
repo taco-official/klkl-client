@@ -32,38 +32,37 @@ const maskBackground = css`
 `
 
 const PreviewContainer = styled.div`
-  width: 13rem;
+  width: 12.5rem;
   background-color: off-white;
   padding: 0.5rem;
-  border: 0.1rem solid transparent;
-  margin: 0.5rem;
-  margin-bottom: 0.7rem;
+  border: 0.0625rem solid transparent;
   display: flex inline-block;
   flex-direction: column;
   justify-content: center;
 `
 
 const ThumbnailContainer = styled.div`
-  height: 13rem;
-  border: 0.09rem solid transparent;
+  width: 12.5rem;
+  height: 12.5rem;
+  border: 0.0625rem solid transparent;
   position: relative;
   justify-content: center;
-  img {
+  > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  :last-child {
+  > :last-child {
     position: absolute;
     bottom: 0.6rem;
     right: 0.8rem;
   }
   &.loading {
-    border: 0.09rem solid ${theme.color.lineGrey};
+    border-color: ${theme.color.lineGrey};
     display: flex;
     align-items: center;
     justify-content: center;
-    :last-child {
+    > :nth-child(n) {
       position: relative;
       bottom: 0;
       right: 0;
@@ -103,10 +102,10 @@ const CategoryWrapper = styled.div`
   padding-left: 0.1rem;
   display: flex inline-block;
   justify-content: space-between;
-  :nth-child(n) {
+  > :nth-child(n) {
     display: inline-block;
   }
-  #city {
+  #country {
     margin-right: 0.5rem;
   }
   &.loading {
@@ -130,11 +129,8 @@ const TagsContainer = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  :nth-child(n) {
+  > :not(:last-child) {
     margin-right: 0.45rem;
-  }
-  :last-child {
-    margin-right: 0rem;
   }
   &.loading {
     ${maskBackground}
@@ -145,11 +141,8 @@ const TagsContainer = styled.div`
 
 const IconContainer = styled.div`
   display: flex;
-  :nth-child(n) {
+  > :not(:last-child) {
     margin-right: 0.6rem;
-  }
-  :last-child {
-    margin-right: 0rem;
   }
 `
 
@@ -158,11 +151,8 @@ const IconBox = styled.div`
   color: ${(props) => props.color};
   display: flex inline;
   align-items: flex-start;
-  :nth-child(n) {
+  > :not(:last-child) {
     margin-right: 0.3rem;
-  }
-  :last-child {
-    margin-right: 0rem;
   }
   &.loading {
     ${maskBackground}
