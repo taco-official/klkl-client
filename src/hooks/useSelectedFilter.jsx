@@ -1,8 +1,8 @@
 import useAdditionalFilter from './useAdditionalFilter'
 
-const useSelectedFilterProperty = () => {
+const useSelectedFilter = () => {
   const { selectedFilter, setSelectedFilter } = useAdditionalFilter()
   return { selectedFilter, setSelectedFilter }
 }
 
-export default useSelectedFilterProperty
+export default useSelectedFilter
