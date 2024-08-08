@@ -1,14 +1,13 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
-import useSelectedCategory from '../../hooks/useSelectedCategory'
-import useSelectedSubCategory from '../../hooks/useSelectedSubCategory'
+import useSelectedCategory from '../../../hooks/useSelectedCategory'
+import useSelectedSubCategory from '../../../hooks/useSelectedSubCategory'
 import SubCategoryContainer from './SubCategoryContainer'
 import {
   SectionContainer,
-  Title,
-  CheckboxContainer,
-  CheckboxWrapper,
+  SelectContainer,
+  SelectWrapper,
 } from './BasicFilter.style'
 
 function CategoryCheckBox({ category }) {
@@ -43,6 +42,9 @@ function CategoryCheckBox({ category }) {
     setSelectedSubCategory,
     category,
   ])
+  const selectedArrayLength = selectedSubCategory.filter(
+    (selected) => selected.categoryId === category.categoryId
+  ).length
 
   useEffect(() => {
     console.log('selectedCategory', selectedCategory)
@@ -50,16 +52,22 @@ function CategoryCheckBox({ category }) {
 
   return (
     <>
-      <CheckboxWrapper>
+      <SelectWrapper>
         <Checkbox
-          checked={selectedCategory.some(
-            (selected) => selected.id === category.categoryId
-          )}
+          checked={
+            selectedCategory.some(
+              (selected) => selected.id === category.categoryId
+            ) || selectedArrayLength === category.subCategoryCount
+          }
+          indeterminate={
+            selectedArrayLength > 0 &&
+            selectedArrayLength < category.subCategoryCount
+          }
           onChange={handleCategoryCheckboxChange}
         >
           {category.name}
         </Checkbox>
-      </CheckboxWrapper>
+      </SelectWrapper>
       {selectedCategory.some(
         (selected) => selected.id === category.categoryId
       ) ? (
@@ -73,10 +81,11 @@ CategoryCheckBox.propTypes = {
   category: PropTypes.shape({
     categoryId: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
+    subCategoryCount: PropTypes.number.isRequired,
   }).isRequired,
 }
 
-function CategoryContainer() {
+function CategoryArray() {
   const [categories, setCategories] = useState([])
   const fetchCategories = useCallback(() => {
     const categoriesData = {
@@ -84,10 +93,12 @@ function CategoryContainer() {
         {
           categoryId: 10000,
           name: '카테고리 1',
+          subCategoryCount: 3,
         },
         {
           categoryId: 20000,
           name: '카테고리 2',
+          subCategoryCount: 3,
         },
       ],
     }
@@ -99,25 +110,24 @@ function CategoryContainer() {
   }, [fetchCategories])
 
   if (categories.length === 0)
-    return <CheckboxContainer>카테고리가 없습니다.</CheckboxContainer>
+    return <SelectContainer>카테고리가 없습니다.</SelectContainer>
 
   return (
-    <CheckboxContainer>
+    <>
       {categories.map((category) => (
-        <CategoryCheckBox
-          key={category.categoryId}
-          category={category}
-        />
+        <SelectContainer key={category.categoryId}>
+          <CategoryCheckBox category={category} />
+        </SelectContainer>
       ))}
-    </CheckboxContainer>
+    </>
   )
 }
 
 function CategorySection() {
   return (
     <SectionContainer>
-      <Title>상품</Title>
-      <CategoryContainer />
+      <div className="title">상품</div>
+      <CategoryArray />
     </SectionContainer>
   )
 }

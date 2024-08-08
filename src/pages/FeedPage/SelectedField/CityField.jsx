@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react'
 import { CloseOutlined } from '@ant-design/icons'
-import useSelectedCountry from '../../hooks/useSelectedCountry'
-import useSelectedCity from '../../hooks/useSelectedCity'
-import { BlueTag, WhiteTag } from '../tag/Tags.style'
+import useSelectedCountry from '../../../hooks/useSelectedCountry'
+import useSelectedCity from '../../../hooks/useSelectedCity'
+import { BlueFieldTag, WhiteFieldTag } from '../../../components/tag/Tags.style'
 
 function CityField() {
   const { selectedCountry } = useSelectedCountry()
@@ -12,28 +12,28 @@ function CityField() {
     (id) => {
       setSelectedCity((current) => current.filter((city) => city.id !== id))
     },
-    [setSelectedCity]
+    [selectedCity]
   )
 
   if (Object.keys(selectedCountry).length === 0)
     return (
-      <WhiteTag>
+      <WhiteFieldTag>
         <span>국가 전체</span>
-      </WhiteTag>
+      </WhiteFieldTag>
     )
 
   if (selectedCity.length === 0)
     return (
-      <WhiteTag>
+      <WhiteFieldTag>
         <span>{selectedCountry.name} 전체</span>
-      </WhiteTag>
+      </WhiteFieldTag>
     )
 
   return selectedCity.map((city) => (
-    <BlueTag key={city.id}>
+    <BlueFieldTag key={city.id}>
       <span>{city.name}</span>
       <CloseOutlined onClick={() => deleteCity(city.id)} />
-    </BlueTag>
+    </BlueFieldTag>
   ))
 }
 

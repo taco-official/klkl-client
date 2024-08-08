@@ -2,20 +2,20 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
 // import useAxios from 'use-axios-client'
-import useSelectedCountry from '../../hooks/useSelectedCountry'
-import useSelectedCity from '../../hooks/useSelectedCity'
-import ShowHideButton from '../Button/ShowHideButton'
+import useSelectedCountry from '../../../hooks/useSelectedCountry'
+import useSelectedCity from '../../../hooks/useSelectedCity'
+import ShowHideButton from '../../../components/Button/ShowHideButton'
 import {
   SectionContainer,
-  Title,
   RegionContainer,
   SubTitle,
   RegionBox,
-  CheckboxContainer,
-  CheckboxWrapper,
+  SelectContainer,
+  SelectWrapper,
 } from './BasicFilter.style'
+import theme from '../../../style/theme'
 
-function CountryBox({ country }) {
+function CountryRadio({ country }) {
   const { selectedCountry, setSelectedCountry } = useSelectedCountry()
   const { setSelectedCity } = useSelectedCity()
 
@@ -32,25 +32,25 @@ function CountryBox({ country }) {
   }, [selectedCountry])
 
   return (
-    <CheckboxWrapper>
+    <SelectWrapper>
       <Radio
         checked={selectedCountry.id === country.countryId}
         onChange={handleCheckboxChange}
       >
         {country.name}
       </Radio>
-    </CheckboxWrapper>
+    </SelectWrapper>
   )
 }
 
-CountryBox.propTypes = {
+CountryRadio.propTypes = {
   country: PropTypes.shape({
     countryId: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
 }
 
-function CountryCheckbox({ regionId }) {
+function CountryRadioArray({ regionId }) {
   const [countries, setCountries] = useState([])
 
   const fetchCountries = useCallback((id) => {
@@ -59,11 +59,11 @@ function CountryCheckbox({ regionId }) {
         data: [
           {
             countryId: 1100,
-            name: '활성화된 국가 1',
+            name: '일본',
           },
           {
             countryId: 1200,
-            name: '활성화된 국가 2',
+            name: '중국',
           },
           {
             countryId: 1300,
@@ -86,22 +86,26 @@ function CountryCheckbox({ regionId }) {
   }, [regionId, fetchCountries])
 
   if (countries.length === 0) {
-    return <CheckboxContainer>나라가 없습니다.</CheckboxContainer>
+    return (
+      <SelectContainer>
+        <SubTitle className="empty">나라가 없습니다.</SubTitle>
+      </SelectContainer>
+    )
   }
 
   return (
-    <CheckboxContainer>
+    <SelectContainer>
       {countries.map((country) => (
-        <CountryBox
+        <CountryRadio
           key={country.countryId}
           country={country}
         />
       ))}
-    </CheckboxContainer>
+    </SelectContainer>
   )
 }
 
-CountryCheckbox.propTypes = {
+CountryRadioArray.propTypes = {
   regionId: PropTypes.number.isRequired,
 }
 
@@ -146,24 +150,29 @@ function RegionCollapse() {
   }
 
   if (regions.length === 0) {
-    return <RegionContainer>지역이 없습니다.</RegionContainer>
+    return (
+      <RegionContainer>
+        <SubTitle className="empty">지역이 없습니다.</SubTitle>
+      </RegionContainer>
+    )
   }
 
   return (
     <RegionContainer>
       {regions.map((region) => (
         <RegionBox key={region.regionId}>
-          <SubTitle>
-            <div className="inBlock">{region.name}</div>
+          <SubTitle className="region">
+            <div className="region">{region.name}</div>
             <ShowHideButton
               handleClick={() =>
                 updateElement(region.regionId, !isOpen[region.regionId])
               }
+              iconColor={theme.color.lineGrey}
               isOption={isOpen[region.regionId]}
             />
           </SubTitle>
           {isOpen[region.regionId] && (
-            <CountryCheckbox regionId={region.regionId} />
+            <CountryRadioArray regionId={region.regionId} />
           )}
         </RegionBox>
       ))}
@@ -174,7 +183,7 @@ function RegionCollapse() {
 function CountrySection() {
   return (
     <SectionContainer>
-      <Title>국가</Title>
+      <div className="title">국가</div>
       <RegionCollapse />
     </SectionContainer>
   )
