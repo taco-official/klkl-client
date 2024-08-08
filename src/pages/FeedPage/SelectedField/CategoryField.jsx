@@ -1,27 +1,31 @@
 import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { CloseOutlined } from '@ant-design/icons'
-import useSelectedCategory from '../../hooks/useSelectedCategory'
-import useSelectedSubCategory from '../../hooks/useSelectedSubCategory'
-import { BlueTag, WhiteTag } from '../tag/Tags.style'
+import useSelectedCategory from '../../../hooks/useSelectedCategory'
+import useSelectedSubCategory from '../../../hooks/useSelectedSubCategory'
+import { BlueFieldTag, WhiteFieldTag } from '../../../components/tag/Tags.style'
 
 function SubCategoryField({ categoryId }) {
   const { selectedSubCategory, setSelectedSubCategory } =
     useSelectedSubCategory()
 
-  const deleteSubCategory = useCallback((id) => {
-    setSelectedSubCategory(
-      selectedSubCategory.filter((subCategory) => subCategory.id !== id)
-    )
-  }, [])
+  const deleteSubCategory = useCallback(
+    (id) => {
+      setSelectedSubCategory(
+        selectedSubCategory.filter((selected) => selected.id !== id)
+      )
+      console.log('deleteSubCategory', id)
+    },
+    [selectedSubCategory]
+  )
 
-  return selectedSubCategory.map((subCategory) => {
-    if (subCategory.categoryId !== categoryId) return null
+  return selectedSubCategory.map((selected) => {
+    if (selected.categoryId !== categoryId) return null
     return (
-      <BlueTag key={subCategory.id}>
-        <span>{subCategory.name}</span>
-        <CloseOutlined onClick={() => deleteSubCategory(subCategory.id)} />
-      </BlueTag>
+      <BlueFieldTag key={selected.id}>
+        <span>{selected.name}</span>
+        <CloseOutlined onClick={() => deleteSubCategory(selected.id)} />
+      </BlueFieldTag>
     )
   })
 }
@@ -45,17 +49,17 @@ function CategoryField() {
 
   if (selectedCategory.length === 0)
     return (
-      <WhiteTag>
+      <WhiteFieldTag>
         <span>카테고리 전체</span>
-      </WhiteTag>
+      </WhiteFieldTag>
     )
 
   return selectedCategory.map((category) => {
     if (!hasSelectedSubCategories(category.id))
       return (
-        <WhiteTag key={category.id}>
+        <WhiteFieldTag key={category.id}>
           <span>{category.name} 전체</span>
-        </WhiteTag>
+        </WhiteFieldTag>
       )
     return (
       <SubCategoryField

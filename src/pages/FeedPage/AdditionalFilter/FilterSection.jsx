@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Switch } from 'antd'
-import useSelectedFilter from '../../hooks/useSelectedFilter'
-import { FilterBox, SubTitle } from './AdditionalFilter.style'
+import useSelectedFilter from '../../../hooks/useSelectedFilter'
+import { FilterBox } from './AdditionalFilter.style'
 
-function FilterSelect({ filter }) {
+function FilterSwitch({ filter }) {
   const { selectedFilter, setSelectedFilter } = useSelectedFilter()
 
   const handleSwitchChange = useCallback(() => {
@@ -22,7 +22,7 @@ function FilterSelect({ filter }) {
       ])
     }
     console.log('click', filter.name)
-  }, [selectedFilter, setSelectedFilter])
+  }, [selectedFilter, filter])
 
   useEffect(() => {
     console.log('selectedFilter', selectedFilter)
@@ -30,20 +30,26 @@ function FilterSelect({ filter }) {
 
   return (
     <FilterBox>
-      <SubTitle style={{ display: 'inline-block' }}>{filter.name}</SubTitle>
-      <Switch onChange={handleSwitchChange} />
+      <div className="filter-name">{filter.name}</div>
+      <Switch
+        size="small"
+        checked={selectedFilter.some(
+          (selected) => selected.id === filter.filterId
+        )}
+        onChange={handleSwitchChange}
+      />
     </FilterBox>
   )
 }
 
-FilterSelect.propTypes = {
+FilterSwitch.propTypes = {
   filter: PropTypes.shape({
     filterId: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
 }
 
-function FilterSection() {
+function FilterSwitchArray() {
   const [filters, setFilters] = useState([])
 
   useEffect(() => {
@@ -84,7 +90,7 @@ function FilterSection() {
   return (
     <>
       {filters.map((filter) => (
-        <FilterSelect
+        <FilterSwitch
           key={filter.filterId}
           filter={filter}
         />
@@ -93,4 +99,4 @@ function FilterSection() {
   )
 }
 
-export default FilterSection
+export default FilterSwitchArray

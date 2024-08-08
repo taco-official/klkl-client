@@ -1,13 +1,13 @@
 import React, { useState, useCallback, useEffect } from 'react'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
-import useSelectedCountry from '../../hooks/useSelectedCountry'
-import useSelectedCity from '../../hooks/useSelectedCity'
+import useSelectedCountry from '../../../hooks/useSelectedCountry'
+import useSelectedCity from '../../../hooks/useSelectedCity'
 import {
   SectionContainer,
-  Title,
-  CheckboxContainer,
-  CheckboxWrapper,
+  SelectContainer,
+  SelectWrapper,
+  SubTitle,
 } from './BasicFilter.style'
 
 function CityCheckBox({ city }) {
@@ -19,7 +19,10 @@ function CityCheckBox({ city }) {
         selectedCity.filter((selected) => selected.id !== city.cityId)
       )
     } else {
-      setSelectedCity([...selectedCity, { id: city.cityId, name: city.name }])
+      setSelectedCity((current) => [
+        ...current,
+        { id: city.cityId, name: city.name },
+      ])
     }
   }, [selectedCity, setSelectedCity, city])
 
@@ -28,14 +31,14 @@ function CityCheckBox({ city }) {
   }, [selectedCity])
 
   return (
-    <CheckboxWrapper>
+    <SelectWrapper>
       <Checkbox
         checked={selectedCity.some((selected) => selected.id === city.cityId)}
         onChange={handleCheckboxChange}
       >
         {city.name}
       </Checkbox>
-    </CheckboxWrapper>
+    </SelectWrapper>
   )
 }
 
@@ -88,26 +91,35 @@ function CityContainer() {
   }, [selectedCountry, fetchCities])
 
   if (!selectedCountry || !selectedCountry.id)
-    return <CheckboxContainer>국가를 선택하세요.</CheckboxContainer>
+    return (
+      <SelectContainer>
+        <SubTitle className="empty">국가를 선택하세요.</SubTitle>
+      </SelectContainer>
+    )
+
   if (cities.length === 0)
-    return <CheckboxContainer>도시가 없습니다.</CheckboxContainer>
+    return (
+      <SelectContainer>
+        <SubTitle className="empty">도시가 없습니다.</SubTitle>
+      </SelectContainer>
+    )
 
   return (
-    <CheckboxContainer>
+    <SelectContainer>
       {cities.map((city) => (
         <CityCheckBox
           key={city.cityId}
           city={city}
         />
       ))}
-    </CheckboxContainer>
+    </SelectContainer>
   )
 }
 
 function CitySection() {
   return (
     <SectionContainer>
-      <Title>도시</Title>
+      <div className="title">도시</div>
       <CityContainer />
     </SectionContainer>
   )

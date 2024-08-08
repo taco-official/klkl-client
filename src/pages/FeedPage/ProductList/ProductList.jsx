@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components'
 // import axios from 'axios'
-import PreviewContent from './PreviewContent'
-import LoadingContent from './LoadingContent'
-
-const StyledList = styled.article`
-  display: inline-grid;
-  grid-template-columns: repeat(3, minmax(auto, 13rem));
-`
+import PreviewContent from '../../../components/preview/PreviewContent'
+import LoadingContent from '../../../components/preview/LoadingContent'
+import StyledList from './ProductList.style'
 
 /* productList 더미 데이터 */
 const user = {
@@ -18,7 +13,7 @@ const dummyProductList = [
   {
     id: 24456,
     name: 'Real Sayoon',
-    city: 'Seoul',
+    country: 'Seoul',
     subcategory: 'Portrait',
     tags: ['귤락', '10기', '레노버', '42Guest'],
     rates: 4.5,
@@ -27,7 +22,7 @@ const dummyProductList = [
   {
     id: 24457,
     name: 'Oyabung',
-    city: 'Olympic',
+    country: 'Olympic',
     subcategory: 'Ohhamma',
     tags: ['오야붕', '함대장', '망치'],
     rates: 4.5,
@@ -36,7 +31,7 @@ const dummyProductList = [
   {
     id: 24458,
     name: 'Yeongo',
-    city: 'Naksungdae',
+    country: 'Naksungdae',
     subcategory: 'Fxck-end',
     tags: ['100m', '패럴림픽'],
     rates: 4.5,

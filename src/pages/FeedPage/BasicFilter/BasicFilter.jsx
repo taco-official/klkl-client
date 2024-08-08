@@ -8,9 +8,9 @@ import { FilterContainer } from './BasicFilter.style'
 function BasicFilter() {
   return (
     <FilterContainer>
-      <CountrySection />
-      <CitySection />
-      <CategorySection />
+      <CountrySection className="section" />
+      <CitySection className="section" />
+      <CategorySection className="section" />
     </FilterContainer>
   )
 }
