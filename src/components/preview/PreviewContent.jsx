@@ -36,7 +36,7 @@ function PreviewContent({ userId = undefined, productData }) {
         <TitleContainer>
           <SubDesBox>
             <CategoryWrapper>
-              <div id="city">{productData.city}</div>
+              <div id="country">{productData.country}</div>
               <div id="subcategory">{productData.subcategory}</div>
             </CategoryWrapper>
             <MoreButton size="1.1rem" />
@@ -75,7 +75,7 @@ PreviewContent.propTypes = {
   userId: PropTypes.number,
   productData: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    city: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
     subcategory: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
