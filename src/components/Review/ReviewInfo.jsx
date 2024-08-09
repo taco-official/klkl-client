@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { MoreOutlined, HeartFilled, LinkOutlined } from '@ant-design/icons'
 import { Breadcrumb, Rate, Dropdown, ConfigProvider, Modal } from 'antd'
+import Icons from '../Common/Icons'
+import StyleTag from '../tag/Tag'
 import theme from '../../style/theme'
 
 const reviewDataType = {
@@ -132,54 +133,35 @@ export default function ReviewInfo({ review }) {
   return (
     <InfoWrapper>
       <ConfigProvider theme={ConfigProviderTheme}>
-        <Breadcrumb
-          style={breadCrumbStyle}
-          separator="/"
-          items={breadCrumbItems}
-        />
+        <CategoryWrapper>
+          <Breadcrumb
+            style={breadCrumbStyle}
+            separator="/"
+            items={breadCrumbItems}
+          />
 
-        <CustomDropdown
-          placement="bottomLeft"
-          arrow={false}
-          menu={{
-            items,
-          }}
-          trigger={['click']}
-        >
-          <MoreOutlined />
-        </CustomDropdown>
-
-        <ForMobile>
-          <div
-            aria-hidden
-            type="button"
-            onClick={() => {
-              console.log('하트누르기')
-            }}
-          >
-            <HeartFilled />
-          </div>
-          <div
-            aria-hidden
-            type="button"
-            onClick={() => {
-              console.log('하트누르기')
-            }}
-          >
-            <LinkOutlined />
-          </div>
-        </ForMobile>
+          <ForMobile>
+            <SmallButton
+              onClick={() => {
+                console.log('하트누르기')
+              }}
+            >
+              <Icons>favorite</Icons>
+            </SmallButton>
+            <SmallButton
+              onClick={() => {
+                console.log('하트누르기')
+              }}
+            >
+              <Icons>link</Icons>
+            </SmallButton>
+          </ForMobile>
+        </CategoryWrapper>
 
         <h2>{review.name}</h2>
-        <div>
+        <div style={{ display: 'flex' }}>
           {review.tags.map((tagName) => (
-            <ReviewTag
-              key={tagName}
-              $convenienceStore={tagName === '편의점'}
-              $gosu={tagName === '고수'}
-            >
-              {tagName}
-            </ReviewTag>
+            <StyleTag key={tagName}>{tagName}</StyleTag>
           ))}
         </div>
 
@@ -189,7 +171,19 @@ export default function ReviewInfo({ review }) {
             disabled
             defaultValue={review.rate}
           />
-          <div>{parseDate(review.createdAt)}</div>
+          <div>
+            {parseDate(review.createdAt)}
+            <CustomDropdown
+              placement="bottomLeft"
+              arrow={false}
+              menu={{
+                items,
+              }}
+              trigger={['click']}
+            >
+              <Icons>more_vert</Icons>
+            </CustomDropdown>
+          </div>
         </EndWrapper>
       </ConfigProvider>
     </InfoWrapper>
@@ -198,6 +192,11 @@ export default function ReviewInfo({ review }) {
 ReviewInfo.propTypes = {
   review: PropTypes.shape(reviewDataType).isRequired,
 }
+
+const CategoryWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`
 
 const InfoWrapper = styled.div`
   position: relative;
@@ -208,46 +207,15 @@ const InfoWrapper = styled.div`
     margin: 10px 0;
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 600px) {
     .review--float__mobile {
       display: flex;
     }
   }
 `
 
-const ReviewTag = styled.div`
-  width: 3.125rem;
-  height: 1.375rem;
-
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-right: 0.4375rem;
-
-  font-family: ${theme.style.main};
-  font-size: ${theme.size.textXS};
-
-  ${({ $convenienceStore }) =>
-    $convenienceStore &&
-    `background-color: ${theme.color.tag};
-		color: ${theme.color.main};
-		border-radius: 5px;`}
-
-  ${({ $gosu }) =>
-    $gosu &&
-    `background-color: #54ce54;
-		color: #006d00;
-		border-radius: 5px;
-		`}
-`
-
 const CustomDropdown = styled(Dropdown)`
-  position: absolute;
-  top: 0;
-  right: 0;
-
-  padding: 3px;
+  margin: 0 2px;
   border-radius: 35%;
 
   cursor: pointer;
@@ -261,31 +229,53 @@ const EndWrapper = styled.div`
   display: flex;
   justify-content: space-between;
 
-  margin-top: 0.9375rem;
+  margin-top: 0.3125rem;
 
   & > div {
     font-size: ${theme.size.textXS};
     display: flex;
     align-items: flex-end;
   }
+
+  :where(.css-dev-only-do-not-override-10fi1po).ant-rate {
+    height: 17px;
+  }
+
+  :where(.css-dev-only-do-not-override-10fi1po).ant-rate .ant-rate-star {
+    margin-inline-end: 0;
+    width: 17px;
+    height: 100%;
+
+    * {
+      height: 100%;
+    }
+  }
 `
 
 const ForMobile = styled.div.attrs({
   className: 'review--float__mobile',
 })`
-  position: absolute;
-  top: 0;
-  right: 20px;
-
   display: none;
 
-  div {
+  span {
     padding: 3px;
     border-radius: 35%;
     cursor: pointer;
 
-    &:hover {
+    & > span:hover {
       background-color: rgba(0, 0, 0, 0.1);
     }
+  }
+`
+
+const SmallButton = styled.button.attrs({ type: 'button' })`
+  background-color: transparent;
+  border: none;
+  height: 100%;
+  padding: 0;
+  color: ${theme.color.textGrey};
+
+  :hover {
+    background-color: rgba(0, 0, 0, 0.1);
   }
 `
