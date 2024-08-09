@@ -15,6 +15,7 @@ export default function SelectionList({
     <SelectBoxes $width={$width}>
       {optionList.map((option) => (
         <SelectButton
+          key={option[name]}
           onClick={() => setOptionState(option[id])}
           className={optionState === option[id] ? 'selected' : null}
         >
@@ -50,23 +51,6 @@ const SelectBoxes = styled.ul`
   overflow: auto;
   transition: all ease-in-out 0.5s;
 
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.15);
-    border-radius: 8px;
-    cursor: pointer;
-  }
-
-  &::-webkit-scrollbar {
-    background-color: transparent;
-    width: 0;
-  }
-
-  &:hover {
-    &::-webkit-scrollbar {
-      width: 0.4375rem;
-    }
-  }
-
   border-top: 1px solid ${theme.color.lineGrey};
   border-bottom: 1px solid ${theme.color.lineGrey};
 
@@ -82,6 +66,23 @@ const SelectBoxes = styled.ul`
     background-color: ${theme.color.selectedCategory};
     color: white;
     font-family: ${theme.style.mainBold};
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar {
+    background-color: transparent;
+    width: 0;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar {
+      width: 0.4375rem;
+    }
   }
 `
 

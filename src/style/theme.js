@@ -13,11 +13,11 @@ const theme = {
     titleXL: '1.5rem',
     titleLG: '1.3125rem',
     titleMD: '1.125rem',
-    titleSM: '15px',
+    titleSM: '0.9375rem',
     textMD: '1rem',
     textSM: '0.875rem',
     textXS: '0.75rem',
-    text2XS: '0.525rem',
+    text2XS: '0.625rem',
   },
   style: {
     main: 'NanumSquareNeo',

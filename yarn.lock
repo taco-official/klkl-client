@@ -9295,6 +9295,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "klkl@workspace:."
   dependencies:
+    "@ant-design/icons": "npm:^5.4.0"
     "@babel/plugin-proposal-private-property-in-object": "npm:^7.21.11"
     "@testing-library/jest-dom": "npm:^5.17.0"
     "@testing-library/react": "npm:^13.4.0"

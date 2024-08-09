@@ -71,6 +71,7 @@ export default function SubmitPage() {
           size="small"
           current={step}
           items={itmes}
+          responsive={false}
           style={{ width: '37.5rem', padding: '0', marginBottom: '2.5rem' }}
         />
       </ConfigProvider>
