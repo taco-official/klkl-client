@@ -15,8 +15,8 @@ function SelectedField() {
           <CityField />
           <CategoryField />
           <FilterField />
+          <ResetButton />
         </FieldContainer>
-        <ResetButton />
       </div>
       <SortButton />
     </FieldSection>

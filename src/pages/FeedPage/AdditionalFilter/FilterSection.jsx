@@ -1,17 +1,22 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
-import { Switch } from 'antd'
+import { Button, theme as antdTheme } from 'antd'
 import useSelectedFilter from '../../../hooks/useSelectedFilter'
-import { FilterBox } from './AdditionalFilter.style'
+import { FilterWrapper } from './AdditionalFilter.style'
+import theme from '../../../styles/theme'
 
 function FilterSwitch({ filter }) {
   const { selectedFilter, setSelectedFilter } = useSelectedFilter()
+  const [isClicked, setIsClicked] = useState(
+    selectedFilter.find((selected) => selected.id === filter.filterId) || false
+  )
 
   const handleSwitchChange = useCallback(() => {
     if (selectedFilter.some((selected) => selected.id === filter.filterId)) {
       setSelectedFilter(
         selectedFilter.filter((selected) => selected.id !== filter.filterId)
       )
+      setIsClicked(false)
     } else {
       setSelectedFilter((current) => [
         ...current,
@@ -20,6 +25,7 @@ function FilterSwitch({ filter }) {
           name: filter.name,
         },
       ])
+      setIsClicked(true)
     }
     console.log('click', filter.name)
   }, [selectedFilter, filter])
@@ -27,18 +33,29 @@ function FilterSwitch({ filter }) {
   useEffect(() => {
     console.log('selectedFilter', selectedFilter)
   }, [selectedFilter])
+  useEffect(() => {
+    console.log('isClicked', filter.name, isClicked)
+  }, [isClicked])
 
   return (
-    <FilterBox>
-      <div className="filter-name">{filter.name}</div>
-      <Switch
+    <FilterWrapper>
+      <Button
+        shape="round"
         size="small"
+        style={{
+          color: isClicked ? theme.color.main : antdTheme.defaultColorText,
+          borderColor: isClicked
+            ? theme.color.main
+            : antdTheme.defaultColorBorder,
+        }}
         checked={selectedFilter.some(
           (selected) => selected.id === filter.filterId
         )}
-        onChange={handleSwitchChange}
-      />
-    </FilterBox>
+        onClick={handleSwitchChange}
+      >
+        {filter.name}
+      </Button>
+    </FilterWrapper>
   )
 }
 
@@ -84,7 +101,7 @@ function FilterSwitchArray() {
   }, [])
 
   if (filters.length === 0) {
-    return <FilterBox>필터가 없습니다.</FilterBox>
+    return <FilterWrapper>필터가 없습니다.</FilterWrapper>
   }
 
   return (

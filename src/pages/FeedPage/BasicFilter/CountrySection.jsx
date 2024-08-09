@@ -13,17 +13,19 @@ import {
   SelectContainer,
   SelectWrapper,
 } from './BasicFilter.style'
-import theme from '../../../style/theme'
+import theme from '../../../styles/theme'
 
 function CountryRadio({ country }) {
   const { selectedCountry, setSelectedCountry } = useSelectedCountry()
   const { setSelectedCity } = useSelectedCity()
 
   const handleCheckboxChange = useCallback(() => {
-    setSelectedCountry({
-      id: country.countryId,
-      name: country.name,
-    })
+    if (selectedCountry.id === country.countryId) setSelectedCountry({})
+    else
+      setSelectedCountry({
+        id: country.countryId,
+        name: country.name,
+      })
     setSelectedCity([])
   }, [selectedCountry, setSelectedCountry, country])
 

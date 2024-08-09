@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 // import axios from 'axios'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 import IconTextButton from './IconTextButton'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 function getLikeContent() {}
 // productId, userId

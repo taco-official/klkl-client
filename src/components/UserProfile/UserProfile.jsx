@@ -2,7 +2,7 @@ import { React, useState } from 'react'
 import styled from 'styled-components'
 import { Button, ConfigProvider } from 'antd'
 import ProfileImage from './ProfileImage'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 const testUser = {
   nickname: '귤락',

@@ -8,9 +8,8 @@ const ThumbnailArea = styled.div`
   > img {
     width: 100%;
     position: absolute;
-    top: 116%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -4%);
   }
   > div {
     display: flex;

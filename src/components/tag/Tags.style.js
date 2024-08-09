@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 const StyleTag = styled.div`
   font-size: ${theme.size.text2XS};

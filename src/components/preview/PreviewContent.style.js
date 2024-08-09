@@ -1,6 +1,6 @@
 import styled, { css, keyframes } from 'styled-components'
 import { CgSpinner } from 'react-icons/cg'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 const spinAnimation = keyframes`
   0% {

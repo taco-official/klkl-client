@@ -5,8 +5,12 @@ import useSelectedCity from '../../../hooks/useSelectedCity'
 import { BlueFieldTag, WhiteFieldTag } from '../../../components/tag/Tags.style'
 
 function CityField() {
-  const { selectedCountry } = useSelectedCountry()
+  const { selectedCountry, setSelectedCountry } = useSelectedCountry()
   const { selectedCity, setSelectedCity } = useSelectedCity()
+
+  const deleteCountry = useCallback(() => {
+    setSelectedCountry({})
+  }, [selectedCity])
 
   const deleteCity = useCallback(
     (id) => {
@@ -24,9 +28,10 @@ function CityField() {
 
   if (selectedCity.length === 0)
     return (
-      <WhiteFieldTag>
+      <BlueFieldTag>
         <span>{selectedCountry.name} 전체</span>
-      </WhiteFieldTag>
+        <CloseOutlined onClick={() => deleteCountry()} />
+      </BlueFieldTag>
     )
 
   return selectedCity.map((city) => (

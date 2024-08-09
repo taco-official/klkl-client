@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import { StyleSection, ContentContainer } from '../FeedPage.style'
-import theme from '../../../style/theme'
+import theme from '../../../styles/theme'
 
 const FilterSection = styled(StyleSection)`
   align-items: center;
   > h6.title {
+    font-size: ${theme.size.textSM};
     flex-basis: content;
     flex-shrink: 0;
   }
@@ -12,7 +13,7 @@ const FilterSection = styled(StyleSection)`
 
 const FilterContainer = styled(ContentContainer)``
 
-const FilterBox = styled.div`
+const FilterWrapper = styled.div`
   display: flex;
   align-items: center;
   column-gap: 0.5rem;
@@ -21,4 +22,4 @@ const FilterBox = styled.div`
   }
 `
 
-export { FilterSection, FilterContainer, FilterBox }
+export { FilterSection, FilterContainer, FilterWrapper }
