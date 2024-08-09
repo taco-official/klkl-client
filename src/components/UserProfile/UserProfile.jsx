@@ -40,7 +40,8 @@ export default function UserProfile() {
 }
 
 const ProfileBox = styled.div`
-  width: 100%;
+  width: 95%;
+  margin: auto;
   height: 80px;
 
   display: flex;
