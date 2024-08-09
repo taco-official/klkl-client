@@ -5,6 +5,7 @@ function NaverLogo() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 200 200"
+      style={{ height: '100%' }}
     >
       <polygon
         className="logo"
@@ -20,6 +21,7 @@ function KakaoLogo() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="-75 -90 350 350"
+      style={{ height: '100%' }}
     >
       <polygon
         fill="black"
