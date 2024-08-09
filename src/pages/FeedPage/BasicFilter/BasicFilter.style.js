@@ -2,10 +2,12 @@ import styled from 'styled-components'
 import theme from '../../../style/theme'
 
 const FilterContainer = styled.aside`
-  width: 10.5rem;
+  width: 168px;
   padding: 1.7rem 1.1rem 0.5rem 1rem;
   display: flex;
   flex-direction: column;
+  flex-basis: content;
+  flex-shrink: 0;
   > div.title {
     font-size: ${theme.size.titleXL};
     margin-bottom: 0.7rem;
@@ -15,15 +17,21 @@ const FilterContainer = styled.aside`
 const SectionContainer = styled.div`
   margin-top: 1.3rem;
   margin-bottom: 1.3rem;
+  flex-basis: content;
+  flex-shrink: 0;
   > div.title {
     font-size: ${theme.size.titleLG};
     margin-bottom: 0.7rem;
     margin-left: 0.3rem;
+    flex-basis: content;
+    flex-shrink: 0;
   }
 `
 
 const RegionContainer = styled.div`
   margin-top: 0.9rem;
+  flex-basis: content;
+  flex-shrink: 0;
   > :nth-child(n) {
     margin-top: 1rem;
   }
@@ -42,6 +50,7 @@ const SubTitle = styled.div`
     align-items: center;
     > div.region {
       font-size: ${theme.size.textSM};
+      margin-right: 2.5rem;
     }
   }
   &.empty {

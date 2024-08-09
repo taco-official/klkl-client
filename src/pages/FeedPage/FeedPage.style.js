@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 
-const PageMain = styled.main`
+const PageRoot = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+
+const PageContent = styled.main`
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -37,4 +43,4 @@ const ContentContainer = styled.div`
   column-gap: 1rem;
 `
 
-export { PageMain, FeedArea, StyleSection, ContentContainer }
+export { PageRoot, PageContent, FeedArea, StyleSection, ContentContainer }
