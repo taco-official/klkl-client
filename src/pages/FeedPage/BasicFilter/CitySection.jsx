@@ -87,7 +87,7 @@ function CityContainer() {
   }, [])
 
   useEffect(() => {
-    if (selectedCountry && selectedCountry.id) fetchCities(selectedCountry.id)
+    if (selectedCountry?.id) fetchCities(selectedCountry.id)
   }, [selectedCountry, fetchCities])
 
   if (!selectedCountry || !selectedCountry.id)
