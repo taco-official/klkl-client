@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import { IconContext } from 'react-icons'
 // import axios from 'axios'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
-import theme from '../../style/theme'
+import IconTextButton from './IconTextButton'
+import theme from '../../styles/theme'
 
 function getLikeContent() {}
 // productId, userId
@@ -12,12 +12,7 @@ function postLikeContent() {}
 function deleteLikeContent() {}
 // likeId
 
-function LikeButton({
-  productId,
-  userId = undefined,
-  iconSize = '1.3rem',
-  text = null,
-}) {
+function LikeButton({ productId, userId = undefined, iconSize = '1.3rem' }) {
   const [likeId, setLikeId] = useState(undefined)
   const [isLiked, setIsLiked] = useState(false)
 
@@ -32,14 +27,15 @@ function LikeButton({
   const handleLiked = useCallback(() => {
     if (userId === undefined) {
       alert('로그인이 필요합니다.')
-    } else if (!isLiked) {
-      postLikeContent(productId, userId)
-      // axios.post('POST API', { product_id: productId, user_id: userId })
-      setIsLiked(true)
     } else {
-      deleteLikeContent(likeId)
-      // axios.delete(`DELETE API/${likeId}`)
-      setIsLiked(false)
+      if (!isLiked) {
+        postLikeContent(productId, userId)
+        // axios.post('POST API', { product_id: productId, user_id: userId })
+      } else {
+        deleteLikeContent(likeId)
+        // axios.delete(`DELETE API/${likeId}`)
+      }
+      setIsLiked((current) => !current)
     }
   }, [isLiked, userId, productId, likeId])
 
@@ -54,12 +50,10 @@ function LikeButton({
   )
 
   return (
-    <IconContext.Provider value={iconValue}>
-      <div>
-        {isLiked ? <FaHeart /> : <FaRegHeart />}
-        {text || null}
-      </div>
-    </IconContext.Provider>
+    <IconTextButton
+      iconValue={iconValue}
+      Icon={isLiked ? <FaHeart /> : <FaRegHeart />}
+    />
   )
 }
 
@@ -67,7 +61,6 @@ LikeButton.propTypes = {
   productId: PropTypes.number.isRequired,
   userId: PropTypes.number,
   iconSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  text: PropTypes.string,
 }
 
 export default LikeButton

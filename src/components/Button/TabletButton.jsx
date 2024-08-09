@@ -20,13 +20,9 @@ const StyledTabletButton = styled.div`
   display: flex inline;
   justify-content: space-between;
   align-items: center;
-  :nth-child(n) {
+  :not(:last-child) {
     margin-top: 0.05358rem;
     margin-right: 0.2rem;
-  }
-  :last-child {
-    margin-top: 0rem;
-    margin-right: 0rem;
   }
 `
 

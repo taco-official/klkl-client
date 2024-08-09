@@ -1,31 +1,32 @@
 import React from 'react'
 import {
   PreviewContainer,
-  DescriptionContainer,
-  SubDesContainer,
-} from './PreviewContent.style'
-import {
-  LoadingContainer,
+  ThumbnailContainer,
   LoadingIcon,
-  CategoryMaskBox,
-  TitleMaskBox,
-  TagsMaskBox,
-  LikeMaskBox,
-} from './LoadingContent.style'
+  DescriptionContainer,
+  TitleContainer,
+  SubDesBox,
+  CategoryWrapper,
+  ProductNameBox,
+  TagsContainer,
+  IconBox,
+} from './PreviewContent.style'
 
 function LoadingContent() {
   return (
     <PreviewContainer>
-      <LoadingContainer>
+      <ThumbnailContainer className="loading">
         <LoadingIcon size="2rem" />
-      </LoadingContainer>
-      <DescriptionContainer>
-        <SubDesContainer>
-          <CategoryMaskBox />
-        </SubDesContainer>
-        <TitleMaskBox />
-        <TagsMaskBox />
-        <LikeMaskBox />
+      </ThumbnailContainer>
+      <DescriptionContainer className="loading">
+        <TitleContainer>
+          <SubDesBox className="loading">
+            <CategoryWrapper className="loading" />
+          </SubDesBox>
+          <ProductNameBox className="loading" />
+        </TitleContainer>
+        <TagsContainer className="loading" />
+        <IconBox className="loading" />
       </DescriptionContainer>
     </PreviewContainer>
   )

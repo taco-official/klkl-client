@@ -1,8 +1,8 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import imgLogo from '../../images/navbar/navImages'
-import theme from '../../style/theme'
 import LoginModal from '../Common/LoginModal'
+import theme from '../../styles/theme'
 import NavList from './NavList'
 
 export default function NavBar() {

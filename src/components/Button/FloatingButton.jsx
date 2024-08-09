@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import propTypes from 'prop-types'
 import { IconContext } from 'react-icons'
 import { FaRegPenToSquare as WriteIcon } from 'react-icons/fa6'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 const StyledButton = styled.div`
   position: fixed;
