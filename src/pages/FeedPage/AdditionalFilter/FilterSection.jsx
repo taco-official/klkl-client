@@ -87,16 +87,13 @@ function FilterSwitchArray() {
         ],
       }
 
-      const initializeFilterState = filterData.data.reduce(
-        (acc, filter) => {
-          acc.push({
-            filterId: filter.filterId,
-            name: filter.name,
-          })
-          return acc
-        },
-        []
-      )
+      const initializeFilterState = filterData.data.reduce((acc, filter) => {
+        acc.push({
+          filterId: filter.filterId,
+          name: filter.name,
+        })
+        return acc
+      }, [])
       setFilters(initializeFilterState)
     }
 
