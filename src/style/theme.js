@@ -25,6 +25,8 @@ const theme = {
     mainEB: 'NanumSquareNeoExtraBold',
     pen: 'ContinuousEN',
     logo: 'PartialSansKR',
+    bannerEN: 'EduHand',
+    bannerKO: 'NanumBarunpenB',
   },
 }
 
