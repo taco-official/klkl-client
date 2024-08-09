@@ -88,14 +88,14 @@ function FilterSwitchArray() {
       }
 
       const initializeFilterState = filterData.data.reduce(
-        (acc, filter, index) => {
-          acc[index] = {
+        (acc, filter) => {
+          acc.push({
             filterId: filter.filterId,
             name: filter.name,
-          }
+          })
           return acc
         },
-        [filterData.data]
+        []
       )
       setFilters(initializeFilterState)
     }
