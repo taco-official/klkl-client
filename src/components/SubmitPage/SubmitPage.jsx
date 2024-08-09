@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useReducer } from 'react'
 import styled from 'styled-components'
 import { Steps, ConfigProvider } from 'antd'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 import PictureSubmitPage from './PictureSubmit'
 import RegionSubmitPage from './RegionSelect'
 import InfoSubmitPage from './InfoSubmit'

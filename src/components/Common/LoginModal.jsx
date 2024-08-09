@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { IoIosClose } from 'react-icons/io'
 import { KakaoLogo, NaverLogo } from '../../images/logos'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 export default function LoginModal({ isModalOpen, closeModal }) {
   return (

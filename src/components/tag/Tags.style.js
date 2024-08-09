@@ -36,4 +36,4 @@ const BlueFieldTag = styled(BlueTag)`
   font-size: ${theme.size.textXS};
 `
 
-export { WhiteTag, BlueTag, WhiteFieldTag, BlueFieldTag }
+export { StyleTag, WhiteTag, BlueTag, WhiteFieldTag, BlueFieldTag }
