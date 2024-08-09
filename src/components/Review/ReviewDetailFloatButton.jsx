@@ -1,6 +1,8 @@
 import React from 'react'
-import { LinkOutlined, HeartFilled, FormOutlined } from '@ant-design/icons'
-import { FloatButton, notification } from 'antd'
+import styled from 'styled-components'
+import { FloatButton, notification, ConfigProvider } from 'antd'
+import Icons from '../Common/Icons'
+import theme from '../../style/theme'
 
 export default function ReviewDetailFloatButton() {
   const [api, contextHolder] = notification.useNotification()
@@ -20,22 +22,47 @@ export default function ReviewDetailFloatButton() {
   }
 
   return (
-    <>
+    <ConfigProvider
+      theme={{
+        token: {
+          fontFamily: theme.style.mainBold,
+        },
+      }}
+    >
       {contextHolder}
       <FloatButton.Group
         shape="circle"
-        style={{
-          insetInlineEnd: 40,
-        }}
         className="review--floatbutton"
       >
-        <FloatButton
-          icon={<LinkOutlined />}
+        <CustomFloatButton
+          icon={<Icons $empty>link</Icons>}
           onClick={copyToClipboard}
+          tooltip="링크복사"
         />
-        <FloatButton icon={<HeartFilled style={{ color: 'red' }} />} />
-        <FloatButton icon={<FormOutlined />} />
+
+        <CustomFloatButton
+          icon={<Icons>favorite</Icons>}
+          tooltip="좋아요"
+        />
+        <CustomFloatButton
+          icon={<Icons $empty>edit_square</Icons>}
+          tooltip="리뷰 작성하러 가기"
+        />
       </FloatButton.Group>
-    </>
+    </ConfigProvider>
   )
 }
+
+const CustomFloatButton = styled(FloatButton)`
+  span {
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`
