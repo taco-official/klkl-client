@@ -12,7 +12,7 @@ export default function CommentList({ comments }) {
           <CommentListContent key={key}>
             <ProfileImage
               src={value.image}
-              $size="70px"
+              $size="50px"
             />
             <ContentBox>
               <div className="comment--info__user">
