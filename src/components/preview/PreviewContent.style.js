@@ -33,7 +33,7 @@ const maskBackground = css`
 
 const PreviewContainer = styled.div`
   width: 12.5rem;
-  background-color: off-white;
+  background-color: white;
   padding: 0.5rem;
   border: 0.0625rem solid transparent;
   display: flex;
