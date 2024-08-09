@@ -36,7 +36,7 @@ const PreviewContainer = styled.div`
   background-color: off-white;
   padding: 0.5rem;
   border: 0.0625rem solid transparent;
-  display: flex inline-block;
+  display: flex;
   flex-direction: column;
   justify-content: center;
 `
