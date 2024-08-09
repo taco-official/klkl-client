@@ -8,7 +8,7 @@ import theme from '../../../styles/theme'
 function FilterSwitch({ filter }) {
   const { selectedFilter, setSelectedFilter } = useSelectedFilter()
   const [isClicked, setIsClicked] = useState(
-    selectedFilter.find((selected) => selected.id === filter.filterId) || false
+    selectedFilter.some((selected) => selected.id === filter.filterId) || false
   )
 
   const handleSwitchChange = useCallback(() => {
@@ -31,6 +31,12 @@ function FilterSwitch({ filter }) {
   }, [selectedFilter, filter])
 
   useEffect(() => {
+    if (selectedFilter.some((selected) => selected.id === filter.filterId))
+      setIsClicked(true)
+    else setIsClicked(false)
+  }, [selectedFilter])
+
+  useEffect(() => {
     console.log('selectedFilter', selectedFilter)
   }, [selectedFilter])
   useEffect(() => {
@@ -48,9 +54,6 @@ function FilterSwitch({ filter }) {
             ? theme.color.main
             : antdTheme.defaultColorBorder,
         }}
-        checked={selectedFilter.some(
-          (selected) => selected.id === filter.filterId
-        )}
         onClick={handleSwitchChange}
       >
         {filter.name}
