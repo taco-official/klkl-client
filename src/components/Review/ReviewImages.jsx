@@ -5,13 +5,13 @@ import styled from 'styled-components'
 import StyledFlickity from '../Common/Carousel'
 
 export default function ReviewImages({ imageURLs }) {
-  const flickityOptions = {
+  const reviewImagesOptions = {
     setGallerySize: false,
     pauseAutoPlayOnHover: true,
   }
 
   return (
-    <ReviewImageCarousel options={flickityOptions}>
+    <ReviewImageCarousel options={reviewImagesOptions}>
       {imageURLs.map((url) => (
         <div
           className="carousel-cell"
@@ -41,15 +41,13 @@ ReviewImages.propTypes = {
 }
 
 const ReviewImageCarousel = styled(StyledFlickity)`
-  height: 420px;
+  width: 100%;
+  height: 50vh;
   margin-bottom: 20px;
-  min-width: 500px;
 
   .carousel-cell {
-    width: 60%;
-    max-width: 400px;
-    height: 400px;
-    margin: 0 25px;
+    width: 100%;
+    height: 100%;
   }
 
   .flickity-button {
