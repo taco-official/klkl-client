@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { Input } from 'antd'
-import SelectionList from './Commons/SelectionList'
+import { useShallow } from 'zustand/react/shallow'
+
+import useReviewStore from './stores/useReviewStore'
+import SelectionList from './components/SelectionList'
 import theme from '../../style/theme'
-import { SmoothAnimation } from './Commons/CommonVariable'
-import { reviewDataType } from './Commons/reviewReducer'
 
 const Regions = [
   {
@@ -87,10 +87,17 @@ const Cities = {
   ],
 }
 
-export default function RegionSubmitPage({ review, setReviewContent }) {
-  const [addressState, setAddressState] = useState(
-    review.address !== '' || review.cityId !== 0
+export default function RegionSubmitPage() {
+  const [continentId, countryId, cityId, address] = useReviewStore(
+    useShallow((state) => [
+      state.continentId,
+      state.countryId,
+      state.cityId,
+      state.address,
+    ])
   )
+
+  const setReviewContents = useReviewStore((state) => state.setReviewContents)
 
   return (
     <>
@@ -99,34 +106,39 @@ export default function RegionSubmitPage({ review, setReviewContent }) {
         <br />
         선택해주세요
       </h2>
+
       <SelectBoxesWrapper>
         <SelectionList
           optionList={Regions}
-          optionState={review.continentId}
-          setOptionState={(num) => setReviewContent('SET_CONTINENT', num)}
+          optionState={continentId}
+          setOptionState={(id) =>
+            setReviewContents({ continentId: id, countryId: 0, cityId: 0 })
+          }
           $width={`${100 / 3}%`}
         />
-        {review.continentId !== 0 && (
+
+        {continentId !== 0 && (
           <SelectionList
-            optionList={Countries[review.continentId]}
-            optionState={review.countryId}
-            setOptionState={(num) => setReviewContent('SET_COUNTRY', num)}
+            optionList={Countries[continentId]}
+            optionState={countryId}
+            setOptionState={(id) =>
+              setReviewContents({ countryId: id, cityId: 0 })
+            }
             $width={`${100 / 3}%`}
           />
         )}
-        {review.countryId !== 0 && (
+
+        {countryId !== 0 && (
           <SelectionList
-            optionList={Cities[review.countryId]}
-            optionState={review.cityId}
-            setOptionState={(num) => {
-              setReviewContent('SET_CITY', num)
-              setAddressState(true)
-            }}
+            optionList={Cities[countryId]}
+            optionState={cityId}
+            setOptionState={(id) => setReviewContents({ cityId: id })}
             $width={`${100 / 3}%`}
           />
         )}
       </SelectBoxesWrapper>
-      {addressState && (
+
+      {cityId !== 0 && (
         <>
           <h2>
             구매 주소를
@@ -135,20 +147,16 @@ export default function RegionSubmitPage({ review, setReviewContent }) {
           </h2>
           <CustomInput
             maxLength={50}
-            defaultValue={review.address}
+            defaultValue={address}
             placeholder="주소입력"
             style={{ width: '37.5rem' }}
-            onChange={(e) => setReviewContent('SET_ADDRESS', e.target.value)}
+            onChange={(e) => setReviewContents({ address: e.target.value })}
             size="large"
           />
         </>
       )}
     </>
   )
-}
-RegionSubmitPage.propTypes = {
-  review: PropTypes.shape(reviewDataType).isRequired,
-  setReviewContent: PropTypes.func.isRequired,
 }
 
 const SelectBoxesWrapper = styled.div`
@@ -163,5 +171,18 @@ const CustomInput = styled(Input)`
   font-size: ${theme.size.textSM};
   font-family: ${theme.style.main};
   margin-bottom: 1.875rem;
-  ${SmoothAnimation}
+
+  @keyframes openModal {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0.99;
+    }
+  }
+
+  animation: openModal ease-in 0.3s;
 `
