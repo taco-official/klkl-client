@@ -5,10 +5,10 @@ import { IconContext } from 'react-icons'
 function IconTextButton({ iconValue = null, Icon = null, text = null }) {
   return (
     <IconContext.Provider value={iconValue}>
-      <>
-        {Icon || null}
-        {text || null}
-      </>
+      <div>
+        <Icon />
+        {text}
+      </div>
     </IconContext.Provider>
   )
 }
