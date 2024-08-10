@@ -1,27 +1,26 @@
 import React from 'react'
-import { Dropdown, message, Button, Space } from 'antd'
+import { Dropdown, Button, Space } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
 
 function SortButton() {
   const handleMenuClick = (e) => {
-    message.info('Click on menu item.')
     console.log('click', e)
   }
   const items = [
     {
-      label: '1st menu item',
+      label: '별점 순',
       key: '1',
     },
     {
-      label: '2nd menu item',
+      label: '좋아요 순',
       key: '2',
     },
     {
-      label: '3rd menu item',
+      label: '최신 순',
       key: '3',
     },
     {
-      label: '4rd menu item',
+      label: '오래된 순',
       key: '4',
     },
   ]
