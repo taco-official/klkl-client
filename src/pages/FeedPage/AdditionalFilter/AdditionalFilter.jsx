@@ -1,15 +1,15 @@
 import React from 'react'
 import FilterSwitchArray from './FilterSection'
-import { FilterContainer, FilterSection } from './AdditionalFilter.style'
+import { StyleSection, ContentContainer } from '../FeedPage.style'
 
 function AdditionalFilter() {
   return (
-    <FilterSection>
+    <StyleSection>
       <h6 className="title">추가 필터</h6>
-      <FilterContainer className="content">
+      <ContentContainer className="content">
         <FilterSwitchArray />
-      </FilterContainer>
-    </FilterSection>
+      </ContentContainer>
+    </StyleSection>
   )
 }
 

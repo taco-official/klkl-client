@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Button, theme as antdTheme } from 'antd'
 import useSelectedFilter from '../../../hooks/useSelectedFilter'
-import { FilterWrapper } from './AdditionalFilter.style'
 import theme from '../../../styles/theme'
 
 function FilterSwitch({ filter }) {
@@ -44,21 +43,19 @@ function FilterSwitch({ filter }) {
   }, [isClicked])
 
   return (
-    <FilterWrapper>
-      <Button
-        shape="round"
-        size="small"
-        style={{
-          color: isClicked ? theme.color.main : antdTheme.defaultColorText,
-          borderColor: isClicked
-            ? theme.color.main
-            : antdTheme.defaultColorBorder,
-        }}
-        onClick={handleSwitchChange}
-      >
-        {filter.name}
-      </Button>
-    </FilterWrapper>
+    <Button
+      shape="round"
+      size="small"
+      style={{
+        color: isClicked ? theme.color.main : antdTheme.defaultColorText,
+        borderColor: isClicked
+          ? theme.color.main
+          : antdTheme.defaultColorBorder,
+      }}
+      onClick={handleSwitchChange}
+    >
+      {filter.name}
+    </Button>
   )
 }
 
@@ -101,7 +98,7 @@ function FilterSwitchArray() {
   }, [])
 
   if (filters.length === 0) {
-    return <FilterWrapper>필터가 없습니다.</FilterWrapper>
+    return <>필터가 없습니다.</>
   }
 
   return (

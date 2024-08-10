@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import theme from '../../styles/theme'
 
 const PageRoot = styled.div`
   display: flex;
@@ -30,17 +31,24 @@ const StyleSection = styled.section`
   width: 42.275rem;
   padding: 0.5rem 0.8rem;
   display: flex;
+  align-items: flex-start;
   flex-basis: content;
-  flex-grow: 0;
-  flex-shrink: 0;
   column-gap: 1rem;
+  > h6.title {
+    font-size: ${theme.size.textSM};
+    padding: 0.3125rem 0rem;
+    flex-basis: content;
+    flex-shrink: 0;
+  }
 `
 
 const ContentContainer = styled.div`
+  flex-grow: 1;
   display: flex;
-  flex-wrap: wrap;
   align-content: flex-start;
-  column-gap: 1rem;
+  flex-wrap: wrap;
+  row-gap: 0.4rem;
+  column-gap: 0.5rem;
 `
 
 export { PageRoot, PageContent, FeedArea, StyleSection, ContentContainer }
