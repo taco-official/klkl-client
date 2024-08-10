@@ -24,7 +24,7 @@ function PreviewContent({ userId = undefined, productData }) {
       <ThumbnailContainer id="productThumbnail">
         <img
           id="previewContentImg"
-          src={`nginx/products/${productData.id}.jpg`}
+          src={productData.thumbnail}
         />
         <LikeButton
           id="likeButton"
@@ -75,6 +75,7 @@ PreviewContent.propTypes = {
   userId: PropTypes.number,
   productData: PropTypes.shape({
     id: PropTypes.number.isRequired,
+    thumbnail: PropTypes.string.isRequired,
     country: PropTypes.string.isRequired,
     subcategory: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
