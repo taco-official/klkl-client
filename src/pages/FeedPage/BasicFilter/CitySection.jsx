@@ -90,7 +90,7 @@ function CityContainer() {
     if (selectedCountry?.id) fetchCities(selectedCountry.id)
   }, [selectedCountry, fetchCities])
 
-  if (!selectedCountry || !selectedCountry.id)
+  if (!selectedCountry?.id)
     return (
       <SelectContainer>
         <SubTitle className="empty">국가를 선택하세요.</SubTitle>
