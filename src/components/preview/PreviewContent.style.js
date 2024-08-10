@@ -45,28 +45,24 @@ const ThumbnailContainer = styled.div`
   width: 12.5rem;
   height: 12.5rem;
   border: 0.0625rem solid transparent;
-  position: relative;
-  justify-content: center;
-  > img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  > :last-child {
-    position: absolute;
-    bottom: 0.6rem;
-    right: 0.8rem;
+  &#productThumbnail {
+    position: relative;
+    > img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    > :last-child {
+      position: absolute;
+      bottom: 0.6rem;
+      right: 0.8rem;
+    }
   }
   &.loading {
     border-color: ${theme.color.lineGrey};
     display: flex;
     align-items: center;
     justify-content: center;
-    > :nth-child(n) {
-      position: relative;
-      bottom: 0;
-      right: 0;
-    }
   }
 `
 
@@ -105,7 +101,7 @@ const CategoryWrapper = styled.div`
   > :nth-child(n) {
     display: inline-block;
   }
-  #country {
+  > #country {
     margin-right: 0.5rem;
   }
   &.loading {
