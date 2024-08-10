@@ -1,13 +1,10 @@
 import { create } from 'zustand'
 
-const useLoginModalStore = create((set) => ({
-  modalState: false,
-  setModalState: (status) => set({ modalState: status }),
-}))
-
-const useSearchModalStore = create((set) => ({
-  modalState: false,
-  setModalState: (status) => set({ modalState: status }),
+const useModalStore = create((set) => ({
+  loginModalState: false,
+  searchModalState: false,
+  setLoginModalState: (status) => set({ loginModalState: status }),
+  setSearchModalState: (status) => set({ searchModalState: status }),
 }))
 
 const useCurrentPageStore = create((set) => ({
@@ -15,4 +12,4 @@ const useCurrentPageStore = create((set) => ({
   setCurrentPage: (currentPage) => set({ currentPage }),
 }))
 
-export { useLoginModalStore, useSearchModalStore, useCurrentPageStore }
+export { useModalStore, useCurrentPageStore }

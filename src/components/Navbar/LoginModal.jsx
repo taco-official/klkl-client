@@ -1,8 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Modal, Button, ConfigProvider } from 'antd'
+import { useShallow } from 'zustand/react/shallow'
 import { KakaoLogo, NaverLogo } from '../../images/logos'
-import { useLoginModalStore } from './stores/navbarStores'
+import { useModalStore } from './stores/navbarStores'
 import theme from '../../style/theme'
 
 const ModalTheme = {
@@ -31,7 +32,9 @@ const KaKaoStyle = {
 }
 
 function LoginModal() {
-  const { modalState, setModalState } = useLoginModalStore()
+  const [modalState, setModalState] = useModalStore(
+    useShallow((state) => [state.loginModalState, state.setLoginModalState])
+  )
 
   return (
     <ConfigProvider theme={ModalTheme}>

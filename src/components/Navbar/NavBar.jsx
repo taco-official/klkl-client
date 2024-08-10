@@ -2,13 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { useLoginModalStore } from './stores/navbarStores'
+import { useModalStore } from './stores/navbarStores'
 import theme from '../../style/theme'
 import LoginModal from './LoginModal'
+import SearchModal from './SearchModal'
 import NavList from './NavList'
 
 export default function NavBar() {
-  const setModalstate = useLoginModalStore((state) => state.setModalState)
+  const setLoginModalState = useModalStore((state) => state.setLoginModalState)
 
   return (
     <>
@@ -20,7 +21,7 @@ export default function NavBar() {
           <NavList />
           <LoginButton
             onClick={() => {
-              setModalstate(true)
+              setLoginModalState(true)
             }}
           >
             로그인
@@ -28,6 +29,7 @@ export default function NavBar() {
         </MyNav>
       </Header>
       <LoginModal />
+      <SearchModal />
     </>
   )
 }
