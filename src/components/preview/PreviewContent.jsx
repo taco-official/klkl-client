@@ -46,9 +46,10 @@ function PreviewContent({ userId = undefined, productData }) {
           </ProductNameBox>
         </TitleContainer>
         <TagsContainer>
-          {productData.tags.map((tag) => (
-            <BlueTag key={tag}>{tag}</BlueTag>
-          ))}
+          {productData.tags.map((tag, index) => {
+            if (index > 3) return null
+            return <BlueTag key={tag}>{tag}</BlueTag>
+          })}
         </TagsContainer>
         <IconContainer>
           <IconBox
