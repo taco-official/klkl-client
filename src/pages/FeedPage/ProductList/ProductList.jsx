@@ -50,7 +50,7 @@ const dummyProductList = [
     name: 'Sample',
     country: 'Sample',
     subcategory: 'Sample',
-    tags: ['sample', 'sample', 'sample', 'sample', 'sample'],
+    tags: ['tag1', 'tag2', 'tag3', 'tag4', 'tag5'],
     rates: 0,
     likeCount: 0,
   },
