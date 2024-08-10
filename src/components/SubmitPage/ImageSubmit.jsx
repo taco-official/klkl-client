@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { CiSquarePlus } from 'react-icons/ci'
 import { Image, Upload, ConfigProvider, message } from 'antd'
+import Icons from '../Common/Icons'
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ export default function ImageSubmitPage() {
           marginTop: 8,
         }}
       >
-        <CiSquarePlus />
+        <Icons $empty>add_box</Icons>
         <br />
         Upload
       </div>
