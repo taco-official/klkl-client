@@ -6,7 +6,7 @@ function IconTextButton({ iconValue = null, Icon = null, text = null }) {
   return (
     <IconContext.Provider value={iconValue}>
       <div>
-        <Icon />
+        {Icon}
         {text}
       </div>
     </IconContext.Provider>
