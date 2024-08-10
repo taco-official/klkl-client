@@ -43,7 +43,7 @@ ReviewImages.propTypes = {
 const ReviewImageCarousel = styled(StyledFlickity)`
   width: 100%;
   height: 50vh;
-  margin-bottom: 20px;
+  margin: 30px 0;
 
   .carousel-cell {
     width: 100%;

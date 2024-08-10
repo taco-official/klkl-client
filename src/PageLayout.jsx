@@ -9,13 +9,11 @@ import GlobalStyle from './style/GlobalStyle'
 export default function Layout() {
   return (
     <>
-      <div style={{ height: '300vh' }}>
-        <GlobalStyle />
-        <NavBar />
-        <StyledMain>
-          <Outlet />
-        </StyledMain>
-      </div>
+      <GlobalStyle />
+      <NavBar />
+      <StyledMain>
+        <Outlet />
+      </StyledMain>
       <Footer />
     </>
   )
@@ -23,5 +21,5 @@ export default function Layout() {
 
 const StyledMain = styled.main`
   width: 100%;
-  min-height: 100vh;
+  min-height: 90vh;
 `
