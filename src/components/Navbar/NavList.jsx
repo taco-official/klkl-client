@@ -4,7 +4,7 @@ import { IoSearchSharp } from 'react-icons/io5'
 import { HiPaperAirplane } from 'react-icons/hi2'
 import { FaHeart } from 'react-icons/fa6'
 import { TbBellFilled } from 'react-icons/tb'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 export default function NavList() {
   const texts = ['둘러보기', '검색', '좋아요', '알림']

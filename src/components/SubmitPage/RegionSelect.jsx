@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Input } from 'antd'
 import SelectionList from './Commons/SelectionList'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 import { SmoothAnimation } from './Commons/CommonVariable'
 import { reviewDataType } from './Commons/reviewReducer'
 

@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import GlobalStyle from '../style/GlobalStyle'
+import GlobalStyle from '../styles/GlobalStyle'
 import ErrorImage from '../images/err.jpg'
-import theme from '../style/theme'
+import theme from '../styles/theme'
 
 export default function ErrorPage() {
   return (

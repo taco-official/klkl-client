@@ -6,6 +6,7 @@ import ErrorPage from './pages/ErrorPage'
 import Home from './components/Home/Home'
 import ReviewDetailPage from './components/Review/ReviewDetailPage'
 import SubmitPage from './components/SubmitPage/SubmitPage'
+import FeedPage from './pages/FeedPage/FeedPage'
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: 'submit',
         element: <SubmitPage />,
+      },
+      {
+        path: 'feed',
+        element: <FeedPage />,
       },
     ],
   },

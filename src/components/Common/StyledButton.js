@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 const StyledButton = styled.button`
   font-family: ${theme.style.mainBold};

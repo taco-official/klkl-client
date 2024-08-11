@@ -6,7 +6,7 @@ import ReviewImages from './ReviewImages'
 import ReviewInfo from './ReviewInfo'
 import UserProfile from '../UserProfile/UserProfile'
 import Comment from '../Comment/Comment'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 const Example = {
   isSuccess: true,

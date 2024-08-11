@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Breadcrumb, Rate, Dropdown, ConfigProvider, Modal } from 'antd'
 import Icons from '../Common/Icons'
-import StyleTag from '../tag/Tag'
-import theme from '../../style/theme'
+import { StyleTag } from '../tag/Tags.style'
+import theme from '../../styles/theme'
 
 const reviewDataType = {
   productId: PropTypes.number,

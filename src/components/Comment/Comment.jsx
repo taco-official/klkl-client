@@ -1,7 +1,7 @@
 import { React, useState, useRef } from 'react'
 import { Input, ConfigProvider } from 'antd'
 import styled from 'styled-components'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 import ProfileImage from '../UserProfile/ProfileImage'
 import CommentList from './CommentList'
 

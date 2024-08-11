@@ -5,6 +5,9 @@
     "node": true
   },
   "extends": ["eslint:recommended", "airbnb", "plugin:prettier/recommended"],
+  "parserOptions": {
+    "ecmaVersion": 2020
+  },
   "rules": {
     "no-alert": "off",
     "no-console": "off",

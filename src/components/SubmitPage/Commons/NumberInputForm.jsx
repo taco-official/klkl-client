@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { InputNumber, Select, ConfigProvider } from 'antd'
 import PropTypes from 'prop-types'
-import theme from '../../../style/theme'
+import theme from '../../../styles/theme'
 
 const { Option } = Select
 
