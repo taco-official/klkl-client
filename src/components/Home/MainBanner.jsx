@@ -52,7 +52,12 @@ export default function MainBanner({ urls }) {
   )
 }
 MainBanner.propTypes = {
-  urls: PropTypes.arrayOf().isRequired,
+  urls: PropTypes.arrayOf(
+    PropTypes.shape({
+      image: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 }
 
 const BannerContainer = styled.div`
