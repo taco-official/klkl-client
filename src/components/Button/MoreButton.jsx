@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { IoMdMore } from 'react-icons/io'
 
-const IconButtonBox = styled.button`
+const IconTextBox = styled.button`
   border: 0rem;
   background-color: transparent;
+  cursor: pointer;
 `
 
 function MoreButton({ size = '0.8rem' }) {
@@ -14,7 +15,7 @@ function MoreButton({ size = '0.8rem' }) {
   }, [])
 
   return (
-    <IconButtonBox
+    <IconTextBox
       type="button"
       onClick={handleClick}
     >
@@ -22,7 +23,7 @@ function MoreButton({ size = '0.8rem' }) {
         color="grey"
         size={size}
       />
-    </IconButtonBox>
+    </IconTextBox>
   )
 }
 

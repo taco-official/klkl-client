@@ -1,64 +1,72 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { StarFilled } from '@ant-design/icons'
 import { FaHeart } from 'react-icons/fa6'
+import LikeButton from '../Button/LikeButton'
+import MoreButton from '../Button/MoreButton'
+import { BlueTag } from '../tag/Tags.style'
 import {
   PreviewContainer,
   ThumbnailContainer,
   DescriptionContainer,
-  SubDesContainer,
-  CategoryBox,
-  TitleBox,
+  SubDesBox,
+  CategoryWrapper,
+  ProductNameBox,
   TagsContainer,
-  LikeBox,
+  IconContainer,
+  IconBox,
+  TitleContainer,
 } from './PreviewContent.style'
-import LikeButton from '../Button/LikeButton'
-import MoreButton from '../Button/MoreButton'
-import Tag from '../tag/Tag'
 
-function PreviewContent({
-  userId = undefined,
-  productId,
-  city,
-  subcategory,
-  name,
-  tags,
-  likeCount,
-}) {
+function PreviewContent({ userId = undefined, productData }) {
   return (
     <PreviewContainer>
-      <ThumbnailContainer className="productThumbnail">
+      <ThumbnailContainer id="productThumbnail">
         <img
-          className="previewContentImg"
-          src={`nginx/products/${productId}.jpg`}
+          id="previewContentImg"
+          src={productData.thumbnail}
         />
         <LikeButton
+          id="likeButton"
           userId={userId}
-          productId={productId}
+          productId={productData.id}
         />
       </ThumbnailContainer>
       <DescriptionContainer>
-        <SubDesContainer>
-          <CategoryBox>
-            <div className="city">{city}</div>
-            <div className="subcategory">{subcategory}</div>
-          </CategoryBox>
-          <MoreButton size="0.8rem" />
-        </SubDesContainer>
-        <TitleBox id="productName">
-          <b>{name}</b>
-        </TitleBox>
+        <TitleContainer>
+          <SubDesBox>
+            <CategoryWrapper>
+              <div id="country">{productData.country}</div>
+              <div id="subcategory">{productData.subcategory}</div>
+            </CategoryWrapper>
+            <MoreButton size="1.1rem" />
+          </SubDesBox>
+          <ProductNameBox id="productName">
+            <b>{productData.name}</b>
+          </ProductNameBox>
+        </TitleContainer>
         <TagsContainer>
-          {tags.map((tag) => (
-            <Tag
-              key={tag}
-              tagName={tag}
-            />
-          ))}
+          {productData.tags.map((tag, index) => {
+            if (index > 3) return null
+            return <BlueTag key={tag}>{tag}</BlueTag>
+          })}
         </TagsContainer>
-        <LikeBox>
-          <FaHeart color="red" />
-          {likeCount}
-        </LikeBox>
+        <IconContainer>
+          <IconBox
+            className="productRates"
+            color="gold"
+          >
+            <StarFilled className="productRates" />
+            <div className="productRates">{productData.rates}</div>
+          </IconBox>
+          <IconBox
+            className="likeCount"
+            color="red"
+          >
+            <FaHeart className="likeCount" />
+            <div className="likeCount">{productData.likeCount}</div>
+          </IconBox>
+        </IconContainer>
       </DescriptionContainer>
     </PreviewContainer>
   )
@@ -66,12 +74,16 @@ function PreviewContent({
 
 PreviewContent.propTypes = {
   userId: PropTypes.number,
-  productId: PropTypes.number.isRequired,
-  city: PropTypes.string.isRequired,
-  subcategory: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-  likeCount: PropTypes.number.isRequired,
+  productData: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    thumbnail: PropTypes.string.isRequired,
+    country: PropTypes.string.isRequired,
+    subcategory: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    rates: PropTypes.number.isRequired,
+    likeCount: PropTypes.number.isRequired,
+  }).isRequired,
 }
 
 export default PreviewContent

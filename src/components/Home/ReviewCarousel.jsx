@@ -24,12 +24,8 @@ export default function ReviewCarousels({ contents }) {
           >
             <PreviewContent
               userId={info.id}
-              productId={info.id}
-              city={info.city}
-              subcategory={info.subcategory}
-              name={info.name}
-              tags={info.tags}
-              likeCount={info.likeCount}
+              productData={info.productData}
+              style={{ transform: 'scale(1.5, 1.5)' }}
             />
           </ReviewWrapper>
         )
