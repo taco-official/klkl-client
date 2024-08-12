@@ -17,28 +17,17 @@ export default function PrevNextButtons() {
 
   const navigate = useNavigate()
 
-  const checkNext = () => {
-    switch (step) {
-      case submitSteps.PICTURE:
-        return true
-      case submitSteps.REGION:
-        return (
-          review.continentId !== 0 &&
-          review.countryId !== 0 &&
-          review.cityId !== 0
-        )
-      case submitSteps.INFO:
-        return (
-          review.name !== '' &&
-          review.description !== '' &&
-          review.price !== 0 &&
-          review.rate !== 0
-        )
-      case submitSteps.CATEGORY:
-        return review.categoryId !== 0 && review.subCategoryId !== 0
-      default:
-        return false
-    }
+  const stepValidations = {
+    [submitSteps.PICTURE]: () => true,
+    [submitSteps.REGION]: () =>
+      review.continentId !== 0 && review.countryId !== 0 && review.cityId !== 0,
+    [submitSteps.INFO]: () =>
+      review.name !== '' &&
+      review.description !== '' &&
+      review.price !== 0 &&
+      review.rate !== 0,
+    [submitSteps.CATEGORY]: () =>
+      review.categoryId !== 0 && review.subCategoryId !== 0,
   }
 
   return (
@@ -55,7 +44,7 @@ export default function PrevNextButtons() {
 
       <StyledButton
         $state
-        disabled={!checkNext()}
+        disabled={!stepValidations[step]()}
         onClick={() => {
           if (step === submitSteps.CATEGORY) {
             resetReviewContents()
