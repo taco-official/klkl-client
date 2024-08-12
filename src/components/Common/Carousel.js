@@ -53,12 +53,12 @@ const StyledFlickity = styled(Flickity)`
       height: 6px;
       opacity: 1;
       background: lightgray;
-      margin-left: 2px;
+      margin: 0 2px;
     }
 
     .dot.is-selected {
       background: gray;
-      transform: scale(120%);
+      transform: scale(110%);
     }
   }
 
