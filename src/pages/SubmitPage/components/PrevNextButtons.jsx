@@ -3,7 +3,7 @@ import { useShallow } from 'zustand/react/shallow'
 import { useNavigate } from 'react-router-dom'
 
 import submitSteps from '../constant/submitSteps'
-import StyledButton from '../../Common/StyledButton'
+import StyledButton from '../../../components/Button/StyledButton'
 import useReviewStore from '../stores/useReviewStore'
 import useStepStore from '../stores/useStepStore'
 

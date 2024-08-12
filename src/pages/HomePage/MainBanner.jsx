@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Flickity from 'flickity'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import StyledFlickity from '../Common/Carousel'
+import StyledFlickity from '../../components/Carousel/Carousel'
 import theme from '../../styles/theme'
 
 const flickityOptions = {

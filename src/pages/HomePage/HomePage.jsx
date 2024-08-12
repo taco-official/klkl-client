@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { FloatButton } from 'antd'
 import { Link } from 'react-router-dom'
-import Icons from '../Common/Icons'
+import Icons from '../../components/Icons/Icons'
 import MainBanner from './MainBanner'
 import ReviewCarousels from './ReviewCarousel'
 import theme from '../../styles/theme'
@@ -179,7 +179,7 @@ const ImageArr = [
   },
 ]
 
-export default function Home() {
+export default function HomePage() {
   const [bannerImages, setBannerImage] = useState(ImageArr)
 
   useEffect(() => {

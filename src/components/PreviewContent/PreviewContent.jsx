@@ -4,7 +4,7 @@ import { StarFilled } from '@ant-design/icons'
 import { FaHeart } from 'react-icons/fa6'
 import LikeButton from '../Button/LikeButton'
 import MoreButton from '../Button/MoreButton'
-import { BlueTag } from '../tag/Tags.style'
+import { BlueTag } from '../Tags/Tags.style'
 import {
   PreviewContainer,
   ThumbnailContainer,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Image, Upload, ConfigProvider, message } from 'antd'
-import Icons from '../Common/Icons'
+import Icons from '../../components/Icons/Icons'
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {

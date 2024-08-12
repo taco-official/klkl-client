@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Breadcrumb, Rate, Dropdown, ConfigProvider, Modal } from 'antd'
-import Icons from '../Common/Icons'
-import { BlueTag } from '../Tags/Tags.style'
+import Icons from '../../components/Icons/Icons'
+import { BlueTag } from '../../components/Tags/Tags.style'
 import theme from '../../styles/theme'
 
 const reviewDataType = {
@@ -121,7 +121,7 @@ const items = [
   },
 ]
 
-export default function ReviewInfo({ review }) {
+export default function ReviewInfoBlock({ review }) {
   function parseDate(dateString) {
     const date = new Date(dateString)
     const year = date.getUTCFullYear()
@@ -189,7 +189,7 @@ export default function ReviewInfo({ review }) {
     </InfoWrapper>
   )
 }
-ReviewInfo.propTypes = {
+ReviewInfoBlock.propTypes = {
   review: PropTypes.shape(reviewDataType).isRequired,
 }
 

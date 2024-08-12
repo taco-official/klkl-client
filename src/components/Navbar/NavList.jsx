@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 
 import { useModalStore, useCurrentPageStore } from './stores/navbarStores'
 import theme from '../../styles/theme'
-import Icons from '../Common/Icons'
+import Icons from '../Icons/Icons'
 
 export default function NavList() {
   const pageIndex = {

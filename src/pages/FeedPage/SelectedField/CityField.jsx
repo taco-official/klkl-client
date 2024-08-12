@@ -2,7 +2,10 @@ import React, { useCallback } from 'react'
 import { CloseOutlined } from '@ant-design/icons'
 import useSelectedCountry from '../../../hooks/useSelectedCountry'
 import useSelectedCity from '../../../hooks/useSelectedCity'
-import { BlueFieldTag, WhiteFieldTag } from '../../../components/tag/Tags.style'
+import {
+  BlueFieldTag,
+  WhiteFieldTag,
+} from '../../../components/Tags/Tags.style'
 
 function CityField() {
   const { selectedCountry, setSelectedCountry } = useSelectedCountry()
