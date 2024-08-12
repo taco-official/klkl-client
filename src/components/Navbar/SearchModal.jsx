@@ -1,7 +1,8 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Modal, ConfigProvider } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
+import { debounce } from 'lodash-es'
 
 import Icons from '../Common/Icons'
 import theme from '../../style/theme'
@@ -22,26 +23,16 @@ const ModalTheme = {
 
 export default function SearchModal() {
   const [value, setValue] = useState('')
-  const timeoutRef = useRef(null)
-
-  const handleChange = (e) => {
-    const newValue = e.target.value
-
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-    }
-
-    timeoutRef.current = setTimeout(() => {
-      setValue(newValue)
-      console.log(newValue)
-    }, 200)
-  }
-  console.log(value)
 
   const [modalState, setModalState] = useModalStore(
     useShallow((state) => [state.searchModalState, state.setSearchModalState])
   )
   const setCurrentPage = useCurrentPageStore((state) => state.setCurrentPage)
+
+  const debouncedSearch = debounce((inputValue) => {
+    setValue(inputValue)
+    console.log(value)
+  }, 200)
 
   return (
     <ConfigProvider theme={ModalTheme}>
@@ -58,7 +49,7 @@ export default function SearchModal() {
       >
         <ModalContents>
           <Icons $size="2em">search</Icons>
-          <input onChange={handleChange} />
+          <input onChange={(e) => debouncedSearch(e.target.value)} />
         </ModalContents>
       </Modal>
     </ConfigProvider>
