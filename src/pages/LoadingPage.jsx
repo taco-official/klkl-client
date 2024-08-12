@@ -1,107 +1,53 @@
 import React from 'react'
 import styled from 'styled-components'
 import theme from '../styles/theme'
+import Icons from '../components/Icons/Icons'
 
 export default function LoadingPage() {
   return (
     <LoadingPageWrapper>
-      <Circle />
-      <Shadow />
+      Loading...
+      <Plane>travel</Plane>
     </LoadingPageWrapper>
   )
 }
 
 const LoadingPageWrapper = styled.div`
+  text-align: center;
+  align-content: center;
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  overflow: hidden;
+  padding: 10% 0;
+
+  width: 400px;
+  height: 400px;
   margin: 0 auto;
+
+  font-family: ${theme.style.bannerEN};
+  font-weight: 700;
+  font-size: 60px;
 `
 
-const Circle = styled.div`
-  transform: translate(-50%, -100%);
+const Plane = styled(Icons)`
   position: absolute;
-  top: 50%;
-  left: calc(50%);
-  background-color: ${theme.color.main};
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 100%;
-  z-index: 100;
-  animation: bounce 1s infinite;
+  font-size: 80px;
+  color: ${theme.color.main};
 
-  @keyframes bounce {
+  transform: rotate3d(1, 0, 1, 45deg);
+  z-index: -10;
+
+  animation: fly 2s infinite;
+
+  @keyframes fly {
     0% {
-      top: 40%;
-      animation-timing-function: ease-in;
-    }
-    50% {
-      top: 48.5%;
-      height: 40px;
-      animation-timing-function: ease-out;
-    }
-    55% {
-      top: 50%;
-      height: 15px;
-      animation-timing-function: ease-in;
-    }
-    65% {
-      top: 48.5%;
-      height: 40px;
-      animation-timing-function: ease-out;
-    }
-    95% {
-      top: 40%;
-      animation-timing-function: ease-in;
+      left: -10%;
+      top: 45%;
+      animation-timing-function: ease-in-out;
     }
     100% {
+      left: 110%;
       top: 40%;
-      animation-timing-function: ease-in;
-    }
-  }
-`
-
-const Shadow = styled.div`
-  position: absolute;
-  width: 40px;
-  height: 5px;
-  left: calc(50% - 20px);
-  bottom: 50%;
-  border-radius: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
-
-  animation: shadow 1s infinite;
-
-  @keyframes shadow {
-    0% {
-      transform: scale(0.1);
-      background-color: rgba(0, 0, 0, 0.1);
-      animation-timing-function: ease-in;
-    }
-    50% {
-      transform: scale(1);
-      background-color: rgba(0, 0, 0, 0.2);
-      animation-timing-function: ease-out;
-    }
-    55% {
-      transform: scale(1);
-      background-color: rgba(0, 0, 0, 0.2);
-      animation-timing-function: ease-in;
-    }
-    65% {
-      transform: scale(0.5);
-      background-color: rgba(0, 0, 0, 0.15);
-      animation-timing-function: ease-out;
-    }
-    95% {
-      transform: scale(0.1);
-      background-color: rgba(0, 0, 0, 0.1);
-      animation-timing-function: ease-in;
-    }
-    100% {
-      transform: scale(0.1);
-      background-color: rgba(0, 0, 0, 0.1);
-      animation-timing-function: ease-in;
+      animation-timing-function: ease-in-out;
     }
   }
 `

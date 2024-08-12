@@ -7,17 +7,20 @@ import NavBar from '../components/Navbar/NavBar'
 import Footer from '../components/Footer/Footer'
 import GlobalStyle from '../styles/GlobalStyle'
 
-const TIMEOUT = 200
+const TIMEOUT = 100
 const getTransitionStyles = {
   entering: {
+    transform: 'translate3d(0, -5px, 0)',
     opacity: 0,
   },
   entered: {
-    transition: `opacity ${TIMEOUT}ms ease-in`,
+    transition: `opacity ${TIMEOUT}ms ease-in, transform ${TIMEOUT + 100}ms ease-in-out`,
+    transform: 'translateZ(0)',
+
     opacity: 1,
   },
   exiting: {
-    transition: `opacity ${TIMEOUT}ms ease-in`,
+    transition: `opacity ${TIMEOUT}ms ease-in, transform ${TIMEOUT + 100}ms ease-in-out`,
     opacity: 0,
   },
 }

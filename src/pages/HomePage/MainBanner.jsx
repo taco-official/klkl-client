@@ -62,10 +62,9 @@ MainBanner.propTypes = {
 
 const BannerContainer = styled.div`
   width: 100%;
-  height: 25rem;
+  height: 47vh;
   position: relative;
   overflow: hidden;
-  margin: 1.875rem 0;
 
   & > span {
     font-family: ${theme.style.bannerEN}, ${theme.style.bannerKO};
@@ -103,6 +102,7 @@ const BannerContainer = styled.div`
   .carousel-cell {
     border-radius: 0;
     margin: 0 5px;
+    height: 45vh;
   }
 `
 
