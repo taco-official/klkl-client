@@ -9311,6 +9311,7 @@ __metadata:
     eslint-plugin-react: "npm:^7.34.3"
     eslint-plugin-react-hooks: "npm:^4.6.2"
     flickity: "npm:2.3.0"
+    lodash-es: "npm:^4.17.21"
     prettier: "npm:3.3.2"
     prop-types: "npm:^15.8.1"
     react: "npm:^18.3.1"
@@ -9458,6 +9459,13 @@ __metadata:
   dependencies:
     p-locate: "npm:^5.0.0"
   checksum: 10c0/d3972ab70dfe58ce620e64265f90162d247e87159b6126b01314dd67be43d50e96a50b517bce2d9452a79409c7614054c277b5232377de50416564a77ac7aad3
+  languageName: node
+  linkType: hard
+
+"lodash-es@npm:^4.17.21":
+  version: 4.17.21
+  resolution: "lodash-es@npm:4.17.21"
+  checksum: 10c0/fb407355f7e6cd523a9383e76e6b455321f0f153a6c9625e21a8827d10c54c2a2341bd2ae8d034358b60e07325e1330c14c224ff582d04612a46a4f0479ff2f2
   languageName: node
   linkType: hard
 

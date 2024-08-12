@@ -43,6 +43,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:7.35.0"],\
           ["eslint-plugin-react-hooks", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:4.6.2"],\
           ["flickity", "npm:2.3.0"],\
+          ["lodash-es", "npm:4.17.21"],\
           ["prettier", "npm:3.3.2"],\
           ["prop-types", "npm:15.8.1"],\
           ["react", "npm:18.3.1"],\
@@ -12870,6 +12871,7 @@ const RAW_RUNTIME_STATE =
           ["eslint-plugin-react", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:7.35.0"],\
           ["eslint-plugin-react-hooks", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:4.6.2"],\
           ["flickity", "npm:2.3.0"],\
+          ["lodash-es", "npm:4.17.21"],\
           ["prettier", "npm:3.3.2"],\
           ["prop-types", "npm:15.8.1"],\
           ["react", "npm:18.3.1"],\
@@ -13040,6 +13042,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/lodash-npm-4.17.21-6382451519-d8cbea072b.zip/node_modules/lodash/",\
         "packageDependencies": [\
           ["lodash", "npm:4.17.21"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["lodash-es", [\
+      ["npm:4.17.21", {\
+        "packageLocation": "./.yarn/cache/lodash-es-npm-4.17.21-b45832dfce-fb407355f7.zip/node_modules/lodash-es/",\
+        "packageDependencies": [\
+          ["lodash-es", "npm:4.17.21"]\
         ],\
         "linkType": "HARD"\
       }]\
