@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Breadcrumb, Rate, Dropdown, ConfigProvider, Modal } from 'antd'
 import Icons from '../Common/Icons'
-import { StyleTag } from '../tag/Tags.style'
+import { BlueTag } from '../tag/Tags.style'
 import theme from '../../styles/theme'
 
 const reviewDataType = {
@@ -159,11 +159,11 @@ export default function ReviewInfo({ review }) {
         </CategoryWrapper>
 
         <h2>{review.name}</h2>
-        <div style={{ display: 'flex' }}>
+        <TagWrapper>
           {review.tags.map((tagName) => (
-            <StyleTag key={tagName}>{tagName}</StyleTag>
+            <BlueTag key={tagName}>{tagName}</BlueTag>
           ))}
-        </div>
+        </TagWrapper>
 
         <EndWrapper>
           <Rate
@@ -237,18 +237,17 @@ const EndWrapper = styled.div`
     align-items: flex-end;
   }
 
-  :where(.css-dev-only-do-not-override-10fi1po).ant-rate {
+  :where(.css-dev-only-do-not-override-1enioam).ant-rate {
     height: 17px;
-  }
-
-  :where(.css-dev-only-do-not-override-10fi1po).ant-rate .ant-rate-star {
-    margin-inline-end: 0;
-    width: 17px;
-    height: 100%;
 
     * {
       height: 100%;
     }
+  }
+
+  :where(.css-dev-only-do-not-override-1enioam).ant-rate .ant-rate-star {
+    margin-inline-end: 0.125rem;
+    width: 15px;
   }
 `
 
@@ -277,5 +276,12 @@ const SmallButton = styled.button.attrs({ type: 'button' })`
 
   :hover {
     background-color: rgba(0, 0, 0, 0.1);
+  }
+`
+
+const TagWrapper = styled.div`
+  display: flex;
+  & > div {
+    margin: 0 3px;
   }
 `
