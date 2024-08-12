@@ -5,7 +5,7 @@ import { useShallow } from 'zustand/react/shallow'
 import { debounce } from 'lodash-es'
 
 import Icons from '../Common/Icons'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 import { useModalStore, useCurrentPageStore } from './stores/navbarStores'
 
 const ModalTheme = {

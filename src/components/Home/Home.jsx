@@ -6,13 +6,6 @@ import Icons from '../Common/Icons'
 import MainBanner from './MainBanner'
 import ReviewCarousels from './ReviewCarousel'
 import theme from '../../styles/theme'
-import Footer from '../Footer/Footer'
-
-const arr = [
-  'https://i.ytimg.com/vi/bLj_mR4Fnls/maxresdefault.jpg',
-  'https://i.ytimg.com/vi/bOJdHU99OO8/maxresdefault.jpg',
-  'https://i.ytimg.com/vi/53lokkIhrYY/maxresdefault.jpg',
-]
 
 const Test = [
   {

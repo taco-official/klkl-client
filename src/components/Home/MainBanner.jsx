@@ -3,7 +3,7 @@ import Flickity from 'flickity'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import StyledFlickity from '../Common/Carousel'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 const flickityOptions = {
   wrapAround: true,

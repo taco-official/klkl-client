@@ -5,7 +5,7 @@ import { useShallow } from 'zustand/react/shallow'
 
 import useReviewStore from './stores/useReviewStore'
 import SelectionList from './components/SelectionList'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 const Regions = [
   {

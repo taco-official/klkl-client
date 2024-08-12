@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import { useModalStore } from './stores/navbarStores'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 import LoginModal from './LoginModal'
 import SearchModal from './SearchModal'
 import NavList from './NavList'
