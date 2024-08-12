@@ -43,8 +43,7 @@ const StyledButton = styled.button`
   width: ${({ $width }) => $width};
 
   &:disabled {
-    visibility: hidden;
-    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.4);
   }
 
   @keyframes anime {

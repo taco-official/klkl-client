@@ -1,14 +1,19 @@
 import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { Input, Rate } from 'antd'
-import theme from '../../styles/theme'
-import NumberInputForm from './Commons/NumberInputForm'
-import { SmoothAnimation } from './Commons/CommonVariable'
-import { reviewDataType } from './Commons/reviewReducer'
+import { useShallow } from 'zustand/react/shallow'
 
-export default function InfoSubmitPage({ review, setReviewContent }) {
-  console.log(review)
+import useReviewStore from './stores/useReviewStore'
+import theme from '../../style/theme'
+import NumberInputForm from './components/NumberInputForm'
+
+export default function InfoSubmitPage() {
+  const [name, description, rate] = useReviewStore(
+    useShallow((state) => [state.name, state.description, state.rate])
+  )
+
+  const setReviewContent = useReviewStore((state) => state.setReviewContents)
+
   return (
     <>
       <h2>
@@ -20,9 +25,9 @@ export default function InfoSubmitPage({ review, setReviewContent }) {
         <Input
           showCount
           maxLength={50}
-          defaultValue={review.name}
+          defaultValue={name}
           placeholder="상품명을 입력해주세요"
-          onBlur={(e) => setReviewContent('SET_NAME', e.target.value)}
+          onBlur={(e) => setReviewContent({ name: e.target.value.trim() })}
           style={{ fontSize: theme.size.textSM }}
           size="large"
         />
@@ -32,9 +37,11 @@ export default function InfoSubmitPage({ review, setReviewContent }) {
         <Input.TextArea
           showCount
           maxLength={1000}
-          defaultValue={review.description}
+          defaultValue={description}
           placeholder="리뷰를 입력해 주세요"
-          onBlur={(e) => setReviewContent('SET_DESCRIPTION', e.target.value)}
+          onBlur={(e) =>
+            setReviewContent({ description: e.target.value.trim() })
+          }
           size="large"
           autoSize={{ minRows: 3 }}
           style={{ fontSize: theme.size.textSM }}
@@ -42,24 +49,19 @@ export default function InfoSubmitPage({ review, setReviewContent }) {
       </Wrapper>
       <Wrapper>
         <h3>구매가격</h3>
-        <NumberInputForm
-          setPrice={(num) => setReviewContent('SET_PRICE', num)}
-          defaultValue={review.price ? review.price : null}
-        />
+        <NumberInputForm />
       </Wrapper>
       <Wrapper>
         <h3>끼룩스타</h3>
         <Rate
           allowHalf
+          defaultValue={rate}
           style={{ color: '#FFD700' }}
+          onChange={(num) => setReviewContent({ rate: num })}
         />
       </Wrapper>
     </>
   )
-}
-InfoSubmitPage.propTypes = {
-  review: PropTypes.shape(reviewDataType).isRequired,
-  setReviewContent: PropTypes.func.isRequired,
 }
 
 const Wrapper = styled.div`
@@ -67,7 +69,24 @@ const Wrapper = styled.div`
   position: relative;
   margin-bottom: 1.875rem;
 
-  ${SmoothAnimation}
+  @keyframes openModal {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0.99;
+    }
+  }
+
+  animation: openModal ease-in 0.3s;
+
+  input,
+  textarea {
+    font-family: ${theme.style.main};
+  }
 
   span > span {
     font-size: 10px;

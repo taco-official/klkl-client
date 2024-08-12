@@ -1,38 +1,121 @@
-import { React } from 'react'
+import React, { useState, useEffect } from 'react'
+import Flickity from 'flickity'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import StyledFlickity from '../Common/Carousel'
+import theme from '../../style/theme'
 
 const flickityOptions = {
   wrapAround: true,
   setGallerySize: false,
-  autoPlay: true,
+  autoPlay: 3500,
   pauseAutoPlayOnHover: true,
+  selectedAttraction: 0.02,
+  prevNextButtons: false,
 }
 
-export default function Banner({ contents }) {
+export default function MainBanner({ urls }) {
+  const [curIndex, setCurIndex] = useState(0)
+
+  useEffect(() => {
+    const flicktyContainer = new Flickity('.main-banner', flickityOptions)
+
+    flicktyContainer.on('change', setCurIndex)
+
+    return () => {
+      flicktyContainer.off('change', setCurIndex)
+    }
+  }, [])
+
   return (
-    <StyledFlickity options={flickityOptions}>
-      <StyledDiv />
-      {contents.map((url) => {
-        return (
-          <img
-            src={url}
-            className="carousel-cell"
-          />
-        )
-      })}
-    </StyledFlickity>
+    <BannerContainer>
+      <StyledFlickity
+        options={flickityOptions}
+        className="main-banner"
+      >
+        {urls.map((country) => {
+          return (
+            <StyledContainer
+              $url={country.image}
+              key={country.name}
+              className="carousel-cell"
+            />
+          )
+        })}
+      </StyledFlickity>
+      <span
+        key={urls[curIndex].name}
+        className="banner--word__country"
+      >{`${urls[curIndex].name}`}</span>
+      <span className="banner--word__other"> 기념품을 둘러보세용가뤼</span>
+    </BannerContainer>
   )
 }
-Banner.propTypes = {
-  contents: PropTypes.arrayOf(PropTypes.string).isRequired,
+MainBanner.propTypes = {
+  urls: PropTypes.arrayOf(
+    PropTypes.shape({
+      image: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 }
 
-const StyledDiv = styled.div`
+const BannerContainer = styled.div`
   width: 100%;
-  height: 280px;
-  background-image: url(https://i.namu.wiki/i/LcxB7HDlW9ZEnKnl4CtQsEgLQ2cFksTsj7H63mV08Q2_d7OQv_XhgszPweyU2AF9wLr0spaQ1zKxv03um9P8M3hg5Lm-6g1BxNEs-xfcU3o74jX1PXybLOWp2gO9c3XdIYxI6v04dxBjSg_DjA0ZkA.svg);
+  height: 25rem;
+  position: relative;
+  overflow: hidden;
+  margin: 1.875rem 0;
+
+  & > span {
+    font-family: ${theme.style.bannerEN}, ${theme.style.bannerKO};
+    font-weight: 500;
+    pointer-events: none;
+    color: white;
+    position: absolute;
+  }
+
+  .banner--word__country {
+    top: 10%;
+    left: 3%;
+    font-size: 3.75rem;
+
+    @keyframes word {
+      0% {
+        opacity: 0;
+        transform: translateY(-50%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0%);
+      }
+    }
+
+    animation: word ease-in-out 0.7s;
+  }
+
+  .banner--word__other {
+    top: 31%;
+    left: 5%;
+    font-size: 2.1875rem;
+  }
+
+  .carousel-cell {
+    border-radius: 0;
+    margin: 0 5px;
+  }
+`
+
+const StyledContainer = styled.div`
+  background-image: ${({ $url }) => `url(${$url})`};
+  background-color: rgba(0, 0, 0, 0.3);
+  background-blend-mode: multiply;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top-right;
+  background-size: 100%;
+  transition: background-size ease-in-out 1.5s;
+
+  &:hover {
+    background-size: 105%;
+  }
 `

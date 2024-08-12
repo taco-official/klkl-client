@@ -3,10 +3,7 @@ import styled from 'styled-components'
 
 const StyledFlickity = styled(Flickity)`
   width: 100%;
-  height: 18.75rem;
-  min-width: 68.75rem;
-
-  margin: 60px auto;
+  height: 100%;
 
   border: none;
   outline: none;
@@ -22,9 +19,19 @@ const StyledFlickity = styled(Flickity)`
     }
   }
 
+  .flickity-viewport {
+    width: 100%;
+    height: 100%;
+  }
+
+  .flickity-slider {
+    width: 100%;
+    height: 100%;
+  }
+
   .carousel-cell {
     width: 100%;
-    height: 280px;
+    height: 95%;
     border-radius: 5px;
     border-radius: 8px;
     object-fit: cover;
@@ -46,12 +53,12 @@ const StyledFlickity = styled(Flickity)`
       height: 6px;
       opacity: 1;
       background: lightgray;
-      border: 1.5px solid white;
       margin-left: 2px;
     }
 
     .dot.is-selected {
       background: gray;
+      transform: scale(120%);
     }
   }
 

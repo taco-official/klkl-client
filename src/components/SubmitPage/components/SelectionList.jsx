@@ -32,19 +32,6 @@ SelectionList.propTypes = {
   $width: PropTypes.string,
 }
 
-const myAnimation = `
-	@keyframes openModal {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
-
-	animation: openModal ease-in-out 0.2s;
-`
-
 const SelectBoxes = styled.ul`
   width: ${({ $width }) => $width};
   height: 10.9375rem;
@@ -54,13 +41,20 @@ const SelectBoxes = styled.ul`
   border-top: 1px solid ${theme.color.lineGrey};
   border-bottom: 1px solid ${theme.color.lineGrey};
 
-  /* border: 1px solid ${theme.color.lineGrey}; */
-
   animation: openModal 0.4s ease-out forwards;
   position: relative;
   z-index: 10;
 
-  ${myAnimation}
+  @keyframes openModal {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  animation: openModal ease-in-out 0.2s;
 
   .selected {
     background-color: ${theme.color.selectedCategory};

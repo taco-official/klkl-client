@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import PropTypes from 'prop-types'
 import { Button, ConfigProvider } from 'antd'
-import theme from '../../styles/theme'
-import SelectionList from './Commons/SelectionList'
-import { SmoothAnimation } from './Commons/CommonVariable'
-import { reviewDataType } from './Commons/reviewReducer'
+import { useShallow } from 'zustand/react/shallow'
+
+import useReviewStore from './stores/useReviewStore'
+import theme from '../../style/theme'
+import SelectionList from './components/SelectionList'
 
 const CategoryDummy = [
   {
@@ -69,9 +69,20 @@ const buttonTheme = {
   },
 }
 
-export default function CategorySelctionPage({ review, setReviewContent }) {
-  const [store, setStore] = useState(false)
-  const [gosu, setGosu] = useState(false)
+export default function CategorySelctionPage() {
+  const [categoryId, subCategoryId, store, gosu] = useReviewStore(
+    useShallow((state) => [
+      state.categoryId,
+      state.subCategoryId,
+      state.store,
+      state.gosu,
+    ])
+  )
+
+  const setReviewContent = useReviewStore((state) => state.setReviewContents)
+
+  const CATEGORY_FOOD = 400
+  const SUBCATEGORYS_CONVINIENTSTORE = [501, 502, 504]
 
   return (
     <>
@@ -80,58 +91,61 @@ export default function CategorySelctionPage({ review, setReviewContent }) {
         선택해주세요
       </h2>
       <h3>상품 분류</h3>
+
       <Wrapper>
         <SelectionList
           optionList={CategoryDummy}
-          optionState={review.categoryId}
-          setOptionState={(num) => setReviewContent('SET_CATEGORY', num)}
+          optionState={categoryId}
+          setOptionState={(id) => setReviewContent({ categoryId: id })}
           $width={`${100 / 2}%`}
         />
-        {review.categoryId !== 0 && (
+
+        {categoryId !== 0 && (
           <SelectionList
-            optionList={SubCategoryDummy[review.categoryId]}
-            optionState={review.subCategoryId}
-            setOptionState={(num) => setReviewContent('SET_SUBCATEGORY', num)}
+            optionList={SubCategoryDummy[categoryId]}
+            optionState={subCategoryId}
+            setOptionState={(id) => setReviewContent({ subCategoryId: id })}
             $width={`${100 / 2}%`}
           />
         )}
       </Wrapper>
+
       <ConfigProvider theme={buttonTheme}>
-        {review.categoryId === 400 && (
+        {categoryId === CATEGORY_FOOD && (
           <>
             <h3>편의점에서 사셨나요?</h3>
             <Wrapper style={{ marginBottom: '1.875rem' }}>
               <CustomButton
                 type={store ? 'primary' : 'default'}
-                onClick={() => setStore(true)}
+                onClick={() => setReviewContent({ store: true })}
                 style={{ marginRight: '1.5625rem' }}
               >
                 YES
               </CustomButton>
               <CustomButton
                 type={store ? 'default' : 'primary'}
-                onClick={() => setStore(false)}
+                onClick={() => setReviewContent({ store: false })}
               >
                 NO
               </CustomButton>
             </Wrapper>
           </>
         )}
-        {review.categoryId === 400 &&
-          [501, 502, 504].includes(review.subCategoryId) && (
+        {categoryId === CATEGORY_FOOD &&
+          SUBCATEGORYS_CONVINIENTSTORE.includes(subCategoryId) && (
             <>
-              <h3>is GOSU there?</h3>
+              <h3>고수맛이 났더랩니까?</h3>
               <Wrapper style={{ marginBottom: '1.875rem' }}>
                 <CustomButton
                   type={gosu ? 'primary' : 'default'}
-                  onClick={() => setGosu(true)}
+                  onClick={() => setReviewContent({ gosu: true })}
                   style={{ marginRight: '1.5625rem' }}
                 >
                   YES
                 </CustomButton>
                 <CustomButton
                   type={gosu ? 'default' : 'primary'}
-                  onClick={() => setGosu(false)}
+                  onClick={() => setReviewContent({ gosu: false })}
                 >
                   NO
                 </CustomButton>
@@ -142,10 +156,6 @@ export default function CategorySelctionPage({ review, setReviewContent }) {
     </>
   )
 }
-CategorySelctionPage.propTypes = {
-  review: PropTypes.shape(reviewDataType).isRequired,
-  setReviewContent: PropTypes.func.isRequired,
-}
 
 const Wrapper = styled.div`
   width: 37.5rem;
@@ -153,7 +163,20 @@ const Wrapper = styled.div`
   display: flex;
 
   margin-bottom: 1.875rem;
-  ${SmoothAnimation}
+
+  @keyframes openModal {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 0.99;
+    }
+  }
+
+  animation: openModal ease-in 0.3s;
 `
 
 const CustomButton = styled(Button)`
