@@ -6,6 +6,7 @@ import PageLayout from './PageLayout'
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'))
 const ReviewPage = lazy(() => import('./pages/ReviewPage/ReviewPage'))
 const SubmitPage = lazy(() => import('./pages/SubmitPage/SubmitPage'))
+const FeedPage = lazy(() => import('./pages/FeedPage/FeedPage'))
 const ErrorPage = lazy(() => import('./pages/ErrorPage'))
 
 const router = createBrowserRouter([
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'review',
+        path: 'review/:id',
         element: (
           <Suspense fallback={<div>Loading...</div>}>
             <ReviewPage />
@@ -37,11 +38,19 @@ const router = createBrowserRouter([
           </Suspense>
         ),
       },
+      {
+        path: 'feed',
+        element: (
+          <Suspense fallback={<div>Loading...</div>}>
+            <FeedPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/*',
+        element: <ErrorPage />,
+      },
     ],
-  },
-  {
-    path: '/*',
-    element: <ErrorPage />,
   },
 ])
 
