@@ -1,7 +1,8 @@
 import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import PageLayout from './PageLayout'
+import PageLayout from './pages/PageLayout'
+import LoadingPage from './pages/LoadingPage'
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'))
 const ReviewPage = lazy(() => import('./pages/ReviewPage/ReviewPage'))
@@ -17,15 +18,15 @@ const router = createBrowserRouter([
       {
         path: '',
         element: (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<LoadingPage />}>
             <HomePage />
           </Suspense>
         ),
       },
       {
-        path: 'review/:id',
+        path: 'review',
         element: (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<LoadingPage />}>
             <ReviewPage />
           </Suspense>
         ),
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
       {
         path: 'submit',
         element: (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<LoadingPage />}>
             <SubmitPage />
           </Suspense>
         ),
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
       {
         path: 'feed',
         element: (
-          <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<LoadingPage />}>
             <FeedPage />
           </Suspense>
         ),
