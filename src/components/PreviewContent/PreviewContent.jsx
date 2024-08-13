@@ -32,7 +32,7 @@ function PreviewContent({ userId = undefined, productData }) {
           <LikeButton
             id="likeButton"
             userId={userId}
-            productId={productData.id}
+            productId={productData.productId}
           />
         </ThumbnailContainer>
         <DescriptionContainer>
@@ -79,7 +79,7 @@ function PreviewContent({ userId = undefined, productData }) {
 PreviewContent.propTypes = {
   userId: PropTypes.number,
   productData: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    productId: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
     subcategory: PropTypes.string.isRequired,
