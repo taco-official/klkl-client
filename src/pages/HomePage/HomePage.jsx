@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { FloatButton } from 'antd'
 import { useNavigate } from 'react-router-dom'
@@ -207,6 +208,8 @@ export default function HomePage() {
         <ReviewCarousels contents={Test} />
         <h1>신규 리뷰</h1>
         <ReviewCarousels contents={Test} />
+      </MainArea>
+      {createPortal(
         <CustomFloatButton
           icon={
             <Icons
@@ -217,10 +220,13 @@ export default function HomePage() {
             </Icons>
           }
           onClick={() => navigate('/submit')}
+          onClick={() => navigate('/submit')}
           type="primary"
           tooltip="리뷰 작성하러 가기"
-        />
-      </MainArea>
+          style={{ bottom: '10px' }}
+        />,
+        document.getElementById('root-aside')
+      )}
     </>
   )
 }
@@ -229,7 +235,7 @@ const MainArea = styled.div`
   width: 40%;
   min-width: 900px;
   min-height: 90vh;
-  padding: 0 1.875rem;
+  padding: 0 3.125rem;
   margin: 0 auto;
 
   h1 {

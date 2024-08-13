@@ -46,6 +46,7 @@ export default function SearchModal() {
         footer={null}
         closable={false}
         zIndex={100}
+        destroyOnClose
       >
         <ModalContents>
           <Icons $size="2em">search</Icons>

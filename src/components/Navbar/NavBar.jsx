@@ -1,4 +1,5 @@
 import React from 'react'
+import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
@@ -28,8 +29,8 @@ export default function NavBar() {
           </LoginButton>
         </MyNav>
       </Header>
-      <LoginModal />
-      <SearchModal />
+      {createPortal(<LoginModal />, document.getElementById('root-aside'))}
+      {createPortal(<SearchModal />, document.getElementById('root-aside'))}
     </>
   )
 }

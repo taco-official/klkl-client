@@ -43,6 +43,7 @@ function LoginModal() {
         onCancel={() => setModalState(false)}
         width="25rem"
         footer={null}
+        destroyOnClose
       >
         <ModalContents>
           <h1>로그인</h1>
