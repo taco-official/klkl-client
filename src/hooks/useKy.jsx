@@ -33,7 +33,6 @@ function useKy(initialConfig, initialData = null) {
       setLoading(false)
     }
   }
-  }
 
   useEffect(() => {
     if (initialConfig) fetchData(initialConfig)
