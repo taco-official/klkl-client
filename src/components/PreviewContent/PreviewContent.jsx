@@ -32,14 +32,14 @@ function PreviewContent({ userId = undefined, productData }) {
           <LikeButton
             id="likeButton"
             userId={userId}
-            productId={productData.id}
+            productId={productData.productId}
           />
         </ThumbnailContainer>
         <DescriptionContainer>
           <TitleContainer>
             <SubDesBox>
               <CategoryWrapper>
-                <div id="country">{productData.country}</div>
+                <div id="city">{productData.city}</div>
                 <div id="subcategory">{productData.subcategory}</div>
               </CategoryWrapper>
               <MoreButton size="1.1rem" />
@@ -79,9 +79,9 @@ function PreviewContent({ userId = undefined, productData }) {
 PreviewContent.propTypes = {
   userId: PropTypes.number,
   productData: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    productId: PropTypes.number.isRequired,
     thumbnail: PropTypes.string.isRequired,
-    country: PropTypes.string.isRequired,
+    city: PropTypes.string.isRequired,
     subcategory: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,

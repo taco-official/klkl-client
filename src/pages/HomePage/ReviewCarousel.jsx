@@ -20,7 +20,7 @@ export default function ReviewCarousels({ contents }) {
         return (
           <ReviewWrapper
             className="carousel-cell"
-            key={info.name}
+            key={info.productData.name}
           >
             <PreviewContent
               userId={info.id}
@@ -34,7 +34,20 @@ export default function ReviewCarousels({ contents }) {
   )
 }
 ReviewCarousels.propTypes = {
-  contents: PropTypes.arrayOf(PropTypes.string).isRequired,
+  contents: PropTypes.arrayOf(
+    PropTypes.shape({
+      userId: PropTypes.number.isRequired,
+      productData: PropTypes.shape({
+        productId: PropTypes.number.isRequired,
+        thumbnail: PropTypes.string.isRequired,
+        city: PropTypes.string.isRequired,
+        subcategory: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+        likeCount: PropTypes.number.isRequired,
+      }),
+    })
+  ).isRequired,
 }
 
 const ReviewWrapper = styled.div`
