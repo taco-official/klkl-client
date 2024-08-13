@@ -23,14 +23,16 @@ function useKy(initialConfig, initialData = null) {
   const [error, setError] = useState(null)
 
   const fetchData = async (config) => {
+    setLoading(true)
     try {
-      const response = await kyInstance(config.url, config)
+      const response = await kyInstance(config.url, config).json()
       setData(response)
     } catch (err) {
       setError(err)
     } finally {
       setLoading(false)
     }
+  }
   }
 
   useEffect(() => {
