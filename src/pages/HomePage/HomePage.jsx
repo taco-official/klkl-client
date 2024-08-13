@@ -2,17 +2,10 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { FloatButton } from 'antd'
 import { Link } from 'react-router-dom'
-import Icons from '../Common/Icons'
+import Icons from '../../components/Icons/Icons'
 import MainBanner from './MainBanner'
 import ReviewCarousels from './ReviewCarousel'
 import theme from '../../styles/theme'
-import Footer from '../Footer/Footer'
-
-const arr = [
-  'https://i.ytimg.com/vi/bLj_mR4Fnls/maxresdefault.jpg',
-  'https://i.ytimg.com/vi/bOJdHU99OO8/maxresdefault.jpg',
-  'https://i.ytimg.com/vi/53lokkIhrYY/maxresdefault.jpg',
-]
 
 const Test = [
   {
@@ -186,7 +179,7 @@ const ImageArr = [
   },
 ]
 
-export default function Home() {
+export default function HomePage() {
   const [bannerImages, setBannerImage] = useState(ImageArr)
 
   useEffect(() => {

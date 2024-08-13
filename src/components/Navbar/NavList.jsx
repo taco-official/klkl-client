@@ -1,31 +1,39 @@
 import React from 'react'
 import { styled } from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 
 import { useModalStore, useCurrentPageStore } from './stores/navbarStores'
-import theme from '../../style/theme'
-import Icons from '../Common/Icons'
+import theme from '../../styles/theme'
+import Icons from '../Icons/Icons'
+
+const pageIndex = {
+  FLIGHT: 1,
+  SEARCH: 2,
+  FAVORITE: 3,
+  NOTIFICATION: 4,
+}
 
 export default function NavList() {
-  const pageIndex = {
-    FLIGHT: 1,
-    SEARCH: 2,
-    FAVORITE: 3,
-    NOTIFICATION: 4,
-  }
   const { currentPage, setCurrentPage } = useCurrentPageStore()
   const setSearchModalState = useModalStore(
     (state) => state.setSearchModalState
   )
 
+  const navigate = useNavigate()
+
   return (
     <NavUl>
       <NavButtonLi
         $isbold={currentPage === pageIndex.FLIGHT}
-        onClick={() => setCurrentPage(pageIndex.FLIGHT)}
+        onClick={() => {
+          setCurrentPage(pageIndex.FLIGHT)
+          navigate('/feed')
+        }}
       >
         <Icons>flight_takeoff</Icons>
         둘러보기
       </NavButtonLi>
+
       <NavButtonLi
         $isbold={currentPage === pageIndex.SEARCH}
         onClick={() => {

@@ -4,7 +4,7 @@ import { Modal, Button, ConfigProvider } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
 import { KakaoLogo, NaverLogo } from '../../images/logos'
 import { useModalStore } from './stores/navbarStores'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 
 const ModalTheme = {
   components: {

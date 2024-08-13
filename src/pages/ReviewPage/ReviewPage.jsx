@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Divider } from 'antd'
-import ReviewDetailFloatButton from './ReviewDetailFloatButton'
+import ReviewFloatButton from './ReviewFloatButton'
 import ReviewImages from './ReviewImages'
-import ReviewInfo from './ReviewInfo'
-import UserProfile from '../UserProfile/UserProfile'
-import Comment from '../Comment/Comment'
+import ReviewInfoBlock from './ReviewInfo'
+import UserProfile from '../../components/UserProfile/UserProfile'
+import Comment from '../../components/Comment/Comment'
 import theme from '../../styles/theme'
 
 const Example = {
@@ -39,9 +39,9 @@ const Example = {
 export default function ReviewDetailPage() {
   return (
     <Wrapper>
-      <ReviewDetailFloatButton />
+      <ReviewFloatButton />
       <ReviewImages imageURLs={Example.data.images} />
-      <ReviewInfo review={Example.data} />
+      <ReviewInfoBlock review={Example.data} />
       <Divider />
       <Description>{Example.data.description}</Description>
       <Divider />

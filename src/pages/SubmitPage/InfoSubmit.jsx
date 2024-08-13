@@ -4,7 +4,7 @@ import { Input, Rate } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
 
 import useReviewStore from './stores/useReviewStore'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 import NumberInputForm from './components/NumberInputForm'
 
 export default function InfoSubmitPage() {

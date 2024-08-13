@@ -1,8 +1,8 @@
 import { React } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import StyledFlickity from '../Common/Carousel'
-import PreviewContent from '../preview/PreviewContent'
+import StyledFlickity from '../../components/Carousel/Carousel'
+import PreviewContent from '../../components/PreviewContent/PreviewContent'
 
 const flickityOptions = {
   wrapAround: false,

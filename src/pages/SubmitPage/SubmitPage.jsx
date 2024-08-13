@@ -4,7 +4,7 @@ import { Steps, ConfigProvider } from 'antd'
 import useStepStore from './stores/useStepStore'
 
 import submitSteps from './constant/submitSteps'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 import PrevNextButtons from './components/PrevNextButtons'
 
 import ImageSubmit from './ImageSubmit'

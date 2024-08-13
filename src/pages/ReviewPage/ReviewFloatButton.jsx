@@ -1,10 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FloatButton, notification, ConfigProvider } from 'antd'
-import Icons from '../Common/Icons'
+import Icons from '../../components/Icons/Icons'
 import theme from '../../styles/theme'
 
-export default function ReviewDetailFloatButton() {
+export default function ReviewFloatButton() {
   const [api, contextHolder] = notification.useNotification()
 
   const openNotification = () => {

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Image } from 'antd'
 import styled from 'styled-components'
-import StyledFlickity from '../Common/Carousel'
+import StyledFlickity from '../../components/Carousel/Carousel'
 
 export default function ReviewImages({ imageURLs }) {
   const reviewImagesOptions = {

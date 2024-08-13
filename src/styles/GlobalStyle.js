@@ -76,12 +76,19 @@ const GlobalStyle = createGlobalStyle`
 
 	header {
 		font-family: NanumSquareNeo;
-		color: rgba(0, 0, 0, 0.65);
+		color: rgba(70, 70, 70, 1);
 	}
 
 	body {
 		font-family: NanumSquareNeo;
-		color: rgba(0, 0, 0, 0.65);
+		color: rgba(70, 70, 70, 1);
+
+
+		a {
+			font-family: inherit;
+			text-decoration: none;
+			color: inherit;
+		}
 	}
 
 `

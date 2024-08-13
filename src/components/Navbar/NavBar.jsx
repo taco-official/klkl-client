@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import { useModalStore } from './stores/navbarStores'
-import theme from '../../style/theme'
+import theme from '../../styles/theme'
 import LoginModal from './LoginModal'
 import SearchModal from './SearchModal'
 import NavList from './NavList'
@@ -15,9 +15,9 @@ export default function NavBar() {
     <>
       <Header>
         <MyNav>
-          <CustomLink to="/">
+          <Link to="/">
             <h1>끼룩끼룩</h1>
-          </CustomLink>
+          </Link>
           <NavList />
           <LoginButton
             onClick={() => {
@@ -54,6 +54,12 @@ const MyNav = styled.nav`
   justify-content: space-between;
   border-bottom: 1px solid ${theme.color.lineGrey};
   background-color: white;
+
+  a {
+    font-family: ${theme.style.logo};
+    font-size: 30px;
+    color: rgba(0, 0, 0, 1);
+  }
 `
 
 const LoginButton = styled.button.attrs({ type: 'button' })`
@@ -71,12 +77,4 @@ const LoginButton = styled.button.attrs({ type: 'button' })`
   &:hover {
     filter: brightness(90%);
   }
-`
-const CustomLink = styled(Link)`
-  display: flex;
-  align-items: center;
-  font-size: 30px;
-  font-family: ${theme.style.logo};
-  color: black;
-  text-decoration: none;
 `

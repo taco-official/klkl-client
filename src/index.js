@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import PageLayout from './PageLayout'
-import ErrorPage from './pages/ErrorPage'
-import Home from './components/Home/Home'
-import ReviewDetailPage from './components/Review/ReviewDetailPage'
-import SubmitPage from './components/SubmitPage/SubmitPage'
-import FeedPage from './pages/FeedPage/FeedPage'
+import PageLayout from './pages/PageLayout'
+import LoadingPage from './pages/LoadingPage'
+
+const HomePage = lazy(() => import('./pages/HomePage/HomePage'))
+const ReviewPage = lazy(() => import('./pages/ReviewPage/ReviewPage'))
+const SubmitPage = lazy(() => import('./pages/SubmitPage/SubmitPage'))
+const FeedPage = lazy(() => import('./pages/FeedPage/FeedPage'))
+const ErrorPage = lazy(() => import('./pages/ErrorPage'))
 
 const router = createBrowserRouter([
   {
@@ -15,32 +17,43 @@ const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Home />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <HomePage />
+          </Suspense>
+        ),
       },
       {
         path: 'review',
-        element: <ReviewDetailPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <ReviewPage />
+          </Suspense>
+        ),
       },
       {
         path: 'submit',
-        element: <SubmitPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <SubmitPage />
+          </Suspense>
+        ),
       },
       {
         path: 'feed',
-        element: <FeedPage />,
+        element: (
+          <Suspense fallback={<LoadingPage />}>
+            <FeedPage />
+          </Suspense>
+        ),
+      },
+      {
+        path: '/*',
+        element: <ErrorPage />,
       },
     ],
-  },
-  {
-    path: '/*',
-    element: <ErrorPage />,
   },
 ])
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(<RouterProvider router={router} />)
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-// reportWebVitals()

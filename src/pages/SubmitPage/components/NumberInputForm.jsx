@@ -1,7 +1,7 @@
 import React from 'react'
 import { InputNumber, Select, ConfigProvider } from 'antd'
 import useReviewStore from '../stores/useReviewStore'
-import theme from '../../../style/theme'
+import theme from '../../../styles/theme'
 
 const { Option } = Select
 
