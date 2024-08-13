@@ -11,7 +11,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',
@@ -24,7 +24,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',
@@ -37,7 +37,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',
@@ -50,7 +50,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',
@@ -63,7 +63,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',
@@ -76,7 +76,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',
@@ -89,7 +89,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',
@@ -102,7 +102,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',
@@ -115,7 +115,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',
@@ -128,7 +128,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',
@@ -141,7 +141,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',
@@ -154,7 +154,7 @@ const Test = [
   {
     userId: 1,
     productData: {
-      id: 1,
+      productId: 1,
       thumbnail: '',
       city: 'city',
       subcategory: 'subcategory',

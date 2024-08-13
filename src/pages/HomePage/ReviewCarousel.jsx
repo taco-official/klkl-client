@@ -38,7 +38,7 @@ ReviewCarousels.propTypes = {
     PropTypes.shape({
       userId: PropTypes.number.isRequired,
       productData: PropTypes.shape({
-        id: PropTypes.number.isRequired,
+        productId: PropTypes.number.isRequired,
         thumbnail: PropTypes.string.isRequired,
         city: PropTypes.string.isRequired,
         subcategory: PropTypes.string.isRequired,
