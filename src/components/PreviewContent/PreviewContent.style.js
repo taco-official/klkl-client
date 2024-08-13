@@ -101,7 +101,7 @@ const CategoryWrapper = styled.div`
   > :nth-child(n) {
     display: inline-block;
   }
-  > #country {
+  > #city {
     margin-right: 0.5rem;
   }
   &.loading {
