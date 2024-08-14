@@ -4,9 +4,9 @@ import { Modal, ConfigProvider } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
 import { debounce } from 'lodash-es'
 
-import Icons from '../Icons/Icons'
-import theme from '../../styles/theme'
-import { useModalStore, useCurrentPageStore } from './stores/navbarStores'
+import Icons from '../../Icons/Icons'
+import theme from '../../../styles/theme'
+import { useModalStore, useCurrentPageStore } from '../stores/navbarStores'
 
 const ModalTheme = {
   components: {
