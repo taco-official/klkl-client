@@ -3,6 +3,7 @@ import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
 import { useModalStore, useCurrentPageStore } from './stores/navbarStores'
+import Notification from './components/Notification'
 import theme from '../../styles/theme'
 import Icons from '../Icons/Icons'
 
@@ -33,7 +34,6 @@ export default function NavList() {
         <Icons>flight_takeoff</Icons>
         둘러보기
       </NavButtonLi>
-
       <NavButtonLi
         $isbold={currentPage === pageIndex.SEARCH}
         onClick={() => {
@@ -44,19 +44,20 @@ export default function NavList() {
         <Icons>search</Icons>
         검색
       </NavButtonLi>
+
+      <NavButtonLi
+        $isbold={currentPage === pageIndex.NOTIFICATION}
+        onClick={() => setCurrentPage(pageIndex.NOTIFICATION)}
+      >
+        <Notification />
+      </NavButtonLi>
+
       <NavButtonLi
         $isbold={currentPage === pageIndex.FAVORITE}
         onClick={() => setCurrentPage(pageIndex.FAVORITE)}
       >
         <Icons>favorite</Icons>
         좋아요
-      </NavButtonLi>
-      <NavButtonLi
-        $isbold={currentPage === pageIndex.NOTIFICATION}
-        onClick={() => setCurrentPage(pageIndex.NOTIFICATION)}
-      >
-        <Icons>notifications</Icons>
-        알림
       </NavButtonLi>
     </NavUl>
   )
@@ -77,12 +78,17 @@ const NavButtonLi = styled.li`
   padding: 0 5px;
 
   font-family: ${theme.style.mainBold};
-  font-size: ${theme.size.textSM};
+  font-size: ${theme.size.textMD};
   color: ${(props) => props.$isbold && theme.color.main};
   border-bottom: ${(props) =>
     props.$isbold ? `2px solid ${theme.color.main}` : `2px solid transparent`};
   cursor: pointer;
   transition: color ease-in-out 0.2s;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 
   span {
     margin-right: 3px;
