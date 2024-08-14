@@ -3979,7 +3979,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"antd@npm:^5.20.1":
+"antd@npm:^5.20.1"
   version: 5.20.1
   resolution: "antd@npm:5.20.1"
   dependencies:
