@@ -1,107 +1,79 @@
 import React from 'react'
 import styled from 'styled-components'
 import theme from '../styles/theme'
+import Icons from '../components/Icons/Icons'
 
 export default function LoadingPage() {
   return (
     <LoadingPageWrapper>
-      <Circle />
-      <Shadow />
+      <Plane>travel</Plane>
+      <Cloud>cloud</Cloud>
     </LoadingPageWrapper>
   )
 }
 
 const LoadingPageWrapper = styled.div`
+  text-align: center;
+  align-content: center;
   position: relative;
-  width: 100vw;
-  height: 100vh;
+  overflow: hidden;
+  padding: 10% 0;
+
+  width: 400px;
+  height: 400px;
   margin: 0 auto;
+
+  font-family: ${theme.style.bannerEN};
+  font-weight: 700;
+  font-size: 60px;
 `
 
-const Circle = styled.div`
-  transform: translate(-50%, -100%);
-  position: absolute;
-  top: 50%;
-  left: calc(50%);
-  background-color: ${theme.color.main};
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 100%;
-  z-index: 100;
-  animation: bounce 1s infinite;
+const Cloud = styled(Icons)`
+  color: rgba(0, 0, 0, 0.1);
+  text-shadow: 1px 1px 0.1px rgba(0, 0, 0, 0.01);
+  font-size: 120px;
 
-  @keyframes bounce {
+  animation: cloud 4s infinite;
+  animation-timing-function: ease-in-out;
+
+  @keyframes cloud {
     0% {
-      top: 40%;
-      animation-timing-function: ease-in;
+      transform: scale(1);
+    }
+    25% {
+      transform: scale(1.2);
     }
     50% {
-      top: 48.5%;
-      height: 40px;
-      animation-timing-function: ease-out;
+      transform: scale(1);
     }
-    55% {
-      top: 50%;
-      height: 15px;
-      animation-timing-function: ease-in;
-    }
-    65% {
-      top: 48.5%;
-      height: 40px;
-      animation-timing-function: ease-out;
-    }
-    95% {
-      top: 40%;
-      animation-timing-function: ease-in;
+    75% {
+      transform: scale(1.5);
     }
     100% {
-      top: 40%;
-      animation-timing-function: ease-in;
+      transform: scale(1);
     }
   }
 `
 
-const Shadow = styled.div`
+const Plane = styled(Icons)`
   position: absolute;
-  width: 40px;
-  height: 5px;
-  left: calc(50% - 20px);
-  bottom: 50%;
-  border-radius: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  font-size: 80px;
+  color: ${theme.color.main};
 
-  animation: shadow 1s infinite;
+  transform: rotate3d(1, 0, 1, 45deg);
+  z-index: -10;
 
-  @keyframes shadow {
+  animation: fly 2s infinite;
+  animation-timing-function: ease-in-out;
+
+  @keyframes fly {
     0% {
-      transform: scale(0.1);
-      background-color: rgba(0, 0, 0, 0.1);
-      animation-timing-function: ease-in;
-    }
-    50% {
-      transform: scale(1);
-      background-color: rgba(0, 0, 0, 0.2);
-      animation-timing-function: ease-out;
-    }
-    55% {
-      transform: scale(1);
-      background-color: rgba(0, 0, 0, 0.2);
-      animation-timing-function: ease-in;
-    }
-    65% {
-      transform: scale(0.5);
-      background-color: rgba(0, 0, 0, 0.15);
-      animation-timing-function: ease-out;
-    }
-    95% {
-      transform: scale(0.1);
-      background-color: rgba(0, 0, 0, 0.1);
-      animation-timing-function: ease-in;
+      left: -10%;
+      top: 45%;
     }
     100% {
-      transform: scale(0.1);
-      background-color: rgba(0, 0, 0, 0.1);
-      animation-timing-function: ease-in;
+      left: 110%;
+      top: 40%;
     }
   }
 `

@@ -2,9 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 import { Modal, Button, ConfigProvider } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
-import { KakaoLogo, NaverLogo } from '../../images/logos'
-import { useModalStore } from './stores/navbarStores'
-import theme from '../../styles/theme'
+import { KakaoLogo, NaverLogo } from '../../../images/logos'
+import { useModalStore } from '../stores/navbarStores'
+import theme from '../../../styles/theme'
 
 const ModalTheme = {
   components: {
@@ -43,6 +43,7 @@ function LoginModal() {
         onCancel={() => setModalState(false)}
         width="25rem"
         footer={null}
+        destroyOnClose
       >
         <ModalContents>
           <h1>로그인</h1>

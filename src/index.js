@@ -24,6 +24,10 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: 'loading',
+        element: <LoadingPage />,
+      },
+      {
         path: 'review',
         element: (
           <Suspense fallback={<LoadingPage />}>

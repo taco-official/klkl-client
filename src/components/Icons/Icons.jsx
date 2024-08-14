@@ -9,7 +9,7 @@ const Icons = styled.span.attrs({
     'GRAD' 0,
     'opsz' 20;
 
-  font-size: ${({ $size }) => $size || '1.2em'};
+  font-size: ${({ $size }) => $size || '1.8em'};
 `
 
 export default Icons

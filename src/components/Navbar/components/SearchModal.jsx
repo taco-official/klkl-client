@@ -4,9 +4,9 @@ import { Modal, ConfigProvider } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
 import { debounce } from 'lodash-es'
 
-import Icons from '../Icons/Icons'
-import theme from '../../styles/theme'
-import { useModalStore, useCurrentPageStore } from './stores/navbarStores'
+import Icons from '../../Icons/Icons'
+import theme from '../../../styles/theme'
+import { useModalStore, useCurrentPageStore } from '../stores/navbarStores'
 
 const ModalTheme = {
   components: {
@@ -46,6 +46,7 @@ export default function SearchModal() {
         footer={null}
         closable={false}
         zIndex={100}
+        destroyOnClose
       >
         <ModalContents>
           <Icons $size="2em">search</Icons>

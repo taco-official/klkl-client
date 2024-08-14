@@ -1,11 +1,12 @@
 import React from 'react'
+import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
 import { useModalStore } from './stores/navbarStores'
 import theme from '../../styles/theme'
-import LoginModal from './LoginModal'
-import SearchModal from './SearchModal'
+import LoginModal from './components/LoginModal'
+import SearchModal from './components/SearchModal'
 import NavList from './NavList'
 
 export default function NavBar() {
@@ -28,8 +29,8 @@ export default function NavBar() {
           </LoginButton>
         </MyNav>
       </Header>
-      <LoginModal />
-      <SearchModal />
+      {createPortal(<LoginModal />, document.getElementById('root-aside'))}
+      {createPortal(<SearchModal />, document.getElementById('root-aside'))}
     </>
   )
 }

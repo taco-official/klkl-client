@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { FloatButton } from 'antd'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import Icons from '../../components/Icons/Icons'
 import MainBanner from './MainBanner'
 import ReviewCarousels from './ReviewCarousel'
@@ -193,19 +194,22 @@ const ImageArr = [
 
 export default function HomePage() {
   const [bannerImages, setBannerImage] = useState(ImageArr)
+  const navigate = useNavigate()
 
   useEffect(() => {
     setBannerImage([...bannerImages])
   }, [])
 
   return (
-    <MainArea>
+    <>
       <MainBanner urls={bannerImages} />
-      <h2>인기 리뷰</h2>
-      <ReviewCarousels contents={Test} />
-      <h2>신규 리뷰</h2>
-      <ReviewCarousels contents={Test} />
-      <Link to="submit">
+      <MainArea>
+        <h1>인기 리뷰</h1>
+        <ReviewCarousels contents={Test} />
+        <h1>신규 리뷰</h1>
+        <ReviewCarousels contents={Test} />
+      </MainArea>
+      {createPortal(
         <CustomFloatButton
           icon={
             <Icons
@@ -215,20 +219,25 @@ export default function HomePage() {
               edit_square
             </Icons>
           }
+          onClick={() => navigate('/submit')}
           type="primary"
           tooltip="리뷰 작성하러 가기"
-        />
-      </Link>
-    </MainArea>
+          style={{ bottom: '10px' }}
+        />,
+        document.getElementById('root-aside')
+      )}
+    </>
   )
 }
 
 const MainArea = styled.div`
   width: 40%;
   min-width: 900px;
+  min-height: 90vh;
+  padding: 0 3.125rem;
   margin: 0 auto;
 
-  h2 {
+  h1 {
     padding: 20px 0;
     border-bottom: 1px solid ${theme.color.lineGrey};
     font-family: ${theme.style.mainEB};
@@ -237,9 +246,9 @@ const MainArea = styled.div`
 `
 
 const CustomFloatButton = styled(FloatButton)`
-  inset-inline-end: 24;
   width: 3.4375rem;
   height: 3.4375rem;
+  margin-block-end: 30px;
 
   div {
     width: 100%;
