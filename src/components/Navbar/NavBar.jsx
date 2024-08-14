@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom'
 
 import { useModalStore } from './stores/navbarStores'
 import theme from '../../styles/theme'
-import LoginModal from './LoginModal'
-import SearchModal from './SearchModal'
+import LoginModal from './components/LoginModal'
+import SearchModal from './components/SearchModal'
 import NavList from './NavList'
 
 export default function NavBar() {
