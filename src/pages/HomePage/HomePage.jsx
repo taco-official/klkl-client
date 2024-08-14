@@ -249,6 +249,7 @@ const MainArea = styled.div`
 const CustomFloatButton = styled(FloatButton)`
   width: 3.4375rem;
   height: 3.4375rem;
+  margin-block-end: 30px;
 
   div {
     width: 100%;
