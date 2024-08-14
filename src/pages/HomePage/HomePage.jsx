@@ -220,7 +220,6 @@ export default function HomePage() {
             </Icons>
           }
           onClick={() => navigate('/submit')}
-          onClick={() => navigate('/submit')}
           type="primary"
           tooltip="리뷰 작성하러 가기"
           style={{ bottom: '10px' }}
