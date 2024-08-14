@@ -122,10 +122,11 @@ function Notification() {
       placement="bottom"
     >
       <StyledBadge
-        dot={notifications.length !== 0}
-        offset={[-5, 18]}
+        dot={dummy.length !== 0}
+        offset={[-33, 18]}
       >
-        <Icons>notifications</Icons>
+        <Icons $size="1.7em">notifications</Icons>
+        알림
       </StyledBadge>
     </Dropdown>
   )
@@ -136,6 +137,7 @@ const StyledBadge = styled(Badge)`
   justify-content: center;
   align-items: center;
   color: inherit;
+  font-family: inherit;
   font-size: inherit;
 
   height: 100%;

@@ -56,7 +56,7 @@ export default function NavList() {
         $isbold={currentPage === pageIndex.FAVORITE}
         onClick={() => setCurrentPage(pageIndex.FAVORITE)}
       >
-        <Icons>favorite</Icons>
+        <Icons $size="1.4em">favorite</Icons>
         좋아요
       </NavButtonLi>
     </NavUl>
@@ -78,7 +78,7 @@ const NavButtonLi = styled.li`
   padding: 0 5px;
 
   font-family: ${theme.style.mainBold};
-  font-size: ${theme.size.textMD};
+  font-size: ${theme.size.textSM};
   color: ${(props) => props.$isbold && theme.color.main};
   border-bottom: ${(props) =>
     props.$isbold ? `2px solid ${theme.color.main}` : `2px solid transparent`};

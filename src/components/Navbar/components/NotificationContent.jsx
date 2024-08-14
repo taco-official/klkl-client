@@ -16,7 +16,7 @@ function NotificationContent({ content }) {
         <div style={{ gridArea: 'content' }}>
           <div className="noti--info">
             <div className="noti--info__writer">
-              {content.comment.writer} 님이 댓글을 작성했습니다
+              {content.comment.writer} 님이 댓글을 달았습니다
             </div>
             <div className="noti--info__date">{content.comment.date}</div>
           </div>
@@ -78,7 +78,7 @@ const ContentWrapper = styled.div`
   }
 
   .noti--info__writer {
-    font-size: ${theme.size.textSM};
+    font-size: 13px;
     font-family: ${theme.style.mainBold};
   }
 `

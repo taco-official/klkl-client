@@ -27,6 +27,7 @@ const Header = styled.div`
   justify-content: space-between;
   font-family: ${theme.style.mainBold};
   width: 400px;
+  margin-left: 10px;
 
   button {
     border: none;
@@ -36,7 +37,8 @@ const Header = styled.div`
 
     color: ${theme.color.main};
     font-family: inherit;
-    font-size: ${theme.size.textXS};
+    font-size: ${theme.size.text2XS};
+    padding: 0 3px;
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.05);
