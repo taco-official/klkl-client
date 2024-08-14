@@ -74,6 +74,18 @@ const GlobalStyle = createGlobalStyle`
 			src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumBarunpen/NanumBarunpenB.eot?#iefix) format("embedded-opentype"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumBarunpen/NanumBarunpenB.woff) format("woff"), url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumBarunpen/NanumBarunpenB.ttf) format("truetype");
 	}
 
+	&::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+		border-radius: 0.3125rem;
+    cursor: pointer;
+  }
+
+  &::-webkit-scrollbar {
+		background-color: white;
+		border-radius: 0 0.3125rem 0.3125rem 0;
+		width: 10px;
+  }
+
 	header {
 		font-family: NanumSquareNeo;
 		color: rgba(70, 70, 70, 1);
@@ -83,14 +95,12 @@ const GlobalStyle = createGlobalStyle`
 		font-family: NanumSquareNeo;
 		color: rgba(70, 70, 70, 1);
 
-
 		a {
 			font-family: inherit;
 			text-decoration: none;
 			color: inherit;
 		}
 	}
-
 `
 
 export default GlobalStyle
