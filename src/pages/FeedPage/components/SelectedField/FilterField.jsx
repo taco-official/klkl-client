@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { CloseOutlined } from '@ant-design/icons'
-import useSelectedFilter from '../../../hooks/useSelectedFilter'
-import { BlueFieldTag } from '../../../components/Tags/Tags.style'
+import useSelectedFilter from '../../../../hooks/useSelectedFilter'
+import { BlueFieldTag } from '../../../../components/Tags/Tags.style'
 
 function FilterField() {
   const { selectedFilter, setSelectedFilter } = useSelectedFilter()

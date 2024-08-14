@@ -5,7 +5,7 @@ import FilterField from './FilterField'
 import ResetButton from './ResetButton'
 import SortButton from './SortButton'
 import FieldSection from './SelectedField.style'
-import { ContentContainer } from '../FeedPage.style'
+import { ContentContainer } from '../../FeedPage.style'
 
 function SelectedField() {
   return (

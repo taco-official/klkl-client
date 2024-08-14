@@ -1,6 +1,6 @@
 import React from 'react'
 import FilterSwitchArray from './FilterSection'
-import { StyleSection, ContentContainer } from '../FeedPage.style'
+import { StyleSection, ContentContainer } from '../../FeedPage.style'
 
 function AdditionalFilter() {
   return (

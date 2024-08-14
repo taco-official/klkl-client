@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { CloseOutlined } from '@ant-design/icons'
-import useSelectedCategory from '../../../hooks/useSelectedCategory'
-import useSelectedSubCategory from '../../../hooks/useSelectedSubCategory'
+import useSelectedCategory from '../../../../hooks/useSelectedCategory'
+import useSelectedSubCategory from '../../../../hooks/useSelectedSubCategory'
 import {
   BlueFieldTag,
   WhiteFieldTag,
-} from '../../../components/Tags/Tags.style'
+} from '../../../../components/Tags/Tags.style'
 
 function SubCategoryField({ categoryId }) {
   const { selectedSubCategory, setSelectedSubCategory } =

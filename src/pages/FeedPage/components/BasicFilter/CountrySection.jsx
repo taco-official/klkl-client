@@ -2,9 +2,9 @@ import React, { useState, useCallback, useEffect } from 'react'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
 // import useAxios from 'use-axios-client'
-import useSelectedCountry from '../../../hooks/useSelectedCountry'
-import useSelectedCity from '../../../hooks/useSelectedCity'
-import ShowHideButton from '../../../components/Button/ShowHideButton'
+import useSelectedCountry from '../../../../hooks/useSelectedCountry'
+import useSelectedCity from '../../../../hooks/useSelectedCity'
+import ShowHideButton from '../../../../components/Button/ShowHideButton'
 import {
   SectionContainer,
   RegionContainer,
@@ -13,7 +13,7 @@ import {
   SelectContainer,
   SelectWrapper,
 } from './BasicFilter.style'
-import theme from '../../../styles/theme'
+import theme from '../../../../styles/theme'
 
 function CountryRadio({ country }) {
   const { selectedCountry, setSelectedCountry } = useSelectedCountry()
