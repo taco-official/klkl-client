@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import { Button, theme as antdTheme } from 'antd'
-import useSelectedFilter from '../../../hooks/useSelectedFilter'
-import theme from '../../../styles/theme'
+import useSelectedFilter from '../../../../hooks/useSelectedFilter'
+import theme from '../../../../styles/theme'
 
 function FilterSwitch({ filter }) {
   const { selectedFilter, setSelectedFilter } = useSelectedFilter()

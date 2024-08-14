@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 // import axios from 'axios'
-import PreviewContent from '../../../components/PreviewContent/PreviewContent'
-import LoadingContent from '../../../components/PreviewContent/LoadingContent'
+import PreviewContent from '../../../../components/PreviewContent/PreviewContent'
+import LoadingContent from '../../../../components/PreviewContent/LoadingContent'
 import StyledList from './ProductList.style'
 
 /* productList 더미 데이터 */
