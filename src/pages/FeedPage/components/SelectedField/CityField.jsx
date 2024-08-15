@@ -1,26 +1,24 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { CloseOutlined } from '@ant-design/icons'
-import useSelectedCountry from '../../../../hooks/useSelectedCountry'
-import useSelectedCity from '../../../../hooks/useSelectedCity'
+import useFeedStore from '../../stores/useFeedStore'
 import {
   BlueFieldTag,
   WhiteFieldTag,
 } from '../../../../components/Tags/Tags.style'
 
 function CityField() {
-  const { selectedCountry, setSelectedCountry } = useSelectedCountry()
-  const { selectedCity, setSelectedCity } = useSelectedCity()
+  const selectedCountry = useFeedStore((state) => state.selectedCountry)
+  const setSelectedCountry = useFeedStore((state) => state.setSelectedCountry)
+  const selectedCity = useFeedStore((state) => state.selectedCity)
+  const setSelectedCity = useFeedStore((state) => state.setSelectedCity)
 
-  const deleteCountry = useCallback(() => {
+  const deleteCountry = () => {
     setSelectedCountry({})
-  }, [selectedCity])
+  }
 
-  const deleteCity = useCallback(
-    (id) => {
-      setSelectedCity((current) => current.filter((city) => city.id !== id))
-    },
-    [selectedCity]
-  )
+  const deleteCity = (id) => {
+    setSelectedCity(selectedCity.filter((selected) => selected.id !== id))
+  }
 
   if (Object.keys(selectedCountry).length === 0)
     return (
@@ -33,14 +31,14 @@ function CityField() {
     return (
       <BlueFieldTag>
         <span>{selectedCountry.name} 전체</span>
-        <CloseOutlined onClick={() => deleteCountry()} />
+        <CloseOutlined onClick={deleteCountry} />
       </BlueFieldTag>
     )
 
-  return selectedCity.map((city) => (
-    <BlueFieldTag key={city.id}>
-      <span>{city.name}</span>
-      <CloseOutlined onClick={() => deleteCity(city.id)} />
+  return selectedCity.map((selected) => (
+    <BlueFieldTag key={selected.id}>
+      <span>{selected.name}</span>
+      <CloseOutlined onClick={() => deleteCity(selected.id)} />
     </BlueFieldTag>
   ))
 }
