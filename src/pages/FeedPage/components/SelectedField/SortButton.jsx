@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Dropdown, Button, Space } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
-import useFeedStore from '../../stores/useFeedStore'
+import useFeedStore from '../../../../stores/useFeedStore'
 
 function SortButton() {
   const setSelectedSort = useFeedStore((state) => state.setSelectedSort)

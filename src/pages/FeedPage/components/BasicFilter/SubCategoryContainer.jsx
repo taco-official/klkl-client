@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Checkbox } from 'antd'
 // import useKy from '../../../../hooks/useKy'
-import useFeedStore from '../../stores/useFeedStore'
+import useFeedStore from '../../../../stores/useFeedStore'
 import { SubSelectContainer, SelectWrapper } from './BasicFilter.style'
 
 function SubCategoryCheckbox({ subCategory }) {

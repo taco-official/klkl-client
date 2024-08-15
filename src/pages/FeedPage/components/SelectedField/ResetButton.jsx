@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'antd'
 import { GrPowerReset } from 'react-icons/gr'
-import useFeedStore from '../../stores/useFeedStore'
+import useFeedStore from '../../../../stores/useFeedStore'
 
 function ResetButton() {
   const setSelectedCountry = useFeedStore((state) => state.setSelectedCountry)

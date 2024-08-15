@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Button, theme as antdTheme } from 'antd'
 // import useKy from '../../../../hooks/useKy'
-import useFeedStore from '../../stores/useFeedStore'
+import useFeedStore from '../../../../stores/useFeedStore'
 import theme from '../../../../styles/theme'
 
 function FilterSwitch({ filter }) {

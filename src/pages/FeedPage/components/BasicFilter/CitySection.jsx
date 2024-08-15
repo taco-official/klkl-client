@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
-import useFeedStore from '../../stores/useFeedStore'
+import useFeedStore from '../../../../stores/useFeedStore'
 // import useKy from '../../../../hooks/useKy'
 import {
   SectionContainer,

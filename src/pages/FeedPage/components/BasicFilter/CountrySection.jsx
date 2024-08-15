@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
 // import useKy from '../../../../hooks/useKy'
-import useFeedStore from '../../stores/useFeedStore'
+import useFeedStore from '../../../../stores/useFeedStore'
 import ShowHideButton from '../../../../components/Button/ShowHideButton'
 import theme from '../../../../styles/theme'
 import {

@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { CloseOutlined } from '@ant-design/icons'
-import useFeedStore from '../../stores/useFeedStore'
+import useFeedStore from '../../../../stores/useFeedStore'
 import {
   BlueFieldTag,
   WhiteFieldTag,

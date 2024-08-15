@@ -1,6 +1,6 @@
 import React from 'react'
 import { CloseOutlined } from '@ant-design/icons'
-import useFeedStore from '../../stores/useFeedStore'
+import useFeedStore from '../../../../stores/useFeedStore'
 import { BlueFieldTag } from '../../../../components/Tags/Tags.style'
 
 function FilterField() {
