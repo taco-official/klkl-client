@@ -1,14 +1,19 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Checkbox } from 'antd'
-import useSelectedSubCategory from '../../../../hooks/useSelectedSubCategory'
+// import useKy from '../../../../hooks/useKy'
+import useFeedStore from '../../stores/useFeedStore'
 import { SubSelectContainer, SelectWrapper } from './BasicFilter.style'
 
 function SubCategoryCheckbox({ subCategory }) {
-  const { selectedSubCategory, setSelectedSubCategory } =
-    useSelectedSubCategory()
+  const selectedSubCategory = useFeedStore(
+    (selected) => selected.selectedSubCategory
+  )
+  const setSelectedSubCategory = useFeedStore(
+    (selected) => selected.setSelectedSubCategory
+  )
 
-  const handleCheckboxChange = useCallback(() => {
+  const handleCheckboxChange = () => {
     if (
       selectedSubCategory.some(
         (selected) => selected.id === subCategory.subCategoryId
@@ -29,11 +34,7 @@ function SubCategoryCheckbox({ subCategory }) {
         },
       ])
     }
-  }, [selectedSubCategory, setSelectedSubCategory, subCategory])
-
-  useEffect(() => {
-    console.log('selectedSubCategory', selectedSubCategory)
-  }, [selectedSubCategory])
+  }
 
   return (
     <SelectWrapper>
@@ -60,53 +61,53 @@ SubCategoryCheckbox.propTypes = {
 function SubCategoryContainer({ categoryId }) {
   const [subCategories, setSubCategories] = useState([])
 
-  const fetchSubCategories = useCallback((id) => {
-    const subCategoriesData = {
-      10000: {
-        data: [
-          {
-            categoryId: 10000,
-            subCategoryId: 10001,
-            name: '서브 카테고리 1-1',
-          },
-          {
-            categoryId: 10000,
-            subCategoryId: 10002,
-            name: '서브 카테고리 1-2',
-          },
-          {
-            categoryId: 10000,
-            subCategoryId: 10003,
-            name: '서브 카테고리 1-3',
-          },
-        ],
-      },
-      20000: {
-        data: [
-          {
-            categoryId: 20000,
-            subCategoryId: 20001,
-            name: '서브 카테고리 2-1',
-          },
-          {
-            categoryId: 20000,
-            subCategoryId: 20002,
-            name: '서브 카테고리 2-2',
-          },
-          {
-            categoryId: 20000,
-            subCategoryId: 20003,
-            name: '서브 카테고리 2-3',
-          },
-        ],
-      },
-    }
-    setSubCategories(subCategoriesData[id] ? subCategoriesData[id].data : [])
-  }, [])
-
   useEffect(() => {
+    const fetchSubCategories = (id) => {
+      const subCategoriesData = {
+        10000: {
+          data: [
+            {
+              categoryId: 10000,
+              subCategoryId: 10001,
+              name: '서브 카테고리 1-1',
+            },
+            {
+              categoryId: 10000,
+              subCategoryId: 10002,
+              name: '서브 카테고리 1-2',
+            },
+            {
+              categoryId: 10000,
+              subCategoryId: 10003,
+              name: '서브 카테고리 1-3',
+            },
+          ],
+        },
+        20000: {
+          data: [
+            {
+              categoryId: 20000,
+              subCategoryId: 20001,
+              name: '서브 카테고리 2-1',
+            },
+            {
+              categoryId: 20000,
+              subCategoryId: 20002,
+              name: '서브 카테고리 2-2',
+            },
+            {
+              categoryId: 20000,
+              subCategoryId: 20003,
+              name: '서브 카테고리 2-3',
+            },
+          ],
+        },
+      }
+      setSubCategories(subCategoriesData[id] ? subCategoriesData[id].data : [])
+    }
+
     fetchSubCategories(categoryId)
-  }, [fetchSubCategories, categoryId])
+  }, [categoryId])
 
   return (
     <SubSelectContainer>
