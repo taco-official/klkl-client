@@ -1,10 +1,10 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
-// import useAxios from 'use-axios-client'
-import useSelectedCountry from '../../../../hooks/useSelectedCountry'
-import useSelectedCity from '../../../../hooks/useSelectedCity'
+// import useKy from '../../../../hooks/useKy'
+import useFeedStore from '../../stores/useFeedStore'
 import ShowHideButton from '../../../../components/Button/ShowHideButton'
+import theme from '../../../../styles/theme'
 import {
   SectionContainer,
   RegionContainer,
@@ -13,31 +13,25 @@ import {
   SelectContainer,
   SelectWrapper,
 } from './BasicFilter.style'
-import theme from '../../../../styles/theme'
 
 function CountryRadio({ country }) {
-  const { selectedCountry, setSelectedCountry } = useSelectedCountry()
-  const { setSelectedCity } = useSelectedCity()
+  const selectedCountry = useFeedStore((state) => state.selectedCountry)
+  const setSelectedCountry = useFeedStore((state) => state.setSelectedCountry)
+  const setSelectedCity = useFeedStore((state) => state.setSelectedCity)
 
-  const handleCheckboxChange = useCallback(() => {
-    if (selectedCountry.id === country.countryId) setSelectedCountry({})
-    else
-      setSelectedCountry({
-        id: country.countryId,
-        name: country.name,
-      })
+  const handleRadioChange = () => {
+    setSelectedCountry({
+      id: country.countryId,
+      name: country.name,
+    })
     setSelectedCity([])
-  }, [selectedCountry, setSelectedCountry, country])
-
-  useEffect(() => {
-    console.log('selectedCountry', selectedCountry)
-  }, [selectedCountry])
+  }
 
   return (
     <SelectWrapper>
       <Radio
         checked={selectedCountry.id === country.countryId}
-        onChange={handleCheckboxChange}
+        onChange={handleRadioChange}
       >
         {country.name}
       </Radio>
@@ -55,37 +49,37 @@ CountryRadio.propTypes = {
 function CountryRadioArray({ regionId }) {
   const [countries, setCountries] = useState([])
 
-  const fetchCountries = useCallback((id) => {
-    const countriesData = {
-      1000: {
-        data: [
-          {
-            countryId: 1100,
-            name: '일본',
-          },
-          {
-            countryId: 1200,
-            name: '중국',
-          },
-          {
-            countryId: 1300,
-            name: '비활성화된 국가 1',
-          },
-        ],
-      },
-      2000: {
-        data: [],
-      },
-      3000: {
-        data: [],
-      },
-    }
-    setCountries(countriesData[id] ? countriesData[id].data : [])
-  }, [])
-
   useEffect(() => {
+    const fetchCountries = (id) => {
+      const countriesData = {
+        1000: {
+          data: [
+            {
+              countryId: 1100,
+              name: '일본',
+            },
+            {
+              countryId: 1200,
+              name: '중국',
+            },
+            {
+              countryId: 1300,
+              name: '비활성화된 국가 1',
+            },
+          ],
+        },
+        2000: {
+          data: [],
+        },
+        3000: {
+          data: [],
+        },
+      }
+      setCountries(countriesData[id] ? countriesData[id].data : [])
+    }
+
     fetchCountries(regionId)
-  }, [regionId, fetchCountries])
+  }, [regionId])
 
   if (countries.length === 0) {
     return (
@@ -145,10 +139,10 @@ function RegionCollapse() {
   }, [])
 
   const updateElement = (key, value) => {
-    setIsOpen((current) => ({
-      ...current,
+    setIsOpen({
+      ...isOpen,
       [key]: value,
-    }))
+    })
   }
 
   if (regions.length === 0) {
