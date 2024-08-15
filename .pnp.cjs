@@ -29,6 +29,8 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["@ant-design/icons", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.4.0"],\
           ["@babel/plugin-proposal-private-property-in-object", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:7.21.11"],\
+          ["@tanstack/react-query", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.51.23"],\
+          ["@tanstack/react-query-devtools", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.51.23"],\
           ["@testing-library/jest-dom", "npm:5.17.0"],\
           ["@testing-library/react", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:13.4.0"],\
           ["@testing-library/user-event", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:13.5.0"],\
@@ -5032,6 +5034,74 @@ const RAW_RUNTIME_STATE =
           ["@svgr/plugin-jsx", "npm:5.5.0"],\
           ["@svgr/plugin-svgo", "npm:5.5.0"],\
           ["loader-utils", "npm:2.0.4"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tanstack/query-core", [\
+      ["npm:5.51.21", {\
+        "packageLocation": "./.yarn/cache/@tanstack-query-core-npm-5.51.21-04adc2d019-bb9e03391f.zip/node_modules/@tanstack/query-core/",\
+        "packageDependencies": [\
+          ["@tanstack/query-core", "npm:5.51.21"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tanstack/query-devtools", [\
+      ["npm:5.51.16", {\
+        "packageLocation": "./.yarn/cache/@tanstack-query-devtools-npm-5.51.16-c98e81abc7-40f1fbad77.zip/node_modules/@tanstack/query-devtools/",\
+        "packageDependencies": [\
+          ["@tanstack/query-devtools", "npm:5.51.16"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tanstack/react-query", [\
+      ["npm:5.51.23", {\
+        "packageLocation": "./.yarn/cache/@tanstack-react-query-npm-5.51.23-45e5787442-913566a677.zip/node_modules/@tanstack/react-query/",\
+        "packageDependencies": [\
+          ["@tanstack/react-query", "npm:5.51.23"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.51.23", {\
+        "packageLocation": "./.yarn/__virtual__/@tanstack-react-query-virtual-02c4e74afa/0/cache/@tanstack-react-query-npm-5.51.23-45e5787442-913566a677.zip/node_modules/@tanstack/react-query/",\
+        "packageDependencies": [\
+          ["@tanstack/react-query", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.51.23"],\
+          ["@tanstack/query-core", "npm:5.51.21"],\
+          ["@types/react", null],\
+          ["react", "npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@types/react",\
+          "react"\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@tanstack/react-query-devtools", [\
+      ["npm:5.51.23", {\
+        "packageLocation": "./.yarn/cache/@tanstack-react-query-devtools-npm-5.51.23-a17c95761e-f11d53c47f.zip/node_modules/@tanstack/react-query-devtools/",\
+        "packageDependencies": [\
+          ["@tanstack/react-query-devtools", "npm:5.51.23"]\
+        ],\
+        "linkType": "SOFT"\
+      }],\
+      ["virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.51.23", {\
+        "packageLocation": "./.yarn/__virtual__/@tanstack-react-query-devtools-virtual-1cba4d22da/0/cache/@tanstack-react-query-devtools-npm-5.51.23-a17c95761e-f11d53c47f.zip/node_modules/@tanstack/react-query-devtools/",\
+        "packageDependencies": [\
+          ["@tanstack/react-query-devtools", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.51.23"],\
+          ["@tanstack/query-devtools", "npm:5.51.16"],\
+          ["@tanstack/react-query", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.51.23"],\
+          ["@types/react", null],\
+          ["@types/tanstack__react-query", null],\
+          ["react", "npm:18.3.1"]\
+        ],\
+        "packagePeers": [\
+          "@tanstack/react-query",\
+          "@types/react",\
+          "@types/tanstack__react-query",\
+          "react"\
         ],\
         "linkType": "HARD"\
       }]\
@@ -12899,6 +12969,8 @@ const RAW_RUNTIME_STATE =
           ["klkl", "workspace:."],\
           ["@ant-design/icons", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.4.0"],\
           ["@babel/plugin-proposal-private-property-in-object", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:7.21.11"],\
+          ["@tanstack/react-query", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.51.23"],\
+          ["@tanstack/react-query-devtools", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.51.23"],\
           ["@testing-library/jest-dom", "npm:5.17.0"],\
           ["@testing-library/react", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:13.4.0"],\
           ["@testing-library/user-event", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:13.5.0"],\
