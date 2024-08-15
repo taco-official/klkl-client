@@ -12,7 +12,7 @@ const useFeedStore = create((set) => ({
   setSelectedCategory: (state) => set({ selectedCategory: state }),
   setSelectedSubCategory: (state) => set({ selectedSubCategory: state }),
   setSelectedFilter: (state) => set({ selectedFilter: state }),
-  setSelectedSort: (state) => set({ sortBy: state }),
+  setSelectedSort: (state) => set({ selectedSort: state }),
 }))
 
 export default useFeedStore
