@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
 import ky from 'ky'
 
 const kyInstance = ky.create({
-  prefixUrl: 'https://yts.mx/api/v2',
+  prefixUrl: 'http://localhost:8080/v1/',
   timeout: 5000,
-  headers: {},
-  hooks: {
-    beforeRequest: [],
-    afterResponse: [],
-    beforeError: [],
-  },
+  // headers: {},
+  // hooks: {
+  // beforeRequest: [],
+  // afterResponse: [],
+  // beforeError: [],
+  // },
   retry: {
     limit: 2,
     methods: ['get', 'post', 'put'],
@@ -17,7 +17,7 @@ const kyInstance = ky.create({
   },
 })
 
-function useKy(initialConfig, initialData = null) {
+function useKy(initialConfig = null, autoFetch = false, initialData = null) {
   const [data, setData] = useState(initialData)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -35,7 +35,7 @@ function useKy(initialConfig, initialData = null) {
   }
 
   useEffect(() => {
-    if (initialConfig) fetchData(initialConfig)
+    if (autoFetch && initialConfig) fetchData(initialConfig)
   }, [])
 
   return { data, loading, error, fetchData }
