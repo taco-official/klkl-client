@@ -1,6 +1,4 @@
 import React from 'react'
-import { BasicFilterProvider } from '../../contexts/BasicFilterContext'
-import { AdditionalFilterProvider } from '../../contexts/AdditionalFilterContext'
 // import NavBar from '../components/Navbar/NavBar'
 import Thumbnail from './components/Thumbnail/Thumbnail'
 import BasicFilter from './components/BasicFilter/BasicFilter'
@@ -14,18 +12,14 @@ function FeedPage() {
   return (
     <PageRoot>
       <Thumbnail />
-      <BasicFilterProvider>
-        <PageContent>
-          <BasicFilter />
-          <AdditionalFilterProvider>
-            <FeedArea>
-              <AdditionalFilter />
-              <SelectedField />
-              <ProductList />
-            </FeedArea>
-          </AdditionalFilterProvider>
-        </PageContent>
-      </BasicFilterProvider>
+      <PageContent>
+        <BasicFilter />
+        <FeedArea>
+          <AdditionalFilter />
+          <SelectedField />
+          <ProductList />
+        </FeedArea>
+      </PageContent>
     </PageRoot>
   )
 }
