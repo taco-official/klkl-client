@@ -1,29 +1,23 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { CloseOutlined } from '@ant-design/icons'
-import useSelectedFilter from '../../../../hooks/useSelectedFilter'
+import useFeedStore from '../../stores/useFeedStore'
 import { BlueFieldTag } from '../../../../components/Tags/Tags.style'
 
 function FilterField() {
-  const { selectedFilter, setSelectedFilter } = useSelectedFilter()
+  const selectedFilter = useFeedStore((state) => state.selectedFilter)
+  const setSelectedFilter = useFeedStore((state) => state.setSelectedFilter)
 
-  const deleteFilter = useCallback(
-    (id) => {
-      setSelectedFilter(selectedFilter.filter((filter) => filter.id !== id))
-    },
-    [selectedFilter]
-  )
+  const deleteFilter = (id) => {
+    setSelectedFilter(selectedFilter.filter((selected) => selected.id !== id))
+  }
 
   if (!selectedFilter) return null
-  return (
-    <>
-      {selectedFilter.map((filter) => (
-        <BlueFieldTag key={filter.id}>
-          <span>{filter.name}</span>
-          <CloseOutlined onClick={() => deleteFilter(filter.id)} />
-        </BlueFieldTag>
-      ))}
-    </>
-  )
+  return selectedFilter.map((selected) => (
+    <BlueFieldTag key={selected.id}>
+      <span>{selected.name}</span>
+      <CloseOutlined onClick={() => deleteFilter(selected.id)} />
+    </BlueFieldTag>
+  ))
 }
 
 export default FilterField
