@@ -1,31 +1,51 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Dropdown, Button, Space } from 'antd'
 import { DownOutlined } from '@ant-design/icons'
+import useFeedStore from '../../stores/useFeedStore'
 
 function SortButton() {
+  const setSelectedSort = useFeedStore((state) => state.setSelectedSort)
+  const [sortStandard, setSortStandard] = useState({})
+
   const handleMenuClick = (e) => {
-    console.log('click', e)
+    console.log(sortStandard[e.key])
+    setSelectedSort(sortStandard[e.key])
   }
-  const items = [
-    {
-      label: '별점 순',
-      key: '1',
-    },
-    {
-      label: '좋아요 순',
-      key: '2',
-    },
-    {
-      label: '최신 순',
-      key: '3',
-    },
-    {
-      label: '오래된 순',
-      key: '4',
-    },
-  ]
+
+  useEffect(() => {
+    const fetchSortStandard = () => {
+      const sortData = {
+        data: [
+          {
+            id: 0,
+            name: '최신 순',
+          },
+          {
+            id: 1,
+            name: '오래된 순',
+          },
+          {
+            id: 2,
+            name: '별점 순',
+          },
+          {
+            id: 3,
+            name: '좋아요 순',
+          },
+        ],
+      }
+      const initialSortState = sortData.data.map((sort) => ({
+        label: sort.name,
+        key: sort.id.toString(),
+      }))
+      setSortStandard(initialSortState)
+      setSelectedSort(initialSortState[0])
+    }
+    fetchSortStandard()
+  }, [])
+
   const menuProps = {
-    items,
+    items: sortStandard,
     onClick: handleMenuClick,
   }
 
