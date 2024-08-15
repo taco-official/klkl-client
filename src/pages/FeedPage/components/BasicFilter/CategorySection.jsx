@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
-import useSelectedCategory from '../../../../hooks/useSelectedCategory'
-import useSelectedSubCategory from '../../../../hooks/useSelectedSubCategory'
+// import useKy from '../../../../hooks/useKy'
+import useFeedStore from '../../stores/useFeedStore'
 import SubCategoryContainer from './SubCategoryContainer'
 import {
   SectionContainer,
@@ -11,11 +11,14 @@ import {
 } from './BasicFilter.style'
 
 function CategoryCheckBox({ category }) {
-  const { selectedCategory, setSelectedCategory } = useSelectedCategory()
-  const { selectedSubCategory, setSelectedSubCategory } =
-    useSelectedSubCategory()
+  const selectedCategory = useFeedStore((state) => state.selectedCategory)
+  const setSelectedCategory = useFeedStore((state) => state.setSelectedCategory)
+  const selectedSubCategory = useFeedStore((state) => state.selectedSubCategory)
+  const setSelectedSubCategory = useFeedStore(
+    (state) => state.setSelectedSubCategory
+  )
 
-  const handleCategoryCheckboxChange = useCallback(() => {
+  const handleCategoryCheckboxChange = () => {
     if (
       selectedCategory.some((selected) => selected.id === category.categoryId)
     ) {
@@ -35,20 +38,11 @@ function CategoryCheckBox({ category }) {
         { id: category.categoryId, name: category.name },
       ])
     }
-  }, [
-    selectedCategory,
-    setSelectedCategory,
-    selectedSubCategory,
-    setSelectedSubCategory,
-    category,
-  ])
+  }
+
   const selectedArrayLength = selectedSubCategory.filter(
     (selected) => selected.categoryId === category.categoryId
   ).length
-
-  useEffect(() => {
-    console.log('selectedCategory', selectedCategory)
-  }, [selectedCategory])
 
   return (
     <>
@@ -87,40 +81,37 @@ CategoryCheckBox.propTypes = {
 
 function CategoryArray() {
   const [categories, setCategories] = useState([])
-  const fetchCategories = useCallback(() => {
-    const categoriesData = {
-      data: [
-        {
-          categoryId: 10000,
-          name: '카테고리 1',
-          subCategoryCount: 3,
-        },
-        {
-          categoryId: 20000,
-          name: '카테고리 2',
-          subCategoryCount: 3,
-        },
-      ],
-    }
-    setCategories(categoriesData.data)
-  }, [])
 
   useEffect(() => {
+    const fetchCategories = () => {
+      const categoriesData = {
+        data: [
+          {
+            categoryId: 10000,
+            name: '카테고리 1',
+            subCategoryCount: 3,
+          },
+          {
+            categoryId: 20000,
+            name: '카테고리 2',
+            subCategoryCount: 3,
+          },
+        ],
+      }
+      setCategories(categoriesData.data)
+    }
+
     fetchCategories()
-  }, [fetchCategories])
+  }, [])
 
   if (categories.length === 0)
     return <SelectContainer>카테고리가 없습니다.</SelectContainer>
 
-  return (
-    <>
-      {categories.map((category) => (
-        <SelectContainer key={category.categoryId}>
-          <CategoryCheckBox category={category} />
-        </SelectContainer>
-      ))}
-    </>
-  )
+  return categories.map((category) => (
+    <SelectContainer key={category.categoryId}>
+      <CategoryCheckBox category={category} />
+    </SelectContainer>
+  ))
 }
 
 function CategorySection() {
