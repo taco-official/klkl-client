@@ -1,24 +1,26 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { Button, theme as antdTheme } from 'antd'
-import useSelectedFilter from '../../../hooks/useSelectedFilter'
-import theme from '../../../styles/theme'
+// import useKy from '../../../../hooks/useKy'
+import useFeedStore from '../../../../stores/useFeedStore'
+import theme from '../../../../styles/theme'
 
 function FilterSwitch({ filter }) {
-  const { selectedFilter, setSelectedFilter } = useSelectedFilter()
+  const selectedFilter = useFeedStore((state) => state.selectedFilter)
+  const setSelectedFilter = useFeedStore((state) => state.setSelectedFilter)
   const [isClicked, setIsClicked] = useState(
     selectedFilter.some((selected) => selected.id === filter.filterId) || false
   )
 
-  const handleSwitchChange = useCallback(() => {
+  const handleSwitchChange = () => {
     if (selectedFilter.some((selected) => selected.id === filter.filterId)) {
       setSelectedFilter(
         selectedFilter.filter((selected) => selected.id !== filter.filterId)
       )
       setIsClicked(false)
     } else {
-      setSelectedFilter((current) => [
-        ...current,
+      setSelectedFilter([
+        ...selectedFilter,
         {
           id: filter.filterId,
           name: filter.name,
@@ -26,21 +28,13 @@ function FilterSwitch({ filter }) {
       ])
       setIsClicked(true)
     }
-    console.log('click', filter.name)
-  }, [selectedFilter, filter])
+  }
 
   useEffect(() => {
     if (selectedFilter.some((selected) => selected.id === filter.filterId))
       setIsClicked(true)
     else setIsClicked(false)
   }, [selectedFilter])
-
-  useEffect(() => {
-    console.log('selectedFilter', selectedFilter)
-  }, [selectedFilter])
-  useEffect(() => {
-    console.log('isClicked', filter.name, isClicked)
-  }, [isClicked])
 
   return (
     <Button
@@ -101,16 +95,12 @@ function FilterSwitchArray() {
     return <>필터가 없습니다.</>
   }
 
-  return (
-    <>
-      {filters.map((filter) => (
-        <FilterSwitch
-          key={filter.filterId}
-          filter={filter}
-        />
-      ))}
-    </>
-  )
+  return filters.map((filter) => (
+    <FilterSwitch
+      key={filter.filterId}
+      filter={filter}
+    />
+  ))
 }
 
 export default FilterSwitchArray
