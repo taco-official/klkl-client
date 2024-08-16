@@ -1,5 +1,5 @@
 import ky from 'ky'
-import { useQuery } from '@tanstack/react-query'
+import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query'
 
 const method = {
   GET: 'get',
@@ -29,7 +29,7 @@ const kyInstance = ky.create({
 /**
  * Ky기반 useQeury 호출 훅
  *
- * @param {string} httpMethod http 메서드
+ * @param {string} httpMethod http 메서드 (get)
  * @param {string} uri 요청할 uri
  * @param {object} options 요청시 넣을 옵션 (default: null)
  * @return useQuery의 return과 동일
@@ -45,4 +45,23 @@ const useKyQuery = (httpMethod, uri, options = null) => {
   return useQuery({ queryKey, queryFn, ...defaultOptions, ...options })
 }
 
-export { method, useKyQuery }
+/**
+ * Ky기반 useMutation 호출 훅
+ *
+ * @param {string} httpMethod http 메서드 (post, put, patch, delete)
+ * @param {string} uri 요청할 uri
+ * @param {string} body post, put, patch, delete
+ * @param {object} options 요청시 넣을 옵션 (default: null)
+ * @return useQuery의 return과 동일
+ */
+const useKyMutation = (httpMethod, uri, body, options = null) => {
+  const queryClient = useQueryClient()
+  const mutationFn = async () => kyInstance[httpMethod](uri, { body }).json()
+  const onSuccess = (data) => {
+    queryClient.invalidateQueries([uri, data.productId])
+  }
+
+  return useMutation({ mutationFn, onSuccess, ...options })
+}
+
+export { method, useKyQuery, useKyMutation }

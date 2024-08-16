@@ -1,7 +1,9 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Outlet, useLocation } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { TransitionGroup, Transition } from 'react-transition-group'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
 import NavBar from '../components/Navbar/NavBar'
 import Footer from '../components/Footer/Footer'
@@ -25,6 +27,8 @@ const getTransitionStyles = {
   },
 }
 
+const queryClient = new QueryClient()
+
 export default function Layout() {
   const location = useLocation()
 
@@ -35,28 +39,34 @@ export default function Layout() {
   return (
     <>
       <GlobalStyle />
-      <NavBar />
-      <TransitionGroup>
-        <Transition
-          key={location.pathname}
-          timeout={{
-            enter: TIMEOUT,
-            exit: TIMEOUT,
-          }}
-        >
-          {(status) => (
-            <StyledMain style={{ ...getTransitionStyles[status] }}>
-              <Outlet />
-            </StyledMain>
-          )}
-        </Transition>
-      </TransitionGroup>
-      <Footer />
+      <QueryClientProvider client={queryClient}>
+        <NavBar />
+        <TransitionGroup>
+          <Transition
+            key={location.pathname}
+            timeout={{
+              enter: TIMEOUT,
+              exit: TIMEOUT,
+            }}
+          >
+            {(status) => (
+              <StyledMain style={{ ...getTransitionStyles[status] }}>
+                <Outlet />
+              </StyledMain>
+            )}
+          </Transition>
+        </TransitionGroup>
+        <Footer />
+        <ReactQueryDevtools
+          initialIsOpen={false}
+          position="bottom-left"
+        />
+      </QueryClientProvider>
     </>
   )
 }
 
 const StyledMain = styled.main`
   width: 100%;
-  min-height: 90vh;
+  min-height: 70vh;
 `
