@@ -5,17 +5,15 @@ import { BlueFieldTag } from '../../../../components/Tags/Tags.style'
 
 function FilterField() {
   const selectedFilter = useFeedStore((state) => state.selectedFilter)
-  const setSelectedFilter = useFeedStore((state) => state.setSelectedFilter)
+  const deleteSelectedFilter = useFeedStore(
+    (state) => state.deleteSelectedFilter
+  )
 
-  const deleteFilter = (id) => {
-    setSelectedFilter(selectedFilter.filter((selected) => selected.id !== id))
-  }
-
-  if (!selectedFilter) return null
+  if (selectedFilter.length === 0) return null
   return selectedFilter.map((selected) => (
     <BlueFieldTag key={selected.id}>
       <span>{selected.name}</span>
-      <CloseOutlined onClick={() => deleteFilter(selected.id)} />
+      <CloseOutlined onClick={() => deleteSelectedFilter(selected.id)} />
     </BlueFieldTag>
   ))
 }

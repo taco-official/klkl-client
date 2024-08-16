@@ -1,4 +1,5 @@
 import React from 'react'
+import { useShallow } from 'zustand/react/shallow'
 import { CloseOutlined } from '@ant-design/icons'
 import useFeedStore from '../../../../stores/useFeedStore'
 import {
@@ -7,18 +8,13 @@ import {
 } from '../../../../components/Tags/Tags.style'
 
 function CityField() {
-  const selectedCountry = useFeedStore((state) => state.selectedCountry)
-  const setSelectedCountry = useFeedStore((state) => state.setSelectedCountry)
-  const selectedCity = useFeedStore((state) => state.selectedCity)
-  const setSelectedCity = useFeedStore((state) => state.setSelectedCity)
-
-  const deleteCountry = () => {
-    setSelectedCountry({})
-  }
-
-  const deleteCity = (id) => {
-    setSelectedCity(selectedCity.filter((selected) => selected.id !== id))
-  }
+  const [selectedCountry, selectedCity] = useFeedStore(
+    useShallow((state) => [state.selectedCountry, state.selectedCity])
+  )
+  const [deleteSelectedCountry, deleteSelectedCity] = useFeedStore((state) => [
+    state.deleteSelectedCountry,
+    state.deleteSelectedCity,
+  ])
 
   if (Object.keys(selectedCountry).length === 0)
     return (
@@ -31,14 +27,14 @@ function CityField() {
     return (
       <BlueFieldTag>
         <span>{selectedCountry.name} 전체</span>
-        <CloseOutlined onClick={deleteCountry} />
+        <CloseOutlined onClick={deleteSelectedCountry} />
       </BlueFieldTag>
     )
 
   return selectedCity.map((selected) => (
     <BlueFieldTag key={selected.id}>
       <span>{selected.name}</span>
-      <CloseOutlined onClick={() => deleteCity(selected.id)} />
+      <CloseOutlined onClick={() => deleteSelectedCity(selected.id)} />
     </BlueFieldTag>
   ))
 }

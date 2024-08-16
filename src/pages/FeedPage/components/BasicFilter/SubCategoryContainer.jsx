@@ -6,42 +6,30 @@ import useFeedStore from '../../../../stores/useFeedStore'
 import { SubSelectContainer, SelectWrapper } from './BasicFilter.style'
 
 function SubCategoryCheckbox({ subCategory }) {
-  const selectedSubCategory = useFeedStore(
-    (selected) => selected.selectedSubCategory
-  )
-  const setSelectedSubCategory = useFeedStore(
-    (selected) => selected.setSelectedSubCategory
-  )
+  const selectedSubCategory = useFeedStore((state) => state.selectedSubCategory)
+  const [inArray, addSelectedSubCategory, deleteSelectedSubCategory] =
+    useFeedStore((state) => [
+      state.inArray,
+      state.addSelectedSubCategory,
+      state.deleteSelectedSubCategory,
+    ])
 
   const handleCheckboxChange = () => {
-    if (
-      selectedSubCategory.some(
-        (selected) => selected.id === subCategory.subCategoryId
-      )
-    ) {
-      setSelectedSubCategory(
-        selectedSubCategory.filter(
-          (selected) => selected.id !== subCategory.subCategoryId
-        )
-      )
+    if (inArray(selectedSubCategory, subCategory.subCategoryId)) {
+      deleteSelectedSubCategory(subCategory.subCategoryId)
     } else {
-      setSelectedSubCategory([
-        ...selectedSubCategory,
-        {
-          categoryId: subCategory.categoryId,
-          id: subCategory.subCategoryId,
-          name: subCategory.name,
-        },
-      ])
+      addSelectedSubCategory({
+        id: subCategory.subCategoryId,
+        name: subCategory.name,
+        categoryId: subCategory.categoryId,
+      })
     }
   }
 
   return (
     <SelectWrapper>
       <Checkbox
-        checked={selectedSubCategory.some(
-          (selected) => selected.id === subCategory.subCategoryId
-        )}
+        checked={inArray(selectedSubCategory, subCategory.subCategoryId)}
         onChange={handleCheckboxChange}
       >
         {subCategory.name}

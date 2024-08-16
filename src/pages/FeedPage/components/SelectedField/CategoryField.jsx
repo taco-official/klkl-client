@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useShallow } from 'zustand/react/shallow'
 import { CloseOutlined } from '@ant-design/icons'
 import useFeedStore from '../../../../stores/useFeedStore'
 import {
@@ -7,37 +8,40 @@ import {
   WhiteFieldTag,
 } from '../../../../components/Tags/Tags.style'
 
-function SubCategoryField({ categoryId }) {
-  const selectedSubCategory = useFeedStore((state) => state.selectedSubCategory)
-  const setSelectedSubCategory = useFeedStore(
-    (state) => state.setSelectedSubCategory
+function SubCategoryField({ selectedSubCategory, categoryId }) {
+  const deleteSelectedSubCategory = useFeedStore(
+    (state) => state.deleteSelectedSubCategory
   )
-
-  const deleteSubCategory = (id) => {
-    setSelectedSubCategory(
-      selectedSubCategory.filter((selected) => selected.id !== id)
-    )
-  }
 
   return selectedSubCategory.map((selected) => {
     if (selected.categoryId !== categoryId) return null
     return (
       <BlueFieldTag key={selected.id}>
         <span>{selected.name}</span>
-        <CloseOutlined onClick={() => deleteSubCategory(selected.id)} />
+        <CloseOutlined onClick={() => deleteSelectedSubCategory(selected.id)} />
       </BlueFieldTag>
     )
   })
 }
 
 SubCategoryField.propTypes = {
+  selectedSubCategory: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      categoryId: PropTypes.number.isRequired,
+    })
+  ).isRequired,
   categoryId: PropTypes.number.isRequired,
 }
 
 function CategoryField() {
-  const selectedCategory = useFeedStore((state) => state.selectedCategory)
-  const setSelectedCategory = useFeedStore((state) => state.setSelectedCategory)
-  const selectedSubCategory = useFeedStore((state) => state.selectedSubCategory)
+  const [selectedCategory, selectedSubCategory] = useFeedStore(
+    useShallow((state) => [state.selectedCategory, state.selectedSubCategory])
+  )
+  const deleteSelectedCategory = useFeedStore(
+    (state) => state.deleteSelectedCategory
+  )
 
   const hasSelectedSubCategories = (categoryId) => {
     return selectedSubCategory.some(
@@ -52,23 +56,18 @@ function CategoryField() {
       </WhiteFieldTag>
     )
 
-  const deleteCategory = (id) => {
-    setSelectedCategory(
-      selectedCategory.filter((selected) => selected.id !== id)
-    )
-  }
-
   return selectedCategory.map((selected) => {
     if (!hasSelectedSubCategories(selected.id))
       return (
         <BlueFieldTag key={selected.id}>
           <span>{selected.name} 전체</span>
-          <CloseOutlined onClick={() => deleteCategory(selected.id)} />
+          <CloseOutlined onClick={() => deleteSelectedCategory(selected.id)} />
         </BlueFieldTag>
       )
     return (
       <SubCategoryField
         key={selected.id}
+        selectedSubCategory={selectedSubCategory}
         categoryId={selected.id}
       />
     )

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useShallow } from 'zustand/react/shallow'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
 // import useKy from '../../../../hooks/useKy'
@@ -11,32 +12,27 @@ import {
 } from './BasicFilter.style'
 
 function CategoryCheckBox({ category }) {
-  const selectedCategory = useFeedStore((state) => state.selectedCategory)
-  const setSelectedCategory = useFeedStore((state) => state.setSelectedCategory)
-  const selectedSubCategory = useFeedStore((state) => state.selectedSubCategory)
-  const setSelectedSubCategory = useFeedStore(
-    (state) => state.setSelectedSubCategory
+  const [selectedCategory, selectedSubCategory] = useFeedStore(
+    useShallow((state) => [state.selectedCategory, state.selectedSubCategory])
   )
+  const [
+    inArray,
+    addSelectedCategory,
+    deleteSelectedCategory,
+    deleteSelectedSubCategoriesByCategoryId,
+  ] = useFeedStore((state) => [
+    state.inArray,
+    state.addSelectedCategory,
+    state.deleteSelectedCategory,
+    state.deleteSelectedSubCategoriesByCategoryId,
+  ])
 
   const handleCategoryCheckboxChange = () => {
-    if (
-      selectedCategory.some((selected) => selected.id === category.categoryId)
-    ) {
-      setSelectedSubCategory(
-        selectedSubCategory.filter(
-          (selected) => selected.categoryId !== category.categoryId
-        )
-      )
-      setSelectedCategory(
-        selectedCategory.filter(
-          (selected) => selected.id !== category.categoryId
-        )
-      )
+    if (inArray(selectedCategory, category.categoryId)) {
+      deleteSelectedSubCategoriesByCategoryId(category.categoryId)
+      deleteSelectedCategory(category.categoryId)
     } else {
-      setSelectedCategory([
-        ...selectedCategory,
-        { id: category.categoryId, name: category.name },
-      ])
+      addSelectedCategory({ id: category.categoryId, name: category.name })
     }
   }
 
@@ -49,9 +45,8 @@ function CategoryCheckBox({ category }) {
       <SelectWrapper>
         <Checkbox
           checked={
-            selectedCategory.some(
-              (selected) => selected.id === category.categoryId
-            ) || selectedArrayLength === category.subCategoryCount
+            inArray(selectedCategory, category.categoryId) ||
+            selectedArrayLength === category.subCategoryCount
           }
           indeterminate={
             selectedArrayLength > 0 &&
@@ -62,9 +57,7 @@ function CategoryCheckBox({ category }) {
           {category.name}
         </Checkbox>
       </SelectWrapper>
-      {selectedCategory.some(
-        (selected) => selected.id === category.categoryId
-      ) ? (
+      {inArray(selectedCategory, category.categoryId) ? (
         <SubCategoryContainer categoryId={category.categoryId} />
       ) : null}
     </>

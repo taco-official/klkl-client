@@ -4,28 +4,14 @@ import { GrPowerReset } from 'react-icons/gr'
 import useFeedStore from '../../../../stores/useFeedStore'
 
 function ResetButton() {
-  const setSelectedCountry = useFeedStore((state) => state.setSelectedCountry)
-  const setSelectedCity = useFeedStore((state) => state.setSelectedCity)
-  const setSelectedCategory = useFeedStore((state) => state.setSelectedCategory)
-  const setSelectedSubCategory = useFeedStore(
-    (state) => state.setSelectedSubCategory
-  )
-  const setSelectedFilter = useFeedStore((state) => state.setSelectedFilter)
-
-  const handleClick = () => {
-    setSelectedFilter([])
-    setSelectedSubCategory([])
-    setSelectedCategory([])
-    setSelectedCity([])
-    setSelectedCountry({})
-  }
+  const resetSelectedField = useFeedStore((state) => state.resetSelectedField)
 
   return (
     <Button
       type="text"
       size="small"
       icon={<GrPowerReset />}
-      onClick={handleClick}
+      onClick={resetSelectedField}
     >
       초기화
     </Button>
