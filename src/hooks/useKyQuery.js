@@ -14,16 +14,6 @@ const kyInstance = ky.create({
   headers: {
     'content-type': 'application/json',
   },
-  hooks: {
-    beforeRequest: [],
-    afterResponse: [],
-    beforeError: [],
-  },
-  retry: {
-    limit: 2,
-    methods: ['get', 'post', 'put'],
-    statusCodes: [400, 500],
-  },
 })
 
 /**
@@ -34,16 +24,15 @@ const kyInstance = ky.create({
  * @param {object} options 요청시 넣을 옵션 (default: null)
  * @return useQuery의 return과 동일
  */
-const useKyQuery = (httpMethod, uri, options = null) => {
-  const queryKey = [uri]
-  const queryFn = async () => kyInstance[httpMethod](uri).json()
-  const defaultOptions = {
+const useKyQuery = (uri, options = null) =>
+  useQuery({
+    queryKey: [uri],
+    queryFn: () => kyInstance.get(uri).json(),
+    retry: false,
     cacheTime: 300000,
     staleTime: 300000,
-  }
-
-  return useQuery({ queryKey, queryFn, ...defaultOptions, ...options })
-}
+    ...options,
+  })
 
 /**
  * Ky기반 useMutation 호출 훅
@@ -54,14 +43,17 @@ const useKyQuery = (httpMethod, uri, options = null) => {
  * @param {object} options 요청시 넣을 옵션 (default: null)
  * @return useQuery의 return과 동일
  */
-const useKyMutation = (httpMethod, uri, body, options = null) => {
+const useKyMutation = (httpMethod, uri, options = null) => {
   const queryClient = useQueryClient()
-  const mutationFn = async () => kyInstance[httpMethod](uri, { body }).json()
-  const onSuccess = (data) => {
-    queryClient.invalidateQueries([uri, data.productId])
-  }
 
-  return useMutation({ mutationFn, onSuccess, ...options })
+  return useMutation({
+    mutationFn: (body) => kyInstance[httpMethod](uri, { body }).json(),
+    onSuccess: (data) => {
+      queryClient.invalidateQueries([uri, data.productId])
+    },
+    retry: false,
+    ...options,
+  })
 }
 
-export { method, useKyQuery, useKyMutation }
+export { method, kyInstance, useKyQuery, useKyMutation }
