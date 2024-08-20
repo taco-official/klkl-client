@@ -1,25 +1,29 @@
 import { React } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+
+import dateParser from '../../utils/dateParser'
 import ProfileImage from '../UserProfile/ProfileImage'
 import theme from '../../styles/theme'
 
 export default function CommentList({ comments }) {
   return (
     <CommentListWrapper>
-      {Object.entries(comments).map(([key, value]) => {
+      {comments.map((comment) => {
         return (
-          <CommentListContent key={key}>
+          <CommentListContent key={comment.id}>
             <ProfileImage
-              src={value.image}
+              src={comment.user.profile}
               $size="50px"
             />
             <ContentBox>
               <div className="comment--info__user">
-                {value.user}
-                <span className="comment--info__date">{value.date}</span>
+                {comment.user.name}
+                <span className="comment--info__date">
+                  {dateParser(comment.createdAt)}
+                </span>
               </div>
-              <div className="comment--info__content">{value.content}</div>
+              <div className="comment--info__content">{comment.content}</div>
             </ContentBox>
           </CommentListContent>
         )
@@ -28,7 +32,18 @@ export default function CommentList({ comments }) {
   )
 }
 CommentList.propTypes = {
-  comments: PropTypes.shape({}).isRequired,
+  comments: PropTypes.arrayOf(
+    PropTypes.shape({
+      commentId: PropTypes.number,
+      content: PropTypes.string,
+      createdAt: PropTypes.string,
+      user: PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+        profile: PropTypes.string,
+      }),
+    })
+  ).isRequired,
 }
 
 const CommentListWrapper = styled.ul`
