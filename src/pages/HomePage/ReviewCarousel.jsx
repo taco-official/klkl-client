@@ -16,16 +16,15 @@ const flickityOptions = {
 export default function ReviewCarousels({ contents }) {
   return (
     <ReviewCarousel options={flickityOptions}>
-      {contents.map((info) => {
+      {contents.map((content) => {
         return (
           <ReviewWrapper
             className="carousel-cell"
-            key={info.productData.name}
+            key={content.id}
           >
             <PreviewContent
-              userId={info.id}
-              productData={info.productData}
-              style={{ transform: 'scale(1.5, 1.5)' }}
+              userId={content.id}
+              productData={content}
             />
           </ReviewWrapper>
         )
@@ -36,16 +35,18 @@ export default function ReviewCarousels({ contents }) {
 ReviewCarousels.propTypes = {
   contents: PropTypes.arrayOf(
     PropTypes.shape({
-      userId: PropTypes.number.isRequired,
-      productData: PropTypes.shape({
-        productId: PropTypes.number.isRequired,
-        thumbnail: PropTypes.string.isRequired,
-        city: PropTypes.string.isRequired,
-        subcategory: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-        likeCount: PropTypes.number.isRequired,
-      }),
+      id: PropTypes.number,
+      name: PropTypes.string,
+      likeCount: PropTypes.number,
+      rating: PropTypes.number,
+      categoryName: PropTypes.string,
+      countryName: PropTypes.string,
+      tags: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number,
+          name: PropTypes.string,
+        })
+      ),
     })
   ).isRequired,
 }
