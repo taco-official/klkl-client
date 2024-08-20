@@ -22,7 +22,7 @@ import {
 
 function PreviewContent({ userId = undefined, productData }) {
   return (
-    <Link to={`review/${userId}`}>
+    <Link to={`products/${productData.id}`}>
       <PreviewContainer>
         <ThumbnailContainer id="productThumbnail">
           <img
