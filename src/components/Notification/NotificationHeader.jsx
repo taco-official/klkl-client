@@ -1,15 +1,32 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import theme from '../../../styles/theme'
+import theme from '../../styles/theme'
+import { method, useKyMutation } from '../../hooks/useKyQuery'
 
-function NotificationHeader({ count }) {
+function NotificationHeader({ isEmpty }) {
+  const { mutateAsync } = useKyMutation(method.PUT, 'notifications/all')
+
+  const readAll = async () => {
+    try {
+      await mutateAsync()
+    } catch (error) {
+      window.alert(error)
+    }
+  }
+
   return (
     <>
       <Header>
-        알림 <button type="button">모두 읽기</button>
+        알림
+        <button
+          type="button"
+          onClick={readAll}
+        >
+          모두 읽기
+        </button>
       </Header>
-      {count && (
+      {isEmpty && (
         <div style={{ margin: '10px 0', textAlign: 'center' }}>
           알림이 없습니다! 😊
         </div>
@@ -18,7 +35,7 @@ function NotificationHeader({ count }) {
   )
 }
 NotificationHeader.propTypes = {
-  count: PropTypes.bool.isRequired,
+  isEmpty: PropTypes.bool.isRequired,
 }
 
 const Header = styled.div`
