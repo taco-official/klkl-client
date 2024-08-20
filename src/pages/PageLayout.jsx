@@ -59,7 +59,8 @@ export default function Layout() {
         <Footer />
         <ReactQueryDevtools
           initialIsOpen={false}
-          position="bottom-left"
+          position="bottom-right"
+          style={{ top: '0px', position: 'absolute' }}
         />
       </QueryClientProvider>
     </>
