@@ -1,80 +1,56 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Steps, ConfigProvider } from 'antd'
-import useStepStore from './stores/useStepStore'
 
+import * as Form from './components/index'
+import PostPage from './components/PostPage'
 import submitSteps from './constant/submitSteps'
-import theme from '../../styles/theme'
 import PrevNextButtons from './components/PrevNextButtons'
+import SubmitSteps from './components/SubmitSteps'
+import theme from '../../styles/theme'
 
-import ImageSubmit from './ImageSubmit'
-import RegionSubmitPage from './RegionSelect'
-import InfoSubmitPage from './InfoSubmit'
-import CategorySelctionPage from './CategorySelect'
+const pages = {
+  [submitSteps.IMAGE]: <Form.ImageSubmitForm />,
+  [submitSteps.REGION]: <Form.RegionSubmitForm />,
+  [submitSteps.INFO]: <Form.InfoSubmitForm />,
+  [submitSteps.CATEGORY]: <Form.CategorSubmitForm />,
+  [submitSteps.LOADING]: <PostPage />,
+}
 
-export default function SubmitPage() {
-  const preventClose = (e) => {
-    e.preventDefault()
-    e.returnValue = ''
+const useStep = () => {
+  const [step, setStep] = useState(0)
+  const goNextStep = () => {
+    setStep(step + 1)
+  }
+  const goPrevStep = () => {
+    setStep(step - 1)
   }
 
-  useEffect(() => {
-    window.addEventListener('beforeunload', preventClose)
+  return [step, goNextStep, goPrevStep]
+}
 
+export default function SubmitPage() {
+  const [step, goNextStep, goPrevStep] = useStep()
+
+  useEffect(() => {
+    const preventClose = (e) => {
+      e.preventDefault()
+      e.returnValue = ''
+    }
+    window.addEventListener('beforeunload', preventClose)
     return () => {
       window.removeEventListener('beforeunload', preventClose)
     }
   }, [])
 
-  const step = useStepStore((state) => state.step)
-
-  const stepsItems = [
-    {
-      title: '사진',
-    },
-    {
-      title: '구매한 곳',
-    },
-    {
-      title: '상세 정보',
-    },
-    {
-      title: '분류',
-    },
-  ]
-
-  const stepsTheme = {
-    components: {
-      Steps: { iconSizeSM: 20, iconFontSize: 10 },
-    },
-    token: {
-      fontFamily: theme.style.mainBold,
-      fontSize: theme.size.textXS,
-      colorPrimary: theme.color.main,
-      colorPrimaryHover: theme.color.mainDark,
-    },
-  }
-
-  const pages = {
-    [submitSteps.PICTURE]: <ImageSubmit />,
-    [submitSteps.REGION]: <RegionSubmitPage />,
-    [submitSteps.INFO]: <InfoSubmitPage />,
-    [submitSteps.CATEGORY]: <CategorySelctionPage />,
-  }
-
   return (
     <Wrapper>
-      <ConfigProvider theme={stepsTheme}>
-        <Steps
-          size="small"
-          current={step}
-          items={stepsItems}
-          responsive={false}
-          style={{ width: '100%', margin: '1.25rem 0' }}
-        />
-      </ConfigProvider>
+      <SubmitSteps step={step} />
       <div>{pages[step]}</div>
-      <PrevNextButtons />
+      <PrevNextButtons
+        step={step}
+        goNextStep={goNextStep}
+        goPrevStep={goPrevStep}
+      />
     </Wrapper>
   )
 }
@@ -82,7 +58,9 @@ export default function SubmitPage() {
 const Wrapper = styled.div`
   width: 80%;
   max-width: 37.5rem;
-  margin: 1.875rem auto;
+  min-width: 31.25rem;
+  margin: 0 auto;
+  padding: 0 1.875rem;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -107,19 +85,5 @@ const Wrapper = styled.div`
     font-family: ${theme.style.mainBold};
     font-size: ${theme.size.titleMD};
     margin-bottom: 15px;
-
-    @keyframes openModal {
-      0% {
-        opacity: 0;
-      }
-      50% {
-        opacity: 0.5;
-      }
-      100% {
-        opacity: 0.99;
-      }
-    }
-
-    animation: openModal ease-in 0.3s;
   }
 `
