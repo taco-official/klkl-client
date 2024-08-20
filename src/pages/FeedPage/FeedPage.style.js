@@ -1,13 +1,19 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-const PageRoot = styled.div`
+const antdTheme = {
+  token: {
+    fontFamily: theme.style.main,
+  },
+}
+
+const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
 `
 
-const PageContent = styled.main`
+const PageContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-start;
@@ -51,4 +57,11 @@ const ContentContainer = styled.div`
   column-gap: 0.5rem;
 `
 
-export { PageRoot, PageContent, FeedArea, StyleSection, ContentContainer }
+export {
+  antdTheme,
+  PageContainer,
+  PageContent,
+  FeedArea,
+  StyleSection,
+  ContentContainer,
+}

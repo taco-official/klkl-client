@@ -12,22 +12,22 @@ import {
 
 function CityCheckBox({ city }) {
   const selectedCity = useFeedStore((state) => state.selectedCity)
-  const setSelectedCity = useFeedStore((state) => state.setSelectedCity)
+  const [inArray, addSelectedCity, deleteSelectedCity] = useFeedStore(
+    (state) => [state.inArray, state.addSelectedCity, state.deleteSelectedCity]
+  )
 
   const handleCheckboxChange = () => {
-    if (selectedCity.some((selected) => selected.id === city.cityId)) {
-      setSelectedCity(
-        selectedCity.filter((selected) => selected.id !== city.cityId)
-      )
+    if (inArray(selectedCity, city.cityId)) {
+      deleteSelectedCity(city.cityId)
     } else {
-      setSelectedCity([...selectedCity, { id: city.cityId, name: city.name }])
+      addSelectedCity({ id: city.cityId, name: city.name })
     }
   }
 
   return (
     <SelectWrapper>
       <Checkbox
-        checked={selectedCity.some((selected) => selected.id === city.cityId)}
+        checked={inArray(selectedCity, city.cityId)}
         onChange={handleCheckboxChange}
       >
         {city.name}

@@ -32,15 +32,15 @@ function PreviewContent({ userId = undefined, productData }) {
           <LikeButton
             id="likeButton"
             userId={userId}
-            productId={productData.productId}
+            productId={productData.id}
           />
         </ThumbnailContainer>
         <DescriptionContainer>
           <TitleContainer>
             <SubDesBox>
               <CategoryWrapper>
-                <div id="city">{productData.city}</div>
-                <div id="subcategory">{productData.subcategory}</div>
+                <div id="country">{productData.countryName}</div>
+                <div id="subcategory">{productData.categoryName}</div>
               </CategoryWrapper>
               <MoreButton size="1.1rem" />
             </SubDesBox>
@@ -49,10 +49,10 @@ function PreviewContent({ userId = undefined, productData }) {
             </ProductNameBox>
           </TitleContainer>
           <TagsContainer>
-            {productData.tags.map((tag, index) => {
-              if (index > 3) return null
-              return <BlueTag key={tag}>{tag}</BlueTag>
-            })}
+            {productData.tags.map(
+              (tag, index) =>
+                index < 3 && <BlueTag key={tag.id}>{tag.name}</BlueTag>
+            )}
           </TagsContainer>
           <IconContainer>
             <IconBox
@@ -60,7 +60,7 @@ function PreviewContent({ userId = undefined, productData }) {
               color="gold"
             >
               <StarFilled className="productRates" />
-              <div className="productRates">{productData.rates}</div>
+              <div className="productRates">{productData.rating}</div>
             </IconBox>
             <IconBox
               className="likeCount"
@@ -79,13 +79,18 @@ function PreviewContent({ userId = undefined, productData }) {
 PreviewContent.propTypes = {
   userId: PropTypes.number,
   productData: PropTypes.shape({
-    productId: PropTypes.number.isRequired,
-    thumbnail: PropTypes.string.isRequired,
-    city: PropTypes.string.isRequired,
-    subcategory: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    thumbnail: PropTypes.string,
+    countryName: PropTypes.string.isRequired,
+    categoryName: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    rates: PropTypes.number.isRequired,
+    tags: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      })
+    ),
+    rating: PropTypes.number.isRequired,
     likeCount: PropTypes.number.isRequired,
   }).isRequired,
 }

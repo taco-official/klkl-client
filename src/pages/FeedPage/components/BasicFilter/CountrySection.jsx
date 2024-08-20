@@ -16,15 +16,17 @@ import {
 
 function CountryRadio({ country }) {
   const selectedCountry = useFeedStore((state) => state.selectedCountry)
-  const setSelectedCountry = useFeedStore((state) => state.setSelectedCountry)
-  const setSelectedCity = useFeedStore((state) => state.setSelectedCity)
+  const [setSelectedCountry, resetSelectedCity] = useFeedStore((state) => [
+    state.setSelectedCountry,
+    state.resetSelectedCity,
+  ])
 
   const handleRadioChange = () => {
     setSelectedCountry({
       id: country.countryId,
       name: country.name,
     })
-    setSelectedCity([])
+    resetSelectedCity()
   }
 
   return (
