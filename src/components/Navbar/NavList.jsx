@@ -2,7 +2,7 @@ import React from 'react'
 import { styled } from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
-import { useModalStore, useCurrentPageStore } from './stores/navbarStores'
+import { useModalStore, useCurrentPageStore } from '../../stores/navbarStores'
 import Notification from './components/Notification'
 import theme from '../../styles/theme'
 import Icons from '../Icons/Icons'

@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 
-import { useModalStore } from './stores/navbarStores'
+import { useModalStore } from '../../stores/navbarStores'
 import theme from '../../styles/theme'
 import LoginModal from './components/LoginModal'
 import SearchModal from './components/SearchModal'
