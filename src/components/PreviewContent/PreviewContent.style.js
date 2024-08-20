@@ -96,12 +96,9 @@ const CategoryWrapper = styled.div`
   font-size: ${theme.size.textXS};
   color: ${theme.color.textGrey};
   padding-left: 0.1rem;
-  display: flex inline-block;
+  display: flex;
   justify-content: space-between;
-  > :nth-child(n) {
-    display: inline-block;
-  }
-  > #city {
+  > #country {
     margin-right: 0.5rem;
   }
   &.loading {
