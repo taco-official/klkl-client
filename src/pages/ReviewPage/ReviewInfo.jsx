@@ -1,40 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { Breadcrumb, Rate, Dropdown, ConfigProvider, Modal } from 'antd'
-import Icons from '../../components/Icons/Icons'
+import { Breadcrumb, Rate, ConfigProvider } from 'antd'
 import { BlueTag } from '../../components/Tags/Tags.style'
+
+import dateParser from '../../utils/dateParser'
+import ReviewOptions from './components/ReviewOptions'
 import theme from '../../styles/theme'
-
-const reviewDataType = {
-  productId: PropTypes.number,
-  userId: PropTypes.number,
-  name: PropTypes.string,
-  description: PropTypes.string,
-  likeCount: PropTypes.number,
-  createdAt: PropTypes.string,
-  price: PropTypes.number,
-  cityId: PropTypes.number,
-  subcategoryId: PropTypes.number,
-  currencyId: PropTypes.number,
-  tags: PropTypes.array,
-  star: PropTypes.number,
-}
-
-const breadCrumbItems = [
-  {
-    title: '국가',
-    href: '',
-  },
-  {
-    title: '도시',
-    href: '',
-  },
-  {
-    title: '상품대분류',
-    href: '',
-  },
-]
 
 const breadCrumbStyle = {
   fontFamily: theme.style.mainBold,
@@ -47,88 +19,17 @@ const ConfigProviderTheme = {
   },
 }
 
-const DeleteModal = () => {
-  Modal.confirm({
-    title: '리뷰 삭제',
-    content: (
-      <div>
-        <p>삭제한 리뷰는 복구할 수 없습니다</p>
-        <p>삭제하시겠습니까?</p>
-      </div>
-    ),
-    centered: true,
-    okText: '삭제',
-    cancelText: '취소',
-    okButtonProps: { danger: true },
-    // onOk() {삭제로직},
-  })
-}
-
-const ReportModal = () => {
-  Modal.info({
-    title: '신고하기',
-    content: (
-      <div>
-        <p>삭제한 리뷰는 복구할 수 없습니다</p>
-        <p>삭제하시겠습니까?</p>
-      </div>
-    ),
-    centered: true,
-    okText: '신고',
-    cancelText: '취소',
-    okButtonProps: { danger: true, style: { width: '200px' } },
-    // onOk() {삭제로직},
-  })
-}
-
-const items = [
-  {
-    key: '1',
-    label: (
-      <a
-        target="_blank"
-        href="수정링크"
-      >
-        수정
-      </a>
-    ),
-  },
-  {
-    key: '2',
-    label: (
-      <div
-        aria-hidden
-        type="button"
-        onClick={DeleteModal}
-        style={{ color: 'red' }}
-      >
-        삭제
-      </div>
-    ),
-  },
-  {
-    key: '3',
-    label: (
-      <div
-        aria-hidden
-        type="button"
-        onClick={ReportModal}
-        style={{ color: 'red' }}
-      >
-        신고
-      </div>
-    ),
-  },
-]
-
 export default function ReviewInfoBlock({ review }) {
-  function parseDate(dateString) {
-    const date = new Date(dateString)
-    const year = date.getUTCFullYear()
-    const month = String(date.getUTCMonth() + 1).padStart(2, '0') // 월은 0부터 시작하므로 +1 필요
-    const day = String(date.getUTCDate()).padStart(2, '0')
-    return `${year}.${month}.${day}`
-  }
+  const breadCrumbItems = [
+    {
+      title: review.city.name,
+      href: '',
+    },
+    {
+      title: review.subcategory.name,
+      href: '',
+    },
+  ]
 
   return (
     <InfoWrapper>
@@ -139,29 +40,12 @@ export default function ReviewInfoBlock({ review }) {
             separator="/"
             items={breadCrumbItems}
           />
-
-          <ForMobile>
-            <SmallButton
-              onClick={() => {
-                console.log('하트누르기')
-              }}
-            >
-              <Icons>favorite</Icons>
-            </SmallButton>
-            <SmallButton
-              onClick={() => {
-                console.log('하트누르기')
-              }}
-            >
-              <Icons>link</Icons>
-            </SmallButton>
-          </ForMobile>
         </CategoryWrapper>
 
         <h2>{review.name}</h2>
         <TagWrapper>
-          {review.tags.map((tagName) => (
-            <BlueTag key={tagName}>{tagName}</BlueTag>
+          {review.tags.map((tag) => (
+            <BlueTag key={tag.id}>{tag.name}</BlueTag>
           ))}
         </TagWrapper>
 
@@ -169,20 +53,11 @@ export default function ReviewInfoBlock({ review }) {
           <Rate
             allowHalf
             disabled
-            defaultValue={review.rate}
+            defaultValue={review.rating}
           />
           <div>
-            {parseDate(review.createdAt)}
-            <CustomDropdown
-              placement="bottomLeft"
-              arrow={false}
-              menu={{
-                items,
-              }}
-              trigger={['click']}
-            >
-              <Icons>more_vert</Icons>
-            </CustomDropdown>
+            {dateParser(review.createdAt)}
+            <ReviewOptions />
           </div>
         </EndWrapper>
       </ConfigProvider>
@@ -190,7 +65,42 @@ export default function ReviewInfoBlock({ review }) {
   )
 }
 ReviewInfoBlock.propTypes = {
-  review: PropTypes.shape(reviewDataType).isRequired,
+  review: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    address: PropTypes.string,
+    price: PropTypes.number,
+    rating: PropTypes.number,
+    likeCount: PropTypes.number,
+    user: PropTypes.shape({
+      id: PropTypes.number,
+      profile: PropTypes.string,
+      name: PropTypes.string,
+      description: PropTypes.string,
+      totalLikeCount: PropTypes.number,
+    }),
+    city: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    }),
+    subcategory: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    }),
+    currency: PropTypes.shape({
+      id: PropTypes.number,
+      code: PropTypes.string,
+      flag: PropTypes.string,
+    }),
+    tags: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number,
+        name: PropTypes.string,
+      })
+    ),
+    createdAt: PropTypes.string,
+  }).isRequired,
 }
 
 const CategoryWrapper = styled.div`
@@ -214,73 +124,33 @@ const InfoWrapper = styled.div`
   }
 `
 
-const CustomDropdown = styled(Dropdown)`
-  margin: 0 2px;
-  border-radius: 35%;
-
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-  }
-`
-
 const EndWrapper = styled.div`
+  height: 17px;
   display: flex;
   justify-content: space-between;
-
-  margin-top: 0.3125rem;
+  align-items: center;
+  font-size: ${theme.size.textXS};
 
   & > div {
-    font-size: ${theme.size.textXS};
     display: flex;
-    align-items: flex-end;
+    align-items: center;
   }
 
-  :where(.css-dev-only-do-not-override-1enioam).ant-rate {
-    height: 17px;
-
+  .ant-rate {
+    height: 100%;
     * {
       height: 100%;
     }
-  }
-
-  :where(.css-dev-only-do-not-override-1enioam).ant-rate .ant-rate-star {
-    margin-inline-end: 0.125rem;
-    width: 15px;
-  }
-`
-
-const ForMobile = styled.div.attrs({
-  className: 'review--float__mobile',
-})`
-  display: none;
-
-  span {
-    padding: 3px;
-    border-radius: 35%;
-    cursor: pointer;
-
-    & > span:hover {
-      background-color: rgba(0, 0, 0, 0.1);
+    .ant-rate-star {
+      margin-inline-end: 0;
     }
-  }
-`
-
-const SmallButton = styled.button.attrs({ type: 'button' })`
-  background-color: transparent;
-  border: none;
-  height: 100%;
-  padding: 0;
-  color: ${theme.color.textGrey};
-
-  :hover {
-    background-color: rgba(0, 0, 0, 0.1);
   }
 `
 
 const TagWrapper = styled.div`
   display: flex;
+  margin: 0.8125rem 0;
+
   & > div {
     margin: 0 3px;
   }
