@@ -4,7 +4,7 @@ import { Image } from 'antd'
 import styled from 'styled-components'
 import StyledFlickity from '../../components/Carousel/Carousel'
 
-export default function ReviewImages({ imageURLs }) {
+export default function ReviewImageBlock({ imageURLs }) {
   const reviewImagesOptions = {
     setGallerySize: false,
     pauseAutoPlayOnHover: true,
@@ -36,7 +36,7 @@ export default function ReviewImages({ imageURLs }) {
     </ReviewImageCarousel>
   )
 }
-ReviewImages.propTypes = {
+ReviewImageBlock.propTypes = {
   imageURLs: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
