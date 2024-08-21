@@ -15,8 +15,8 @@ const useKyMutation = (httpMethod, uri, options = null) => {
 
   return useMutation({
     mutationFn: (body) => kyInstance[httpMethod](uri, { body }).json(),
-    onSuccess: (data) => {
-      queryClient.invalidateQueries([uri, data.productId])
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: [uri] })
     },
     retry: false,
     ...options,
