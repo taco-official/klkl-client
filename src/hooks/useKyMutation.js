@@ -6,17 +6,16 @@ import { kyInstance } from './kyInstance'
  *
  * @param {string} httpMethod http 메서드 (post, put, patch, delete)
  * @param {string} uri 요청할 uri
- * @param {string} body post, put, patch, delete
+ * @param {Array} queryKey stale할 queryKey (default: [uri])
  * @param {object} options 요청시 넣을 옵션 (default: null)
  * @return useQuery의 return과 동일
  */
-const useKyMutation = (httpMethod, uri, options = null) => {
+const useKyMutation = (httpMethod, uri, queryKey = [uri], options = {}) => {
   const queryClient = useQueryClient()
-
   return useMutation({
     mutationFn: (body) => kyInstance[httpMethod](uri, { body }).json(),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: [uri] })
+      queryClient.invalidateQueries({ queryKey: [...queryKey] })
     },
     retry: false,
     ...options,

@@ -12,7 +12,8 @@ function NotificationContent({ content }) {
   const navigate = useNavigate()
   const { mutateAsync } = useKyMutation(
     method.PUT,
-    `notifications/${content.notification.id}`
+    `notifications/${content.notification.id}`,
+    ['notifications']
   )
 
   const onClick = async () => {
