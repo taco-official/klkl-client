@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Input, ConfigProvider } from 'antd'
+import { Input, Button, ConfigProvider } from 'antd'
 import styled from 'styled-components'
 
 import { method } from '../../hooks/kyInstance'
@@ -57,12 +57,12 @@ export default function CommentInput() {
             setInputValue(e.target.value)
           }}
         />
-        <button
-          type="button"
+        <Button
+          type="default"
           onClick={addComment}
         >
           등록
-        </button>
+        </Button>
       </ConfigProvider>
     </CommentInputBox>
   )
@@ -88,25 +88,9 @@ const CommentInputBox = styled.div`
   }
 
   button {
-    height: 30px;
+    height: 35px;
     width: 60px;
-    border: none;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
-    background-color: white;
     font-size: ${theme.size.textSM};
     font-family: ${theme.style.main};
-
-    border-radius: 0.5rem;
-
-    transition: s transform ease-in-out 0.05s;
-    cursor: pointer;
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.05);
-    }
-    &:active {
-      transform: translate(0, 2px);
-      box-shadow: none;
-    }
   }
 `
