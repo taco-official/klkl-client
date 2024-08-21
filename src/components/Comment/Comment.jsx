@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 import theme from '../../styles/theme'
-import { useKyQuery } from '../../hooks/useKyQuery'
+import useKyQuery from '../../hooks/useKyQuery'
 import CommentInput from './CommentInput'
 import CommentList from './CommentList'
 

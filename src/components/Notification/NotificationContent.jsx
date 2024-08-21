@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 
-import { method, useKyMutation } from '../../hooks/useKyQuery'
+import { method } from '../../hooks/kyInstance'
+import useKyMutation from '../../hooks/useKyMutation'
 import dateParser from '../../utils/dateParser'
 import theme from '../../styles/theme'
 

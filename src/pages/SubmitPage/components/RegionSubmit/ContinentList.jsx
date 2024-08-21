@@ -1,7 +1,7 @@
 import React from 'react'
 
 import SelectionList from './SelectionList'
-import { useKyQuery } from '../../../../hooks/useKyQuery'
+import useKyQuery from '../../../../hooks/useKyQuery'
 import useFormStore from '../../../../stores/useFormStore'
 
 const useContinentState = () => {

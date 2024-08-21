@@ -1,7 +1,7 @@
 import React from 'react'
 import { Select, ConfigProvider } from 'antd'
 import useFormStore from '../../../../stores/useFormStore'
-import { useKyQuery } from '../../../../hooks/useKyQuery'
+import useKyQuery from '../../../../hooks/useKyQuery'
 
 export default function NumberInputForm() {
   const currencyId = useFormStore((state) => state.currencyId)

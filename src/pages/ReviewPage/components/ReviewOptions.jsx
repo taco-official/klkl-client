@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Dropdown, Modal } from 'antd'
 
-import { kyInstance } from '../../../hooks/useKyQuery'
+import { kyInstance } from '../../../hooks/kyInstance'
 import Icons from '../../../components/Icons/Icons'
 import theme from '../../../styles/theme'
 

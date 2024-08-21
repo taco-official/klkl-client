@@ -2,7 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import theme from '../../styles/theme'
-import { method, useKyMutation } from '../../hooks/useKyQuery'
+import { method } from '../../hooks/kyInstance'
+import useKyMutation from '../../hooks/useKyMutation'
 
 function NotificationHeader({ isEmpty }) {
   const { mutateAsync } = useKyMutation(method.PUT, 'notifications/all')

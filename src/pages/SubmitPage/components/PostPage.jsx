@@ -2,8 +2,9 @@ import React, { useEffect } from 'react'
 import { Spin } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
+import { method } from '../../../hooks/kyInstance'
+import useKyMutation from '../../../hooks/useKyMutation'
 import useFormStore from '../../../stores/useFormStore'
-import { method, useKyMutation } from '../../../hooks/useKyQuery'
 
 const useReviewPost = () => {
   const postBody = useFormStore((state) => ({

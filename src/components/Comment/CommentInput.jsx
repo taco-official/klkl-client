@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import { Input, ConfigProvider } from 'antd'
 import styled from 'styled-components'
 
-import { method, useKyMutation } from '../../hooks/useKyQuery'
+import { method } from '../../hooks/kyInstance'
+import useKyMutation from '../../hooks/useKyMutation'
 import theme from '../../styles/theme'
 import ProfileImage from '../UserProfile/ProfileImage'
 

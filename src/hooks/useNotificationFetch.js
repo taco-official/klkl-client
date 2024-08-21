@@ -1,7 +1,7 @@
 import React from 'react'
 import NotificationContent from '../components/Notification/NotificationContent'
 import NotificationHeader from '../components/Notification/NotificationHeader'
-import { useKyQuery } from './useKyQuery'
+import useKyQuery from './useKyQuery'
 
 const useNotificationFetch = () => {
   const {

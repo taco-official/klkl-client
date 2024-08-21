@@ -4,7 +4,7 @@ import { Divider } from 'antd'
 import { debounce } from 'lodash-es'
 import { useNavigate } from 'react-router-dom'
 
-import { kyInstance } from './useKyQuery'
+import { kyInstance } from './kyInstance'
 import theme from '../styles/theme'
 
 const SearchMapping = {

@@ -2,7 +2,7 @@ import React from 'react'
 import { useShallow } from 'zustand/react/shallow'
 
 import SelectionList from './SelectionList'
-import { useKyQuery } from '../../../../hooks/useKyQuery'
+import useKyQuery from '../../../../hooks/useKyQuery'
 import useFormStore from '../../../../stores/useFormStore'
 
 const useCountryState = () => {

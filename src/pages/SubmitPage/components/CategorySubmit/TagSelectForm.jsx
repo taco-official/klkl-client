@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { useKyQuery } from '../../../../hooks/useKyQuery'
+import useKyQuery from '../../../../hooks/useKyQuery'
 import SelectButtons from './SelectButtons'
 import useFormStore from '../../../../stores/useFormStore'
 

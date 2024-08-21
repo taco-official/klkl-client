@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
 import ky from 'ky'
+import { useState, useEffect } from 'react'
 
 const kyInstance = ky.create({
   prefixUrl: 'http://localhost:8080/v1/',

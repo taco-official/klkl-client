@@ -3,7 +3,7 @@ import { useShallow } from 'zustand/react/shallow'
 
 import useFormStore from '../../../../stores/useFormStore'
 import SelectionList from '../RegionSubmit/SelectionList'
-import { useKyQuery } from '../../../../hooks/useKyQuery'
+import useKyQuery from '../../../../hooks/useKyQuery'
 
 const useSubcategoryStore = () => {
   const [categoryId, subcategoryId] = useFormStore(

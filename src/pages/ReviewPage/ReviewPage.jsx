@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Divider } from 'antd'
-import { useLocation } from 'react-router-dom'
 import { createPortal } from 'react-dom'
 
-import { useKyQuery } from '../../hooks/useKyQuery'
+import useKyQuery from '../../hooks/useKyQuery'
 import theme from '../../styles/theme'
 
 import ReviewFloatButton from './components/ReviewFloatButton'
@@ -15,9 +14,8 @@ import UserProfile from '../../components/UserProfile/UserProfile'
 import Comment from '../../components/Comment/Comment'
 
 export default function ReviewDetailPage() {
-  const location = useLocation()
   const { data, isLoading, isError, error } = useKyQuery(
-    `${location.pathname}`.slice(1)
+    `${window.location.pathname}`.slice(1)
   )
 
   if (isLoading) return <div>loading</div>

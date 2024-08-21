@@ -1,5 +1,5 @@
 import React from 'react'
-import { useKyQuery } from './useKyQuery'
+import useKyQuery from './useKyQuery'
 
 const usePopularReview = () => {
   const { data, isLoading, isError, error } = useKyQuery(
