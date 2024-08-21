@@ -26,7 +26,7 @@ const useExchangeData = (currency) => {
 
   let exchangeCurrency = {}
 
-  if (!isLoading) {
+  if (!isLoading && !isError) {
     exchangeCurrency = {
       ...exchanges.find((data) => data.cur_unit.slice(0, 3) === currency.code),
     }
@@ -47,7 +47,6 @@ function ReviewMiddleBlock({ address, price, currency }) {
   const [currencyState, setCurrencyState] = useState(false)
 
   if (isLoading) return <div>loading</div>
-  if (isError) return <div>환율 정보를 불러오는 데 실패했습니다</div>
 
   return (
     <Wrapper>
@@ -55,17 +54,24 @@ function ReviewMiddleBlock({ address, price, currency }) {
         <Icons>location_on</Icons>
         {address === '' ? '상세 위치가 없습니다' : address}
       </LocationBox>
-      <PriceBox>
-        <button
-          type="button"
-          onClick={() => setCurrencyState(!currencyState)}
-        >
-          환전
-        </button>
-        <img src={currency.flag} />
-        {currencyState ? price * exchangeCurrency.bkpr : price}{' '}
-        {currencyState ? '원' : exchangeCurrency.cur_nm}
-      </PriceBox>
+      {isError ? (
+        <PriceBox>
+          <img src={currency.flag} />
+          {`${currency.code} ${price}`}
+        </PriceBox>
+      ) : (
+        <PriceBox>
+          <button
+            type="button"
+            onClick={() => setCurrencyState(!currencyState)}
+          >
+            환전
+          </button>
+          <img src={currency.flag} />
+          {currencyState ? price * exchangeCurrency.bkpr : price}
+          {currencyState ? '원' : exchangeCurrency.cur_nm}
+        </PriceBox>
+      )}
     </Wrapper>
   )
 }
