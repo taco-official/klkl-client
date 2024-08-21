@@ -8,7 +8,7 @@ const useNotificationFetch = () => {
     data: notifications,
     isError,
     isPending,
-  } = useKyQuery('notifications', { cacheTime: 0, staleTime: 0 })
+  } = useKyQuery('notifications', { staleTime: 60000 })
 
   if (isPending || isError)
     return {
