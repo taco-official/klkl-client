@@ -65,9 +65,9 @@ function ReviewMiddleBlock({ address, price, currency }) {
             type="button"
             onClick={() => setCurrencyState(!currencyState)}
           >
-            환전
+            <img src={currency.flag} />
+            {}
           </button>
-          <img src={currency.flag} />
           {currencyState ? price * exchangeCurrency.bkpr : price}
           {currencyState ? '원' : exchangeCurrency.cur_nm}
         </PriceBox>
@@ -114,26 +114,24 @@ const PriceBox = styled.div`
     align-items: center;
     justify-content: center;
 
-    color: white;
     font-size: ${theme.size.textXS};
     font-family: ${theme.style.mainBold};
-    background-color: ${theme.color.main};
+    background-color: rgba(255, 255, 255, 1);
     padding: 5px;
     margin-right: 0.625rem;
     border: none;
     border-radius: 0.3125rem;
-    box-shadow: 1px 1px rgba(0, 0, 0, 0.5);
 
     transition: all ease-in-out 0.1s;
 
     cursor: pointer;
 
     &:hover {
-      background-color: ${theme.color.mainDark};
+      filter: brightness(0.9);
     }
+
     &:active {
-      transform: translate(0, 2px);
-      box-shadow: none;
+      filter: brightness(0.8);
     }
   }
 
