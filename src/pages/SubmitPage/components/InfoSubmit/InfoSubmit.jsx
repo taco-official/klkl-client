@@ -3,16 +3,15 @@ import styled from 'styled-components'
 import { Input, Rate } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
 
-import useReviewStore from './stores/useReviewStore'
-import theme from '../../styles/theme'
-import NumberInputForm from './components/NumberInputForm'
+import useFormStore from '../../../../stores/useFormStore'
+import theme from '../../../../styles/theme'
+import NumberInputForm from './NumberInputForm'
 
-export default function InfoSubmitPage() {
-  const [name, description, rate] = useReviewStore(
-    useShallow((state) => [state.name, state.description, state.rate])
+export default function InfoSubmitForm() {
+  const [name, description, rating] = useFormStore(
+    useShallow((state) => [state.name, state.description, state.rating])
   )
-
-  const setReviewContent = useReviewStore((state) => state.setReviewContents)
+  const setFormContents = useFormStore((state) => state.setFormContents)
 
   return (
     <>
@@ -27,7 +26,7 @@ export default function InfoSubmitPage() {
           maxLength={50}
           defaultValue={name}
           placeholder="상품명을 입력해주세요"
-          onBlur={(e) => setReviewContent({ name: e.target.value.trim() })}
+          onBlur={(e) => setFormContents({ name: e.target.value.trim() })}
           style={{ fontSize: theme.size.textSM }}
           size="large"
         />
@@ -40,7 +39,7 @@ export default function InfoSubmitPage() {
           defaultValue={description}
           placeholder="리뷰를 입력해 주세요"
           onBlur={(e) =>
-            setReviewContent({ description: e.target.value.trim() })
+            setFormContents({ description: e.target.value.trim() })
           }
           size="large"
           autoSize={{ minRows: 3 }}
@@ -52,12 +51,12 @@ export default function InfoSubmitPage() {
         <NumberInputForm />
       </Wrapper>
       <Wrapper>
-        <h3>끼룩스타</h3>
+        <h3>별점</h3>
         <Rate
           allowHalf
-          defaultValue={rate}
+          defaultValue={rating}
           style={{ color: '#FFD700' }}
-          onChange={(num) => setReviewContent({ rate: num })}
+          onChange={(num) => setFormContents({ rating: num })}
         />
       </Wrapper>
     </>
@@ -68,20 +67,6 @@ const Wrapper = styled.div`
   width: 600px;
   position: relative;
   margin-bottom: 1.875rem;
-
-  @keyframes openModal {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0.5;
-    }
-    100% {
-      opacity: 0.99;
-    }
-  }
-
-  animation: openModal ease-in 0.3s;
 
   input,
   textarea {

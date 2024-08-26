@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import theme from '../../../styles/theme'
+import theme from '../../../../styles/theme'
 
 export default function SelectionList({
   optionList,
@@ -9,6 +9,8 @@ export default function SelectionList({
   setOptionState,
   $width = '100%',
 }) {
+  if (!optionList || optionList.length === 0)
+    return <SelectBoxes $width={$width} />
   const [id, name] = Object.keys(optionList[0])
 
   return (
@@ -26,9 +28,9 @@ export default function SelectionList({
   )
 }
 SelectionList.propTypes = {
-  optionList: PropTypes.arrayOf(Object).isRequired,
-  optionState: PropTypes.number.isRequired,
-  setOptionState: PropTypes.func.isRequired,
+  optionList: PropTypes.arrayOf(Object),
+  optionState: PropTypes.number,
+  setOptionState: PropTypes.func,
   $width: PropTypes.string,
 }
 
@@ -41,7 +43,6 @@ const SelectBoxes = styled.ul`
   border-top: 1px solid ${theme.color.lineGrey};
   border-bottom: 1px solid ${theme.color.lineGrey};
 
-  animation: openModal 0.4s ease-out forwards;
   position: relative;
   z-index: 10;
 
@@ -53,7 +54,6 @@ const SelectBoxes = styled.ul`
       opacity: 1;
     }
   }
-
   animation: openModal ease-in-out 0.2s;
 
   .selected {

@@ -1,171 +1,15 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { FloatButton } from 'antd'
 import { useNavigate } from 'react-router-dom'
+
+import usePopularReview from '../../hooks/usePopularReview'
+import useNewReview from '../../hooks/useNewReview'
 import Icons from '../../components/Icons/Icons'
 import MainBanner from './MainBanner'
 import ReviewCarousels from './ReviewCarousel'
 import theme from '../../styles/theme'
-
-const Test = [
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name1',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name2',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name3',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name4',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name5',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name6',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name7',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name8',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name9',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name10',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name11',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-  {
-    userId: 1,
-    productData: {
-      productId: 1,
-      thumbnail: '',
-      city: 'city',
-      subcategory: 'subcategory',
-      name: 'name12',
-      tags: ['tags'],
-      rates: 0,
-      likeCount: 42,
-    },
-  },
-]
 
 const ImageArr = [
   {
@@ -193,21 +37,20 @@ const ImageArr = [
 ]
 
 export default function HomePage() {
-  const [bannerImages, setBannerImage] = useState(ImageArr)
+  const [bannerImages] = useState(ImageArr)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    setBannerImage([...bannerImages])
-  }, [])
+  const popularReview = usePopularReview()
+  const newReview = useNewReview()
 
   return (
     <>
       <MainBanner urls={bannerImages} />
       <MainArea>
         <h1>인기 리뷰</h1>
-        <ReviewCarousels contents={Test} />
+        <ReviewCarousels contents={popularReview} />
         <h1>신규 리뷰</h1>
-        <ReviewCarousels contents={Test} />
+        <ReviewCarousels contents={newReview} />
       </MainArea>
       {createPortal(
         <CustomFloatButton

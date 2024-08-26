@@ -1,15 +1,12 @@
-import { useState, useEffect } from 'react'
 import ky from 'ky'
+import { useState, useEffect } from 'react'
 
 const kyInstance = ky.create({
   prefixUrl: 'http://localhost:8080/v1/',
   timeout: 5000,
-  // headers: {},
-  // hooks: {
-  // beforeRequest: [],
-  // afterResponse: [],
-  // beforeError: [],
-  // },
+  headers: {
+    'content-type': 'application/json',
+  },
   retry: {
     limit: 2,
     methods: ['get', 'post', 'put'],

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Image, Upload, ConfigProvider, message } from 'antd'
-import Icons from '../../components/Icons/Icons'
+import Icons from '../../../../components/Icons/Icons'
 
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
@@ -22,7 +22,7 @@ const beforeUpload = (file) => {
   return isJpgOrPng && isLt2M
 }
 
-export default function ImageSubmitPage() {
+export default function ImageSubmitForm() {
   const [previewOpen, setPreviewOpen] = useState(false)
   const [previewImage, setPreviewImage] = useState('')
   const [fileList, setFileList] = useState([])

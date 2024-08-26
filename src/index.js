@@ -28,7 +28,7 @@ const router = createBrowserRouter([
         element: <LoadingPage />,
       },
       {
-        path: 'review',
+        path: '/products/:id',
         element: (
           <Suspense fallback={<LoadingPage />}>
             <ReviewPage />

@@ -1,30 +1,25 @@
 import { React, useState } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Button, ConfigProvider } from 'antd'
 import ProfileImage from './ProfileImage'
 import theme from '../../styles/theme'
 
-const testUser = {
-  nickname: '귤락',
-  like: 42,
-  introduce: '김빠빠 누룽지 통닭',
-}
-
-export default function UserProfile() {
+export default function UserProfile({ userData }) {
   const [isFollowed, changeFollow] = useState(false)
 
   return (
     <ProfileBox>
       <ProfileImage
-        src="https://i.ytimg.com/vi/Hoi0IAl74wY/maxresdefault.jpg"
+        src={userData.profile}
         $size="100%"
       />
       <SimpleUserInfo>
-        <div className="profile--user__nickname">{testUser.nickname}</div>
+        <div className="profile--user__nickname">{userData.name}</div>
         <div className="profile--user__like">
-          <span>♥</span> {testUser.like}
+          <span>♥</span> {userData.totalLikeCount}
         </div>
-        <div className="profile--user__introduce">{testUser.introduce}</div>
+        <div className="profile--user__introduce">{userData.description}</div>
       </SimpleUserInfo>
       <ConfigProvider theme={{ token: { colorPrimary: theme.color.main } }}>
         <Button
@@ -37,6 +32,15 @@ export default function UserProfile() {
       </ConfigProvider>
     </ProfileBox>
   )
+}
+UserProfile.propTypes = {
+  userData: PropTypes.shape({
+    id: PropTypes.number,
+    profile: PropTypes.string,
+    name: PropTypes.string,
+    description: PropTypes.string,
+    totalLikeCount: PropTypes.number,
+  }),
 }
 
 const ProfileBox = styled.div`
