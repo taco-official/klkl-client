@@ -40,17 +40,11 @@ const useDebouncedSearch = (setModalState) => {
                 key={content.name}
                 onClick={() => {
                   setModalState(false)
-                  navigate(
-                    category === 'products' ? `products/${content.id}` : '/'
-                  )
+                  navigate('/', { state: { from: window.location.pathname } })
                 }}
               >
-                {content.name}{' '}
-                {category === 'products' ? (
-                  <span>→ 보러가기</span>
-                ) : (
-                  <span>→ 검색결과</span>
-                )}
+                {content.name}
+                <span>→ 보러가기</span>
               </ResultRow>
             ))
 
