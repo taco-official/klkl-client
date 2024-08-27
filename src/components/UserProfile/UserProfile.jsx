@@ -12,7 +12,7 @@ export default function UserProfile({ userData }) {
     <ProfileBox>
       <ProfileImage
         src={userData.profile}
-        $size="100%"
+        $size="3.75rem"
       />
       <SimpleUserInfo>
         <div className="profile--user__nickname">{userData.name}</div>
