@@ -5,14 +5,17 @@ const initialState = {
   selectedCity: [],
   selectedCategory: [],
   selectedSubCategory: [],
-  selectedFilter: [],
+  selectedTag: [],
+  selectedSort: {
+    key: 0,
+    label: '최신 순',
+    sortBy: 'created_at',
+    sortDirection: 'DESC',
+  },
 }
 
 const useFeedStore = create((set) => ({
   ...initialState,
-  selectedSort: {},
-
-  inArray: (array, id) => array.some((selected) => selected.id === id),
 
   setSelectedCountry: (state) => set({ selectedCountry: state }),
   deleteSelectedCountry: () =>
@@ -60,16 +63,15 @@ const useFeedStore = create((set) => ({
   resetSelectedSubCategory: () =>
     set({ selectedSubCategory: initialState.selectedSubCategory }),
 
-  addSelectedFilter: (filter) =>
-    set((state) => ({ selectedFilter: [...state.selectedFilter, filter] })),
-  deleteSelectedFilter: (filterId) =>
+  addSelectedTag: (Tag) =>
+    set((state) => ({ selectedTag: [...state.selectedTag, Tag] })),
+  deleteSelectedTag: (tagId) =>
     set((state) => ({
-      selectedFilter: state.selectedFilter.filter(
-        (selected) => selected.id !== filterId
+      selectedTag: state.selectedTag.filter(
+        (selected) => selected.id !== tagId
       ),
     })),
-  resetSelectedFilter: () =>
-    set({ selectedFilter: initialState.selectedFilter }),
+  resetSelectedTag: () => set({ selectedTag: initialState.selectedTag }),
 
   setSelectedSort: (state) => set({ selectedSort: state }),
 
