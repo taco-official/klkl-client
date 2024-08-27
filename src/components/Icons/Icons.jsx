@@ -10,6 +10,9 @@ const Icons = styled.span.attrs({
     'opsz' 20;
 
   font-size: ${({ $size }) => $size || '1.8em'};
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 `
 
 export default Icons
