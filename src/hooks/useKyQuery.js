@@ -1,48 +1,31 @@
-import ky from 'ky'
 import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query'
-
-const method = {
-  GET: 'get',
-  POST: 'post',
-  PUT: 'put',
-  DELETE: 'delete',
-}
-
-const kyInstance = ky.create({
-  prefixUrl: 'http://localhost:8080/v1/',
-  timeout: 5000,
-  headers: {
-    'content-type': 'application/json',
-  },
-  hooks: {
-    beforeRequest: [],
-    afterResponse: [],
-    beforeError: [],
-  },
-  retry: {
-    limit: 2,
-    methods: ['get', 'post', 'put'],
-    statusCodes: [400, 500],
-  },
-})
+import kyInstance, { method } from './kyInstance'
+import parseQueryParams from '../utils/parseQueryParams'
 
 /**
  * Ky기반 useQeury 호출 훅
  *
- * @param {string} httpMethod http 메서드 (get)
- * @param {string} uri 요청할 uri
+ * @param {string} endPoint 요청할 엔드포인트 URL
+ * @param {Array} requestQuery 요청시 넣을 쿼리 객체 (default: null)
+ *  Type: Array<Object<string, Array<number | string | boolean>>>
  * @param {object} options 요청시 넣을 옵션 (default: null)
  * @return useQuery의 return과 동일
  */
-const useKyQuery = (httpMethod, uri, options = null) => {
-  const queryKey = [uri]
-  const queryFn = async () => kyInstance[httpMethod](uri).json()
-  const defaultOptions = {
+const useKyQuery = (
+  endPoint,
+  requestQuery = null,
+  queryKey = null,
+  options = null
+) => {
+  const uri = parseQueryParams(endPoint, requestQuery)
+
+  return useQuery({
+    queryKey: queryKey || [endPoint],
+    queryFn: () => kyInstance.get(uri).json(),
     cacheTime: 300000,
     staleTime: 300000,
-  }
-
-  return useQuery({ queryKey, queryFn, ...defaultOptions, ...options })
+    ...options,
+  })
 }
 
 /**
