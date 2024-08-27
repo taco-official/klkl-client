@@ -3,7 +3,7 @@ import theme from '../../styles/theme'
 
 const StyleTag = styled.div`
   font-size: ${theme.size.text2XS};
-  padding: ${(props) => props.$padding || '0.3rem'};
+  padding: ${(props) => props.$padding || '0.3rem 0.5rem'};
   border: 0.0625rem solid;
   border-radius: 0.4rem;
   display: flex;
