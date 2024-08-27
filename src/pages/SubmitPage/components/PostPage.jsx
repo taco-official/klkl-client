@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { method } from '../../../hooks/kyInstance'
 import LoadingPage from '../../LoadingPage'
 import useKyMutation from '../../../hooks/useKyMutation'
 import useFormStore from '../../../stores/useFormStore'
 
-const useReviewPost = () => {
+const useReviewSubmit = (httpMethod, uri) => {
   const postBody = useFormStore((state) => ({
     name: state.name,
     description: state.description,
@@ -23,8 +23,8 @@ const useReviewPost = () => {
   const navigate = useNavigate()
 
   const { data, mutate, isSuccess, isError, error } = useKyMutation(
-    method.POST,
-    'products'
+    httpMethod,
+    uri
   )
 
   useEffect(() => {
@@ -42,10 +42,16 @@ const useReviewPost = () => {
   }, [isSuccess])
 }
 
-function PostingPage() {
-  useReviewPost()
+function PostPage() {
+  const isCreate = window.location.pathname === '/submit'
+  const { id } = useParams()
+
+  const uri = isCreate ? '/products' : `products/${id}`
+  const httpMethod = isCreate ? method.POST : method.PUT
+
+  useReviewSubmit(httpMethod, uri)
 
   return <LoadingPage />
 }
 
-export default PostingPage
+export default PostPage

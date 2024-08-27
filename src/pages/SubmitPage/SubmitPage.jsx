@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import * as Form from './components/index'
-import PostingPage from './components/PostPage'
+import PostPage from './components/PostPage'
 import submitSteps from '../../constants/submitSteps'
 import PrevNextButtons from './components/PrevNextButtons'
 import SubmitSteps from './components/SubmitSteps'
 import theme from '../../styles/theme'
+import useFormStore from '../../stores/useFormStore'
 
 const pages = {
   [submitSteps.IMAGE]: <Form.ImageSubmitForm />,
   [submitSteps.REGION]: <Form.RegionSubmitForm />,
   [submitSteps.INFO]: <Form.InfoSubmitForm />,
   [submitSteps.CATEGORY]: <Form.CategorSubmitForm />,
-  [submitSteps.LOADING]: <PostingPage />,
+  [submitSteps.LOADING]: <PostPage />,
 }
 
 const useStep = () => {
@@ -30,15 +31,11 @@ const useStep = () => {
 
 export default function SubmitPage() {
   const [step, goNextStep, goPrevStep] = useStep()
+  const resetFormContents = useFormStore((state) => state.resetFormContents)
 
   useEffect(() => {
-    const preventClose = (e) => {
-      e.preventDefault()
-      e.returnValue = ''
-    }
-    window.addEventListener('beforeunload', preventClose)
     return () => {
-      window.removeEventListener('beforeunload', preventClose)
+      resetFormContents()
     }
   }, [])
 
