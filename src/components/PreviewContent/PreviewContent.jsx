@@ -84,8 +84,8 @@ PreviewContent.propTypes = {
     name: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
+        id: PropTypes.number,
+        name: PropTypes.string,
       })
     ),
     rating: PropTypes.number.isRequired,
