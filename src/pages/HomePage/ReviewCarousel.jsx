@@ -11,6 +11,7 @@ const flickityOptions = {
   pageDots: false,
   resize: true,
   contain: true,
+  cellAlign: 'left',
 }
 
 export default function ReviewCarousels({ contents }) {
@@ -58,7 +59,7 @@ const ReviewWrapper = styled.div`
 
 const ReviewCarousel = styled(StyledFlickity)`
   width: 100%;
-  height: 350px;
+  height: 320px;
   cursor: default;
   margin: 20px 0;
   overflow: visible;
