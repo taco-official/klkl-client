@@ -20,7 +20,7 @@ const ModalTheme = {
 }
 
 const NaverStyle = {
-  backgroundColor: 'rgb(3, 199, 90)',
+  // backgroundColor: 'rgb(3, 199, 90)',
   color: 'white',
   width: '75%',
 }
@@ -48,11 +48,14 @@ function LoginModal() {
         <ModalContents>
           <h1>로그인</h1>
           <div>로그인 후 원활한 사용이 가능해용가뤼</div>
-          <Button style={NaverStyle}>
+          <Button
+            style={NaverStyle}
+            disabled
+          >
             <NaverLogo /> 네이버 로그인
           </Button>
           <Button style={KaKaoStyle}>
-            <KakaoLogo />
+            <KakaoLogo onClick={() => {}} />
             카카오 로그인
           </Button>
         </ModalContents>
@@ -63,7 +66,7 @@ function LoginModal() {
 
 const ModalContents = styled.div`
   width: 100%;
-  height: 100%;
+  height: 18.75rem;
 
   display: flex;
   flex-direction: column;
