@@ -50,6 +50,7 @@ const ProfileBox = styled.div`
 
   display: flex;
   align-items: center;
+  grid-area: profile;
 `
 
 const SimpleUserInfo = styled.div`
