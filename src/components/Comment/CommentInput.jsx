@@ -27,7 +27,7 @@ export default function CommentInput() {
   const addComment = async () => {
     if (inputValue === '') return
 
-    const body = JSON.stringify({ content: inputValue })
+    const body = JSON.stringify({ content: inputValue.trim() })
 
     try {
       await mutateAsync(body)
@@ -57,12 +57,13 @@ export default function CommentInput() {
             setInputValue(e.target.value)
           }}
         />
-        <Button
-          type="default"
+        <SubmitButton
+          type="text"
           onClick={addComment}
+          $canSubmit={inputValue.length !== 0}
         >
           등록
-        </Button>
+        </SubmitButton>
       </ConfigProvider>
     </CommentInputBox>
   )
@@ -86,11 +87,18 @@ const CommentInputBox = styled.div`
       font-size: ${theme.size.text2XS};
     }
   }
+`
 
-  button {
-    height: 35px;
-    width: 60px;
-    font-size: ${theme.size.textSM};
-    font-family: ${theme.style.main};
-  }
+const SubmitButton = styled(Button)`
+  height: 35px;
+  width: 60px;
+  font-size: ${theme.size.textSM};
+  font-family: ${theme.style.mainBold};
+
+  ${({ $canSubmit }) =>
+    $canSubmit
+      ? `background-color: rgba(47, 167, 255, 0.1);
+			color: ${theme.color.main};`
+      : `background-color: white;
+			color: black`};
 `
