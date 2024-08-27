@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 
 import * as Form from './components/index'
-import PostPage from './components/PostPage'
+import PostingPage from './components/PostPage'
 import submitSteps from '../../constants/submitSteps'
 import PrevNextButtons from './components/PrevNextButtons'
 import SubmitSteps from './components/SubmitSteps'
@@ -13,7 +13,7 @@ const pages = {
   [submitSteps.REGION]: <Form.RegionSubmitForm />,
   [submitSteps.INFO]: <Form.InfoSubmitForm />,
   [submitSteps.CATEGORY]: <Form.CategorSubmitForm />,
-  [submitSteps.LOADING]: <PostPage />,
+  [submitSteps.LOADING]: <PostingPage />,
 }
 
 const useStep = () => {

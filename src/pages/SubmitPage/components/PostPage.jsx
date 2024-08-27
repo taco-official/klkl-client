@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
-import { Spin } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import { method } from '../../../hooks/kyInstance'
+import LoadingPage from '../../LoadingPage'
 import useKyMutation from '../../../hooks/useKyMutation'
 import useFormStore from '../../../stores/useFormStore'
 
@@ -42,17 +42,10 @@ const useReviewPost = () => {
   }, [isSuccess])
 }
 
-function LoadingPage() {
+function PostingPage() {
   useReviewPost()
 
-  return (
-    <Spin
-      fullscreen
-      tip="전송중입니다..."
-      size="large"
-      percent="auto"
-    />
-  )
+  return <LoadingPage />
 }
 
-export default LoadingPage
+export default PostingPage
