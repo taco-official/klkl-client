@@ -51,6 +51,7 @@ const ThumbnailContainer = styled.div`
       width: 100%;
       height: 100%;
       object-fit: cover;
+      border-radius: 0.3125rem;
     }
     > :last-child {
       position: absolute;
@@ -93,8 +94,9 @@ const SubDesBox = styled.div`
 `
 
 const CategoryWrapper = styled.div`
-  font-size: ${theme.size.textXS};
+  font-size: ${theme.size.text2XS};
   color: ${theme.color.textGrey};
+  margin: 0.1875rem 0;
   padding-left: 0.1rem;
   display: flex;
   justify-content: space-between;
@@ -109,7 +111,8 @@ const CategoryWrapper = styled.div`
 `
 
 const ProductNameBox = styled.div`
-  font-size: ${theme.size.textMD};
+  font-size: ${theme.size.textSM};
+  font-family: ${theme.style.mainBold};
   &.loading {
     ${maskBackground}
     width: 40%;

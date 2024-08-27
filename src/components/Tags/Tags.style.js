@@ -23,6 +23,8 @@ const BlueTag = styled(StyleTag)`
   border-color: ${theme.color.tag};
   background-color: ${theme.color.tag};
   color: ${theme.color.main};
+  border-radius: 0.1875rem;
+  padding: 0.225rem;
 `
 
 const WhiteFieldTag = styled(WhiteTag)`
