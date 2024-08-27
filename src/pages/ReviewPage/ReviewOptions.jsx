@@ -25,7 +25,9 @@ function ReviewOptions({ review }) {
       tags: new Set(review.tags.map((tag) => tag.id)),
     })
 
-    navigate('/submit', { state: { from: window.location.pathname } })
+    navigate(`edit`, {
+      state: { from: window.location.pathname },
+    })
   }
 
   const deleteReview = () =>

@@ -13,7 +13,8 @@ function ReviewMiddleBlock({ address, price, currency }) {
       </LocationBox>
       <PriceBox>
         <img src={currency.flag} />
-        {`${currency.code} ${price}`}
+        <p>{currency.code}</p>
+        {price}
       </PriceBox>
     </Wrapper>
   )
@@ -52,30 +53,12 @@ const LocationBox = styled.div`
 `
 
 const PriceBox = styled.div`
-  button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  font-size: ${theme.size.textSM};
 
+  p {
     font-size: ${theme.size.textXS};
-    font-family: ${theme.style.mainBold};
-    background-color: rgba(255, 255, 255, 1);
-    padding: 5px;
-    margin-right: 0.625rem;
-    border: none;
-    border-radius: 0.3125rem;
-
-    transition: all ease-in-out 0.1s;
-
-    cursor: pointer;
-
-    &:hover {
-      filter: brightness(0.9);
-    }
-
-    &:active {
-      filter: brightness(0.8);
-    }
+    color: ${theme.color.textGrey};
+    margin-right: 0.3125rem;
   }
 
   img {
