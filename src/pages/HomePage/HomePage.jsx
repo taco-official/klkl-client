@@ -47,10 +47,14 @@ export default function HomePage() {
     <>
       <MainBanner urls={bannerImages} />
       <MainArea>
-        <h1>인기 리뷰</h1>
-        <ReviewCarousels contents={popularReview} />
-        <h1>신규 리뷰</h1>
-        <ReviewCarousels contents={newReview} />
+        <div>
+          <h1>인기 리뷰</h1>
+          <ReviewCarousels contents={popularReview} />
+        </div>
+        <div>
+          <h1>신규 리뷰</h1>
+          <ReviewCarousels contents={newReview} />
+        </div>
       </MainArea>
       {createPortal(
         <CustomFloatButton
@@ -62,7 +66,9 @@ export default function HomePage() {
               edit_square
             </Icons>
           }
-          onClick={() => navigate('/submit')}
+          onClick={() =>
+            navigate('/submit', { state: { from: window.location.pathname } })
+          }
           type="primary"
           tooltip="리뷰 작성하러 가기"
           style={{ bottom: '10px' }}
@@ -85,6 +91,10 @@ const MainArea = styled.div`
     border-bottom: 1px solid ${theme.color.lineGrey};
     font-family: ${theme.style.mainEB};
     font-size: ${theme.size.titleLG};
+  }
+
+  & > div {
+    margin: 1.875rem 0;
   }
 `
 

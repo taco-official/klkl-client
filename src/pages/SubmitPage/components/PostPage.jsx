@@ -19,8 +19,6 @@ const useReviewPost = () => {
     tagIds: [...state.tags],
   }))
 
-  console.log(postBody)
-
   const resetReviewContents = useFormStore((state) => state.resetFormContents)
   const navigate = useNavigate()
 
@@ -37,7 +35,9 @@ const useReviewPost = () => {
 
     if (isError) console.log(error)
 
-    navigate(`/products/${data.data.id}`)
+    navigate(`/products/${data.data.id}`, {
+      state: { from: window.location.pathname },
+    })
     resetReviewContents()
   }, [isSuccess])
 }
