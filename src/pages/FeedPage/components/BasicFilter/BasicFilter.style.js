@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import theme from '../../../../styles/theme'
 
 const FilterContainer = styled.aside`
-  width: 168px;
+  min-width: 10.5rem;
   padding: 1.7rem 1.1rem 0.5rem 1rem;
   display: flex;
   flex-direction: column;
