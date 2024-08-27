@@ -1,22 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { Breadcrumb, Rate, ConfigProvider } from 'antd'
-import { BlueTag } from '../../components/Tags/Tags.style'
+import { Breadcrumb, Rate } from 'antd'
 
+import { BlueTag } from '../../components/Tags/Tags.style'
 import dateParser from '../../utils/dateParser'
-import ReviewOptions from './components/ReviewOptions'
 import theme from '../../styles/theme'
+import ReviewOptions from './ReviewOptions'
 
 const breadCrumbStyle = {
   fontFamily: theme.style.mainBold,
   fontSize: theme.size.textXS,
-}
-
-const ConfigProviderTheme = {
-  token: {
-    fontFamily: theme.style.mainBold,
-  },
 }
 
 export default function ReviewInfoBlock({ review }) {
@@ -33,34 +27,31 @@ export default function ReviewInfoBlock({ review }) {
 
   return (
     <InfoWrapper>
-      <ConfigProvider theme={ConfigProviderTheme}>
-        <CategoryWrapper>
-          <Breadcrumb
-            style={breadCrumbStyle}
-            separator="/"
-            items={breadCrumbItems}
-          />
-        </CategoryWrapper>
+      <CategoryWrapper>
+        <Breadcrumb
+          style={breadCrumbStyle}
+          separator="/"
+          items={breadCrumbItems}
+        />
+      </CategoryWrapper>
 
-        <h2>{review.name}</h2>
-        <TagWrapper>
-          {review.tags.map((tag) => (
-            <BlueTag key={tag.id}>{tag.name}</BlueTag>
-          ))}
-        </TagWrapper>
+      <h2>{review.name}</h2>
+      <TagWrapper>
+        {review.tags.map((tag) => (
+          <BlueTag key={tag.id}>{tag.name}</BlueTag>
+        ))}
+      </TagWrapper>
 
-        <EndWrapper>
-          <Rate
-            allowHalf
-            disabled
-            defaultValue={review.rating}
-          />
-          <div>
-            {dateParser(review.createdAt)}
-            <ReviewOptions />
-          </div>
-        </EndWrapper>
-      </ConfigProvider>
+      <EndWrapper>
+        <Rate
+          allowHalf
+          disabled
+          defaultValue={review.rating}
+        />
+        <div>
+          {dateParser(review.createdAt)} <ReviewOptions review={review} />
+        </div>
+      </EndWrapper>
     </InfoWrapper>
   )
 }
