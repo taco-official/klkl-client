@@ -1,5 +1,6 @@
 import React from 'react'
-import FilterSwitchArray from './FilterSection'
+import TagDataFetcher from './TagDataFetcher'
+import TagSwitchList from './TagSwitch'
 import { StyleSection, ContentContainer } from '../../FeedPage.style'
 
 function AdditionalFilter() {
@@ -7,7 +8,9 @@ function AdditionalFilter() {
     <StyleSection>
       <h6 className="title">추가 필터</h6>
       <ContentContainer className="content">
-        <FilterSwitchArray />
+        <TagDataFetcher>
+          {({ queryData }) => <TagSwitchList queryData={queryData} />}
+        </TagDataFetcher>
       </ContentContainer>
     </StyleSection>
   )
