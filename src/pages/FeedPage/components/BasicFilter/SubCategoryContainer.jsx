@@ -1,35 +1,28 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Checkbox } from 'antd'
-// import useKy from '../../../../hooks/useKy'
 import useFeedStore from '../../../../stores/useFeedStore'
+import inArray from '../../../../utils/inArray'
 import { SubSelectContainer, SelectWrapper } from './BasicFilter.style'
 
-function SubCategoryCheckbox({ subCategory }) {
+function SubCategoryCheckbox({ categoryId, subCategory }) {
   const selectedSubCategory = useFeedStore((state) => state.selectedSubCategory)
-  const [inArray, addSelectedSubCategory, deleteSelectedSubCategory] =
-    useFeedStore((state) => [
-      state.inArray,
-      state.addSelectedSubCategory,
-      state.deleteSelectedSubCategory,
-    ])
+  const [addSelectedSubCategory, deleteSelectedSubCategory] = useFeedStore(
+    (state) => [state.addSelectedSubCategory, state.deleteSelectedSubCategory]
+  )
 
   const handleCheckboxChange = () => {
-    if (inArray(selectedSubCategory, subCategory.subCategoryId)) {
-      deleteSelectedSubCategory(subCategory.subCategoryId)
+    if (inArray(selectedSubCategory, subCategory.id)) {
+      deleteSelectedSubCategory(subCategory.id)
     } else {
-      addSelectedSubCategory({
-        id: subCategory.subCategoryId,
-        name: subCategory.name,
-        categoryId: subCategory.categoryId,
-      })
+      addSelectedSubCategory({ ...subCategory, categoryId })
     }
   }
 
   return (
     <SelectWrapper>
       <Checkbox
-        checked={inArray(selectedSubCategory, subCategory.subCategoryId)}
+        checked={inArray(selectedSubCategory, subCategory.id)}
         onChange={handleCheckboxChange}
       >
         {subCategory.name}
@@ -39,69 +32,32 @@ function SubCategoryCheckbox({ subCategory }) {
 }
 
 SubCategoryCheckbox.propTypes = {
+  categoryId: PropTypes.number.isRequired,
   subCategory: PropTypes.shape({
-    categoryId: PropTypes.number.isRequired,
-    subCategoryId: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
 }
 
 function SubCategoryContainer({ categoryId }) {
-  const [subCategories, setSubCategories] = useState([])
+  const selectedCategory = useFeedStore((state) => state.selectedCategory)
+  const { subCategories } = selectedCategory.find(
+    (selected) => selected.id === categoryId
+  )
 
-  useEffect(() => {
-    const fetchSubCategories = (id) => {
-      const subCategoriesData = {
-        10000: {
-          data: [
-            {
-              categoryId: 10000,
-              subCategoryId: 10001,
-              name: '서브 카테고리 1-1',
-            },
-            {
-              categoryId: 10000,
-              subCategoryId: 10002,
-              name: '서브 카테고리 1-2',
-            },
-            {
-              categoryId: 10000,
-              subCategoryId: 10003,
-              name: '서브 카테고리 1-3',
-            },
-          ],
-        },
-        20000: {
-          data: [
-            {
-              categoryId: 20000,
-              subCategoryId: 20001,
-              name: '서브 카테고리 2-1',
-            },
-            {
-              categoryId: 20000,
-              subCategoryId: 20002,
-              name: '서브 카테고리 2-2',
-            },
-            {
-              categoryId: 20000,
-              subCategoryId: 20003,
-              name: '서브 카테고리 2-3',
-            },
-          ],
-        },
-      }
-      setSubCategories(subCategoriesData[id] ? subCategoriesData[id].data : [])
-    }
-
-    fetchSubCategories(categoryId)
-  }, [categoryId])
+  if (!subCategories.length)
+    return (
+      <SubSelectContainer>
+        <div className="empty">카테고리가 없습니다.</div>
+      </SubSelectContainer>
+    )
 
   return (
     <SubSelectContainer>
       {subCategories.map((subCategory) => (
         <SubCategoryCheckbox
-          key={subCategory.subCategoryId}
+          key={subCategory.id}
+          categoryId={categoryId}
           subCategory={subCategory}
         />
       ))}
