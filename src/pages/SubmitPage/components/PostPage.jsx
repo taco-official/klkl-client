@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react'
-import { Spin } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { method } from '../../../hooks/kyInstance'
+import LoadingPage from '../../LoadingPage'
 import useKyMutation from '../../../hooks/useKyMutation'
 import useFormStore from '../../../stores/useFormStore'
 
-const useReviewPost = () => {
+const useReviewSubmit = (httpMethod, uri) => {
   const postBody = useFormStore((state) => ({
     name: state.name,
     description: state.description,
@@ -19,14 +19,12 @@ const useReviewPost = () => {
     tagIds: [...state.tags],
   }))
 
-  console.log(postBody)
-
   const resetReviewContents = useFormStore((state) => state.resetFormContents)
   const navigate = useNavigate()
 
   const { data, mutate, isSuccess, isError, error } = useKyMutation(
-    method.POST,
-    'products'
+    httpMethod,
+    uri
   )
 
   useEffect(() => {
@@ -37,22 +35,23 @@ const useReviewPost = () => {
 
     if (isError) console.log(error)
 
-    navigate(`/products/${data.data.id}`)
+    navigate(`/products/${data.data.id}`, {
+      state: { from: window.location.pathname },
+    })
     resetReviewContents()
   }, [isSuccess])
 }
 
-function LoadingPage() {
-  useReviewPost()
+function PostPage() {
+  const isCreate = window.location.pathname === '/submit'
+  const { id } = useParams()
 
-  return (
-    <Spin
-      fullscreen
-      tip="전송중입니다..."
-      size="large"
-      percent="auto"
-    />
-  )
+  const uri = isCreate ? '/products' : `products/${id}`
+  const httpMethod = isCreate ? method.POST : method.PUT
+
+  useReviewSubmit(httpMethod, uri)
+
+  return <LoadingPage />
 }
 
-export default LoadingPage
+export default PostPage

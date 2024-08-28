@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Input, Button, ConfigProvider } from 'antd'
 import styled from 'styled-components'
 
 import { method } from '../../hooks/kyInstance'
 import useKyMutation from '../../hooks/useKyMutation'
 import theme from '../../styles/theme'
-import ProfileImage from '../UserProfile/ProfileImage'
 
 const inputTheme = {
   components: {
@@ -19,18 +19,27 @@ const inputTheme = {
   },
 }
 
-export default function CommentInput() {
-  const [inputValue, setInputValue] = useState('')
+export default function CommentEdit({
+  commentId,
+  commentContent,
+  disableEditMode,
+}) {
+  const [inputValue, setInputValue] = useState(commentContent)
   const location = `${window.location.pathname.slice(1)}/comments`
-  const { mutateAsync } = useKyMutation(method.POST, location)
+  const { mutateAsync } = useKyMutation(
+    method.PUT,
+    `${location}/${commentId}`,
+    [location]
+  )
 
-  const addComment = async () => {
+  const editComment = async () => {
     if (inputValue === '') return
 
     const body = JSON.stringify({ content: inputValue.trim() })
 
     try {
       await mutateAsync(body)
+      disableEditMode()
     } catch (error) {
       console.error(error.response)
       window.alert('다시 시도해 주세요')
@@ -40,45 +49,48 @@ export default function CommentInput() {
   }
 
   return (
-    <CommentInputBox>
-      <ProfileImage
-        src="https://i.namu.wiki/i/w0zeVMmf9I79S1loLZ-y7rifOgf6XPo8iNuEfheNG3LItfP6MA5vxVYQ6Lkk31cM6u01TffiuGLNPsCqmuLJGtsrJcoY0Plq5a5LW-MbxM6m1oPEW6GIs3kLDhH5veWAcLm6YpBVpvek1H_F2UzMOQ.webp"
-        $size="3.125rem"
-      />
+    <CommentEditBox>
       <ConfigProvider theme={inputTheme}>
         <Input.TextArea
           rows={1}
           showCount
           maxLength={200}
           size="large"
-          autoSize={{ maxRows: 1 }}
+          autoSize={{ maxRows: 3 }}
           value={inputValue}
-          onChange={(e) => {
-            setInputValue(e.target.value)
-          }}
+          onChange={(e) => setInputValue(e.target.value)}
         />
-        <SubmitButton
+        <Button
           type="text"
-          onClick={addComment}
-          $canSubmit={inputValue.length !== 0}
+          onClick={disableEditMode}
         >
-          등록
-        </SubmitButton>
+          취소
+        </Button>
+        <Button
+          type="text"
+          onClick={editComment}
+        >
+          수정
+        </Button>
       </ConfigProvider>
-    </CommentInputBox>
+    </CommentEditBox>
   )
 }
+CommentEdit.propTypes = {
+  commentId: PropTypes.number.isRequired,
+  commentContent: PropTypes.string.isRequired,
+  disableEditMode: PropTypes.func.isRequired,
+}
 
-const CommentInputBox = styled.div`
+const CommentEditBox = styled.div`
+  width: 100%;
   height: 50px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 30px;
 
   & > span {
-    width: 85%;
-    margin: 0 15px;
+    margin: 0 10px;
     border: none;
     border-bottom: 1px solid lightgray;
     border-radius: 0;
@@ -87,18 +99,8 @@ const CommentInputBox = styled.div`
       font-size: ${theme.size.text2XS};
     }
   }
-`
 
-const SubmitButton = styled(Button)`
-  height: 35px;
-  width: 60px;
-  font-size: ${theme.size.textSM};
-  font-family: ${theme.style.mainBold};
-
-  ${({ $canSubmit }) =>
-    $canSubmit
-      ? `background-color: rgba(47, 167, 255, 0.1);
-			color: ${theme.color.main};`
-      : `background-color: white;
-			color: black`};
+  button {
+    width: 50px;
+  }
 `

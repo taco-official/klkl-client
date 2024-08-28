@@ -3,10 +3,11 @@ import styled from 'styled-components'
 
 import * as Form from './components/index'
 import PostPage from './components/PostPage'
-import submitSteps from './constant/submitSteps'
+import submitSteps from '../../constants/submitSteps'
 import PrevNextButtons from './components/PrevNextButtons'
 import SubmitSteps from './components/SubmitSteps'
 import theme from '../../styles/theme'
+import useFormStore from '../../stores/useFormStore'
 
 const pages = {
   [submitSteps.IMAGE]: <Form.ImageSubmitForm />,
@@ -30,15 +31,11 @@ const useStep = () => {
 
 export default function SubmitPage() {
   const [step, goNextStep, goPrevStep] = useStep()
+  const resetFormContents = useFormStore((state) => state.resetFormContents)
 
   useEffect(() => {
-    const preventClose = (e) => {
-      e.preventDefault()
-      e.returnValue = ''
-    }
-    window.addEventListener('beforeunload', preventClose)
     return () => {
-      window.removeEventListener('beforeunload', preventClose)
+      resetFormContents()
     }
   }, [])
 

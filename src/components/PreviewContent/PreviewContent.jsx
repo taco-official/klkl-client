@@ -5,7 +5,6 @@ import { FaHeart } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
 
 import LikeButton from '../Button/LikeButton'
-import MoreButton from '../Button/MoreButton'
 import { BlueTag } from '../Tags/Tags.style'
 import {
   PreviewContainer,
@@ -22,7 +21,10 @@ import {
 
 function PreviewContent({ userId = undefined, productData }) {
   return (
-    <Link to={`products/${productData.id}`}>
+    <Link
+      to={`products/${productData.id}`}
+      state={{ from: window.location.pathname }}
+    >
       <PreviewContainer>
         <ThumbnailContainer id="productThumbnail">
           <img
@@ -39,14 +41,10 @@ function PreviewContent({ userId = undefined, productData }) {
           <TitleContainer>
             <SubDesBox>
               <CategoryWrapper>
-                <div id="country">{productData.countryName}</div>
-                <div id="subcategory">{productData.categoryName}</div>
+                <div>{`${productData.countryName} / ${productData.categoryName}`}</div>
               </CategoryWrapper>
-              <MoreButton size="1.1rem" />
             </SubDesBox>
-            <ProductNameBox id="productName">
-              <b>{productData.name}</b>
-            </ProductNameBox>
+            <ProductNameBox id="productName">{productData.name}</ProductNameBox>
           </TitleContainer>
           <TagsContainer>
             {productData.tags.map(

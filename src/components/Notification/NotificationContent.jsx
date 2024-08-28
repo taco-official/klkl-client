@@ -19,9 +19,13 @@ function NotificationContent({ content }) {
   const onClick = async () => {
     try {
       await mutateAsync()
-      navigate(`/products/${content.product.id}`)
+      navigate(`/products/${content.product.id}`, {
+        state: { from: window.location.pathname },
+      })
     } catch (error) {
-      window.alert('다시 시도해 주세요!')
+      if (error.response.status === 404) {
+        window.alert('이미 삭제된 댓글입니다')
+      }
       console.error(error.response)
     }
   }

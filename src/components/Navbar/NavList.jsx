@@ -28,7 +28,7 @@ export default function NavList() {
         $isbold={currentPage === pageIndex.FLIGHT}
         onClick={() => {
           setCurrentPage(pageIndex.FLIGHT)
-          navigate('/feed')
+          navigate('/feed', { state: { from: window.location.pathname } })
         }}
       >
         <Icons>flight_takeoff</Icons>

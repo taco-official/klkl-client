@@ -6,7 +6,7 @@ import { createPortal } from 'react-dom'
 import useKyQuery from '../../hooks/useKyQuery'
 import theme from '../../styles/theme'
 
-import ReviewFloatButton from './components/ReviewFloatButton'
+import ReviewFloatButton from './ReviewFloatButton'
 import ReviewImageBlock from './ReviewImageBlock'
 import ReviewInfoBlock from './ReviewInfo'
 import ReviewMiddleBlock from './ReviewMiddle'
