@@ -40,5 +40,5 @@ export default function Layout() {
 
 const StyledMain = styled.main`
   width: 100%;
-  min-height: 70vh;
+  min-height: 90vh;
 `
