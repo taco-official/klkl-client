@@ -38,6 +38,7 @@ export default function PrevNextButtons({ step, goNextStep, goPrevStep }) {
             colorPrimaryHover: theme.color.mainDark,
           },
         }}
+        wave={{ disabled: true }}
       >
         {step > submitSteps.IMAGE && (
           <Button

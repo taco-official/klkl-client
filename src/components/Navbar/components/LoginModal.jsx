@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Modal, Button, ConfigProvider } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
+
+import { kyInstance } from '../../../hooks/kyInstance'
 import { KakaoLogo, NaverLogo } from '../../../images/logos'
 import { useModalStore } from '../../../stores/navbarStores'
 import theme from '../../../styles/theme'
@@ -54,8 +56,14 @@ function LoginModal() {
           >
             <NaverLogo /> 네이버 로그인
           </Button>
-          <Button style={KaKaoStyle}>
-            <KakaoLogo onClick={() => {}} />
+          <Button
+            style={KaKaoStyle}
+            onClick={async () => {
+              const data = await kyInstance.get('oauth/kakao')
+              console.log(data)
+            }}
+          >
+            <KakaoLogo />
             카카오 로그인
           </Button>
         </ModalContents>

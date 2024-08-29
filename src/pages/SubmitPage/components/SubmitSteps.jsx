@@ -39,7 +39,7 @@ function SubmitSteps({ step }) {
         current={step}
         items={stepsItems}
         responsive={false}
-        style={{ width: '100%', margin: '1.25rem 0' }}
+        style={{ width: '100%', margin: '2.5rem 0' }}
       />
     </ConfigProvider>
   )

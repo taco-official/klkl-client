@@ -46,7 +46,7 @@ function PostPage() {
   const isCreate = window.location.pathname === '/submit'
   const { id } = useParams()
 
-  const uri = isCreate ? '/products' : `products/${id}`
+  const uri = isCreate ? 'products' : `products/${id}`
   const httpMethod = isCreate ? method.POST : method.PUT
 
   useReviewSubmit(httpMethod, uri)

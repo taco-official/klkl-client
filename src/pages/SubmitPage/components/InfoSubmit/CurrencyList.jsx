@@ -14,6 +14,7 @@ export default function NumberInputForm() {
   } = useKyQuery('currencies')
 
   if (isError) return <div>{error}</div>
+  if (isLoading) return <div>loading</div>
 
   return (
     <ConfigProvider
@@ -27,21 +28,19 @@ export default function NumberInputForm() {
         defaultValue={currencyId}
         onSelect={(value) => setFormContents({ currencyId: value })}
         style={{ width: '90px' }}
-      >
-        {!isLoading &&
-          currencies.data.map((currency) => (
-            <Select.Option
-              key={currency.code}
-              value={currency.id}
-            >
+        options={currencies?.data.map((currency) => ({
+          value: currency.id,
+          label: (
+            <div>
               <img
                 src={currency.flag}
                 style={{ width: '20px' }}
               />
               {currency.code}
-            </Select.Option>
-          ))}
-      </Select>
+            </div>
+          ),
+        }))}
+      />
     </ConfigProvider>
   )
 }

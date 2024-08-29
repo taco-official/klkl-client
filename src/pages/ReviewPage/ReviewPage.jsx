@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { Divider } from 'antd'
 import { createPortal } from 'react-dom'
 
+import LoadingPage from '../LoadingPage'
 import useKyQuery from '../../hooks/useKyQuery'
 import theme from '../../styles/theme'
-
+import UserFollowButton from '../../components/UserProfile/UserFollowButton'
 import ReviewFloatButton from './ReviewFloatButton'
 import ReviewImageBlock from './ReviewImageBlock'
 import ReviewInfoBlock from './ReviewInfo'
@@ -18,7 +19,7 @@ export default function ReviewDetailPage() {
     `${window.location.pathname}`.slice(1)
   )
 
-  if (isLoading) return <div>loading</div>
+  if (isLoading) return <LoadingPage />
   if (isError) {
     if (error.response.status === 404) return <div>cannot found!</div>
     return <div>error</div>
@@ -41,7 +42,10 @@ export default function ReviewDetailPage() {
       <Divider />
       <Description>{data.data.description}</Description>
       <Divider />
-      <UserProfile userData={data.data.user} />
+      <UserProfile
+        userData={data.data.user}
+        profileButton={<UserFollowButton />}
+      />
       <Divider />
       <Comment />
     </Wrapper>
