@@ -1,50 +1,58 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-const antdTheme = {
+const fontTheme = {
   token: {
     fontFamily: theme.style.main,
   },
 }
 
-const PageContainer = styled.div`
+const tagTheme = {
+  ...fontTheme,
+  token: {
+    fontSize: theme.size.textXS,
+  },
+}
+
+const FeedPageLayout = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  row-gap: 1rem;
 `
 
-const PageContent = styled.div`
+const FeedPageContent = styled.div`
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  column-gap: 2rem;
-  > :nth-child(n) {
-    border: 0.0625rem solid transparent;
-  }
+  column-gap: 2.5rem;
 `
 
 const FeedArea = styled.section`
-  padding: 0.5rem;
   display: flex;
   flex-direction: column;
-  row-gap: 0.1rem;
-  > :nth-child(n) {
-    border: 0.0625rem solid transparent;
-  }
+  flex: 0 1 content;
+  align-items: flex-start;
+  row-gap: 1.1rem;
+`
+
+const FeedContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 0 1;
+  align-items: center;
+  row-gap: 1.1rem;
 `
 
 const StyleSection = styled.section`
-  width: 42.275rem;
-  padding: 0.5rem 0.8rem;
+  width: 42rem;
   display: flex;
   align-items: flex-start;
   flex-basis: content;
   column-gap: 1rem;
   > h6.title {
     font-size: ${theme.size.textSM};
-    padding: 0.3125rem 0rem;
-    flex-basis: content;
-    flex-shrink: 0;
+    padding: 0.3125rem 0;
+    flex: 0 content;
   }
 `
 
@@ -53,15 +61,16 @@ const ContentContainer = styled.div`
   display: flex;
   align-content: flex-start;
   flex-wrap: wrap;
-  row-gap: 0.4rem;
-  column-gap: 0.5rem;
+  gap: 0.4rem 0.5rem;
 `
 
 export {
-  antdTheme,
-  PageContainer,
-  PageContent,
+  fontTheme,
+  tagTheme,
+  FeedPageLayout,
+  FeedPageContent,
   FeedArea,
+  FeedContainer,
   StyleSection,
   ContentContainer,
 }

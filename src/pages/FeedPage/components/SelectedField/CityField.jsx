@@ -16,14 +16,14 @@ function CityField() {
     state.deleteSelectedCity,
   ])
 
-  if (Object.keys(selectedCountry).length === 0)
+  if (!Object.keys(selectedCountry).length)
     return (
       <WhiteFieldTag>
         <span>국가 전체</span>
       </WhiteFieldTag>
     )
 
-  if (selectedCity.length === 0)
+  if (!selectedCity.length)
     return (
       <BlueFieldTag>
         <span>{selectedCountry.name} 전체</span>

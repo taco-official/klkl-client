@@ -49,7 +49,7 @@ function CategoryField() {
     )
   }
 
-  if (selectedCategory.length === 0)
+  if (!selectedCategory.length)
     return (
       <WhiteFieldTag>
         <span>카테고리 전체</span>
