@@ -6,6 +6,7 @@ import { method } from '../../../../hooks/kyInstance'
 import useKy from '../../../../hooks/useKy'
 import useFeedStore from '../../../../stores/useFeedStore'
 import parseQueryParams from '../../../../utils/parseQueryParams'
+import { FeedContainer } from '../../FeedPage.style'
 
 function useProductQuery() {
   const [queryArray, setQueryArray] = useState([])
@@ -158,7 +159,7 @@ function ProductDataFetcher({ children }) {
   }, [loading, error, productData])
 
   return (
-    <>
+    <FeedContainer>
       {children({ loading, productDataList, error })}
       <Pagination
         defaultCurrent={1}
@@ -169,7 +170,7 @@ function ProductDataFetcher({ children }) {
           setPage((prev) => ({ ...prev, requestPage: pageNumber - 1 }))
         }
       />
-    </>
+    </FeedContainer>
   )
 }
 
