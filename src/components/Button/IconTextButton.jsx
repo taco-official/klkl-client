@@ -5,7 +5,7 @@ import { IconContext } from 'react-icons'
 function IconTextButton({ iconValue = null, Icon = null, text = null }) {
   return (
     <IconContext.Provider value={iconValue}>
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
         {Icon}
         {text}
       </div>

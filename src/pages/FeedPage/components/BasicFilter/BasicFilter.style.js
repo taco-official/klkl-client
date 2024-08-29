@@ -3,11 +3,10 @@ import theme from '../../../../styles/theme'
 
 const FilterContainer = styled.aside`
   min-width: 10.5rem;
-  padding: 1.7rem 1.1rem 0.5rem 1rem;
+  padding-top: 1.5rem;
   display: flex;
   flex-direction: column;
-  flex-basis: content;
-  flex-shrink: 0;
+  flex: 0 content;
   > div.title {
     font-size: ${theme.size.titleXL};
     margin-bottom: 0.7rem;
@@ -60,7 +59,7 @@ const SubTitle = styled.div`
 `
 
 const SelectContainer = styled.div`
-  padding: 0rem 0rem 0rem 0.5rem;
+  padding-left: 0.5rem;
   margin-top: 0.5rem;
   > :not(:last-child) {
     margin-bottom: 0.1rem;
@@ -68,7 +67,7 @@ const SelectContainer = styled.div`
 `
 
 const SubSelectContainer = styled.div`
-  margin: 0.15rem 0rem 0.2rem 0.6rem;
+  margin: 0.15rem 0 0.2rem 0.6rem;
   > :not(:last-child) {
     margin-bottom: 0.1rem;
   }

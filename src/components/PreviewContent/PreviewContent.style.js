@@ -32,18 +32,16 @@ const maskBackground = css`
 `
 
 const PreviewContainer = styled.div`
-  width: 12.5rem;
+  min-width: 12.5rem;
   background-color: white;
-  padding: 0.5rem;
-  border: 0.0625rem solid transparent;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `
 
 const ThumbnailContainer = styled.div`
-  width: 12.5rem;
-  height: 12.5rem;
+  width: 100%;
+  aspect-ratio: 1;
   border: 0.0625rem solid transparent;
   &#productThumbnail {
     position: relative;

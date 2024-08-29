@@ -1,7 +1,7 @@
 import React from 'react'
 import CityField from './CityField'
 import CategoryField from './CategoryField'
-import FilterField from './FilterField'
+import TagField from './TagField'
 import ResetButton from './ResetButton'
 import SortButton from './SortButton'
 import FieldSection from './SelectedField.style'
@@ -14,7 +14,7 @@ function SelectedField() {
       <ContentContainer className="content">
         <CityField />
         <CategoryField />
-        <FilterField />
+        <TagField />
         <ResetButton />
       </ContentContainer>
       <div className="alignEnd">
