@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FloatButton, notification } from 'antd'
+import { useNavigate } from 'react-router-dom'
+
 import Icons from '../../components/Icons/Icons'
 import theme from '../../styles/theme'
 
@@ -16,6 +18,7 @@ export default function ReviewFloatButton() {
       })
     )
   }
+  const navigate = useNavigate()
 
   return (
     <FloatButton.Group
@@ -34,6 +37,7 @@ export default function ReviewFloatButton() {
       />
       <CustomFloatButton
         icon={<Icons $empty>edit_square</Icons>}
+        onClick={() => navigate('/submit')}
         tooltip="리뷰 작성하러 가기"
       />
     </FloatButton.Group>
