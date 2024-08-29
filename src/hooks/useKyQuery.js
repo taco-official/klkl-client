@@ -1,5 +1,5 @@
-import { useQueryClient, useQuery, useMutation } from '@tanstack/react-query'
-import { kyInstance, method } from './kyInstance'
+import { useQuery } from '@tanstack/react-query'
+import { kyInstance } from './kyInstance'
 import parseQueryParams from '../utils/parseQueryParams'
 
 /**
