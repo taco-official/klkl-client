@@ -19,7 +19,7 @@ import {
   TitleContainer,
 } from './PreviewContent.style'
 
-function PreviewContent({ userId = undefined, productData }) {
+function PreviewContent({ userId = null, productData }) {
   return (
     <Link
       to={`/products/${productData.id}`}
