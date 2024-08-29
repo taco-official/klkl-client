@@ -22,7 +22,7 @@ import {
 function PreviewContent({ userId = undefined, productData }) {
   return (
     <Link
-      to={`products/${productData.id}`}
+      to={`/products/${productData.id}`}
       state={{ from: window.location.pathname }}
     >
       <PreviewContainer>
