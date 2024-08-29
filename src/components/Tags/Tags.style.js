@@ -3,9 +3,9 @@ import theme from '../../styles/theme'
 
 const StyleTag = styled.div`
   font-size: ${theme.size.text2XS};
-  padding: ${(props) => props.$padding || '0.3rem 0.5rem'};
+  padding: ${(props) => props.$padding || '0.3rem 0.35rem'};
   border: 0.0625rem solid;
-  border-radius: 0.4rem;
+  border-radius: 0.3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,8 +23,6 @@ const BlueTag = styled(StyleTag)`
   border-color: ${theme.color.tag};
   background-color: ${theme.color.tag};
   color: ${theme.color.main};
-  border-radius: 0.1875rem;
-  padding: 0.225rem;
 `
 
 const WhiteFieldTag = styled(WhiteTag)`

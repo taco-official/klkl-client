@@ -32,11 +32,12 @@ const maskBackground = css`
 `
 
 const PreviewContainer = styled.div`
-  min-width: 12.5rem;
+  min-width: 11rem;
   background-color: white;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  row-gap: 0.5rem;
 `
 
 const ThumbnailContainer = styled.div`
@@ -71,86 +72,68 @@ const LoadingIcon = styled(CgSpinner)`
 `
 
 const DescriptionContainer = styled.div`
-  margin: 0.3rem 0.1rem;
+  margin: 0 0.1rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.55rem;
   &.loading {
     padding-left: 0.1rem;
   }
 `
 
-const TitleContainer = styled.div`
-  margin-bottom: 0.7rem;
-`
-
-const SubDesBox = styled.div`
-  margin-bottom: 0.3rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  &.loading {
-    height: 1.4125rem;
-  }
-`
-
 const CategoryWrapper = styled.div`
-  font-size: ${theme.size.text2XS};
+  font-size: ${theme.size.textXS};
   color: ${theme.color.textGrey};
-  margin: 0.1875rem 0;
   padding-left: 0.1rem;
   display: flex;
   justify-content: space-between;
-  > #country {
-    margin-right: 0.5rem;
-  }
+  column-gap: 0.5rem;
   &.loading {
     ${maskBackground}
-    width: 70%;
+    width: 50%;
     height: 0.8rem;
   }
 `
 
 const ProductNameBox = styled.div`
-  font-size: ${theme.size.textSM};
+  font-size: ${theme.size.textMD};
   font-family: ${theme.style.mainBold};
   &.loading {
     ${maskBackground}
-    width: 40%;
+    width: 60%;
     height: ${theme.size.titleMD};
   }
 `
 
 const TagsContainer = styled.div`
-  margin-bottom: 0.7rem;
+  background-color: ${theme.color.tag};
+  height: ${theme.size.textSM};
+  margin-top: 0.2rem;
+  margin-bottom: 0.1rem;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
-  > :not(:last-child) {
-    margin-right: 0.45rem;
-  }
+  column-gap: 0.45rem;
   &.loading {
     ${maskBackground}
-    width: 50%;
-    height: ${theme.size.textSM};
+    width: 70%;
+    margin: 0;
   }
 `
 
 const IconContainer = styled.div`
   display: flex;
-  > :not(:last-child) {
-    margin-right: 0.6rem;
-  }
+  column-gap: 0.6rem;
 `
 
 const IconBox = styled.div`
   font-size: ${theme.size.text2XS};
   color: ${(props) => props.color};
-  display: flex inline;
-  align-items: flex-start;
-  > :not(:last-child) {
-    margin-right: 0.3rem;
-  }
+  display: flex;
+  column-gap: 0.3rem;
   &.loading {
     ${maskBackground}
-    width: 20%;
+    width: 40%;
     height: ${theme.size.textXS};
     display: block;
   }
@@ -161,8 +144,6 @@ export {
   ThumbnailContainer,
   LoadingIcon,
   DescriptionContainer,
-  TitleContainer,
-  SubDesBox,
   CategoryWrapper,
   ProductNameBox,
   TagsContainer,

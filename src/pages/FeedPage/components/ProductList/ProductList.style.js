@@ -2,11 +2,11 @@ import styled from 'styled-components'
 import theme from '../../../../styles/theme'
 
 const StyledList = styled.article`
-  min-width: 640px;
+  min-width: 36rem;
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
   display: grid;
-  grid-template-columns: repeat(3, minmax(auto, 13rem));
+  grid-template-columns: repeat(3, minmax(auto, 11rem));
   gap: 1.4rem 1.5rem;
   &.empty {
     font-color: ${theme.color.textGrey};

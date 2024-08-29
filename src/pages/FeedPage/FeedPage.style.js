@@ -24,7 +24,7 @@ const FeedPageLayout = styled.div`
 const FeedPageContent = styled.div`
   display: flex;
   justify-content: center;
-  column-gap: 2.5rem;
+  column-gap: 3.5rem;
 `
 
 const FeedArea = styled.section`
@@ -44,7 +44,7 @@ const FeedContainer = styled.div`
 `
 
 const StyleSection = styled.section`
-  width: 42rem;
+  width: 36rem;
   display: flex;
   align-items: flex-start;
   flex-basis: content;
@@ -52,7 +52,7 @@ const StyleSection = styled.section`
   > h6.title {
     font-size: ${theme.size.textSM};
     padding: 0.3125rem 0;
-    flex: 0 content;
+    flex: 0 0 content;
   }
 `
 

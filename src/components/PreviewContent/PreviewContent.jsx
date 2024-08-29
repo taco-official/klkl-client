@@ -10,13 +10,11 @@ import {
   PreviewContainer,
   ThumbnailContainer,
   DescriptionContainer,
-  SubDesBox,
   CategoryWrapper,
   ProductNameBox,
   TagsContainer,
   IconContainer,
   IconBox,
-  TitleContainer,
 } from './PreviewContent.style'
 
 function PreviewContent({ userId = null, productData }) {
@@ -38,14 +36,10 @@ function PreviewContent({ userId = null, productData }) {
           />
         </ThumbnailContainer>
         <DescriptionContainer>
-          <TitleContainer>
-            <SubDesBox>
-              <CategoryWrapper>
-                <div>{`${productData.countryName} / ${productData.categoryName}`}</div>
-              </CategoryWrapper>
-            </SubDesBox>
-            <ProductNameBox id="productName">{productData.name}</ProductNameBox>
-          </TitleContainer>
+          <CategoryWrapper>
+            <div>{`${productData.countryName} / ${productData.categoryName}`}</div>
+          </CategoryWrapper>
+          <ProductNameBox id="productName">{productData.name}</ProductNameBox>
           <TagsContainer>
             {productData.tags.map(
               (tag, index) =>

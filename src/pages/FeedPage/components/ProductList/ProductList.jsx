@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import PreviewContent from '../../../../components/PreviewContent/PreviewContent'
-import { user } from '../BasicFilter/DummyData'
+import { user } from '../../../../test/data/DummyData'
 import StyledList from './ProductList.style'
 import LoadingContent from '../../../../components/PreviewContent/LoadingContent'
 

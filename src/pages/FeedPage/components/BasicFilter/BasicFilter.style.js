@@ -2,15 +2,11 @@ import styled from 'styled-components'
 import theme from '../../../../styles/theme'
 
 const FilterContainer = styled.aside`
-  min-width: 10.5rem;
+  min-width: 9.5rem;
   padding-top: 1.5rem;
   display: flex;
   flex-direction: column;
-  flex: 0 content;
-  > div.title {
-    font-size: ${theme.size.titleXL};
-    margin-bottom: 0.7rem;
-  }
+  flex: 0 1 content;
 `
 
 const SectionContainer = styled.div`
@@ -20,6 +16,7 @@ const SectionContainer = styled.div`
   flex-shrink: 0;
   > div.title {
     font-size: ${theme.size.titleLG};
+    font-weight: 800;
     margin-bottom: 0.7rem;
     margin-left: 0.3rem;
     flex-basis: content;
@@ -43,7 +40,7 @@ const SubTitle = styled.div`
   margin-bottom: 0.2rem;
   &.region {
     padding-bottom: 0.3rem;
-    border-bottom: 1px solid ${theme.color.lineGrey};
+    border-bottom: 0.08rem solid ${theme.color.lineGrey};
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -61,16 +58,17 @@ const SubTitle = styled.div`
 const SelectContainer = styled.div`
   padding-left: 0.5rem;
   margin-top: 0.5rem;
-  > :not(:last-child) {
-    margin-bottom: 0.1rem;
-  }
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3rem;
 `
 
 const SubSelectContainer = styled.div`
-  margin: 0.15rem 0 0.2rem 0.6rem;
-  > :not(:last-child) {
-    margin-bottom: 0.1rem;
-  }
+  margin: 0.3rem 0;
+  margin-left: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.3rem;
 `
 
 const SelectWrapper = styled.div``
