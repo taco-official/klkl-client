@@ -6,7 +6,7 @@ import theme from '../../styles/theme'
 function Widthdrawl() {
   return (
     <ConfigProvider>
-      <WidthdrawlBox>
+      <WidthdrawalBox>
         {`탈퇴하시면 개인정보는 모두 삭제되며 
 				삭제된 정보는 복구할 수 없습니다
         탈퇴하시겠습니까?`}
@@ -16,12 +16,12 @@ function Widthdrawl() {
         >
           탈퇴
         </Button>
-      </WidthdrawlBox>
+      </WidthdrawalBox>
     </ConfigProvider>
   )
 }
 
-const WidthdrawlBox = styled.div`
+const WidthdrawalBox = styled.div`
   width: 100%;
   height: 100%;
 

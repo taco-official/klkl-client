@@ -15,7 +15,7 @@ function DescriptionInput() {
         maxLength={50}
         placeholder="자기소개 변경"
         autoSize={{ minRows: 2 }}
-        onClick={(e) => setDescription(e.target.value)}
+        onChange={(e) => setDescription(e.target.value)}
       />
     </InfoBox>
   )
