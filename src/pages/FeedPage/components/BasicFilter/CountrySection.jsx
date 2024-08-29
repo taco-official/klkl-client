@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
-import { useKyQuery } from '../../../../hooks/useKyQuery'
+import useKyQuery from '../../../../hooks/useKyQuery'
 import useFeedStore from '../../../../stores/useFeedStore'
 import ShowHideButton from '../../../../components/Button/ShowHideButton'
 import theme from '../../../../styles/theme'
@@ -42,6 +42,8 @@ function CountryRadio({ country }) {
   return (
     <SelectWrapper>
       <Radio
+        id={country.id}
+        name={country.name}
         checked={selectedCountry.id === country.id}
         onChange={handleRadioChange}
       >

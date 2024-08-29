@@ -25,6 +25,8 @@ function CityCheckBox({ city }) {
   return (
     <SelectWrapper>
       <Checkbox
+        id={city.id}
+        name={city.name}
         checked={inArray(selectedCity, city.id)}
         onChange={handleCheckboxChange}
       >

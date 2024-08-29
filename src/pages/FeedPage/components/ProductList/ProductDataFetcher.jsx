@@ -31,9 +31,9 @@ function useProductQuery() {
     setQueryArray([])
   }, [])
 
-  const queryData = []
-
   useEffect(() => {
+    const queryData = []
+
     if (Object.keys(selectedCountry).length) {
       if (!selectedCity.length) {
         if (selectedCountry?.cities)
@@ -48,9 +48,7 @@ function useProductQuery() {
         })
       }
     }
-  }, [selectedCountry, selectedCity])
 
-  useEffect(() => {
     if (selectedCategory.length) {
       const subCategoryValue = selectedCategory.reduce((acc, category) => {
         if (
@@ -71,18 +69,14 @@ function useProductQuery() {
         value: subCategoryValue,
       })
     }
-  }, [selectedCategory, selectedSubCategory])
 
-  useEffect(() => {
     if (selectedTag.length) {
       queryData.push({
         key: 'tag_id',
         value: selectedTag.map((tag) => tag.id),
       })
     }
-  }, [selectedTag])
 
-  useEffect(() => {
     if (Object.keys(selectedSort).length) {
       queryData.push(
         {
@@ -95,9 +89,7 @@ function useProductQuery() {
         }
       )
     }
-  }, [selectedSort])
 
-  useEffect(() => {
     setQueryArray(queryData)
   }, [
     selectedCountry,

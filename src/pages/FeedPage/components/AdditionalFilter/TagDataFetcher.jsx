@@ -1,57 +1,37 @@
 import { useState, useEffect } from 'react'
 import { useShallow } from 'zustand/react/shallow'
-import { useQueries } from '@tanstack/react-query'
 import PropTypes from 'prop-types'
-import kyInstance from '../../../../hooks/kyInstance'
-import { useKyQuery } from '../../../../hooks/useKyQuery'
+import useKyQuery from '../../../../hooks/useKyQuery'
 import useFeedStore from '../../../../stores/useFeedStore'
 
 function TagDataFetcher({ children }) {
   const [selectedCategory, selectedSubCategory] = useFeedStore(
     useShallow((state) => [state.selectedCategory, state.selectedSubCategory])
   )
-  const { isLoading: CategoriesLoading, data: CategoryFetchList } = useKyQuery(
-    'categories',
-    null,
-    null,
-    {
-      select: (data) => {
-        const categories = data.data.map((category) => category.id)
-        if (!selectedCategory.length) return categories
-        const filteredCategories = categories.filter(
-          (category) =>
-            selectedCategory.some((selected) => selected.id === category) &&
-            !selectedSubCategory.some(
-              (subCategory) => subCategory.categoryId === category
-            )
-        )
-        return filteredCategories
-      },
-    }
-  )
-  const combinedQueries = useQueries({
-    queries:
-      !CategoriesLoading && CategoryFetchList
-        ? CategoryFetchList.map((categoryId) => ({
-            queryKey: ['categories/subcategories', categoryId],
-            queryFn: () =>
-              kyInstance.get(`categories/${categoryId}/subcategories`).json(),
-            select: (data) => {
-              return data.data.subcategories.map(
-                (subCategory) => subCategory.id
-              )
-            },
-            enabled: !!categoryId,
-          }))
-        : [],
-    combine: (queryResult) => {
-      return {
-        data: queryResult.reduce((acc, item) => {
-          if (item?.data) acc.push(...item.data)
+  const {
+    isLoading,
+    data: filteredSubCategories,
+    isError,
+  } = useKyQuery('categories', null, null, {
+    select: (data) => {
+      if (!selectedCategory.length) {
+        const allSubCategories = data.data.reduce((acc, category) => {
+          acc.push(...category.subcategories)
           return acc
-        }, []),
-        pending: queryResult.some((result) => result.isPending),
+        }, [])
+        return allSubCategories
       }
+      const filteredCategories = data.data.filter(
+        (category) =>
+          selectedCategory.some((selected) => selected.id === category.id) &&
+          !selectedSubCategory.some(
+            (subCategory) => subCategory.categoryId === category.id
+          )
+      )
+      return filteredCategories.reduce((acc, filteredCategory) => {
+        acc.push(...filteredCategory.subcategories)
+        return acc
+      }, [])
     },
   })
 
@@ -59,8 +39,10 @@ function TagDataFetcher({ children }) {
 
   useEffect(() => {
     const subCategoryValue = []
-    if (!combinedQueries.pending && combinedQueries.data) {
-      subCategoryValue.push(...combinedQueries.data)
+    if (!isLoading && !isError && filteredSubCategories.length) {
+      subCategoryValue.push(
+        ...filteredSubCategories.map((subCategory) => subCategory.id)
+      )
     }
     if (selectedSubCategory.length) {
       subCategoryValue.push(
@@ -73,7 +55,7 @@ function TagDataFetcher({ children }) {
         value: subCategoryValue,
       },
     ])
-  }, [combinedQueries, selectedSubCategory])
+  }, [filteredSubCategories, selectedSubCategory])
 
   return children({ queryData })
 }

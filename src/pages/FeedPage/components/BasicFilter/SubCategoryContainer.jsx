@@ -11,8 +11,10 @@ function SubCategoryCheckbox({ categoryId, subCategory }) {
     (state) => [state.addSelectedSubCategory, state.deleteSelectedSubCategory]
   )
 
+  const subCategoryInSelected = inArray(selectedSubCategory, subCategory.id)
+
   const handleCheckboxChange = () => {
-    if (inArray(selectedSubCategory, subCategory.id)) {
+    if (subCategoryInSelected) {
       deleteSelectedSubCategory(subCategory.id)
     } else {
       addSelectedSubCategory({ ...subCategory, categoryId })
@@ -22,7 +24,9 @@ function SubCategoryCheckbox({ categoryId, subCategory }) {
   return (
     <SelectWrapper>
       <Checkbox
-        checked={inArray(selectedSubCategory, subCategory.id)}
+        id={subCategory.id}
+        name={subCategory.name}
+        checked={subCategoryInSelected}
         onChange={handleCheckboxChange}
       >
         {subCategory.name}
@@ -39,12 +43,7 @@ SubCategoryCheckbox.propTypes = {
   }).isRequired,
 }
 
-function SubCategoryContainer({ categoryId }) {
-  const selectedCategory = useFeedStore((state) => state.selectedCategory)
-  const { subCategories } = selectedCategory.find(
-    (selected) => selected.id === categoryId
-  )
-
+function SubCategoryContainer({ categoryId, subCategories }) {
   if (!subCategories.length)
     return (
       <SubSelectContainer>
@@ -67,6 +66,12 @@ function SubCategoryContainer({ categoryId }) {
 
 SubCategoryContainer.propTypes = {
   categoryId: PropTypes.number.isRequired,
+  subCategories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 }
 
 export default SubCategoryContainer
