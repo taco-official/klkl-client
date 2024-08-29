@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { Button, ConfigProvider } from 'antd'
 import theme from '../../styles/theme'
 
-function Widthdrawl() {
+function Withdrawal() {
   return (
     <ConfigProvider>
-      <WidthdrawalBox>
+      <WithdrawalBox>
         {`탈퇴하시면 개인정보는 모두 삭제되며 
 				삭제된 정보는 복구할 수 없습니다
         탈퇴하시겠습니까?`}
@@ -16,12 +16,12 @@ function Widthdrawl() {
         >
           탈퇴
         </Button>
-      </WidthdrawalBox>
+      </WithdrawalBox>
     </ConfigProvider>
   )
 }
 
-const WidthdrawalBox = styled.div`
+const WithdrawalBox = styled.div`
   width: 100%;
   height: 100%;
 
@@ -42,4 +42,4 @@ const WidthdrawalBox = styled.div`
   }
 `
 
-export default Widthdrawl
+export default Withdrawal

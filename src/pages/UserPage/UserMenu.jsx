@@ -4,7 +4,7 @@ import { Menu } from 'antd'
 import userMenuKeys from '../../constants/userMenuKeys'
 import ProductList from './ProductList'
 import theme from '../../styles/theme'
-import Widthdrawal from './Withdrawal'
+import Withdrawal from './Withdrawal'
 import { kyInstance } from '../../hooks/kyInstance'
 
 const items = [
@@ -32,7 +32,7 @@ const useContentFetch = (selectedMenu) => {
 
   const fetchProductList = async () => {
     try {
-      if (selectedMenu === userMenuKeys.WIDTHDRAW) setContent(<Widthdrawal />)
+      if (selectedMenu === userMenuKeys.WIDTHDRAW) setContent(<Withdrawal />)
       else {
         const data = await kyInstance.get(selectedMenu).json()
         setContent(<ProductList productList={data.data.content} />)
