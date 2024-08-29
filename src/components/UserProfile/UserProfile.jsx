@@ -1,13 +1,10 @@
-import { React, useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Button, ConfigProvider } from 'antd'
 import ProfileImage from './ProfileImage'
 import theme from '../../styles/theme'
 
-export default function UserProfile({ userData }) {
-  const [isFollowed, changeFollow] = useState(false)
-
+export default function UserProfile({ userData, profileButton }) {
   return (
     <ProfileBox>
       <ProfileImage
@@ -21,15 +18,7 @@ export default function UserProfile({ userData }) {
         </div>
         <div className="profile--user__introduce">{userData.description}</div>
       </SimpleUserInfo>
-      <ConfigProvider theme={{ token: { colorPrimary: theme.color.main } }}>
-        <Button
-          onClick={() => changeFollow(!isFollowed)}
-          type={isFollowed ? 'primary' : 'default'}
-          style={{ fontFamily: theme.style.mainBold }}
-        >
-          {isFollowed ? '팔로우' : '팔로우 취소'}
-        </Button>
-      </ConfigProvider>
+      {profileButton}
     </ProfileBox>
   )
 }
@@ -41,6 +30,7 @@ UserProfile.propTypes = {
     description: PropTypes.string,
     totalLikeCount: PropTypes.number,
   }),
+  profileButton: PropTypes.element.isRequired,
 }
 
 const ProfileBox = styled.div`
@@ -60,7 +50,6 @@ const SimpleUserInfo = styled.div`
   flex-grow: 1;
 
   height: 100%;
-
   margin-left: 15px;
 
   .profile--user__nickname {
