@@ -22,7 +22,10 @@ function CountryList() {
     isLoading,
     isError,
     error,
-  } = useKyQuery(`regions/${continentId}/countries`)
+  } = useKyQuery(`regions/${continentId}/countries`, null, [
+    'regions/countries',
+    continentId,
+  ])
 
   if (isLoading) return <SelectionList $width={`${100 / 3}%`} />
   if (isError) return <div>{error}</div>

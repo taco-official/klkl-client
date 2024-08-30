@@ -5,15 +5,15 @@ import { user } from '../../../../test/data/DummyData'
 import StyledList from './ProductList.style'
 import LoadingContent from '../../../../components/PreviewContent/LoadingContent'
 
-function ProductList({ productDataList, loading = null, error = null }) {
-  if (loading)
+function ProductList({ productDataList, isLoading = null, isError = null }) {
+  if (isLoading)
     return (
       <StyledList>
         <LoadingContent />
       </StyledList>
     )
 
-  if (error)
+  if (isError)
     return <StyledList className="empty">로딩에 실패했습니다.</StyledList>
 
   if (!productDataList.length)
@@ -50,8 +50,8 @@ ProductList.propTypes = {
       likeCount: PropTypes.number,
     })
   ),
-  loading: PropTypes.bool,
-  error: PropTypes.shape({}),
+  isLoading: PropTypes.bool,
+  isError: PropTypes.bool,
 }
 
 export default ProductList

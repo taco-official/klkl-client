@@ -22,7 +22,10 @@ function CityList() {
     isLoading,
     isError,
     error,
-  } = useKyQuery(`countries/${countryId}/cities`)
+  } = useKyQuery(`countries/${countryId}/cities`, null, [
+    'countries/cities',
+    countryId,
+  ])
 
   if (isLoading) return <SelectionList $width={`${100 / 3}%`} />
   if (isError) return <div>{error}</div>

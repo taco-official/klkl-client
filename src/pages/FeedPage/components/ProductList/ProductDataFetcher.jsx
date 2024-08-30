@@ -2,11 +2,9 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useShallow } from 'zustand/react/shallow'
 import { Pagination } from 'antd'
-import { method } from '../../../../hooks/kyInstance'
-import useKy from '../../../../hooks/useKy'
 import useFeedStore from '../../../../stores/useFeedStore'
-import parseQueryParams from '../../../../utils/parseQueryParams'
 import { FeedContainer } from '../../FeedPage.style'
+import useKyQuery from '../../../../hooks/useKyQuery'
 
 function useProductQuery() {
   const [queryArray, setQueryArray] = useState([])
@@ -77,18 +75,16 @@ function useProductQuery() {
       })
     }
 
-    if (Object.keys(selectedSort).length) {
-      queryData.push(
-        {
-          key: 'sort_by',
-          value: selectedSort.sortBy,
-        },
-        {
-          key: 'sort_direction',
-          value: selectedSort.sortDirection,
-        }
-      )
-    }
+    queryData.push(
+      {
+        key: 'sort_by',
+        value: selectedSort.sortBy,
+      },
+      {
+        key: 'sort_direction',
+        value: selectedSort.sortDirection,
+      }
+    )
 
     setQueryArray(queryData)
   }, [
@@ -103,11 +99,32 @@ function useProductQuery() {
 }
 
 function ProductDataFetcher({ children }) {
-  const { queryArray } = useProductQuery()
+  const { queryArray: selectedQueryArray } = useProductQuery()
   const [page, setPage] = useState({ requestPage: 0, size: 9 })
   const [productDataList, setProductDataList] = useState([])
-  const [requestURI, setRequestURI] = useState(
-    parseQueryParams('products', [
+  const [requestQuery, setRequestQuery] = useState([
+    {
+      key: 'page',
+      value: page.requestPage,
+    },
+    {
+      key: 'size',
+      value: page.size,
+    },
+    ...selectedQueryArray,
+  ])
+  const {
+    isLoading,
+    data: productData,
+    isError,
+    refetch,
+  } = useKyQuery('products', requestQuery, undefined, {
+    staleTime: 0,
+    refetchOnMount: false,
+  })
+
+  useEffect(() => {
+    setRequestQuery([
       {
         key: 'page',
         value: page.requestPage,
@@ -116,43 +133,23 @@ function ProductDataFetcher({ children }) {
         key: 'size',
         value: page.size,
       },
-      ...queryArray,
+      ...selectedQueryArray,
     ])
-  )
-  const { loading, data: productData, error, fetchData } = useKy()
+  }, [page, selectedQueryArray])
 
   useEffect(() => {
-    setRequestURI(
-      parseQueryParams('products', [
-        {
-          key: 'page',
-          value: page.requestPage,
-        },
-        {
-          key: 'size',
-          value: page.size,
-        },
-        ...queryArray,
-      ])
-    )
-  }, [page, queryArray])
+    refetch()
+  }, [])
 
   useEffect(() => {
-    fetchData({
-      url: requestURI,
-      method: method.GET,
-    })
-  }, [requestURI])
-
-  useEffect(() => {
-    if (!loading && !error && productData) {
+    if (!isLoading && !isError && productData) {
       setProductDataList(productData.data.content)
     }
-  }, [loading, error, productData])
+  }, [isLoading, isError, productData])
 
   return (
     <FeedContainer>
-      {children({ loading, productDataList, error })}
+      {children({ isLoading, productDataList, isError })}
       <Pagination
         defaultCurrent={1}
         current={page.requestPage + 1}

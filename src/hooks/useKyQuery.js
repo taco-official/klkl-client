@@ -8,19 +8,20 @@ import parseQueryParams from '../utils/parseQueryParams'
  * @param {string} endPoint 요청할 엔드포인트 URL
  * @param {Array} requestQuery 요청시 넣을 쿼리 객체 (default: null)
  *  Type: Array<Object<string, Array<number | string | boolean>>>
+ * @param {Array} queryKey 쿼리키 (default: [endPoint])
  * @param {object} options 요청시 넣을 옵션 (default: null)
  * @return useQuery의 return과 동일
  */
 const useKyQuery = (
   endPoint,
   requestQuery = null,
-  queryKey = null,
+  queryKey = [endPoint],
   options = null
 ) => {
   const uri = parseQueryParams(endPoint, requestQuery)
 
   return useQuery({
-    queryKey: queryKey || [endPoint],
+    queryKey,
     queryFn: () => kyInstance.get(uri).json(),
     cacheTime: 300000,
     staleTime: 300000,

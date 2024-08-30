@@ -12,7 +12,7 @@ function TagDataFetcher({ children }) {
     isLoading,
     data: filteredSubCategories,
     isError,
-  } = useKyQuery('categories', null, null, {
+  } = useKyQuery('categories', null, undefined, {
     select: (data) => {
       if (!selectedCategory.length) {
         const allSubCategories = data.data.reduce((acc, category) => {
@@ -49,12 +49,13 @@ function TagDataFetcher({ children }) {
         ...selectedSubCategory.map((subCategory) => subCategory.id)
       )
     }
-    setQueryData([
-      {
-        key: 'subcategory_id',
-        value: subCategoryValue,
-      },
-    ])
+    if (subCategoryValue.length)
+      setQueryData([
+        {
+          key: 'subcategory_id',
+          value: subCategoryValue,
+        },
+      ])
   }, [filteredSubCategories, selectedSubCategory])
 
   return children({ queryData })
