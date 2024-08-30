@@ -4,13 +4,13 @@ import PreviewContent from '../../../../components/PreviewContent/PreviewContent
 import { user } from '../../../../test/data/DummyData'
 import StyledList from './ProductList.style'
 
-function ProductList({ productDataList }) {
-  if (!productDataList.length)
+function ProductList({ dataList }) {
+  if (!dataList.length)
     return <StyledList className="empty">해당 상품이 없습니다.</StyledList>
 
   return (
     <StyledList>
-      {productDataList.map((content) => (
+      {dataList.map((content) => (
         <PreviewContent
           key={content.id}
           userId={user.id}
@@ -22,7 +22,7 @@ function ProductList({ productDataList }) {
 }
 
 ProductList.propTypes = {
-  productDataList: PropTypes.arrayOf(
+  dataList: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       thumbnail: PropTypes.string,

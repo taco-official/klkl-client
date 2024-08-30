@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import { Pagination } from 'antd'
 import useKyQuery from '../../../../hooks/useKyQuery'
 import useProductQuery from '../../../../hooks/useProductQuery'
-import LoadingContent from '../../../../components/PreviewContent/LoadingContent'
 import { FeedContainer } from '../../FeedPage.style'
-import StyledList from './ProductList.style'
 
 function ProductDataFetcher({ children }) {
   const { queryArray: selectedQueryArray } = useProductQuery()
@@ -66,15 +64,7 @@ function ProductDataFetcher({ children }) {
 
   return (
     <FeedContainer>
-      {isLoading && (
-        <StyledList>
-          <LoadingContent />
-        </StyledList>
-      )}
-      {isError && (
-        <StyledList className="empty">로딩에 실패했습니다.</StyledList>
-      )}
-      {!isLoading && !isError && children({ productDataList })}
+      {children({ isLoading, productDataList, isError })}
       <Pagination
         align="center"
         current={pageData?.responsePage && pageData.responsePage + 1}
