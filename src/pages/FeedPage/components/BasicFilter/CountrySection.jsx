@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
-// import useKy from '../../../../hooks/useKy'
+import useKyQuery from '../../../../hooks/useKyQuery'
 import useFeedStore from '../../../../stores/useFeedStore'
 import ShowHideButton from '../../../../components/Button/ShowHideButton'
 import theme from '../../../../styles/theme'
@@ -20,19 +20,31 @@ function CountryRadio({ country }) {
     state.setSelectedCountry,
     state.resetSelectedCity,
   ])
+  const {
+    isLoading,
+    data: citiesData,
+    isError,
+  } = useKyQuery(`countries/${country.id}/cities`, null, [
+    'countries/cities',
+    country.id,
+  ])
 
   const handleRadioChange = () => {
-    setSelectedCountry({
-      id: country.countryId,
-      name: country.name,
-    })
     resetSelectedCity()
+    setSelectedCountry({
+      ...country,
+      cities: citiesData.data,
+    })
   }
+
+  if (isLoading || isError) return null
 
   return (
     <SelectWrapper>
       <Radio
-        checked={selectedCountry.id === country.countryId}
+        id={country.id}
+        name={country.name}
+        checked={selectedCountry.id === country.id}
         onChange={handleRadioChange}
       >
         {country.name}
@@ -43,59 +55,58 @@ function CountryRadio({ country }) {
 
 CountryRadio.propTypes = {
   country: PropTypes.shape({
-    countryId: PropTypes.number.isRequired,
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
 }
 
 function CountryRadioArray({ regionId }) {
   const [countries, setCountries] = useState([])
+  const {
+    isLoading,
+    data: countriesData,
+    isError,
+  } = useKyQuery(`regions/${regionId}/countries`, null, [
+    'regions/countries',
+    regionId,
+  ])
 
   useEffect(() => {
-    const fetchCountries = (id) => {
-      const countriesData = {
-        1000: {
-          data: [
-            {
-              countryId: 1100,
-              name: '일본',
-            },
-            {
-              countryId: 1200,
-              name: '중국',
-            },
-            {
-              countryId: 1300,
-              name: '비활성화된 국가 1',
-            },
-          ],
-        },
-        2000: {
-          data: [],
-        },
-        3000: {
-          data: [],
-        },
-      }
-      setCountries(countriesData[id] ? countriesData[id].data : [])
-    }
+    if (!isLoading && !isError && countriesData)
+      setCountries(
+        countriesData.data.map((country) => ({
+          id: country.id,
+          name: country.name,
+        }))
+      )
+  }, [isLoading, isError, countriesData])
 
-    fetchCountries(regionId)
-  }, [regionId])
+  if (isLoading)
+    return (
+      <SelectContainer>
+        <SubTitle className="empty">불러오는 중입니다.</SubTitle>
+      </SelectContainer>
+    )
 
-  if (countries.length === 0) {
+  if (isError)
+    return (
+      <SelectContainer>
+        <SubTitle className="empty">로딩에 실패했습니다.</SubTitle>
+      </SelectContainer>
+    )
+
+  if (!countries.length)
     return (
       <SelectContainer>
         <SubTitle className="empty">나라가 없습니다.</SubTitle>
       </SelectContainer>
     )
-  }
 
   return (
     <SelectContainer>
       {countries.map((country) => (
         <CountryRadio
-          key={country.countryId}
+          key={country.id}
           country={country}
         />
       ))}
@@ -108,70 +119,65 @@ CountryRadioArray.propTypes = {
 }
 
 function RegionCollapse() {
-  const [isOpen, setIsOpen] = useState({})
   const [regions, setRegions] = useState([])
+  const [isOpen, setIsOpen] = useState({})
+  const { isLoading, data: regionsData, isError } = useKyQuery('regions')
 
   useEffect(() => {
-    const fetchRegions = () => {
-      const regionsData = {
-        data: [
-          {
-            regionId: 1000,
-            name: '활성화된 지역',
-          },
-          {
-            regionId: 2000,
-            name: '비활성화된 지역',
-          },
-          {
-            regionId: 3000,
-            name: '비활성화된 지역',
-          },
-        ],
-      }
-      setRegions(regionsData.data)
-
+    if (!isLoading && !isError && regionsData) {
+      setRegions(
+        regionsData.data.map((region) => ({
+          id: region.id,
+          name: region.name,
+        }))
+      )
       const initializeOpenState = regionsData.data.reduce((acc, region) => {
-        acc[region.regionId] = false
+        acc[region.id] = false
         return acc
       }, {})
+
       setIsOpen(initializeOpenState)
     }
-    fetchRegions()
-  }, [])
+  }, [isLoading, isError, regionsData])
 
-  const updateElement = (key, value) => {
-    setIsOpen({
-      ...isOpen,
-      [key]: value,
-    })
-  }
+  if (isLoading)
+    return (
+      <RegionContainer>
+        <SubTitle className="empty">불러오는 중입니다.</SubTitle>
+      </RegionContainer>
+    )
 
-  if (regions.length === 0) {
+  if (isError)
+    return (
+      <RegionContainer>
+        <SubTitle className="empty">로딩에 실패했습니다.</SubTitle>
+      </RegionContainer>
+    )
+
+  if (!regions.length)
     return (
       <RegionContainer>
         <SubTitle className="empty">지역이 없습니다.</SubTitle>
       </RegionContainer>
     )
+
+  const updateIsOpen = (key) => {
+    setIsOpen((prev) => ({ ...prev, [key]: !prev[key] }))
   }
 
   return (
     <RegionContainer>
       {regions.map((region) => (
-        <RegionBox key={region.regionId}>
+        <RegionBox key={region.id}>
           <SubTitle className="region">
             <div className="region">{region.name}</div>
             <ShowHideButton
-              handleClick={() =>
-                updateElement(region.regionId, !isOpen[region.regionId])
-              }
+              handleClick={() => updateIsOpen(region.id)}
               iconColor={theme.color.lineGrey}
-              isOption={isOpen[region.regionId]}
+              isOption={isOpen[region.id]}
             />
           </SubTitle>
-          {isOpen[region.regionId] && (
-            <CountryRadioArray regionId={region.regionId} />
-          )}
+          {isOpen[region.id] && <CountryRadioArray regionId={region.id} />}
         </RegionBox>
       ))}
     </RegionContainer>

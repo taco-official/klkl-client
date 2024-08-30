@@ -4,8 +4,6 @@ import {
   ThumbnailContainer,
   LoadingIcon,
   DescriptionContainer,
-  TitleContainer,
-  SubDesBox,
   CategoryWrapper,
   ProductNameBox,
   TagsContainer,
@@ -19,12 +17,8 @@ function LoadingContent() {
         <LoadingIcon size="2rem" />
       </ThumbnailContainer>
       <DescriptionContainer className="loading">
-        <TitleContainer>
-          <SubDesBox className="loading">
-            <CategoryWrapper className="loading" />
-          </SubDesBox>
-          <ProductNameBox className="loading" />
-        </TitleContainer>
+        <CategoryWrapper className="loading" />
+        <ProductNameBox className="loading" />
         <TagsContainer className="loading" />
         <IconBox className="loading" />
       </DescriptionContainer>

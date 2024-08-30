@@ -10,16 +10,14 @@ import {
   PreviewContainer,
   ThumbnailContainer,
   DescriptionContainer,
-  SubDesBox,
   CategoryWrapper,
   ProductNameBox,
   TagsContainer,
   IconContainer,
   IconBox,
-  TitleContainer,
 } from './PreviewContent.style'
 
-function PreviewContent({ userId = undefined, productData }) {
+function PreviewContent({ userId = null, productData }) {
   return (
     <Link
       to={`/products/${productData.id}`}
@@ -38,14 +36,10 @@ function PreviewContent({ userId = undefined, productData }) {
           />
         </ThumbnailContainer>
         <DescriptionContainer>
-          <TitleContainer>
-            <SubDesBox>
-              <CategoryWrapper>
-                <div>{`${productData.countryName} / ${productData.categoryName}`}</div>
-              </CategoryWrapper>
-            </SubDesBox>
-            <ProductNameBox id="productName">{productData.name}</ProductNameBox>
-          </TitleContainer>
+          <CategoryWrapper>
+            <div>{`${productData.countryName} / ${productData.categoryName}`}</div>
+          </CategoryWrapper>
+          <ProductNameBox id="productName">{productData.name}</ProductNameBox>
           <TagsContainer>
             {productData.tags.map(
               (tag, index) =>
@@ -84,8 +78,8 @@ PreviewContent.propTypes = {
     name: PropTypes.string.isRequired,
     tags: PropTypes.arrayOf(
       PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
+        id: PropTypes.number,
+        name: PropTypes.string,
       })
     ),
     rating: PropTypes.number.isRequired,
