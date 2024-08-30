@@ -21,9 +21,6 @@ function useProductQuery() {
       state.selectedSort,
     ])
   )
-  useEffect(() => {
-    setQueryArray([])
-  }, [])
 
   useEffect(() => {
     const queryData = []
