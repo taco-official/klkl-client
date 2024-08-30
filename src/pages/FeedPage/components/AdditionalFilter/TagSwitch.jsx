@@ -16,8 +16,10 @@ function TagSwitch({ tag }) {
     state.deleteSelectedTag,
   ])
 
+  const tagInSelected = inArray(selectedTag, tag.id)
+
   const handleSwitchChange = () => {
-    if (inArray(selectedTag, tag.id)) deleteSelectedTag(tag.id)
+    if (tagInSelected) deleteSelectedTag(tag.id)
     else addSelectedTag(tag)
   }
 
@@ -26,10 +28,8 @@ function TagSwitch({ tag }) {
       shape="round"
       size="small"
       style={{
-        color: inArray(selectedTag, tag.id)
-          ? theme.color.main
-          : antdTheme.defaultColorText,
-        borderColor: inArray(selectedTag, tag.id)
+        color: tagInSelected ? theme.color.main : antdTheme.defaultColorText,
+        borderColor: tagInSelected
           ? theme.color.main
           : antdTheme.defaultColorBorder,
       }}

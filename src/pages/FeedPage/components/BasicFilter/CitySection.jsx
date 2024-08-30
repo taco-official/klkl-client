@@ -17,8 +17,10 @@ function CityCheckBox({ city }) {
     state.deleteSelectedCity,
   ])
 
+  const cityInSelected = inArray(selectedCity, city.id)
+
   const handleCheckboxChange = () => {
-    if (inArray(selectedCity, city.id)) deleteSelectedCity(city.id)
+    if (cityInSelected) deleteSelectedCity(city.id)
     else addSelectedCity({ id: city.id, name: city.name })
   }
 
@@ -27,7 +29,7 @@ function CityCheckBox({ city }) {
       <Checkbox
         id={city.id}
         name={city.name}
-        checked={inArray(selectedCity, city.id)}
+        checked={cityInSelected}
         onChange={handleCheckboxChange}
       >
         {city.name}
