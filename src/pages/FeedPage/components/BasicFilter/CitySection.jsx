@@ -25,16 +25,14 @@ function CityCheckBox({ city }) {
   }
 
   return (
-    <SelectWrapper>
-      <Checkbox
-        id={city.id}
-        name={city.name}
-        checked={cityInSelected}
-        onChange={handleCheckboxChange}
-      >
-        {city.name}
-      </Checkbox>
-    </SelectWrapper>
+    <Checkbox
+      id={city.id}
+      name={city.name}
+      checked={cityInSelected}
+      onChange={handleCheckboxChange}
+    >
+      {city.name}
+    </Checkbox>
   )
 }
 
@@ -45,26 +43,17 @@ CityCheckBox.propTypes = {
   }).isRequired,
 }
 
-function CityContainer() {
+function CityArray() {
   const selectedCountry = useFeedStore((state) => state.selectedCountry)
 
   if (!selectedCountry.cities.length)
-    return (
-      <SelectContainer>
-        <SubTitle className="empty">도시가 없습니다.</SubTitle>
-      </SelectContainer>
-    )
+    return <SubTitle className="empty">도시가 없습니다.</SubTitle>
 
-  return (
-    <SelectContainer>
-      {selectedCountry.cities.map((city) => (
-        <CityCheckBox
-          key={city.id}
-          city={city}
-        />
-      ))}
-    </SelectContainer>
-  )
+  return selectedCountry.cities.map((city) => (
+    <SelectWrapper key={city.id}>
+      <CityCheckBox city={city} />
+    </SelectWrapper>
+  ))
 }
 
 function CitySection() {
@@ -73,13 +62,13 @@ function CitySection() {
   return (
     <SectionContainer>
       <div className="title">도시</div>
-      {!('id' in selectedCountry) ? (
-        <SelectContainer>
+      <SelectContainer>
+        {!('id' in selectedCountry) ? (
           <SubTitle className="empty">국가를 선택하세요.</SubTitle>
-        </SelectContainer>
-      ) : (
-        <CityContainer />
-      )}
+        ) : (
+          <CityArray />
+        )}
+      </SelectContainer>
     </SectionContainer>
   )
 }
