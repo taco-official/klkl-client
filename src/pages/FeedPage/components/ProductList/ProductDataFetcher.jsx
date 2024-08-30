@@ -9,16 +9,20 @@ import StyledList from './ProductList.style'
 
 function ProductDataFetcher({ children }) {
   const { queryArray: selectedQueryArray } = useProductQuery()
-  const [page, setPage] = useState({ requestPage: 0, size: 9 })
+  const [pageData, setPageData] = useState({
+    requestPage: 0,
+    responsePage: undefined,
+    size: 9,
+  })
   const [productDataList, setProductDataList] = useState([])
   const [requestQuery, setRequestQuery] = useState([
     {
       key: 'page',
-      value: page.requestPage,
+      value: pageData.requestPage,
     },
     {
       key: 'size',
-      value: page.size,
+      value: pageData.size,
     },
     ...selectedQueryArray,
   ])
@@ -36,15 +40,15 @@ function ProductDataFetcher({ children }) {
     setRequestQuery([
       {
         key: 'page',
-        value: page.requestPage,
+        value: pageData.requestPage,
       },
       {
         key: 'size',
-        value: page.size,
+        value: pageData.size,
       },
       ...selectedQueryArray,
     ])
-  }, [page, selectedQueryArray])
+  }, [pageData, selectedQueryArray])
 
   useEffect(() => {
     refetch()
@@ -53,6 +57,10 @@ function ProductDataFetcher({ children }) {
   useEffect(() => {
     if (!isLoading && !isError && productData) {
       setProductDataList(productData.data.content)
+      setPageData((prev) => ({
+        ...prev,
+        responsePage: productData.data.pageNumber,
+      }))
     }
   }, [isLoading, isError, productData])
 
@@ -68,12 +76,13 @@ function ProductDataFetcher({ children }) {
       )}
       {!isLoading && !isError && children({ productDataList })}
       <Pagination
-        defaultCurrent={1}
-        current={page.requestPage + 1}
-        total={productData?.data.totalElements || 0}
-        pageSize={page.size}
-        onChange={(pageNumber) =>
-          setPage((prev) => ({ ...prev, requestPage: pageNumber - 1 }))
+        align="center"
+        current={pageData?.responsePage && pageData.responsePage + 1}
+        defaultPageSize={9}
+        pageSize={productData?.data.pageSize}
+        total={productData?.data.totalElements}
+        onChange={(page) =>
+          setPageData((prev) => ({ ...prev, requestPage: page - 1 }))
         }
       />
     </FeedContainer>

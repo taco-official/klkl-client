@@ -1,8 +1,8 @@
 import React from 'react'
-import { Dropdown, Button } from 'antd'
+import { ConfigProvider, Dropdown, Button } from 'antd'
 import { FiChevronDown as DownArrow } from 'react-icons/fi'
 import useFeedStore from '../../../../stores/useFeedStore'
-import theme from '../../../../styles/theme'
+import { buttonTheme } from '../../FeedPage.style'
 
 function SortButton() {
   const selectedSort = useFeedStore((state) => state.selectedSort)
@@ -47,25 +47,25 @@ function SortButton() {
   }
 
   return (
-    <Dropdown menu={menuProps}>
-      <Button
-        shape="round"
-        size="small"
-      >
-        <div
-          style={{
-            fontFamily: theme.style.main,
-            fontSize: theme.size.textXS,
-            display: 'flex',
-            columnGap: '0.1rem',
-            alignItems: 'center',
-          }}
+    <ConfigProvider theme={buttonTheme}>
+      <Dropdown menu={menuProps}>
+        <Button
+          shape="round"
+          size="small"
         >
-          <div>{selectedSort.label}</div>
-          <DownArrow />
-        </div>
-      </Button>
-    </Dropdown>
+          <div
+            style={{
+              display: 'flex',
+              columnGap: '0.15rem',
+              alignItems: 'center',
+            }}
+          >
+            <div>{selectedSort.label}</div>
+            <DownArrow />
+          </div>
+        </Button>
+      </Dropdown>
+    </ConfigProvider>
   )
 }
 

@@ -32,7 +32,7 @@ const maskBackground = css`
 `
 
 const PreviewContainer = styled.div`
-  min-width: 11rem;
+  width: 11rem;
   background-color: white;
   display: flex;
   flex-direction: column;
@@ -106,10 +106,8 @@ const ProductNameBox = styled.div`
 `
 
 const TagsContainer = styled.div`
-  background-color: ${theme.color.tag};
-  height: ${theme.size.textSM};
-  margin-top: 0.2rem;
-  margin-bottom: 0.1rem;
+  height: 1.35rem;
+  margin: 0.2rem 0;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;

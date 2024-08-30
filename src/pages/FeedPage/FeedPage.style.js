@@ -7,10 +7,16 @@ const fontTheme = {
   },
 }
 
-const tagTheme = {
-  ...fontTheme,
+const buttonTheme = {
+  components: {
+    Button: {
+      contentFontSizeSM: theme.size.textXS,
+      paddingBlockSM: 0,
+      paddingInlineSM: 0,
+    },
+  },
   token: {
-    fontSize: theme.size.textXS,
+    fontFamily: theme.style.main,
   },
 }
 
@@ -39,7 +45,6 @@ const FeedContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 0 1;
-  align-items: center;
   row-gap: 1.1rem;
 `
 
@@ -66,7 +71,7 @@ const ContentContainer = styled.div`
 
 export {
   fontTheme,
-  tagTheme,
+  buttonTheme,
   FeedPageLayout,
   FeedPageContent,
   FeedArea,

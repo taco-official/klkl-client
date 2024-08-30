@@ -6,7 +6,7 @@ import useKy from '../../../../hooks/useKy'
 import useFeedStore from '../../../../stores/useFeedStore'
 import inArray from '../../../../utils/inArray'
 import theme from '../../../../styles/theme'
-import { tagTheme } from '../../FeedPage.style'
+import { buttonTheme } from '../../FeedPage.style'
 import MessageBox from './TagSwitch.style'
 
 function TagSwitch({ tag }) {
@@ -67,7 +67,7 @@ function TagSwitchList({ queryData }) {
   if (!tags.length) return <MessageBox>선택 가능한 태그가 없습니다.</MessageBox>
 
   return (
-    <ConfigProvider theme={tagTheme}>
+    <ConfigProvider theme={buttonTheme}>
       {tags.map((tag) => (
         <TagSwitch
           key={tag.id}
