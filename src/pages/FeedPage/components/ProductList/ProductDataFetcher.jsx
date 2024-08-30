@@ -139,7 +139,7 @@ function ProductDataFetcher({ children }) {
 
   useEffect(() => {
     refetch()
-  }, [])
+  }, [requestQuery])
 
   useEffect(() => {
     if (!isLoading && !isError && productData) {
