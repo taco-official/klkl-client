@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import useKyQuery from '../../../../hooks/useKyQuery'
 import useFeedStore from '../../../../stores/useFeedStore'
 import inArray from '../../../../utils/inArray'
-import SubCategoryArray from './SubCategoryContainer'
+import SubCategoryArray from './SubCategoryArray'
 import {
   SectionContainer,
   SelectContainer,
