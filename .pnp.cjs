@@ -35,7 +35,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/react", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:13.4.0"],\
           ["@testing-library/user-event", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:13.5.0"],\
           ["antd", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.20.1"],\
-          ["axios", "npm:1.7.2"],\
+          ["axios", "npm:1.7.6"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-airbnb", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:19.0.4"],\
           ["eslint-config-prettier", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:9.1.0"],\
@@ -6827,11 +6827,11 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["axios", [\
-      ["npm:1.7.2", {\
-        "packageLocation": "./.yarn/cache/axios-npm-1.7.2-c89264f6f7-cbd47ce380.zip/node_modules/axios/",\
+      ["npm:1.7.6", {\
+        "packageLocation": "./.yarn/cache/axios-npm-1.7.6-9db5867ee5-8b4be67056.zip/node_modules/axios/",\
         "packageDependencies": [\
-          ["axios", "npm:1.7.2"],\
-          ["follow-redirects", "virtual:c89264f6f79513b22a07db5e53adf77eba9e48634cf471fb55eb2e75d910809bbac48d9ce7a920c63c8ff2780624fff91866270d8acf614cbd0c4cb748a8b29a#npm:1.15.6"],\
+          ["axios", "npm:1.7.6"],\
+          ["follow-redirects", "virtual:9db5867ee50d487707320bc0a33f64787df8fd2705505150638b0fac05a396752c8ea19d53559f8c134bdae114b0865794d2050b60171d8d4291335db61f8530#npm:1.15.6"],\
           ["form-data", "npm:4.0.0"],\
           ["proxy-from-env", "npm:1.1.0"]\
         ],\
@@ -10423,10 +10423,10 @@ const RAW_RUNTIME_STATE =
         ],\
         "linkType": "SOFT"\
       }],\
-      ["virtual:c89264f6f79513b22a07db5e53adf77eba9e48634cf471fb55eb2e75d910809bbac48d9ce7a920c63c8ff2780624fff91866270d8acf614cbd0c4cb748a8b29a#npm:1.15.6", {\
-        "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-d6f128c480/0/cache/follow-redirects-npm-1.15.6-50635fe51d-9ff767f0d7.zip/node_modules/follow-redirects/",\
+      ["virtual:9db5867ee50d487707320bc0a33f64787df8fd2705505150638b0fac05a396752c8ea19d53559f8c134bdae114b0865794d2050b60171d8d4291335db61f8530#npm:1.15.6", {\
+        "packageLocation": "./.yarn/__virtual__/follow-redirects-virtual-8422af585d/0/cache/follow-redirects-npm-1.15.6-50635fe51d-9ff767f0d7.zip/node_modules/follow-redirects/",\
         "packageDependencies": [\
-          ["follow-redirects", "virtual:c89264f6f79513b22a07db5e53adf77eba9e48634cf471fb55eb2e75d910809bbac48d9ce7a920c63c8ff2780624fff91866270d8acf614cbd0c4cb748a8b29a#npm:1.15.6"],\
+          ["follow-redirects", "virtual:9db5867ee50d487707320bc0a33f64787df8fd2705505150638b0fac05a396752c8ea19d53559f8c134bdae114b0865794d2050b60171d8d4291335db61f8530#npm:1.15.6"],\
           ["@types/debug", null],\
           ["debug", null]\
         ],\
@@ -11160,7 +11160,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["http-proxy", "npm:1.18.1"],\
           ["eventemitter3", "npm:4.0.7"],\
-          ["follow-redirects", "virtual:c89264f6f79513b22a07db5e53adf77eba9e48634cf471fb55eb2e75d910809bbac48d9ce7a920c63c8ff2780624fff91866270d8acf614cbd0c4cb748a8b29a#npm:1.15.6"],\
+          ["follow-redirects", "virtual:9db5867ee50d487707320bc0a33f64787df8fd2705505150638b0fac05a396752c8ea19d53559f8c134bdae114b0865794d2050b60171d8d4291335db61f8530#npm:1.15.6"],\
           ["requires-port", "npm:1.0.0"]\
         ],\
         "linkType": "HARD"\
@@ -12955,7 +12955,7 @@ const RAW_RUNTIME_STATE =
           ["@testing-library/react", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:13.4.0"],\
           ["@testing-library/user-event", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:13.5.0"],\
           ["antd", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:5.20.1"],\
-          ["axios", "npm:1.7.2"],\
+          ["axios", "npm:1.7.6"],\
           ["eslint", "npm:8.57.0"],\
           ["eslint-config-airbnb", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:19.0.4"],\
           ["eslint-config-prettier", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:9.1.0"],\
@@ -19939,7 +19939,7 @@ const RAW_RUNTIME_STATE =
           ["@types/axios", null],\
           ["@types/react", null],\
           ["@types/react-dom", null],\
-          ["axios", "npm:1.7.2"],\
+          ["axios", "npm:1.7.6"],\
           ["react", "npm:18.3.1"],\
           ["react-dom", "virtual:67db5ed624082b42cd56c7ecca75bf4baff63760eefb59b3d57ed775a7eb6c4ec2e5790e77c5f297decf434393ac0efe400139b47e75ac363b5363c733538e60#npm:18.3.1"]\
         ],\
