@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { ConfigProvider, Button, theme as antdTheme } from 'antd'
-import parseQueryParams from '../../../../utils/parseQueryParams'
-import useKy from '../../../../hooks/useKy'
 import useFeedStore from '../../../../stores/useFeedStore'
 import inArray from '../../../../utils/inArray'
 import theme from '../../../../styles/theme'
@@ -47,23 +45,7 @@ TagSwitch.propTypes = {
   }).isRequired,
 }
 
-function TagSwitchList({ queryData }) {
-  const [tags, setTags] = useState([])
-  const { loading, data: tagData, error, fetchData } = useKy()
-
-  useEffect(() => {
-    if (queryData.length)
-      fetchData({ url: parseQueryParams('tags', queryData) })
-  }, [queryData])
-
-  useEffect(() => {
-    if (!loading && !error && tagData) setTags(tagData.data)
-  }, [loading, error, tagData])
-
-  if (loading) return <MessageBox>불러오는 중입니다.</MessageBox>
-
-  if (error) return <MessageBox>로딩에 실패했습니다.</MessageBox>
-
+function TagSwitchList({ tags }) {
   if (!tags.length) return <MessageBox>선택 가능한 태그가 없습니다.</MessageBox>
 
   return (
@@ -79,18 +61,12 @@ function TagSwitchList({ queryData }) {
 }
 
 TagSwitchList.propTypes = {
-  queryData: PropTypes.arrayOf(
+  tags: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string,
-      value: PropTypes.arrayOf(
-        PropTypes.oneOfType([
-          PropTypes.string,
-          PropTypes.number,
-          PropTypes.bool,
-        ])
-      ),
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
     })
-  ),
+  ).isRequired,
 }
 
 export default TagSwitchList
