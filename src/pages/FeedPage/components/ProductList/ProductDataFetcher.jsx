@@ -3,8 +3,10 @@ import PropTypes from 'prop-types'
 import { useShallow } from 'zustand/react/shallow'
 import { Pagination } from 'antd'
 import useFeedStore from '../../../../stores/useFeedStore'
-import { FeedContainer } from '../../FeedPage.style'
 import useKyQuery from '../../../../hooks/useKyQuery'
+import LoadingContent from '../../../../components/PreviewContent/LoadingContent'
+import { FeedContainer } from '../../FeedPage.style'
+import StyledList from './ProductList.style'
 
 function useProductQuery() {
   const [queryArray, setQueryArray] = useState([])
@@ -149,7 +151,15 @@ function ProductDataFetcher({ children }) {
 
   return (
     <FeedContainer>
-      {children({ isLoading, productDataList, isError })}
+      {isLoading && (
+        <StyledList>
+          <LoadingContent />
+        </StyledList>
+      )}
+      {isError && (
+        <StyledList className="empty">로딩에 실패했습니다.</StyledList>
+      )}
+      {!isLoading && !isError && children({ productDataList })}
       <Pagination
         defaultCurrent={1}
         current={page.requestPage + 1}

@@ -3,19 +3,8 @@ import PropTypes from 'prop-types'
 import PreviewContent from '../../../../components/PreviewContent/PreviewContent'
 import { user } from '../../../../test/data/DummyData'
 import StyledList from './ProductList.style'
-import LoadingContent from '../../../../components/PreviewContent/LoadingContent'
 
-function ProductList({ productDataList, isLoading = null, isError = null }) {
-  if (isLoading)
-    return (
-      <StyledList>
-        <LoadingContent />
-      </StyledList>
-    )
-
-  if (isError)
-    return <StyledList className="empty">로딩에 실패했습니다.</StyledList>
-
+function ProductList({ productDataList }) {
   if (!productDataList.length)
     return <StyledList className="empty">해당 상품이 없습니다.</StyledList>
 
@@ -50,8 +39,6 @@ ProductList.propTypes = {
       likeCount: PropTypes.number,
     })
   ),
-  isLoading: PropTypes.bool,
-  isError: PropTypes.bool,
 }
 
 export default ProductList
