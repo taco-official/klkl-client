@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { Pagination } from 'antd'
 import LoadingContent from '../../../../components/PreviewContent/LoadingContent'
@@ -12,15 +12,6 @@ function ProductDataStatusRenderer({
   setPageData,
   isError,
 }) {
-  useEffect(() => {
-    if (!isLoading && !isError && data) {
-      setPageData((prev) => ({
-        ...prev,
-        responsePage: data.data.pageNumber,
-      }))
-    }
-  }, [isLoading, isError, data])
-
   return (
     <>
       {isLoading && (
@@ -40,7 +31,7 @@ function ProductDataStatusRenderer({
         ))}
       <Pagination
         align="center"
-        current={pageData?.responsePage && pageData.responsePage + 1}
+        current={pageData.requestPage + 1}
         defaultPageSize={9}
         pageSize={data?.data.pageSize}
         total={data?.data.totalElements}

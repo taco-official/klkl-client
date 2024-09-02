@@ -8,7 +8,6 @@ function ProductDataFetcher({ children }) {
   const { queryArray: selectedQueryArray } = useProductQuery()
   const [pageData, setPageData] = useState({
     requestPage: 0,
-    responsePage: undefined,
     size: 9,
   })
   const [requestQuery, setRequestQuery] = useState([
