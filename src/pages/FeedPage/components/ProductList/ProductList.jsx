@@ -5,9 +5,6 @@ import { user } from '../../../../test/data/DummyData'
 import StyledList from './ProductList.style'
 
 function ProductList({ dataList }) {
-  if (!dataList.length)
-    return <StyledList className="empty">해당 상품이 없습니다.</StyledList>
-
   return (
     <StyledList>
       {dataList.map((content) => (
