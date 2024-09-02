@@ -1,8 +1,7 @@
 import React from 'react'
 import TagDataFetcher from './TagDataFetcher'
-import TagSwitchList from './TagSwitch'
+import TagDataStatusRenderer from './TagDataStatusRenderer'
 import { StyleSection, ContentContainer } from '../../FeedPage.style'
-import MessageBox from './TagSwitch.style'
 
 function AdditionalFilter() {
   return (
@@ -10,11 +9,15 @@ function AdditionalFilter() {
       <h6 className="title">추가 필터</h6>
       <ContentContainer className="content">
         <TagDataFetcher>
-          {({ tags, isError, error }) => {
-            if (isError || error)
-              return <MessageBox>로딩에 실패했습니다.</MessageBox>
-            return <TagSwitchList tags={tags} />
-          }}
+          {({ isLoading, loading, data, isError, error }) => (
+            <TagDataStatusRenderer
+              isLoading={isLoading}
+              loading={loading}
+              data={data}
+              isError={isError}
+              error={error}
+            />
+          )}
         </TagDataFetcher>
       </ContentContainer>
     </StyleSection>

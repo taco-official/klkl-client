@@ -5,7 +5,6 @@ import useFeedStore from '../../../../stores/useFeedStore'
 import inArray from '../../../../utils/inArray'
 import theme from '../../../../styles/theme'
 import { buttonTheme } from '../../FeedPage.style'
-import MessageBox from './TagSwitch.style'
 
 function TagSwitch({ tag }) {
   const selectedTag = useFeedStore((state) => state.selectedTag)
@@ -46,8 +45,6 @@ TagSwitch.propTypes = {
 }
 
 function TagSwitchList({ tags }) {
-  if (!tags.length) return <MessageBox>선택 가능한 태그가 없습니다.</MessageBox>
-
   return (
     <ConfigProvider theme={buttonTheme}>
       {tags.map((tag) => (
