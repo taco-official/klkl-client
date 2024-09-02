@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 
 const initialState = {
+  images: [],
   name: '',
   description: '',
   currencyId: 438,
