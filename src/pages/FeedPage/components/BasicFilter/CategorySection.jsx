@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useShallow } from 'zustand/react/shallow'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
 import useKyQuery from '../../../../hooks/useKyQuery'
 import useFeedStore from '../../../../stores/useFeedStore'
 import inArray from '../../../../utils/inArray'
-import SubCategoryContainer from './SubCategoryContainer'
+import SubCategoryArray from './SubCategoryArray'
 import {
   SectionContainer,
   SelectContainer,
   SelectWrapper,
+  SubSelectContainer,
 } from './BasicFilter.style'
 
 function CategoryCheckBox({ category }) {
@@ -47,7 +48,7 @@ function CategoryCheckBox({ category }) {
   }
 
   return (
-    <SelectWrapper>
+    <>
       <Checkbox
         id={category.id}
         name={category.name}
@@ -63,12 +64,14 @@ function CategoryCheckBox({ category }) {
         {category.name}
       </Checkbox>
       {categoryInSelected && (
-        <SubCategoryContainer
-          categoryId={category.id}
-          subCategories={category.subcategories}
-        />
+        <SubSelectContainer>
+          <SubCategoryArray
+            categoryId={category.id}
+            subCategories={category.subcategories}
+          />
+        </SubSelectContainer>
       )}
-    </SelectWrapper>
+    </>
   )
 }
 
@@ -86,52 +89,29 @@ CategoryCheckBox.propTypes = {
 }
 
 function CategoryArray() {
-  const [categories, setCategories] = useState([])
-  const { isLoading, data: categoriesData, isError } = useKyQuery('categories')
+  const { isLoading, data, isError } = useKyQuery('categories')
 
-  useEffect(() => {
-    if (!isLoading && !isError && categoriesData)
-      setCategories(categoriesData.data)
-  }, [isLoading, isError, categoriesData])
+  if (isLoading) return <div className="empty">불러오는 중입니다.</div>
 
-  if (isLoading)
-    return (
-      <SelectContainer>
-        <div className="empty">불러오는 중입니다.</div>
-      </SelectContainer>
-    )
+  if (isError) return <div className="empty">로딩에 실패했습니다.</div>
 
-  if (isError)
-    return (
-      <SelectContainer>
-        <div className="empty">로딩에 실패했습니다.</div>
-      </SelectContainer>
-    )
+  if (!data.data.length)
+    return <div className="empty">카테고리가 없습니다.</div>
 
-  if (!categories.length)
-    return (
-      <SelectContainer>
-        <div className="empty">카테고리가 없습니다.</div>
-      </SelectContainer>
-    )
-
-  return (
-    <SelectContainer>
-      {categories.map((category) => (
-        <CategoryCheckBox
-          key={category.id}
-          category={category}
-        />
-      ))}
-    </SelectContainer>
-  )
+  return data.data.map((category) => (
+    <SelectWrapper key={category.id}>
+      <CategoryCheckBox category={category} />
+    </SelectWrapper>
+  ))
 }
 
 function CategorySection() {
   return (
     <SectionContainer>
       <div className="title">상품</div>
-      <CategoryArray />
+      <SelectContainer>
+        <CategoryArray />
+      </SelectContainer>
     </SectionContainer>
   )
 }

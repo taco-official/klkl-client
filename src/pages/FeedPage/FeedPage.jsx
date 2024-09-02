@@ -1,12 +1,10 @@
 import React from 'react'
-// import NavBar from '../components/Navbar/NavBar'
 import Thumbnail from './components/Thumbnail/Thumbnail'
 import BasicFilter from './components/BasicFilter/BasicFilter'
 import AdditionalFilter from './components/AdditionalFilter/AdditionalFilter'
 import SelectedField from './components/SelectedField/SelectedField'
 import ProductDataFetcher from './components/ProductList/ProductDataFetcher'
-import ProductList from './components/ProductList/ProductList'
-// import Footer from '../../components/Footer/Footer'
+import ProductDataStatusRenderer from './components/ProductList/ProductDataStatusRenderer'
 import { FeedPageLayout, FeedPageContent, FeedArea } from './FeedPage.style'
 
 function FeedPage() {
@@ -19,11 +17,13 @@ function FeedPage() {
           <AdditionalFilter />
           <SelectedField />
           <ProductDataFetcher>
-            {({ productDataList, loading, error }) => (
-              <ProductList
-                productDataList={productDataList}
-                loading={loading}
-                error={error}
+            {({ isLoading, data, pageData, setPageData, isError }) => (
+              <ProductDataStatusRenderer
+                isLoading={isLoading}
+                data={data}
+                pageData={pageData}
+                setPageData={setPageData}
+                isError={isError}
               />
             )}
           </ProductDataFetcher>

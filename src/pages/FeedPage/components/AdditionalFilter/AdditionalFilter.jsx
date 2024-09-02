@@ -1,6 +1,6 @@
 import React from 'react'
 import TagDataFetcher from './TagDataFetcher'
-import TagSwitchList from './TagSwitch'
+import TagDataStatusRenderer from './TagDataStatusRenderer'
 import { StyleSection, ContentContainer } from '../../FeedPage.style'
 
 function AdditionalFilter() {
@@ -9,7 +9,15 @@ function AdditionalFilter() {
       <h6 className="title">추가 필터</h6>
       <ContentContainer className="content">
         <TagDataFetcher>
-          {({ queryData }) => <TagSwitchList queryData={queryData} />}
+          {({ isLoading, loading, data, isError, error }) => (
+            <TagDataStatusRenderer
+              isLoading={isLoading}
+              loading={loading}
+              data={data}
+              isError={isError}
+              error={error}
+            />
+          )}
         </TagDataFetcher>
       </ContentContainer>
     </StyleSection>

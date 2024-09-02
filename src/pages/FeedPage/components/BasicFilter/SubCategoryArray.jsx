@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Checkbox } from 'antd'
 import useFeedStore from '../../../../stores/useFeedStore'
 import inArray from '../../../../utils/inArray'
-import { SubSelectContainer, SelectWrapper } from './BasicFilter.style'
+import { SelectWrapper } from './BasicFilter.style'
 
 function SubCategoryCheckbox({ categoryId, subCategory }) {
   const selectedSubCategory = useFeedStore((state) => state.selectedSubCategory)
@@ -22,16 +22,14 @@ function SubCategoryCheckbox({ categoryId, subCategory }) {
   }
 
   return (
-    <SelectWrapper>
-      <Checkbox
-        id={subCategory.id}
-        name={subCategory.name}
-        checked={subCategoryInSelected}
-        onChange={handleCheckboxChange}
-      >
-        {subCategory.name}
-      </Checkbox>
-    </SelectWrapper>
+    <Checkbox
+      id={subCategory.id}
+      name={subCategory.name}
+      checked={subCategoryInSelected}
+      onChange={handleCheckboxChange}
+    >
+      {subCategory.name}
+    </Checkbox>
   )
 }
 
@@ -43,28 +41,21 @@ SubCategoryCheckbox.propTypes = {
   }).isRequired,
 }
 
-function SubCategoryContainer({ categoryId, subCategories }) {
+function SubCategoryArray({ categoryId, subCategories }) {
   if (!subCategories.length)
-    return (
-      <SubSelectContainer>
-        <div className="empty">카테고리가 없습니다.</div>
-      </SubSelectContainer>
-    )
+    return <div className="empty">카테고리가 없습니다.</div>
 
-  return (
-    <SubSelectContainer>
-      {subCategories.map((subCategory) => (
-        <SubCategoryCheckbox
-          key={subCategory.id}
-          categoryId={categoryId}
-          subCategory={subCategory}
-        />
-      ))}
-    </SubSelectContainer>
-  )
+  return subCategories.map((subCategory) => (
+    <SelectWrapper key={subCategory.id}>
+      <SubCategoryCheckbox
+        categoryId={categoryId}
+        subCategory={subCategory}
+      />
+    </SelectWrapper>
+  ))
 }
 
-SubCategoryContainer.propTypes = {
+SubCategoryArray.propTypes = {
   categoryId: PropTypes.number.isRequired,
   subCategories: PropTypes.arrayOf(
     PropTypes.shape({
@@ -74,4 +65,4 @@ SubCategoryContainer.propTypes = {
   ).isRequired,
 }
 
-export default SubCategoryContainer
+export default SubCategoryArray

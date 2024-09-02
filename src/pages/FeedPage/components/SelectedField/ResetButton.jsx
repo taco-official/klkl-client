@@ -2,20 +2,28 @@ import React from 'react'
 import { ConfigProvider, Button } from 'antd'
 import { GrPowerReset } from 'react-icons/gr'
 import useFeedStore from '../../../../stores/useFeedStore'
-import { tagTheme } from '../../FeedPage.style'
+import { buttonTheme } from '../../FeedPage.style'
 
 function ResetButton() {
   const resetSelectedField = useFeedStore((state) => state.resetSelectedField)
 
   return (
-    <ConfigProvider theme={tagTheme}>
+    <ConfigProvider theme={buttonTheme}>
       <Button
         type="text"
         size="small"
-        icon={<GrPowerReset />}
         onClick={resetSelectedField}
       >
-        초기화
+        <div
+          style={{
+            display: 'flex',
+            columnGap: '0.3rem',
+            alignItems: 'center',
+          }}
+        >
+          <GrPowerReset />
+          <div>초기화</div>
+        </div>
       </Button>
     </ConfigProvider>
   )
