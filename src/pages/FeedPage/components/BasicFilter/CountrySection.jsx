@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
 import useKyQuery from '../../../../hooks/useKyQuery'
@@ -19,20 +19,17 @@ function CountryRadio({ country }) {
     state.setSelectedCountry,
     state.resetSelectedCity,
   ])
-  const {
-    isLoading,
-    data: citiesData,
-    isError,
-  } = useKyQuery(`countries/${country.id}/cities`, null, [
-    'countries/cities',
-    country.id,
-  ])
+  const { isLoading, data, isError } = useKyQuery(
+    `countries/${country.id}/cities`,
+    null,
+    ['countries/cities', country.id]
+  )
 
   const handleRadioChange = () => {
     resetSelectedCity()
     setSelectedCountry({
       ...country,
-      cities: citiesData.data,
+      cities: data.data,
     })
   }
 
@@ -58,25 +55,11 @@ CountryRadio.propTypes = {
 }
 
 function CountryArray({ regionId }) {
-  const [countries, setCountries] = useState([])
-  const {
-    isLoading,
-    data: countriesData,
-    isError,
-  } = useKyQuery(`regions/${regionId}/countries`, null, [
-    'regions/countries',
-    regionId,
-  ])
-
-  useEffect(() => {
-    if (!isLoading && !isError && countriesData)
-      setCountries(
-        countriesData.data.map((country) => ({
-          id: country.id,
-          name: country.name,
-        }))
-      )
-  }, [isLoading, isError, countriesData])
+  const { isLoading, data, isError } = useKyQuery(
+    `regions/${regionId}/countries`,
+    null,
+    ['regions/countries', regionId]
+  )
 
   if (isLoading)
     return <SubTitle className="empty">불러오는 중입니다.</SubTitle>
@@ -84,10 +67,10 @@ function CountryArray({ regionId }) {
   if (isError)
     return <SubTitle className="empty">로딩에 실패했습니다.</SubTitle>
 
-  if (!countries.length)
+  if (!data.data.length)
     return <SubTitle className="empty">나라가 없습니다.</SubTitle>
 
-  return countries.map((country) => (
+  return data.data.map((country) => (
     <SelectWrapper key={country.id}>
       <CountryRadio country={country} />
     </SelectWrapper>
@@ -129,18 +112,7 @@ RegionCollapse.propTypes = {
 }
 
 function RegionArray() {
-  const [regions, setRegions] = useState([])
-  const { isLoading, data: regionsData, isError } = useKyQuery('regions')
-
-  useEffect(() => {
-    if (!isLoading && !isError && regionsData)
-      setRegions(
-        regionsData.data.map((region) => ({
-          id: region.id,
-          name: region.name,
-        }))
-      )
-  }, [isLoading, isError, regionsData])
+  const { isLoading, data, isError } = useKyQuery('regions')
 
   if (isLoading)
     return <SubTitle className="empty">불러오는 중입니다.</SubTitle>
@@ -148,10 +120,10 @@ function RegionArray() {
   if (isError)
     return <SubTitle className="empty">로딩에 실패했습니다.</SubTitle>
 
-  if (!regions.length)
+  if (!data.data.length)
     return <SubTitle className="empty">지역이 없습니다.</SubTitle>
 
-  return regions.map((region) => (
+  return data.data.map((region) => (
     <SelectWrapper key={region.id}>
       <RegionCollapse region={region} />
     </SelectWrapper>

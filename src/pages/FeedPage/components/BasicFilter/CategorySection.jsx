@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useShallow } from 'zustand/react/shallow'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
@@ -89,22 +89,16 @@ CategoryCheckBox.propTypes = {
 }
 
 function CategoryArray() {
-  const [categories, setCategories] = useState([])
-  const { isLoading, data: categoriesData, isError } = useKyQuery('categories')
-
-  useEffect(() => {
-    if (!isLoading && !isError && categoriesData)
-      setCategories(categoriesData.data)
-  }, [isLoading, isError, categoriesData])
+  const { isLoading, data, isError } = useKyQuery('categories')
 
   if (isLoading) return <div className="empty">불러오는 중입니다.</div>
 
   if (isError) return <div className="empty">로딩에 실패했습니다.</div>
 
-  if (!categories.length)
+  if (!data.data.length)
     return <div className="empty">카테고리가 없습니다.</div>
 
-  return categories.map((category) => (
+  return data.data.map((category) => (
     <SelectWrapper key={category.id}>
       <CategoryCheckBox category={category} />
     </SelectWrapper>
