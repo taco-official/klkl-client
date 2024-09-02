@@ -4,7 +4,7 @@ import { Image } from 'antd'
 import styled from 'styled-components'
 import StyledFlickity from '../../components/Carousel/Carousel'
 
-export default function ReviewImageBlock({ imageURLs }) {
+export default function ReviewImageBlock({ images }) {
   const reviewImagesOptions = {
     setGallerySize: false,
     pauseAutoPlayOnHover: true,
@@ -12,13 +12,13 @@ export default function ReviewImageBlock({ imageURLs }) {
 
   return (
     <ReviewImageCarousel options={reviewImagesOptions}>
-      {imageURLs.map((url) => (
+      {images.map((image) => (
         <div
           className="carousel-cell"
-          key={url}
+          key={image.orderIndex}
         >
           <Image
-            src={url}
+            src={image.url}
             width="100%"
             height="100%"
             style={{
@@ -37,7 +37,10 @@ export default function ReviewImageBlock({ imageURLs }) {
   )
 }
 ReviewImageBlock.propTypes = {
-  imageURLs: PropTypes.arrayOf(PropTypes.string).isRequired,
+  images: PropTypes.arrayOf({
+    url: PropTypes.string,
+    orderIndex: PropTypes.number,
+  }).isRequired,
 }
 
 const ReviewImageCarousel = styled(StyledFlickity)`

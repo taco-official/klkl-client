@@ -31,7 +31,7 @@ export default function ReviewDetailPage() {
         <ReviewFloatButton />,
         document.getElementById('root-aside')
       )}
-      <ReviewImageBlock imageURLs={[]} />
+      <ReviewImageBlock images={data.data.images} />
       <ReviewInfoBlock review={data.data} />
       <Divider />
       <ReviewMiddleBlock
