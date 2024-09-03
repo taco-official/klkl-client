@@ -35,6 +35,7 @@ function ProductDataStatusRenderer({
         defaultPageSize={9}
         pageSize={data?.data.pageSize}
         total={data?.data.totalElements}
+        showSizeChanger={false}
         onChange={(page) =>
           setPageData((prev) => ({
             ...prev,
