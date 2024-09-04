@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import * as Form from './components/index'
@@ -7,7 +7,7 @@ import submitSteps from '../../constants/submitSteps'
 import PrevNextButtons from './components/PrevNextButtons'
 import SubmitSteps from './components/SubmitSteps'
 import theme from '../../styles/theme'
-import useFormStore from '../../stores/useFormStore'
+import useInitialData from '../../hooks/useInitialData'
 
 const pages = {
   [submitSteps.IMAGE]: <Form.ImageSubmitForm />,
@@ -31,23 +31,19 @@ const useStep = () => {
 
 export default function SubmitPage() {
   const [step, goNextStep, goPrevStep] = useStep()
-  const resetFormContents = useFormStore((state) => state.resetFormContents)
-
-  useEffect(() => {
-    return () => {
-      resetFormContents()
-    }
-  }, [])
+  useInitialData()
 
   return (
     <Wrapper>
       <SubmitSteps step={step} />
       <div>{pages[step]}</div>
-      <PrevNextButtons
-        step={step}
-        goNextStep={goNextStep}
-        goPrevStep={goPrevStep}
-      />
+      {step < 4 && (
+        <PrevNextButtons
+          step={step}
+          goNextStep={goNextStep}
+          goPrevStep={goPrevStep}
+        />
+      )}
     </Wrapper>
   )
 }

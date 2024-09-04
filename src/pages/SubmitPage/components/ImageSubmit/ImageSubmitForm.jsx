@@ -33,12 +33,11 @@ function ImageSubmitForm() {
       if (current === image) return false
       return true
     })
-    setFormContents({ images: [...newArray] })
+    setFormContents({ images: newArray })
   }
 
   return (
     <>
-      {console.log(images)}
       <h2>사진을 선택해 주세요</h2>
       <ImageListBox>
         {images.map((image) => (
@@ -49,7 +48,11 @@ function ImageSubmitForm() {
             <CloseButton onClick={() => removeImage(image)}>
               <Icon $size="1.5em">close</Icon>
             </CloseButton>
-            <StyledImage src={URL.createObjectURL(image)} />
+            <StyledImage
+              src={
+                typeof image === 'string' ? image : URL.createObjectURL(image)
+              }
+            />
           </div>
         ))}
         {images.length !== 3 && (
