@@ -1,10 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Divider } from 'antd'
+import { useLoaderData } from 'react-router-dom'
 import { createPortal } from 'react-dom'
 
-import LoadingPage from '../LoadingPage'
-import useKyQuery from '../../hooks/useKyQuery'
 import theme from '../../styles/theme'
 import UserFollowButton from '../../components/UserProfile/UserFollowButton'
 import ReviewFloatButton from './ReviewFloatButton'
@@ -15,15 +14,7 @@ import UserProfile from '../../components/UserProfile/UserProfile'
 import Comment from '../../components/Comment/Comment'
 
 export default function ReviewDetailPage() {
-  const { data, isLoading, isError, error } = useKyQuery(
-    `${window.location.pathname}`.slice(1)
-  )
-
-  if (isLoading) return <LoadingPage />
-  if (isError) {
-    if (error.response.status === 404) return <div>cannot found!</div>
-    return <div>error</div>
-  }
+  const { data: review } = useLoaderData()
 
   return (
     <Wrapper>
@@ -31,19 +22,19 @@ export default function ReviewDetailPage() {
         <ReviewFloatButton />,
         document.getElementById('root-aside')
       )}
-      <ReviewImageBlock imageURLs={[]} />
-      <ReviewInfoBlock review={data.data} />
+      <ReviewImageBlock images={review.images} />
+      <ReviewInfoBlock review={review} />
       <Divider />
       <ReviewMiddleBlock
-        address={data.data.address}
-        price={data.data.price}
-        currency={data.data.currency}
+        address={review.address}
+        price={review.price}
+        currency={review.currency}
       />
       <Divider />
-      <Description>{data.data.description}</Description>
+      <Description>{review.description}</Description>
       <Divider />
       <UserProfile
-        userData={data.data.user}
+        userData={review.user}
         profileButton={<UserFollowButton />}
       />
       <Divider />

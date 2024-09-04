@@ -1,106 +1,153 @@
-import React, { useState } from 'react'
-import { Image, Upload, ConfigProvider, message } from 'antd'
-import Icons from '../../../../components/Icons/Icons'
+import React, { useRef } from 'react'
+import styled from 'styled-components'
+import { Image } from 'antd'
 
-const getBase64 = (file) =>
-  new Promise((resolve, reject) => {
-    const reader = new FileReader()
-    reader.readAsDataURL(file)
-    reader.onload = () => resolve(reader.result)
-    reader.onerror = (error) => reject(error)
-  })
+import Icon from '../../../../components/Icons/Icons'
+import theme from '../../../../styles/theme'
+import useFormStore from '../../../../stores/useFormStore'
 
-const beforeUpload = (file) => {
-  const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png'
-  if (!isJpgOrPng) {
-    message.error('You can only upload JPG/PNG file!')
-  }
-  const isLt2M = file.size / 1024 / 1024 < 10
-  if (!isLt2M) {
-    message.error('Image must smaller than 10MB!')
-  }
-  return isJpgOrPng && isLt2M
-}
+const MAX_COUNT = 3
 
-export default function ImageSubmitForm() {
-  const [previewOpen, setPreviewOpen] = useState(false)
-  const [previewImage, setPreviewImage] = useState('')
-  const [fileList, setFileList] = useState([])
+function ImageSubmitForm() {
+  const images = useFormStore((state) => state.images)
+  const setFormContents = useFormStore((state) => state.setFormContents)
+  const inputRef = useRef()
 
-  const handlePreview = async (file) => {
-    const newFile = file
+  const changeProfileImage = (e) => {
+    const { files } = e.target
+    if (files.length === 0) return
 
-    if (!newFile.url && !newFile.preview) {
-      newFile.preview = await getBase64(newFile.originFileObj)
-    }
-    setPreviewImage(newFile.url || newFile.preview)
-    setPreviewOpen(true)
+    const length =
+      files.length + images.length > MAX_COUNT
+        ? MAX_COUNT - images.length
+        : files.length
+
+    const newFiles = []
+    for (let i = 0; i < length; i++) newFiles.push(files[i])
+
+    setFormContents({ images: [...images, ...newFiles] })
   }
 
-  const handleChange = ({ fileList: newFileList }) => {
-    setFileList(newFileList)
+  const removeImage = (image) => {
+    const newArray = images.filter((current) => {
+      if (current === image) return false
+      return true
+    })
+    setFormContents({ images: newArray })
   }
-
-  const uploadButton = (
-    <button
-      style={{
-        border: 0,
-        background: 'none',
-      }}
-      type="button"
-    >
-      <div
-        style={{
-          marginTop: 8,
-        }}
-      >
-        <Icons $empty>add_box</Icons>
-        <br />
-        Upload
-      </div>
-    </button>
-  )
 
   return (
     <>
-      <h2>
-        상품 사진을 <br />
-        등록해주세요
-      </h2>
-      <div style={{ width: '37.5rem', marginBottom: '1.875rem' }}>
-        <ConfigProvider
-          theme={{
-            token: {
-              controlHeightLG: 68,
-            },
-          }}
-        >
-          <Upload
-            listType="picture-card"
-            fileList={fileList}
-            onPreview={handlePreview}
-            onChange={handleChange}
-            beforeUpload={beforeUpload}
-            maxCount={3}
-            multiple
+      <h2>사진을 선택해 주세요</h2>
+      <ImageListBox>
+        {images.map((image) => (
+          <div
+            style={{ position: 'relative' }}
+            key={image.name}
           >
-            {fileList.length >= 3 ? null : uploadButton}
-          </Upload>
-          {previewImage && (
-            <Image
-              wrapperStyle={{
-                display: 'none',
-              }}
-              preview={{
-                visible: previewOpen,
-                onVisibleChange: (visible) => setPreviewOpen(visible),
-                afterOpenChange: (visible) => !visible && setPreviewImage(''),
-              }}
-              src={previewImage}
+            <CloseButton onClick={() => removeImage(image)}>
+              <Icon $size="1.5em">close</Icon>
+            </CloseButton>
+            <StyledImage
+              src={
+                typeof image === 'string' ? image : URL.createObjectURL(image)
+              }
             />
-          )}
-        </ConfigProvider>
-      </div>
+          </div>
+        ))}
+        {images.length !== 3 && (
+          <SubmitButton onClick={() => inputRef.current.click()}>
+            <Icon $size="2.5em">add</Icon>
+          </SubmitButton>
+        )}
+      </ImageListBox>
+      <input
+        type="file"
+        accept="image/png, image/jpeg, image/webp"
+        multiple
+        ref={inputRef}
+        onChange={changeProfileImage}
+        style={{ display: 'none' }}
+      />
     </>
   )
 }
+
+const ImageListBox = styled.div`
+  display: flex;
+  column-gap: 0.625rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+`
+
+const StyledImage = styled(Image).attrs({
+  className: 'submit--image',
+  width: '10.9375rem',
+  height: '10.9375rem',
+  placeholder: true,
+  preview: { destroyOnClose: true, toolbarRender: () => null },
+})`
+  border-radius: 0.5rem;
+  object-fit: cover;
+
+  @keyframes slide {
+    0% {
+      transform: translateX(-5%);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+  animation: slide 0.3s;
+`
+
+const CloseButton = styled.button.attrs({ type: 'button' })`
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  z-index: 10;
+
+  background: none;
+  border: none;
+  color: white;
+
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all ease-in-out 0.2s;
+
+  &:hover {
+    color: rgba(255, 0, 0, 0.9);
+  }
+`
+
+const SubmitButton = styled.button.attrs({ type: 'button' })`
+  width: 10.9375rem;
+  height: 10.9375rem;
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid ${theme.color.lineGrey};
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all ease-in-out 0.1s;
+
+  &:hover {
+    border: 1px solid ${theme.color.main};
+  }
+
+  &:active {
+    border: 1px solid ${theme.color.mainDark};
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  span {
+    color: rgba(0, 0, 0, 0.3);
+  }
+`
+
+export default ImageSubmitForm

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import PageLayout from './pages/PageLayout'
 import LoadingPage from './pages/LoadingPage'
+import productLoader from './loader/productLoader'
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'))
 const ReviewPage = lazy(() => import('./pages/ReviewPage/ReviewPage'))
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <PageLayout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: '',
@@ -31,6 +33,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/products/:id',
+        loader: productLoader,
         element: (
           <Suspense fallback={<LoadingPage />}>
             <ReviewPage />
