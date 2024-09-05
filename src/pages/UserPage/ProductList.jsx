@@ -42,8 +42,8 @@ const StyledList = styled.ul`
     'product product product'
     'product product product';
   grid-template-columns: 30% 30% 30%;
-
-  justify-content: center;
+  place-items: center;
+  grid-row-gap: 1.875rem;
 
   li {
     grid-area: 'product';
