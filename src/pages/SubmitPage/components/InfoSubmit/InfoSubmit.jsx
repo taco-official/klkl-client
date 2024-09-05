@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Input, Rate } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
 
+import useKyQuery from '../../../../hooks/useKyQuery'
 import useFormStore from '../../../../stores/useFormStore'
 import theme from '../../../../styles/theme'
 import NumberInputForm from './NumberInputForm'
@@ -12,6 +13,7 @@ export default function InfoSubmitForm() {
     useShallow((state) => [state.name, state.description, state.rating])
   )
   const setFormContents = useFormStore((state) => state.setFormContents)
+  const { data: currencies, isLoading } = useKyQuery('currencies')
 
   return (
     <>
@@ -48,7 +50,7 @@ export default function InfoSubmitForm() {
       </Wrapper>
       <Wrapper>
         <h3>구매가격</h3>
-        <NumberInputForm />
+        {!isLoading && <NumberInputForm currencies={currencies.data} />}
       </Wrapper>
       <Wrapper>
         <h3>별점</h3>
