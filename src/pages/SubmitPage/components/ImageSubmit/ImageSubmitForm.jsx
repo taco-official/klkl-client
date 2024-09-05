@@ -43,7 +43,7 @@ function ImageSubmitForm() {
         {images.map((image) => (
           <div
             style={{ position: 'relative' }}
-            key={image.name}
+            key={typeof image === 'string' ? image : image.name}
           >
             <CloseButton onClick={() => removeImage(image)}>
               <Icon $size="1.5em">close</Icon>
