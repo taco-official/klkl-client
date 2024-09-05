@@ -45,17 +45,15 @@ const ThumbnailContainer = styled.div`
   aspect-ratio: 1;
   border: 0.0625rem solid transparent;
   &#productThumbnail {
+    border-radius: 0.3rem;
     position: relative;
-    > img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 0.3125rem;
-    }
-    > :last-child {
+    background: center/cover
+      ${(props) => (props.$url ? `url(${props.$url})` : 'white')};
+    & > div {
       position: absolute;
       bottom: 0.6rem;
       right: 0.8rem;
+      z-index: 1;
     }
   }
   &.loading {
@@ -96,8 +94,17 @@ const CategoryWrapper = styled.div`
 `
 
 const ProductNameBox = styled.div`
-  font-size: ${theme.size.textMD};
-  font-family: ${theme.style.mainBold};
+  &#productName {
+    font-size: ${theme.size.textMD};
+    font-family: ${theme.style.mainBold};
+    white-space: wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
   &.loading {
     ${maskBackground}
     width: 60%;
@@ -106,7 +113,6 @@ const ProductNameBox = styled.div`
 `
 
 const TagsContainer = styled.div`
-  height: 1.35rem;
   margin: 0.2rem 0;
   display: flex;
   justify-content: flex-start;
@@ -115,6 +121,7 @@ const TagsContainer = styled.div`
   &.loading {
     ${maskBackground}
     width: 70%;
+    height: 1rem;
     margin: 0;
   }
 `

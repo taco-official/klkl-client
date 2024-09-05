@@ -1,59 +1,90 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
-// import axios from 'axios'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
+// import { kyInstance } from '../../hooks/kyInstance'
 import IconTextButton from './IconTextButton'
 import theme from '../../styles/theme'
 
-function getLikeContent() {}
-// productId, userId
-function postLikeContent() {}
-// productId, userId
-function deleteLikeContent() {}
-// likeId
+const LikeButtonContainer = styled.div`
+  color: ${(props) => (props.$isLiked ? 'red' : theme.color.lineGrey)};
+  gray-scale: ${(props) => (props.$isLiked ? '0' : '100%')};
+  mix-blend-mode: ${(props) => (props.$isLiked ? 'normal' : 'plus-darker')};
+`
 
-function LikeButton({ productId, userId = undefined, iconSize = '1.3rem' }) {
-  const [likeId, setLikeId] = useState(undefined)
+function LikeButton({ productId, userId = null, iconSize = '1.3rem' }) {
   const [isLiked, setIsLiked] = useState(false)
 
   useEffect(() => {
-    if (userId !== undefined) {
-      const likedContentId = getLikeContent(productId, userId)
-      setLikeId(likedContentId)
-      setIsLiked(likedContentId !== undefined)
+    /*
+    const fetchLikeContent = async (product) => {
+      const response = await kyInstance.get(`products/${product}/likes`).json()
+      return response.data.isLiked
     }
-  }, [productId, userId])
+    */
+
+    if (userId === 0) {
+      // const isLikedContent = fetchLikeContent(productId)
+      // if (isLikedContent) {
+      //   setIsLiked(isLikedContent)
+      console.log('is liked')
+    }
+  }, [userId])
 
   const handleLiked = useCallback(() => {
-    if (userId === undefined) {
-      alert('로그인이 필요합니다.')
-    } else {
-      if (!isLiked) {
-        postLikeContent(productId, userId)
-        // axios.post('POST API', { product_id: productId, user_id: userId })
-      } else {
-        deleteLikeContent(likeId)
-        // axios.delete(`DELETE API/${likeId}`)
-      }
-      setIsLiked((current) => !current)
-    }
-  }, [isLiked, userId, productId, likeId])
+    // const postLikeContent = async (product) => {
+    // const response = await kyInstance
+    // .post(`products/${product}/likes`, {
+    // body: JSON.stringify({
+    // product_id: product,
+    // }),
+    // })
+    // .json()
+    // return response.data
+    // }
 
-  const iconColor = useMemo(
-    () => (isLiked ? 'red' : theme.color.textGrey),
-    [isLiked, theme.color.textGrey]
-  )
+    /*
+    const deleteLikeContent = async (user, product) => {
+      const response = await kyInstance
+        .delete(`products/${product}/likes`, {
+          body: JSON.stringify({
+            user_id: user,
+            product_id: product,
+          }),
+        })
+        .json()
+      return response.data.isLiked
+    }
+    */
+
+    if (userId === null) {
+      alert('로그인이 필요합니다.')
+    } else if (!isLiked) {
+      // const responseData = postLikeContent(productId)
+      // if ('isLiked' in responseData) setIsLiked(responseData.isLiked)
+      console.log('post like', productId)
+      setIsLiked(true)
+    } else {
+      // const responseData = deleteLikeContent(userId, productId)
+      // if ('isLiked' in response) setIsLiked(responseData.isLiked)
+      console.log('delete like')
+      setIsLiked(false)
+    }
+  }, [userId, isLiked])
+
   const iconAttr = useMemo(() => ({ onClick: handleLiked }), [handleLiked])
   const iconValue = useMemo(
-    () => ({ color: iconColor, size: iconSize, attr: iconAttr }),
-    [iconColor, iconSize, iconAttr]
+    () => ({ size: iconSize, attr: iconAttr }),
+    [iconSize, iconAttr]
   )
 
   return (
-    <IconTextButton
-      iconValue={iconValue}
-      Icon={isLiked ? <FaHeart /> : <FaRegHeart />}
-    />
+    <LikeButtonContainer $isLiked={isLiked}>
+      <IconTextButton
+        iconValue={iconValue}
+        Icon={isLiked ? <FaHeart /> : <FaRegHeart />}
+      />
+    </LikeButtonContainer>
   )
 }
 
