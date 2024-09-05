@@ -55,8 +55,7 @@ export default function SearchModal() {
               onChange={(e) => debouncedSearch(e.target.value)}
             />
           </ModalHeader>
-
-          {results.map((contents) => contents)}
+          {results}
         </ModalContents>
       </Modal>
     </ConfigProvider>
