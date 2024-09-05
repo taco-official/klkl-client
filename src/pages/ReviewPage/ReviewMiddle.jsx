@@ -72,6 +72,7 @@ const PriceBox = styled.div`
     margin-right: 5px;
     border-radius: 2px;
     box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    object-fit: cover;
   }
 `
 
