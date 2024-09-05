@@ -6,17 +6,17 @@ import theme from '../../styles/theme'
 
 function ReviewMiddleBlock({ address, price, currency }) {
   return (
-    <Wrapper>
+    <Section>
       <LocationBox>
         <Icons>location_on</Icons>
-        {address === '' ? '상세 위치가 없습니다' : address}
+        <p>{address === '' ? '상세 위치가 없습니다' : address}</p>
       </LocationBox>
       <PriceBox>
-        <img src={currency.flag} />
-        <p>{currency.code}</p>
-        {price}
+        <img src={currency.flagUrl} />
+        <p className="currency-code">{currency.code}</p>
+        <p className="currency-price">{`${price} ${currency.unit}`}</p>
       </PriceBox>
-    </Wrapper>
+    </Section>
   )
 }
 ReviewMiddleBlock.propTypes = {
@@ -25,11 +25,12 @@ ReviewMiddleBlock.propTypes = {
   currency: PropTypes.shape({
     id: PropTypes.number,
     code: PropTypes.string,
-    flag: PropTypes.string,
+    unit: PropTypes.string,
+    flagUrl: PropTypes.string,
   }),
 }
 
-const Wrapper = styled.div`
+const Section = styled.section`
   div {
     margin: 20px 0;
 
@@ -42,8 +43,10 @@ const Wrapper = styled.div`
 `
 
 const LocationBox = styled.div`
-  font-size: ${theme.size.titleXL};
-  color: ${theme.color.textGrey};
+  p {
+    color: ${theme.color.textGrey};
+    font-size: ${theme.size.textSM};
+  }
 
   span {
     font-size: 1.5em;
@@ -53,19 +56,22 @@ const LocationBox = styled.div`
 `
 
 const PriceBox = styled.div`
-  font-size: ${theme.size.textSM};
-
-  p {
+  .currency-code {
     font-size: ${theme.size.textXS};
     color: ${theme.color.textGrey};
     margin-right: 0.3125rem;
+  }
+
+  .currency-price {
+    font-size: ${theme.size.textSM};
   }
 
   img {
     height: 13px;
     aspect-ratio: 1.5 /1;
     margin-right: 5px;
-    border-radius: 3px;
+    border-radius: 2px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
   }
 `
 
