@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { StarFilled } from '@ant-design/icons'
 import { FaHeart } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
-
 import LikeButton from '../Button/LikeButton'
 import { BlueTag } from '../Tags/Tags.style'
 import {
@@ -24,20 +23,19 @@ function PreviewContent({ userId = null, productData }) {
       state={{ from: window.location.pathname }}
     >
       <PreviewContainer>
-        <ThumbnailContainer id="productThumbnail">
-          <img
-            id="previewContentImg"
-            src={productData.thumbnail}
-          />
+        <ThumbnailContainer
+          id="productThumbnail"
+          $url={productData.images.length && productData.images[0].url}
+        >
           <LikeButton
-            id="likeButton"
             userId={userId}
             productId={productData.id}
+            iconSize="1.5rem"
           />
         </ThumbnailContainer>
         <DescriptionContainer>
           <CategoryWrapper>
-            <div>{`${productData.countryName} / ${productData.categoryName}`}</div>
+            {`${productData.countryName} · ${productData.categoryName}`}
           </CategoryWrapper>
           <ProductNameBox id="productName">{productData.name}</ProductNameBox>
           <TagsContainer>
@@ -72,7 +70,12 @@ PreviewContent.propTypes = {
   userId: PropTypes.number,
   productData: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    thumbnail: PropTypes.string,
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        url: PropTypes.string,
+        orderIndex: PropTypes.number,
+      })
+    ),
     countryName: PropTypes.string.isRequired,
     categoryName: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

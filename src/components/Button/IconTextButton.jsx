@@ -1,27 +1,28 @@
 import React from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { IconContext } from 'react-icons'
+
+const ButtonBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+`
 
 function IconTextButton({ iconValue = null, Icon = null, text = null }) {
   return (
     <IconContext.Provider value={iconValue}>
-      <div style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+      <ButtonBox>
         {Icon}
         {text}
-      </div>
+      </ButtonBox>
     </IconContext.Provider>
   )
 }
 
 IconTextButton.propTypes = {
-  iconValue: PropTypes.shape({
-    color: PropTypes.string,
-    size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    className: PropTypes.string,
-    attr: PropTypes.shape({
-      onClick: PropTypes.func,
-    }),
-  }),
+  iconValue: PropTypes.shape({}),
   Icon: PropTypes.element,
   text: PropTypes.string,
 }
