@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Breadcrumb, Rate } from 'antd'
+import { Link } from 'react-router-dom'
 
 import { BlueTag } from '../../components/Tags/Tags.style'
 import dateParser from '../../utils/dateParser'
@@ -16,12 +17,24 @@ const breadCrumbStyle = {
 export default function ReviewInfoBlock({ review }) {
   const breadCrumbItems = [
     {
-      title: review.city.name,
-      href: '',
+      title: (
+        <Link
+          to="/"
+          state={{ from: window.location.pathname }}
+        >
+          {review.city.name}
+        </Link>
+      ),
     },
     {
-      title: review.subcategory.name,
-      href: '',
+      title: (
+        <Link
+          to="/"
+          state={{ from: window.location.pathname }}
+        >
+          {review.subcategory.name}
+        </Link>
+      ),
     },
   ]
 
@@ -49,7 +62,7 @@ export default function ReviewInfoBlock({ review }) {
           defaultValue={review.rating}
         />
         <div>
-          {dateParser(review.createdAt)} <ReviewOptions review={review} />
+          <p>{dateParser(review.createdAt)}</p> <ReviewOptions />
         </div>
       </EndWrapper>
     </InfoWrapper>
@@ -94,12 +107,7 @@ ReviewInfoBlock.propTypes = {
   }).isRequired,
 }
 
-const CategoryWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-`
-
-const InfoWrapper = styled.div`
+const InfoWrapper = styled.section`
   position: relative;
 
   & > h2 {
@@ -113,6 +121,11 @@ const InfoWrapper = styled.div`
       display: flex;
     }
   }
+`
+
+const CategoryWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 const EndWrapper = styled.div`

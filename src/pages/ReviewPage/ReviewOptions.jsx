@@ -1,34 +1,20 @@
 import React from 'react'
 import { Modal, notification } from 'antd'
-import PropTypes from 'prop-types'
 import { useNavigate, useLocation } from 'react-router-dom'
 
 import OptionDropdown from '../../components/OptionDropdown/OptionDropdown'
 import { kyInstance } from '../../hooks/kyInstance'
-import useFormStore from '../../stores/useFormStore'
 import theme from '../../styles/theme'
 
-function ReviewOptions({ review }) {
+function ReviewOptions() {
   const location = useLocation()
   const productURL = window.location.pathname.slice(1)
-  const setFormContents = useFormStore((state) => state.setFormContents)
   const navigate = useNavigate()
 
-  const editReview = () => {
-    setFormContents({
-      name: review.name,
-      description: review.description,
-      address: review.address,
-      price: review.price,
-      rating: review.rating,
-      currencyId: review.currency.id,
-      tags: new Set(review.tags.map((tag) => tag.id)),
-    })
-
+  const editReview = () =>
     navigate(`edit`, {
       state: { from: window.location.pathname },
     })
-  }
 
   const deleteReview = () =>
     Modal.confirm({
@@ -73,27 +59,6 @@ function ReviewOptions({ review }) {
       deleteOnclick={deleteReview}
     />
   )
-}
-ReviewOptions.propTypes = {
-  review: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    description: PropTypes.string,
-    address: PropTypes.string,
-    price: PropTypes.number,
-    rating: PropTypes.number,
-    currency: PropTypes.shape({
-      id: PropTypes.number,
-      code: PropTypes.string,
-      flag: PropTypes.string,
-    }),
-    tags: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string,
-      })
-    ),
-  }).isRequired,
 }
 
 export default ReviewOptions

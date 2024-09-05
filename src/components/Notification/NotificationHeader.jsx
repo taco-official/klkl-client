@@ -2,32 +2,33 @@ import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import theme from '../../styles/theme'
-import { method } from '../../hooks/kyInstance'
-import useKyMutation from '../../hooks/useKyMutation'
+
+import useReadNotificationAll from '../../hooks/useReadNotificationAll'
+import useDeleteNotificationAll from '../../hooks/useDeleteNotificationAll'
 
 function NotificationHeader({ isEmpty }) {
-  const { mutateAsync } = useKyMutation(method.PUT, 'notifications/all', [
-    'notifications',
-  ])
-
-  const readAll = async () => {
-    try {
-      await mutateAsync()
-    } catch (error) {
-      window.alert(error)
-    }
-  }
+  const readAll = useReadNotificationAll()
+  const deleteAll = useDeleteNotificationAll()
 
   return (
     <>
       <Header>
         알림
-        <button
-          type="button"
-          onClick={readAll}
-        >
-          모두 읽기
-        </button>
+        <div>
+          <button
+            type="button"
+            onClick={readAll}
+          >
+            모두 읽기
+          </button>
+          <button
+            type="button"
+            onClick={deleteAll}
+            style={{ color: 'red' }}
+          >
+            모두 지우기
+          </button>
+        </div>
       </Header>
       {isEmpty && (
         <div style={{ margin: '10px 0', textAlign: 'center' }}>
@@ -58,10 +59,14 @@ const Header = styled.div`
     color: ${theme.color.main};
     font-family: inherit;
     font-size: ${theme.size.text2XS};
-    padding: 0 3px;
+    padding: 5px;
 
     &:hover {
       background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    &:active {
+      background-color: rgba(0, 0, 0, 0.1);
     }
   }
 `

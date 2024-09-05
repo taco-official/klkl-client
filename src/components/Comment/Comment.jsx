@@ -19,17 +19,17 @@ export default function Comment() {
   if (isLoading) return <div>loading</div>
 
   return (
-    <CommentBox>
+    <CommentSection>
       <h2>
         댓글(<span>{Object.keys(comments.data).length}</span>)
       </h2>
       <CommentInput />
       <CommentList comments={comments.data} />
-    </CommentBox>
+    </CommentSection>
   )
 }
 
-const CommentBox = styled.div`
+const CommentSection = styled.section`
   width: 95%;
   margin: 0 auto;
 

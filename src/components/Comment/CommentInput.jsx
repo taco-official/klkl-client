@@ -42,7 +42,7 @@ export default function CommentInput() {
   return (
     <CommentInputBox>
       <ProfileImage
-        src="https://i.namu.wiki/i/w0zeVMmf9I79S1loLZ-y7rifOgf6XPo8iNuEfheNG3LItfP6MA5vxVYQ6Lkk31cM6u01TffiuGLNPsCqmuLJGtsrJcoY0Plq5a5LW-MbxM6m1oPEW6GIs3kLDhH5veWAcLm6YpBVpvek1H_F2UzMOQ.webp"
+        src=""
         $size="3.125rem"
       />
       <ConfigProvider theme={inputTheme}>

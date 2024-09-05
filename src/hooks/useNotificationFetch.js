@@ -25,7 +25,7 @@ const useNotificationFetch = () => {
   items.children = notifications.data.map((content, i) => ({
     key: `${i}`,
     label: <NotificationContent content={content} />,
-    checked: content.notification.isRead,
+    checked: content.isRead,
   }))
 
   return items

@@ -33,23 +33,11 @@ const useDebouncedSearch = (setModalState) => {
           ([category, result]) => {
             if (result.length === 0) return null
 
-            if (result.length > 10) return <ResultRow>검색창?</ResultRow>
+            const searchValues = []
 
-            const searchValues = result.map((content) => (
-              <ResultRow
-                key={content.name}
-                onClick={() => {
-                  setModalState(false)
-                  navigate('/', { state: { from: window.location.pathname } })
-                }}
-              >
-                {content.name}
-                <span>→ 보러가기</span>
-              </ResultRow>
-            ))
-
-            searchValues.unshift(
+            searchValues.push(
               <Divider
+                key={category}
                 orientation="left"
                 orientationMargin={0}
                 style={{
@@ -61,6 +49,21 @@ const useDebouncedSearch = (setModalState) => {
               >
                 {SearchMapping[category]}
               </Divider>
+            )
+
+            result.forEach((content) =>
+              searchValues.push(
+                <ResultRow
+                  key={content.name}
+                  onClick={() => {
+                    setModalState(false)
+                    navigate('/', { state: { from: window.location.pathname } })
+                  }}
+                >
+                  {content.name}
+                  <span>→ 보러가기</span>
+                </ResultRow>
+              )
             )
 
             return searchValues

@@ -6,7 +6,7 @@ import theme from '../../styles/theme'
 
 export default function UserProfile({ userData, profileButton }) {
   return (
-    <ProfileBox>
+    <ProfileSection>
       <ProfileImage
         src={userData.profile}
         $size="3.75rem"
@@ -19,7 +19,7 @@ export default function UserProfile({ userData, profileButton }) {
         <div className="profile--user__introduce">{userData.description}</div>
       </SimpleUserInfo>
       {profileButton}
-    </ProfileBox>
+    </ProfileSection>
   )
 }
 UserProfile.propTypes = {
@@ -33,7 +33,7 @@ UserProfile.propTypes = {
   profileButton: PropTypes.element.isRequired,
 }
 
-const ProfileBox = styled.div`
+const ProfileSection = styled.section`
   width: 95%;
   margin: auto;
   height: 80px;

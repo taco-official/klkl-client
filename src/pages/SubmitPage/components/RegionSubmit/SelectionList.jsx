@@ -98,4 +98,8 @@ const SelectButton = styled.li`
   &:hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
 `

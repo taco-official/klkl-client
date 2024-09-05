@@ -7,7 +7,7 @@ import { createPortal } from 'react-dom'
 import theme from '../../styles/theme'
 import UserFollowButton from '../../components/UserProfile/UserFollowButton'
 import ReviewFloatButton from './ReviewFloatButton'
-import ReviewImageBlock from './ReviewImageBlock'
+import ReviewImageSection from './ReviewImageBlock'
 import ReviewInfoBlock from './ReviewInfo'
 import ReviewMiddleBlock from './ReviewMiddle'
 import UserProfile from '../../components/UserProfile/UserProfile'
@@ -17,12 +17,12 @@ export default function ReviewDetailPage() {
   const { data: review } = useLoaderData()
 
   return (
-    <Wrapper>
+    <Article>
       {createPortal(
         <ReviewFloatButton />,
         document.getElementById('root-aside')
       )}
-      <ReviewImageBlock images={review.images} />
+      <ReviewImageSection images={review.images} />
       <ReviewInfoBlock review={review} />
       <Divider />
       <ReviewMiddleBlock
@@ -31,7 +31,9 @@ export default function ReviewDetailPage() {
         currency={review.currency}
       />
       <Divider />
-      <Description>{review.description}</Description>
+      <Description>
+        <p>{review.description}</p>
+      </Description>
       <Divider />
       <UserProfile
         userData={review.user}
@@ -39,14 +41,12 @@ export default function ReviewDetailPage() {
       />
       <Divider />
       <Comment />
-    </Wrapper>
+    </Article>
   )
 }
 
-const Wrapper = styled.div`
-  width: 50%;
-  min-width: 37.5rem;
-  max-width: 62.5rem;
+const Article = styled.article`
+  width: 550px;
   padding: 0 3.125rem;
   margin: 0 auto;
   position: relative;
@@ -64,11 +64,11 @@ const Wrapper = styled.div`
   }
 `
 
-const Description = styled.div`
+const Description = styled.section`
   width: 95%;
   margin: 0 auto;
-  font-size: ${theme.size.textSM};
-  line-height: 1.5rem;
+  font-size: ${theme.size.textMD};
+  line-height: 1.8rem;
   white-space: pre-line;
   text-justify: none;
 `

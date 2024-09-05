@@ -3,7 +3,7 @@ import useKyQuery from './useKyQuery'
 
 const usePopularReview = () => {
   const { data, isLoading, isError, error } = useKyQuery(
-    'products?sort_by=like_count&sort_direction=DESC',
+    'products?sort_by=like_count&sort_direction=DESC&size=12',
     null,
     undefined,
     { staleTime: 0 }

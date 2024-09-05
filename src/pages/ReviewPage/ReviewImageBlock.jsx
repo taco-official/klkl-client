@@ -11,36 +11,40 @@ export default function ReviewImageBlock({ images }) {
   }
 
   return (
-    <ReviewImageCarousel options={reviewImagesOptions}>
-      {images.map((image) => (
-        <div
-          className="carousel-cell"
-          key={image.orderIndex}
-        >
-          <Image
-            src={image.url}
-            width="100%"
-            height="100%"
-            style={{
-              borderRadius: '10px',
-              objectFit: 'cover	',
-              objectPosition: 'center',
-            }}
-            preview={{
-              destroyOnClose: true,
-              toolbarRender: () => null,
-            }}
-          />
-        </div>
-      ))}
-    </ReviewImageCarousel>
+    <section>
+      <ReviewImageCarousel options={reviewImagesOptions}>
+        {images.map((image) => (
+          <div
+            className="carousel-cell"
+            key={image.orderIndex}
+          >
+            <Image
+              src={image.url}
+              width="100%"
+              height="100%"
+              style={{
+                borderRadius: '10px',
+                objectFit: 'cover	',
+                objectPosition: 'center',
+              }}
+              preview={{
+                destroyOnClose: true,
+                toolbarRender: () => null,
+              }}
+            />
+          </div>
+        ))}
+      </ReviewImageCarousel>
+    </section>
   )
 }
 ReviewImageBlock.propTypes = {
-  images: PropTypes.arrayOf({
-    url: PropTypes.string,
-    orderIndex: PropTypes.number,
-  }).isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string,
+      orderIndex: PropTypes.number,
+    })
+  ).isRequired,
 }
 
 const ReviewImageCarousel = styled(StyledFlickity)`

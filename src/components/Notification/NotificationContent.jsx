@@ -12,7 +12,7 @@ function NotificationContent({ content }) {
   const navigate = useNavigate()
   const { mutateAsync } = useKyMutation(
     method.PUT,
-    `notifications/${content.notification.id}`,
+    `notifications/${content.id}/read`,
     ['notifications']
   )
 
@@ -33,27 +33,28 @@ function NotificationContent({ content }) {
   return (
     <ContentWrapper onClick={onClick}>
       <ContentImage
-        src={content.comment.user.profile}
+        src={content.product.productImageUrl}
+        $isRead={content.isRead}
         className="noti--img"
       />
       <div style={{ gridArea: 'content' }}>
         <Content className="noti--info">
           <Content
             className="noti--info__writer"
-            $isRead={content.notification.isRead}
+            $isRead={content.isRead}
           >
-            {content.comment.user.name} 님이 댓글을 달았습니다
+            {content.comment.userName} 님이 댓글을 달았습니다
           </Content>
           <Content
             className="noti--info__date"
-            $isRead={content.notification.isRead}
+            $isRead={content.isRead}
           >
             {dateParser(content.comment.createdAt)}
           </Content>
         </Content>
         <Content
           className="noti--content"
-          $isRead={content.notification.isRead}
+          $isRead={content.isRead}
         >
           {content.comment.content}
         </Content>
@@ -63,28 +64,18 @@ function NotificationContent({ content }) {
 }
 NotificationContent.propTypes = {
   content: PropTypes.shape({
-    notification: PropTypes.shape({
-      id: PropTypes.number,
-      createdAt: PropTypes.string,
-      isRead: PropTypes.bool,
-    }),
+    id: PropTypes.number,
+    createdAt: PropTypes.string,
+    isRead: PropTypes.bool,
     comment: PropTypes.shape({
-      id: PropTypes.number,
       createdAt: PropTypes.string,
       content: PropTypes.string,
-      user: PropTypes.shape({
-        id: PropTypes.number,
-        name: PropTypes.string,
-        profile: PropTypes.string,
-      }),
+      userName: PropTypes.string,
     }),
     product: PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
-      likeCount: PropTypes.number,
-      rating: PropTypes.number,
-      countryName: PropTypes.string,
-      categoryName: PropTypes.string,
+      productImageUrl: PropTypes.string,
     }),
   }).isRequired,
 }
@@ -106,8 +97,8 @@ const ContentImage = styled.img`
   height: 60px;
   aspect-ratio: 1/1;
   object-fit: cover;
-  border-radius: 0.5rem;
-  ${({ $isRead }) => $isRead && 'filter: grayscale(50%);'};
+  border-radius: 0.3125rem;
+  ${({ $isRead }) => $isRead && 'filter: grayscale(30%);'};
 `
 
 const Content = styled.div`
