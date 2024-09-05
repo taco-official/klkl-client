@@ -6,7 +6,7 @@ import { method } from '../../hooks/kyInstance'
 import useKyMutation from '../../hooks/useKyMutation'
 
 function NotificationHeader({ isEmpty }) {
-  const { mutateAsync } = useKyMutation(method.PUT, 'notifications/all', [
+  const { mutateAsync } = useKyMutation(method.PUT, 'notifications/read', [
     'notifications',
   ])
 
