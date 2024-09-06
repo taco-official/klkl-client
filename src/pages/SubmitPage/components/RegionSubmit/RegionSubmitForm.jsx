@@ -1,15 +1,17 @@
 import React from 'react'
-import RegionSelectForm from './RegionSelectForm'
+import RegionSelectList from './RegionSelectList'
 import AddressInputForm from './AddressInputForm'
-import useFormStore from '../../../../stores/useFormStore'
+import useKyQuery from '../../../../hooks/useKyQuery'
 
 export default function RegionSubmitPage() {
-  const cityId = useFormStore((state) => state.cityId)
+  const { data: regions, status } = useKyQuery('regions')
+
+  if (status === 'pending') return null
 
   return (
     <>
-      <RegionSelectForm />
-      {cityId !== 0 && <AddressInputForm />}
+      <RegionSelectList regions={regions.data} />
+      <AddressInputForm />
     </>
   )
 }

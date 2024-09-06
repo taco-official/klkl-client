@@ -7,9 +7,11 @@ import useFormStore from '../../../../stores/useFormStore'
 import theme from '../../../../styles/theme'
 
 export default function RegionSubmitPage() {
-  const [address, setAddress] = useFormStore(
-    useShallow((state) => [state.address, state.setFormContents])
+  const [city, address, setAddress] = useFormStore(
+    useShallow((state) => [state.city, state.address, state.setFormContents])
   )
+
+  if (!city) return null
 
   return (
     <>
