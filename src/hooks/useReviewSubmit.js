@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import ky from 'ky'
 import { useNavigate } from 'react-router-dom'
+import uploadToS3 from '../utils/uploadToS3'
 
 import { kyInstance } from './kyInstance'
 import useFormStore from '../stores/useFormStore'
@@ -12,9 +12,9 @@ const useReviewSubmit = (httpMethod, uri) => {
     currencyId: state.currencyId,
     price: state.price,
     rating: state.rating,
-    cityId: state.cityId,
+    cityId: state.city?.id,
     address: state.address,
-    subcategoryId: state.subcategoryId,
+    subcategoryId: state.subcategory?.id,
     tagIds: [...state.tags],
   }))
 
@@ -41,22 +41,6 @@ const useReviewSubmit = (httpMethod, uri) => {
     }, Promise.resolve())
 
     return responses
-  }
-
-  const uploadToS3 = async (presignedUrls, sendImage) => {
-    const promises = presignedUrls.map((url, i) =>
-      ky
-        .put(url, {
-          headers: {
-            'X-Amz-Acl': 'private',
-            'Content-Type': sendImage[i].type,
-          },
-          body: sendImage[i],
-          retry: 0,
-        })
-        .json()
-    )
-    return Promise.all(promises)
   }
 
   const sendUploadComplete = async (id) => {
