@@ -8,13 +8,13 @@ const initialState = {
   price: 0,
   rating: 0,
 
-  continentId: 0,
-  countryId: 0,
-  cityId: 0,
+  region: undefined,
+  country: undefined,
+  city: undefined,
   address: '',
 
-  categoryId: 0,
-  subcategoryId: 0,
+  category: undefined,
+  subcategory: undefined,
   tags: new Set([]),
 }
 
