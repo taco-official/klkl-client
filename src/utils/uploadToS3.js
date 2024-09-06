@@ -1,14 +1,14 @@
 import ky from 'ky'
 
-const uploadToS3 = async (presignedUrls, sendImage) => {
+const uploadToS3 = async (presignedUrls, sendImages) => {
   const promises = presignedUrls.map((url, i) =>
     ky
-      .put(url, {
+      .put(url.presignedUrl, {
         headers: {
           'X-Amz-Acl': 'private',
-          'Content-Type': sendImage[i].type,
+          'Content-Type': sendImages[i].type,
         },
-        body: sendImage[i],
+        body: sendImages[i],
         retry: 0,
       })
       .json()

@@ -16,10 +16,10 @@ export default function ReviewImageBlock({ images }) {
         {images.map((image) => (
           <div
             className="carousel-cell"
-            key={image.orderIndex}
+            key={image}
           >
             <Image
-              src={image.url}
+              src={image}
               width="100%"
               height="100%"
               style={{
@@ -39,17 +39,12 @@ export default function ReviewImageBlock({ images }) {
   )
 }
 ReviewImageBlock.propTypes = {
-  images: PropTypes.arrayOf(
-    PropTypes.shape({
-      url: PropTypes.string,
-      orderIndex: PropTypes.number,
-    })
-  ).isRequired,
+  images: PropTypes.arrayOf(PropTypes.string).isRequired,
 }
 
 const ReviewImageCarousel = styled(StyledFlickity)`
   width: 100%;
-  height: 50vh;
+  height: 25rem;
   margin: 30px 0;
 
   .carousel-cell {
