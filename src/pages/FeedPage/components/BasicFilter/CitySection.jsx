@@ -43,17 +43,24 @@ CityCheckBox.propTypes = {
   }).isRequired,
 }
 
-function CityArray() {
-  const selectedCountry = useFeedStore((state) => state.selectedCountry)
-
-  if (!selectedCountry.cities.length)
+function CityArray({ cities }) {
+  if (!cities.length)
     return <SubTitle className="empty">도시가 없습니다.</SubTitle>
 
-  return selectedCountry.cities.map((city) => (
+  return cities.map((city) => (
     <SelectWrapper key={city.id}>
       <CityCheckBox city={city} />
     </SelectWrapper>
   ))
+}
+
+CityArray.propTypes = {
+  cities: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+    })
+  ).isRequired,
 }
 
 function CitySection() {
@@ -66,7 +73,7 @@ function CitySection() {
         {!Object.keys(selectedCountry).length ? (
           <SubTitle className="empty">국가를 선택하세요.</SubTitle>
         ) : (
-          <CityArray />
+          <CityArray cities={selectedCountry.cities} />
         )}
       </SelectContainer>
     </SectionContainer>
