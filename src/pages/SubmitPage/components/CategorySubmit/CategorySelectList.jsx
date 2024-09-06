@@ -43,10 +43,12 @@ function CategorySelectList({ categories }) {
   )
 }
 CategorySelectList.propTypes = {
-  categories: PropTypes.arrayOf({
-    id: PropTypes.number,
-    name: PropTypes.string,
-  }).isRequired,
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+    })
+  ).isRequired,
 }
 
 const ListWrapper = styled.div`
