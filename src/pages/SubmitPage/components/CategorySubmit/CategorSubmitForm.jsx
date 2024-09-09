@@ -1,16 +1,13 @@
 import React from 'react'
-import styled from 'styled-components'
-import { useShallow } from 'zustand/react/shallow'
+import useKyQuery from '../../../../hooks/useKyQuery'
 
-import CategoryList from './CategoryList'
-import SubcategoryList from './SubcategoryList'
+import CategorySelectList from './CategorySelectList'
 import TagSelectForm from './TagSelectForm'
-import useFormStore from '../../../../stores/useFormStore'
 
 export default function CategorSubmitForm() {
-  const [categoryId, subcategoryId] = useFormStore(
-    useShallow((state) => [state.categoryId, state.subcategoryId])
-  )
+  const { data: categories, status } = useKyQuery('categories')
+
+  if (status === 'pending') return null
 
   return (
     <>
@@ -19,17 +16,9 @@ export default function CategorSubmitForm() {
         선택해주세요
       </h2>
       <h3>상품 분류</h3>
-      <Wrapper>
-        <CategoryList />
-        {categoryId !== 0 && <SubcategoryList />}
-      </Wrapper>
-      {subcategoryId !== 0 && <TagSelectForm subcategory={subcategoryId} />}
+
+      <CategorySelectList categories={categories.data} />
+      <TagSelectForm />
     </>
   )
 }
-
-const Wrapper = styled.div`
-  width: 37.5rem;
-  display: flex;
-  margin-bottom: 1.875rem;
-`

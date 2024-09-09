@@ -18,7 +18,7 @@ export default function SelectionList({
       {optionList.map((option) => (
         <SelectButton
           key={option[name]}
-          onClick={() => setOptionState(option[id])}
+          onClick={() => setOptionState(option)}
           className={optionState === option[id] ? 'selected' : null}
         >
           {option[name]}

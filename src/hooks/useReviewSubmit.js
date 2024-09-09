@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import ky from 'ky'
 import { useNavigate } from 'react-router-dom'
+import uploadToS3 from '../utils/uploadToS3'
 
 import { kyInstance } from './kyInstance'
 import useFormStore from '../stores/useFormStore'
@@ -12,9 +12,9 @@ const useReviewSubmit = (httpMethod, uri) => {
     currencyId: state.currencyId,
     price: state.price,
     rating: state.rating,
-    cityId: state.cityId,
+    cityId: state.city?.id,
     address: state.address,
-    subcategoryId: state.subcategoryId,
+    subcategoryId: state.subcategory?.id,
     tagIds: [...state.tags],
   }))
 
@@ -22,55 +22,42 @@ const useReviewSubmit = (httpMethod, uri) => {
   const resetReviewContents = useFormStore((state) => state.resetFormContents)
   const navigate = useNavigate()
 
-  const getPresignedUrl = async (id) => {
-    const responses = []
+  const getPresignedUrl = async (id, sendImages) => {
+    const body = {
+      fileExtensions: sendImages.map((image) => image.type.split('/')[1]),
+    }
 
-    await images.reduce((promise, image) => {
-      if (typeof image === 'string') return promise
-      return promise
-        .then(() => {
-          return kyInstance
-            .post(`products/${id}/upload-url`, {
-              body: JSON.stringify({ fileExtension: image.type.split('/')[1] }),
-            })
-            .json()
-        })
-        .then(({ data }) => {
-          responses.push(data.presignedUrl)
-        })
-    }, Promise.resolve())
+    const response = await kyInstance
+      .post(`products/${id}/upload-url`, { body: JSON.stringify(body) })
+      .json()
 
-    return responses
+    return response.data
   }
 
-  const uploadToS3 = async (presignedUrls, sendImage) => {
-    const promises = presignedUrls.map((url, i) =>
-      ky
-        .put(url, {
-          headers: {
-            'X-Amz-Acl': 'private',
-            'Content-Type': sendImage[i].type,
-          },
-          body: sendImage[i],
-          retry: 0,
-        })
-        .json()
-    )
-    return Promise.all(promises)
-  }
+  const sendUploadComplete = async (id, presignedUrls) => {
+    const imageIds = []
 
-  const sendUploadComplete = async (id) => {
-    await kyInstance.post(`products/${id}/upload-complete`).json()
+    images.forEach((image) => {
+      if (id in image) imageIds.push(image.id)
+    })
+
+    presignedUrls.forEach((presignedUrl) => imageIds.push(presignedUrl.id))
+
+    await kyInstance.post(`products/${id}/upload-complete`, {
+      body: JSON.stringify({ imageIds: [...imageIds] }),
+    })
   }
 
   const uploadImage = async (id) => {
     try {
-      const presignedUrls = await getPresignedUrl(id)
-      if (presignedUrls.length !== 0) {
-        const sendImage = images.filter((image) => typeof image !== 'string')
-        await uploadToS3(presignedUrls, sendImage)
-        await sendUploadComplete(id)
+      const sendImages = images.filter((image) => typeof image !== 'string')
+
+      if (sendImages.length !== 0) {
+        const presignedUrls = await getPresignedUrl(id, sendImages)
+        await uploadToS3(presignedUrls, sendImages)
+        await sendUploadComplete(id, presignedUrls)
       }
+
       resetReviewContents()
       navigate(`/products/${id}`)
     } catch (err) {

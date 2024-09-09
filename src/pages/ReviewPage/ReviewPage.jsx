@@ -22,7 +22,7 @@ export default function ReviewDetailPage() {
         <ReviewFloatButton />,
         document.getElementById('root-aside')
       )}
-      <ReviewImageSection images={review.images} />
+      <ReviewImageSection images={review.imageUrls} />
       <ReviewInfoBlock review={review} />
       <Divider />
       <ReviewMiddleBlock
