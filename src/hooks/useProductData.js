@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
-import useKyQuery from '../../hooks/useKyQuery'
-import useProductQuery from '../../hooks/useProductQuery'
-import { FeedContainer } from '../../pages/FeedPage/FeedPage.style'
+import { useEffect, useState } from 'react'
+import useKyQuery from './useKyQuery'
+import useProductQuery from './useProductQuery'
 
-function ProductDataFetcher({ children }) {
+function useProductData() {
   const { queryArray: selectedQueryArray } = useProductQuery()
   const [pageData, setPageData] = useState({
     requestPage: 0,
@@ -49,15 +47,7 @@ function ProductDataFetcher({ children }) {
     refetch()
   }, [requestQuery])
 
-  return (
-    <FeedContainer>
-      {children({ isLoading, data, pageData, setPageData, isError })}
-    </FeedContainer>
-  )
+  return { isLoading, data, pageData, setPageData, isError }
 }
 
-ProductDataFetcher.propTypes = {
-  children: PropTypes.func,
-}
-
-export default ProductDataFetcher
+export default useProductData
