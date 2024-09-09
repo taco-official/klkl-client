@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import useKyQuery from '../../../../hooks/useKyQuery'
-import useProductQuery from '../../../../hooks/useProductQuery'
-import { FeedContainer } from '../../FeedPage.style'
+import useKyQuery from '../../hooks/useKyQuery'
+import useProductQuery from '../../hooks/useProductQuery'
+import { FeedContainer } from '../../pages/FeedPage/FeedPage.style'
 
 function ProductDataFetcher({ children }) {
   const { queryArray: selectedQueryArray } = useProductQuery()

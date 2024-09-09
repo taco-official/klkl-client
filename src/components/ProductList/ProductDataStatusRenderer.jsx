@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Pagination } from 'antd'
-import LoadingContent from '../../../../components/PreviewContent/LoadingContent'
+import { Pagination, ConfigProvider } from 'antd'
+import LoadingContent from '../PreviewContent/LoadingContent'
 import ProductList from './ProductList'
 import StyledList from './ProductList.style'
+import theme from '../../styles/theme'
 
 function ProductDataStatusRenderer({
   isLoading,
@@ -29,20 +30,30 @@ function ProductDataStatusRenderer({
         ) : (
           <ProductList dataList={data.data.content} />
         ))}
-      <Pagination
-        align="center"
-        current={pageData.requestPage + 1}
-        defaultPageSize={9}
-        pageSize={data?.data.pageSize}
-        total={data?.data.totalElements}
-        showSizeChanger={false}
-        onChange={(page) =>
-          setPageData((prev) => ({
-            ...prev,
-            requestPage: page - 1,
-          }))
-        }
-      />
+      <ConfigProvider
+        theme={{
+          token: {
+            fontFamily: theme.style.main,
+            fontSize: theme.size.textXS,
+            colorPrimary: theme.color.main,
+          },
+        }}
+      >
+        <Pagination
+          align="center"
+          current={pageData.requestPage + 1}
+          defaultPageSize={9}
+          pageSize={data?.data.pageSize}
+          total={data?.data.totalElements}
+          showSizeChanger={false}
+          onChange={(page) =>
+            setPageData((prev) => ({
+              ...prev,
+              requestPage: page - 1,
+            }))
+          }
+        />
+      </ConfigProvider>
     </>
   )
 }
