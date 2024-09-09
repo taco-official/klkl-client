@@ -30,6 +30,13 @@ function useProductData() {
   )
 
   useEffect(() => {
+    setPageData((prev) => ({
+      ...prev,
+      requestPage: 0,
+    }))
+  }, [selectedQueryArray])
+
+  useEffect(() => {
     setRequestQuery([
       {
         key: 'page',
