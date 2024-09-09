@@ -19,21 +19,11 @@ function CountryRadio({ country }) {
     state.setSelectedCountry,
     state.resetSelectedCity,
   ])
-  const { isLoading, data, isError } = useKyQuery(
-    `countries/${country.id}/cities`,
-    null,
-    ['countries/cities', country.id]
-  )
 
   const handleRadioChange = () => {
     resetSelectedCity()
-    setSelectedCountry({
-      ...country,
-      cities: data.data,
-    })
+    setSelectedCountry(country)
   }
-
-  if (isLoading || isError) return null
 
   return (
     <Radio
@@ -51,26 +41,20 @@ CountryRadio.propTypes = {
   country: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
+    cities: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+      })
+    ).isRequired,
   }).isRequired,
 }
 
-function CountryArray({ regionId }) {
-  const { isLoading, data, isError } = useKyQuery(
-    `regions/${regionId}/countries`,
-    null,
-    ['regions/countries', regionId]
-  )
-
-  if (isLoading)
-    return <SubTitle className="empty">불러오는 중입니다.</SubTitle>
-
-  if (isError)
-    return <SubTitle className="empty">로딩에 실패했습니다.</SubTitle>
-
-  if (!data.data.length)
+function CountryArray({ countries }) {
+  if (!countries.length)
     return <SubTitle className="empty">나라가 없습니다.</SubTitle>
 
-  return data.data.map((country) => (
+  return countries.map((country) => (
     <SelectWrapper key={country.id}>
       <CountryRadio country={country} />
     </SelectWrapper>
@@ -78,7 +62,18 @@ function CountryArray({ regionId }) {
 }
 
 CountryArray.propTypes = {
-  regionId: PropTypes.number.isRequired,
+  countries: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      cities: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.number.isRequired,
+          name: PropTypes.string.isRequired,
+        })
+      ).isRequired,
+    })
+  ).isRequired,
 }
 
 function RegionCollapse({ region }) {
@@ -97,7 +92,7 @@ function RegionCollapse({ region }) {
       </SubTitle>
       {isOpen && (
         <SelectContainer>
-          <CountryArray regionId={region.id} />
+          <CountryArray countries={region.countries} />
         </SelectContainer>
       )}
     </>
@@ -108,6 +103,18 @@ RegionCollapse.propTypes = {
   region: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
+    countries: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        cities: PropTypes.arrayOf(
+          PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            name: PropTypes.string.isRequired,
+          })
+        ).isRequired,
+      })
+    ).isRequired,
   }).isRequired,
 }
 

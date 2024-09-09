@@ -2,33 +2,30 @@ import styled from 'styled-components'
 
 const ThumbnailArea = styled.div`
   width: 100%;
-  height: 45vh;
+  height: 50vh;
+  background: 50% 4% / cover
+    ${(props) => (props.$url ? `url(${props.$url})` : 'white')};
+  display: flex;
+  justify-content: center;
   position: relative;
-  overflow: hidden;
-  > img {
-    width: 100%;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -4%);
-  }
   > div {
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    row-gap: 1rem;
     position: absolute;
+    transform: translate(-50%, -50%);
     top: 60%;
     left: 50%;
-    transform: translate(-50%, -50%);
     z-index: 1;
-    color: white;
+    text-align: center;
+    mix-blend-mode: screen;
     > div.title {
-      text-align: center;
       font-size: 3rem;
       font-weight: bold;
     }
     > div.description {
-      margin: 1rem;
-      text-align: center;
       font-size: 1.3rem;
     }
   }
