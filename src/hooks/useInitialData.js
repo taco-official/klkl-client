@@ -13,7 +13,7 @@ const useInitialData = () => {
       const getReviewData = async () => {
         const { data: review } = await kyInstance.get(`products/${id}`).json()
         setFormContents({
-          images: review.imageUrls.map((image) => image),
+          images: review.imageUrls,
           name: review.name,
           description: review.description,
           address: review.address,
