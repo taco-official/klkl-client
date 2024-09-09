@@ -10,7 +10,6 @@ import NumberInputForm from './NumberInputForm'
 
 export default function InfoSubmitForm() {
   const { data: currencies, isLoading } = useKyQuery('currencies')
-  console.log(currencies)
 
   return (
     <>
