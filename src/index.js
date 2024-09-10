@@ -1,90 +1,82 @@
-import React, { Suspense, lazy } from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import PageLayout from './pages/PageLayout'
-import LoadingPage from './pages/LoadingPage'
-import productLoader from './loader/productLoader'
-import userLoader from './loader/userLoader'
 
-const HomePage = lazy(() => import('./pages/HomePage/HomePage'))
-const ReviewPage = lazy(() => import('./pages/ReviewPage/ReviewPage'))
-const SubmitPage = lazy(() => import('./pages/SubmitPage/SubmitPage'))
-const UserPage = lazy(() => import('./pages/UserPage/UserPage'))
-const UserEditPage = lazy(() => import('./pages/UserEditPage/UserEditPage'))
-const FeedPage = lazy(() => import('./pages/FeedPage/FeedPage'))
-const ErrorPage = lazy(() => import('./pages/ErrorPage'))
+import PageLayout from './pages/PageLayout'
+import * as pages from './pages/index'
+import * as loader from './loader/index'
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <PageLayout />,
-    errorElement: <ErrorPage />,
+    errorElement: <pages.ErrorPage />,
     children: [
       {
         path: '',
         element: (
-          <Suspense fallback={<LoadingPage />}>
-            <HomePage />
+          <Suspense fallback={<pages.LoadingPage />}>
+            <pages.HomePage />
           </Suspense>
         ),
       },
       {
         path: 'loading',
-        element: <LoadingPage />,
+        element: <pages.LoadingPage />,
       },
       {
         path: '/products/:id',
-        loader: productLoader,
+        loader: loader.productLoader,
         element: (
-          <Suspense fallback={<LoadingPage />}>
-            <ReviewPage />
+          <Suspense fallback={<pages.LoadingPage />}>
+            <pages.ReviewPage />
           </Suspense>
         ),
       },
       {
         path: 'products/:id/edit',
         element: (
-          <Suspense fallback={<LoadingPage />}>
-            <SubmitPage />
+          <Suspense fallback={<pages.LoadingPage />}>
+            <pages.SubmitPage />
           </Suspense>
         ),
       },
       {
         path: 'submit',
         element: (
-          <Suspense fallback={<LoadingPage />}>
-            <SubmitPage />
+          <Suspense fallback={<pages.LoadingPage />}>
+            <pages.SubmitPage />
           </Suspense>
         ),
       },
       {
         path: 'feed',
         element: (
-          <Suspense fallback={<LoadingPage />}>
-            <FeedPage />
+          <Suspense fallback={<pages.LoadingPage />}>
+            <pages.FeedPage />
           </Suspense>
         ),
       },
       {
         path: 'users/:id',
-        loader: userLoader,
+        loader: loader.userLoader,
         element: (
-          <Suspense fallback={<LoadingPage />}>
-            <UserPage />
+          <Suspense fallback={<pages.LoadingPage />}>
+            <pages.UserPage />
           </Suspense>
         ),
       },
       {
         path: 'user/edit',
         element: (
-          <Suspense fallback={<LoadingPage />}>
-            <UserEditPage />
+          <Suspense fallback={<pages.LoadingPage />}>
+            <pages.UserEditPage />
           </Suspense>
         ),
       },
       {
         path: '*',
-        element: <ErrorPage />,
+        element: <pages.ErrorPage />,
       },
     ],
   },
