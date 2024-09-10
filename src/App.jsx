@@ -1,32 +1,25 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { Outlet, useLocation } from 'react-router-dom'
+import { RouterProvider } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 
-import NavBar from '../components/Navbar/NavBar'
-import Footer from '../components/Footer/Footer'
-import GlobalStyle from '../styles/GlobalStyle'
+import NavBar from './components/Navbar/NavBar'
+import Footer from './components/Footer/Footer'
+import GlobalStyle from './styles/GlobalStyle'
+import router from './router'
 
 const queryClient = new QueryClient()
 
-export default function Layout() {
-  const location = useLocation()
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [location])
-
+export default function App() {
   return (
     <>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
         <NavBar />
-
         <StyledMain>
-          <Outlet />
+          <RouterProvider router={router} />
         </StyledMain>
-
         <Footer />
         <ReactQueryDevtools
           initialIsOpen={false}

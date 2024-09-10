@@ -2,10 +2,10 @@ import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
 import { Divider } from 'antd'
 import { debounce } from 'lodash-es'
-import { useNavigate } from 'react-router-dom'
 
 import { kyInstance } from './kyInstance'
 import theme from '../styles/theme'
+import router from '../router'
 
 const SearchMapping = {
   products: '리뷰',
@@ -17,7 +17,6 @@ const SearchMapping = {
 
 const useDebouncedSearch = (setModalState) => {
   const [results, setResults] = useState([])
-  const navigate = useNavigate()
 
   const debouncedSearch = useCallback(
     debounce(async (inputValue) => {
@@ -57,7 +56,9 @@ const useDebouncedSearch = (setModalState) => {
                   key={content.name}
                   onClick={() => {
                     setModalState(false)
-                    navigate('/', { state: { from: window.location.pathname } })
+                    router.navigate('/', {
+                      state: { from: window.location.pathname },
+                    })
                   }}
                 >
                   {content.name}
