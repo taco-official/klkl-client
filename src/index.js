@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import PageLayout from './pages/PageLayout'
 import LoadingPage from './pages/LoadingPage'
 import productLoader from './loader/productLoader'
+import userLoader from './loader/userLoader'
 
 const HomePage = lazy(() => import('./pages/HomePage/HomePage'))
 const ReviewPage = lazy(() => import('./pages/ReviewPage/ReviewPage'))
@@ -65,7 +66,8 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: 'user',
+        path: 'users/:id',
+        loader: userLoader,
         element: (
           <Suspense fallback={<LoadingPage />}>
             <UserPage />
