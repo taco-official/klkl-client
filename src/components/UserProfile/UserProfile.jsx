@@ -8,7 +8,7 @@ export default function UserProfile({ userData, profileButton }) {
   return (
     <ProfileSection>
       <ProfileImage
-        src={userData.profile}
+        src={userData.profileUrl}
         $size="3.75rem"
       />
       <SimpleUserInfo>
@@ -25,7 +25,7 @@ export default function UserProfile({ userData, profileButton }) {
 UserProfile.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.number,
-    profile: PropTypes.string,
+    profileUrl: PropTypes.string,
     name: PropTypes.string,
     description: PropTypes.string,
     totalLikeCount: PropTypes.number,

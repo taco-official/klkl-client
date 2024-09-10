@@ -2,24 +2,19 @@ import React from 'react'
 import styled from 'styled-components'
 import { Divider } from 'antd'
 
+import { useLoaderData } from 'react-router-dom'
 import UserMenu from './UserMenu'
 import UserEditButton from '../../components/UserProfile/UserEditButton'
 import UserProfile from '../../components/UserProfile/UserProfile'
 
-const dummy = {
-  id: 1,
-  profile: 'https://pbs.twimg.com/media/GUhwmEaa8AAHbT5.jpg',
-  name: '현승희',
-  description: '사랑해요 연예가중계',
-  totalLikeCount: 42,
-}
-
 function UserPage() {
+  const { data: userData } = useLoaderData()
+
   return (
     <Wrapper>
       <ProfileWrapper>
         <UserProfile
-          userData={dummy}
+          userData={userData}
           profileButton={<UserEditButton />}
         />
       </ProfileWrapper>
