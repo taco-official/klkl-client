@@ -44,10 +44,12 @@ function ReviewOptions() {
             },
             closeIcon: false,
           })
-          if (location.state.from !== '/submit') navigate(-1)
+
+          if (location.state?.from && location.state.from !== '/submit')
+            navigate(-1)
           else navigate('/')
         } catch (error) {
-          console.error(error.response)
+          console.error(error, error.response)
           window.alert('다시 시도해 주세요')
         }
       },
