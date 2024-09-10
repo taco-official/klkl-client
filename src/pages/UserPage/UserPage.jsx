@@ -34,16 +34,8 @@ const Wrapper = styled.div`
   padding: 0 1.875rem;
   margin: 30px auto;
 
-  display: grid;
-  grid-template-areas:
-    'profile profile'
-    'divider divider'
-    'menu content';
-
-  grid-column-gap: 0.9375rem;
-  grid-template-columns: 9.375rem auto;
-  grid-template-rows: 6.25rem auto auto;
-  align-content: stretch;
+  display: flex;
+  flex-direction: column;
 `
 
 const ProfileWrapper = styled.div`

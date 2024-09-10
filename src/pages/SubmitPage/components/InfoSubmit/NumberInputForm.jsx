@@ -1,15 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { InputNumber, Select, ConfigProvider } from 'antd'
 
+import useKyQuery from '../../../../hooks/useKyQuery'
 import useFormStore from '../../../../stores/useFormStore'
 import theme from '../../../../styles/theme'
 
+const useDefaultCurrency = (setFormContents) => {
+  const country = useFormStore((state) => state.country)
+  const { data, isLoading } = useKyQuery(`currencies?country_id=${country.id}`)
+
+  useEffect(() => {
+    if (!isLoading) setFormContents({ currencyId: data.data[0].id })
+  }, [isLoading])
+}
+
 export default function NumberInputForm({ currencies }) {
-  const price = useFormStore((state) => state.price)
-  const currencyId = useFormStore((state) => state.currencyId)
   const setFormContents = useFormStore((state) => state.setFormContents)
+  const currencyId = useFormStore((state) => state.currencyId)
+  const price = useFormStore((state) => state.price)
+
+  useDefaultCurrency(setFormContents)
 
   return (
     <ConfigProvider
@@ -30,6 +42,7 @@ export default function NumberInputForm({ currencies }) {
         defaultValue={price}
         addonBefore={
           <Select
+            key={currencyId}
             defaultValue={currencyId}
             onSelect={(value) => setFormContents({ currencyId: value })}
             style={{ width: '90px', fontSize: '2px' }}

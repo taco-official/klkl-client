@@ -21,7 +21,7 @@ export default function Comment() {
   return (
     <CommentSection>
       <h2>
-        댓글(<span>{Object.keys(comments.data).length}</span>)
+        댓글 (<span>{Object.keys(comments.data).length}</span>)
       </h2>
       <CommentInput />
       <CommentList comments={comments.data} />
@@ -35,7 +35,7 @@ const CommentSection = styled.section`
 
   h2 {
     font-style: ${theme.style.mainEB};
-    font-size: ${theme.size.titleSM};
+    font-size: ${theme.size.textSM};
     margin-bottom: 20px;
     margin-top: 20px;
   }

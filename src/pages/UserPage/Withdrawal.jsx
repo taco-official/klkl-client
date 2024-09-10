@@ -22,7 +22,7 @@ function Withdrawal() {
 }
 
 const WithdrawalBox = styled.div`
-  width: 100%;
+  width: 36rem;
   height: 100%;
 
   display: flex;

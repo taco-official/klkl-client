@@ -25,7 +25,7 @@ function PreviewContent({ userId = null, productData }) {
       <PreviewContainer>
         <ThumbnailContainer
           id="productThumbnail"
-          $url={productData.mainImgUrl}
+          $url={productData.mainImageUrl}
         >
           <LikeButton
             userId={userId}
@@ -70,7 +70,7 @@ PreviewContent.propTypes = {
   userId: PropTypes.number,
   productData: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    mainImgUrl: PropTypes.string,
+    mainImageUrl: PropTypes.string.isRequired,
     countryName: PropTypes.string.isRequired,
     categoryName: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

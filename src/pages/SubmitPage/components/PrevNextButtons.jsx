@@ -10,7 +10,7 @@ const checkCanNext = (step, review) => {
     case submitSteps.IMAGE:
       return true
     case submitSteps.REGION:
-      return review.cityId !== 0
+      return review.region && review.country && review.city
     case submitSteps.INFO:
       return (
         review.name !== '' &&

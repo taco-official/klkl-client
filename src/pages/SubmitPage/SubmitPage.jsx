@@ -20,10 +20,10 @@ const pages = {
 const useStep = () => {
   const [step, setStep] = useState(0)
   const goNextStep = () => {
-    setStep(step + 1)
+    setStep((prev) => prev + 1)
   }
   const goPrevStep = () => {
-    setStep(step - 1)
+    setStep((prev) => prev - 1)
   }
 
   return [step, goNextStep, goPrevStep]

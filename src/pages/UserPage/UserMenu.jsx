@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Menu } from 'antd'
 
-import userMenuKeys from '../../constants/userMenuKeys'
-import ProductList from './ProductList'
-import theme from '../../styles/theme'
+import styled from 'styled-components'
 import Withdrawal from './Withdrawal'
-import { kyInstance } from '../../hooks/kyInstance'
+import userMenuKeys from '../../constants/userMenuKeys'
+import theme from '../../styles/theme'
+import ProductDataStatusRenderer from '../../components/ProductList/ProductDataStatusRenderer'
+import useKyQuery from '../../hooks/useKyQuery'
 
 const items = [
   {
@@ -28,25 +29,33 @@ const items = [
 ]
 
 const useContentFetch = (selectedMenu) => {
-  const [content, setContent] = useState()
+  const [currentPage, setCurrentPage] = useState({
+    size: 9,
+    requestPage: 0,
+  })
 
-  const fetchProductList = async () => {
-    try {
-      if (selectedMenu === userMenuKeys.WIDTHDRAW) setContent(<Withdrawal />)
-      else {
-        const data = await kyInstance.get(selectedMenu).json()
-        setContent(<ProductList productList={data.data.content} />)
-      }
-    } catch (error) {
-      console.log(`${error}`)
+  const {
+    data: productList,
+    isLoading,
+    isError,
+  } = useKyQuery(
+    `${selectedMenu}?page=${currentPage.requestPage}`,
+    null,
+    undefined,
+    {
+      refetchOnMount: false,
     }
-  }
+  )
 
-  useEffect(() => {
-    fetchProductList()
-  }, [selectedMenu])
-
-  return content
+  return (
+    <ProductDataStatusRenderer
+      isLoading={isLoading}
+      isError={isError}
+      data={productList}
+      pageData={currentPage}
+      setPageData={setCurrentPage}
+    />
+  )
 }
 
 function UserPage() {
@@ -54,26 +63,27 @@ function UserPage() {
   const content = useContentFetch(selectedMenu)
 
   return (
-    <>
-      <Menu
+    <MenuSection>
+      <StyledMenu
         items={items}
         defaultSelectedKeys={[userMenuKeys.MY_REVIEW]}
-        style={{ fontFamily: theme.style.mainBold }}
         onSelect={({ key }) => setMenu(key)}
-        className="user--menu"
       />
-      <div
-        className="user--content"
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignContent: 'center',
-        }}
-      >
-        {content}
+      <div>
+        {selectedMenu !== userMenuKeys.WIDTHDRAW ? content : <Withdrawal />}
       </div>
-    </>
+    </MenuSection>
   )
 }
+
+const MenuSection = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`
+
+const StyledMenu = styled(Menu)`
+  width: 130px;
+  font-family: ${theme.style.mainBold};
+`
 
 export default UserPage
