@@ -1,0 +1,64 @@
+import React from 'react'
+import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
+import { Button } from 'antd'
+
+import { kyInstance } from '../../hooks/kyInstance'
+import useKyMutation from '../../hooks/useKyMutation'
+import theme from '../../styles/theme'
+import useUserStore from '../../stores/useUserStore'
+import uploadeToS3 from '../../utils/uploadToS3'
+
+const useEditProfile = () => {
+  const navigate = useNavigate()
+  const body = useUserStore((state) => ({
+    name: state.name,
+    description: state.description,
+  }))
+
+  const { mutateAsync } = useKyMutation('put', 'users/me')
+
+  const profileUrl = useUserStore((state) => state.profileUrl)
+
+  const editProfile = async () => {
+    try {
+      if (typeof profileUrl !== 'string') {
+        const { data } = await kyInstance
+          .post('users/me/upload-url', {
+            body: JSON.stringify({
+              fileExtension: profileUrl.type.split('/')[1],
+            }),
+          })
+          .json()
+
+        await uploadeToS3([data], [profileUrl])
+
+        await kyInstance.post('users/me/upload-complete', {
+          body: JSON.stringify({ imageId: data.id }),
+        })
+      }
+
+      await mutateAsync(JSON.stringify(body))
+
+      navigate('/me')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  return editProfile
+}
+
+function SaveButton() {
+  const editProfile = useEditProfile()
+
+  return <CustomButton onClick={editProfile}>저장</CustomButton>
+}
+
+const CustomButton = styled(Button).attrs({ type: 'text' })`
+  font-family: ${theme.style.mainBold};
+  border: 1px solid ${theme.color.lineGrey};
+  width: 7.5rem;
+`
+
+export default SaveButton
