@@ -17,7 +17,7 @@ const initialState = {
 const useFeedStore = create((set) => ({
   ...initialState,
 
-  setSelectedCountry: (state) => set({ selectedCountry: state }),
+  setSelectedCountry: (country) => set({ selectedCountry: country }),
   deleteSelectedCountry: () =>
     set({ selectedCountry: initialState.selectedCountry }),
 
@@ -75,7 +75,7 @@ const useFeedStore = create((set) => ({
 
   setSelectedSort: (state) => set({ selectedSort: state }),
 
-  resetSelectedField: () => set(() => ({ ...initialState })),
+  resetSelectedField: () => set({ ...initialState }),
 }))
 
 export default useFeedStore
