@@ -35,7 +35,7 @@ function PreviewContent({ userId = null, productData }) {
         </ThumbnailContainer>
         <DescriptionContainer>
           <CategoryWrapper>
-            {`${productData.countryName} · ${productData.categoryName}`}
+            {`${productData.countryName} ∙ ${productData.categoryName}`}
           </CategoryWrapper>
           <ProductNameBox id="productName">{productData.name}</ProductNameBox>
           <TagsContainer>
