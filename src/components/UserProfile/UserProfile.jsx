@@ -9,7 +9,7 @@ export default function UserProfile({ userData, profileButton }) {
     <ProfileSection>
       <ProfileImage
         src={userData.profileUrl}
-        $size="3.75rem"
+        $size="4.375rem"
       />
       <SimpleUserInfo>
         <div className="profile--user__nickname">{userData.name}</div>
