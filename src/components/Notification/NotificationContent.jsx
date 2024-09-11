@@ -1,15 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
 
+import router from '../../router'
 import { method } from '../../hooks/kyInstance'
 import useKyMutation from '../../hooks/useKyMutation'
 import dateParser from '../../utils/dateParser'
 import theme from '../../styles/theme'
 
 function NotificationContent({ content }) {
-  const navigate = useNavigate()
   const { mutateAsync } = useKyMutation(
     method.PUT,
     `notifications/${content.id}/read`,
@@ -19,7 +18,8 @@ function NotificationContent({ content }) {
   const onClick = async () => {
     try {
       await mutateAsync()
-      navigate(`/products/${content.product.id}`, {
+
+      router.navigate(`/products/${content.product.id}`, {
         state: { from: window.location.pathname },
       })
     } catch (error) {
