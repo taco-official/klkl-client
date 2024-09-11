@@ -1,14 +1,15 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { Button } from 'antd'
+import PropTypes from 'prop-types'
+
 import theme from '../../styles/theme'
 import ProfileImage from '../../components/UserProfile/ProfileImage'
 import useUserStore from '../../stores/useUserStore'
 
-function ProfileEditBlock() {
+function ProfileEditBlock({ name }) {
   const inputRef = useRef()
-  const profileRef = useRef()
-  const profileImage = useUserStore((state) => state.profile)
+  const profileUrl = useUserStore((state) => state.profileUrl)
   const setProfile = useUserStore((state) => state.setProfile)
 
   const changeProfileButton = () => inputRef.current.click()
@@ -16,30 +17,21 @@ function ProfileEditBlock() {
   const changeProfileImage = (e) => {
     const file = e.target?.files[0]
     if (!file) return
-
-    const reader = new FileReader()
-
-    reader.onload = () => {
-      profileRef.current.src = reader.result
-      setProfile(reader.result)
-    }
-
-    reader.readAsDataURL(file)
+    setProfile(file)
   }
 
-  const deleteProfileImage = () => {
-    inputRef.current.value = ''
-    profileRef.current.src = ''
-    setProfile('')
-  }
+  const deleteProfileImage = () => setProfile('')
 
   return (
     <ProfileEditBlockWrapper>
       <ProfileImage
-        src={profileImage}
+        src={
+          typeof profileUrl === 'string'
+            ? profileUrl
+            : URL.createObjectURL(profileUrl)
+        }
         height="100px"
         style={{ gridArea: 'profile' }}
-        ref={profileRef}
       />
       <input
         type="file"
@@ -47,7 +39,7 @@ function ProfileEditBlock() {
         onChange={changeProfileImage}
         ref={inputRef}
       />
-      <div className="profile--nickname">존나긴닉네임을여기에입력</div>
+      <div className="profile--nickname">{name}</div>
       <div className="profile--buttons">
         <StyledButton
           type="text"
@@ -66,6 +58,7 @@ function ProfileEditBlock() {
     </ProfileEditBlockWrapper>
   )
 }
+ProfileEditBlock.propTypes = { name: PropTypes.string.isRequired }
 
 const ProfileEditBlockWrapper = styled.div`
   display: grid;

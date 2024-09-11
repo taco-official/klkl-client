@@ -5,6 +5,7 @@ import theme from '../../styles/theme'
 import useUserStore from '../../stores/useUserStore'
 
 function DescriptionInput() {
+  const description = useUserStore((state) => state.description)
   const setDescription = useUserStore((state) => state.setDescription)
 
   return (
@@ -12,10 +13,11 @@ function DescriptionInput() {
       자기소개
       <StyledTextArea
         showCount
+        defaultValue={description}
         maxLength={50}
         placeholder="자기소개 변경"
         autoSize={{ minRows: 2 }}
-        onChange={(e) => setDescription(e.target.value)}
+        onBlur={(e) => setDescription(e.target.value)}
       />
     </InfoBox>
   )
