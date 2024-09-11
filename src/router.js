@@ -1,75 +1,64 @@
 import React, { Suspense } from 'react'
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Outlet } from 'react-router-dom'
 
 import * as pages from './pages/index'
 import * as loader from './loader/index'
+import LoadingPage from './pages/LoadingPage'
+import ErrorPage from './pages/ErrorPage'
 
-const router = createBrowserRouter([
+const routes = [
   {
     path: '',
-    element: (
-      <Suspense fallback={<pages.LoadingPage />}>
-        <pages.HomePage />
-      </Suspense>
-    ),
-  },
-  {
-    path: 'loading',
-    element: <pages.LoadingPage />,
+    element: <pages.HomePage />,
   },
   {
     path: '/products/:id',
     loader: loader.productLoader,
-    element: (
-      <Suspense fallback={<pages.LoadingPage />}>
-        <pages.ReviewPage />
-      </Suspense>
-    ),
+    element: <pages.ReviewPage />,
   },
   {
     path: 'products/:id/edit',
-    element: (
-      <Suspense fallback={<pages.LoadingPage />}>
-        <pages.SubmitPage />
-      </Suspense>
-    ),
+    loader: loader.productEditLoader,
+    element: <pages.SubmitPage />,
   },
   {
     path: 'submit',
-    element: (
-      <Suspense fallback={<pages.LoadingPage />}>
-        <pages.SubmitPage />
-      </Suspense>
-    ),
+    element: <pages.SubmitPage />,
   },
   {
     path: 'feed',
-    element: (
-      <Suspense fallback={<pages.LoadingPage />}>
-        <pages.FeedPage />
-      </Suspense>
-    ),
+    element: <pages.FeedPage />,
+  },
+  {
+    path: 'me',
+    element: <pages.MyPage />,
+  },
+  {
+    path: 'me/edit',
+    loader: loader.meLoader,
+    element: <pages.MyEditPage />,
   },
   {
     path: 'users/:id',
     loader: loader.userLoader,
-    element: (
-      <Suspense fallback={<pages.LoadingPage />}>
-        <pages.UserPage />
-      </Suspense>
-    ),
-  },
-  {
-    path: 'user/edit',
-    element: (
-      <Suspense fallback={<pages.LoadingPage />}>
-        <pages.UserEditPage />
-      </Suspense>
-    ),
+    element: <pages.UserPage />,
   },
   {
     path: '*',
-    element: <pages.ErrorPage />,
+    element: <ErrorPage />,
+  },
+]
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: (
+      <Suspense fallback={<LoadingPage />}>
+        <Outlet />
+      </Suspense>
+    ),
+    errorElement: <ErrorPage />,
+    children: routes,
   },
 ])
 

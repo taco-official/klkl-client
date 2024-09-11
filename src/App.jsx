@@ -33,5 +33,5 @@ export default function App() {
 
 const StyledMain = styled.main`
   width: 100%;
-  min-height: 90vh;
+  min-height: 70vh;
 `
