@@ -7,23 +7,23 @@ import router from '../../../router'
 import PlainButton from '../../Button/PlainButton'
 
 export default function LoginButton() {
-  const userData = useUserData()
+  const { data } = useUserData()
   const setLoginModalState = useModalStore((store) => store.setLoginModalState)
 
   return (
     <PlainButton
       onClick={() => {
-        if (!userData) {
+        if (!data) {
           setLoginModalState(true)
           return
         }
 
-        router.navigate(`/users/${userData.id}`)
+        router.navigate(`/me`)
       }}
     >
       <ProfileImage
-        src={!userData ? null : userData.profileUrl}
-        $size="2.5rem"
+        src={!data ? null : data.data.profileUrl}
+        $size="2.1875rem"
       />
     </PlainButton>
   )
