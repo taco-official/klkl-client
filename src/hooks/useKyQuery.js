@@ -23,7 +23,7 @@ const useKyQuery = (
   return useQuery({
     queryKey,
     queryFn: () => kyInstance.get(uri).json(),
-    cacheTime: 300000,
+    gcTime: 300000,
     staleTime: 300000,
     ...options,
   })
