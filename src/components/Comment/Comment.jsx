@@ -1,19 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import { useParams } from 'react-router-dom'
 
 import theme from '../../styles/theme'
 import useKyQuery from '../../hooks/useKyQuery'
 import CommentInput from './CommentInput'
 import CommentList from './CommentList'
 
-export default function Comment() {
-  const location = window.location.pathname.slice(1)
+export default function Comment({ userData }) {
+  const { id } = useParams()
   const {
     data: comments,
     isError,
     error,
     isLoading,
-  } = useKyQuery(`${location}/comments`)
+  } = useKyQuery(`products/${id}/comments`, null, undefined, { staleTime: 0 })
 
   if (isError) return <div>{error}</div>
   if (isLoading) return <div>loading</div>
@@ -23,10 +25,20 @@ export default function Comment() {
       <h2>
         댓글 (<span>{Object.keys(comments.data).length}</span>)
       </h2>
-      <CommentInput />
-      <CommentList comments={comments.data} />
+      <CommentInput profile={userData.profileUrl} />
+      <CommentList
+        comments={comments.data}
+        userId={userData.id}
+      />
     </CommentSection>
   )
+}
+Comment.propTypes = {
+  userData: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    profileUrl: PropTypes.string,
+  }).isRequired,
 }
 
 const CommentSection = styled.section`

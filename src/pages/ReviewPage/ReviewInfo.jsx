@@ -14,7 +14,7 @@ const breadCrumbStyle = {
   fontSize: theme.size.textXS,
 }
 
-export default function ReviewInfoBlock({ review }) {
+export default function ReviewInfoBlock({ review, canEdit }) {
   const breadCrumbItems = [
     {
       title: (
@@ -62,7 +62,7 @@ export default function ReviewInfoBlock({ review }) {
           defaultValue={review.rating}
         />
         <div>
-          <p>{dateParser(review.createdAt)}</p> <ReviewOptions />
+          <p>{dateParser(review.createdAt)}</p> {canEdit && <ReviewOptions />}
         </div>
       </EndWrapper>
     </InfoWrapper>
@@ -105,6 +105,7 @@ ReviewInfoBlock.propTypes = {
     ),
     createdAt: PropTypes.string,
   }).isRequired,
+  canEdit: PropTypes.bool,
 }
 
 const InfoWrapper = styled.section`

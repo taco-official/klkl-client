@@ -8,7 +8,7 @@ import ProfileImage from '../UserProfile/ProfileImage'
 import CommentOptions from './CommentOptions'
 import theme from '../../styles/theme'
 
-export default function CommentListContent({ comment }) {
+export default function CommentListContent({ comment, canEdit }) {
   const [isEdit, setEditState] = useState(false)
 
   const enableEditMode = () => setEditState(true)
@@ -17,8 +17,8 @@ export default function CommentListContent({ comment }) {
   return (
     <CommentListContentWrapper>
       <ProfileImage
-        src={comment.user.profile}
-        $size="50px"
+        src={comment.user.profileUrl}
+        $size="2.5rem"
       />
       {isEdit ? (
         <CommentEdit
@@ -33,10 +33,12 @@ export default function CommentListContent({ comment }) {
             <span className="comment--info__date">
               {dateParser(comment.createdAt)}
             </span>
-            <CommentOptions
-              commentId={comment.id}
-              setEditMode={enableEditMode}
-            />
+            {canEdit && (
+              <CommentOptions
+                commentId={comment.id}
+                setEditMode={enableEditMode}
+              />
+            )}
           </div>
           <div className="comment--info__content">{comment.content}</div>
         </ContentBox>
@@ -52,9 +54,10 @@ CommentListContent.propTypes = {
     user: PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
-      profile: PropTypes.string,
+      profileUrl: PropTypes.string,
     }),
   }).isRequired,
+  canEdit: PropTypes.bool.isRequired,
 }
 
 const CommentListContentWrapper = styled.li`
