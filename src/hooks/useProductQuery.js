@@ -48,7 +48,7 @@ function useProductQuery() {
           )
         )
           acc.push(
-            ...category.subCategories.map((subCategory) => subCategory.id)
+            ...category.subcategories.map((subCategory) => subCategory.id)
           )
         return acc
       }, [])
