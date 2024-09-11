@@ -1,5 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useShallow } from 'zustand/react/shallow'
+import { useLocation } from 'react-router-dom'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
 import useKyQuery from '../../../../hooks/useKyQuery'
@@ -89,7 +90,56 @@ CategoryCheckBox.propTypes = {
 }
 
 function CategoryArray() {
-  const { isLoading, data, isError } = useKyQuery('categories')
+  const { isLoading, data, isError } = useKyQuery(
+    'categories',
+    null,
+    undefined,
+    {
+      gcTime: 24 * 60 * 60 * 1000,
+      staleTime: 24 * 60 * 60 * 1000,
+    }
+  )
+  const location = useLocation()
+  const { selectedCategory, selectedSubCategory } = useFeedStore(
+    useShallow((state) => ({
+      selectedCategory: state.selectedCategory,
+      selectedSubCategory: state.selectedSubCategory,
+    }))
+  )
+  const { addSelectedCategory, addSelectedSubCategory } = useFeedStore(
+    (state) => ({
+      addSelectedCategory: state.addSelectedCategory,
+      addSelectedSubCategory: state.addSelectedSubCategory,
+    })
+  )
+
+  useEffect(() => {
+    if (location.state?.data && !isLoading && !isError && data) {
+      if (location.state.data.categories.length) {
+        const searchedCategory = location.state.data.categories[0]
+        if (!inArray(selectedCategory, searchedCategory.id)) {
+          addSelectedCategory(searchedCategory)
+        }
+      }
+
+      if (location.state.data.subcategories.length) {
+        const searchedSubCategory = location.state.data.subcategories[0]
+        data.data.find((category) => {
+          if (inArray(category.subcategories, searchedSubCategory.id)) {
+            if (!inArray(selectedSubCategory, searchedSubCategory.id))
+              addSelectedSubCategory({
+                ...searchedSubCategory,
+                categoryId: category.id,
+              })
+            if (!inArray(selectedCategory, category.id))
+              addSelectedCategory(category)
+            return true
+          }
+          return false
+        })
+      }
+    }
+  }, [isLoading, isError, data])
 
   if (isLoading) return <div className="empty">불러오는 중입니다.</div>
 

@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
+import { useShallow } from 'zustand/react/shallow'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
 import useKyQuery from '../../../../hooks/useKyQuery'
 import useFeedStore from '../../../../stores/useFeedStore'
+import inArray from '../../../../utils/inArray'
 import ShowHideButton from '../../../../components/Button/ShowHideButton'
 import theme from '../../../../styles/theme'
 import {
@@ -76,9 +79,13 @@ CountryArray.propTypes = {
   ).isRequired,
 }
 
-function RegionCollapse({ region }) {
+function RegionCollapse({ region, defaultOpenId = undefined }) {
   const [isOpen, setIsOpen] = useState(false)
   const toggleRegion = () => setIsOpen((prev) => !prev)
+
+  useEffect(() => {
+    setIsOpen(region.id === defaultOpenId)
+  }, [defaultOpenId])
 
   return (
     <>
@@ -116,10 +123,59 @@ RegionCollapse.propTypes = {
       })
     ).isRequired,
   }).isRequired,
+  defaultOpenId: PropTypes.number,
 }
 
 function RegionArray() {
-  const { isLoading, data, isError } = useKyQuery('regions')
+  const { isLoading, data, isError } = useKyQuery('regions', null, undefined, {
+    gcTime: 24 * 60 * 60 * 1000,
+    staleTime: 24 * 60 * 60 * 1000,
+  })
+  const location = useLocation()
+  const { selectedCountry, selectedCity } = useFeedStore(
+    useShallow((state) => ({
+      selectedCountry: state.selectedCountry,
+      selectedCity: state.selectedCity,
+    }))
+  )
+  const { setSelectedCountry, addSelectedCity } = useFeedStore((state) => ({
+    setSelectedCountry: state.setSelectedCountry,
+    addSelectedCity: state.addSelectedCity,
+  }))
+  const [defaultOpenRegion, setDefaultOpenRegion] = useState(undefined)
+
+  useEffect(() => {
+    if (location.state?.data && !isLoading && !isError && data) {
+      if (location.state.data.countries.length) {
+        const searchedCountry = location.state.data.countries[0]
+        data.data.find((region) => {
+          if (inArray(region.countries, searchedCountry.id)) {
+            setSelectedCountry(searchedCountry)
+            if (region.id !== defaultOpenRegion) setDefaultOpenRegion(region.id)
+            return true
+          }
+          return false
+        })
+      }
+
+      if (location.state.data.cities.length) {
+        const searchedCity = location.state.data.cities[0]
+        data.data.find((region) =>
+          region.countries.find((country) => {
+            if (inArray(country.cities, searchedCity.id)) {
+              if (!inArray(selectedCity, searchedCity.id))
+                addSelectedCity(searchedCity)
+              if (!('id' in selectedCountry)) setSelectedCountry(country)
+              if (region.id !== defaultOpenRegion)
+                setDefaultOpenRegion(region.id)
+              return true
+            }
+            return false
+          })
+        )
+      }
+    }
+  }, [isLoading, isError, data])
 
   if (isLoading)
     return <SubTitle className="empty">불러오는 중입니다.</SubTitle>
@@ -132,7 +188,10 @@ function RegionArray() {
 
   return data.data.map((region) => (
     <SelectWrapper key={region.id}>
-      <RegionCollapse region={region} />
+      <RegionCollapse
+        region={region}
+        defaultOpenId={defaultOpenRegion}
+      />
     </SelectWrapper>
   ))
 }

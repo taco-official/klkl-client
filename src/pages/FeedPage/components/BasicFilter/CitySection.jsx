@@ -70,7 +70,7 @@ function CitySection() {
     <SectionContainer>
       <div className="title">도시</div>
       <SelectContainer>
-        {!Object.keys(selectedCountry).length ? (
+        {!('cities' in selectedCountry) ? (
           <SubTitle className="empty">국가를 선택하세요.</SubTitle>
         ) : (
           <CityArray cities={selectedCountry.cities} />
