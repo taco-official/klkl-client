@@ -68,7 +68,7 @@ function UserFollowButton({ id }) {
   const followUser = useFollow(toInteger(id))
   const unFollowUser = useUnFollow(toInteger(id))
 
-  if (data.data.id === toInteger(id)) return null
+  if (data.data.id === id) return null
 
   return (
     <ConfigProvider
@@ -99,7 +99,7 @@ function UserFollowButton({ id }) {
   )
 }
 UserFollowButton.propTypes = {
-  id: PropTypes.string.isRequired,
+  id: PropTypes.number.isRequired,
 }
 
 export default UserFollowButton
