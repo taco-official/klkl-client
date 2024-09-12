@@ -13,7 +13,12 @@ function ReviewList({ selectedMenu }) {
     data: productList,
     isLoading,
     isError,
-  } = useKyQuery(`${selectedMenu}?page=${currentPage.requestPage}`)
+  } = useKyQuery(
+    `${selectedMenu}?page=${currentPage.requestPage}`,
+    null,
+    undefined,
+    { staleTime: 0 }
+  )
 
   if (!productList) return null
 
