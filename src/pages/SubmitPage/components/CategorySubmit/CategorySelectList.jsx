@@ -48,7 +48,7 @@ CategorySelectList.propTypes = {
       id: PropTypes.number,
       name: PropTypes.string,
     })
-  ).isRequired,
+  ),
 }
 
 const ListWrapper = styled.div`
