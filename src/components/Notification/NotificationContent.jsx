@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import router from '../../router'
 import { method } from '../../hooks/kyInstance'
 import useKyMutation from '../../hooks/useKyMutation'
-import dateParser from '../../utils/dateParser'
 import theme from '../../styles/theme'
 
 function NotificationContent({ content }) {
@@ -49,7 +48,7 @@ function NotificationContent({ content }) {
             className="noti--info__date"
             $isRead={content.isRead}
           >
-            {dateParser(content.comment.createdAt)}
+            {content.comment.createdAt}
           </Content>
         </Content>
         <Content

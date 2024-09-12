@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
 import CommentEdit from './CommentEdit'
-import dateParser from '../../utils/dateParser'
 import ProfileImage from '../UserProfile/ProfileImage'
 import CommentOptions from './CommentOptions'
 import theme from '../../styles/theme'
@@ -39,9 +38,7 @@ export default function CommentListContent({ comment, canEdit }) {
             >
               {comment.user.name}
             </span>
-            <span className="comment--info__date">
-              {dateParser(comment.createdAt)}
-            </span>
+            <span className="comment--info__date">{comment.createdAt}</span>
             {canEdit && (
               <CommentOptions
                 commentId={comment.id}
