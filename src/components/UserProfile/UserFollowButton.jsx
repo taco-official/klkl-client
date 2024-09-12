@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, ConfigProvider, notification } from 'antd'
-import { toInteger } from 'lodash-es'
 
 import useUserData from '../../hooks/useUserData'
 import theme from '../../styles/theme'
@@ -68,9 +67,9 @@ const useUnFollow = (id) => {
 
 function UserFollowButton({ id }) {
   const { data } = useUserData()
-  const isFollowed = useCheckFollow(toInteger(id))
-  const followUser = useFollow(toInteger(id))
-  const unFollowUser = useUnFollow(toInteger(id))
+  const isFollowed = useCheckFollow(id)
+  const followUser = useFollow(id)
+  const unFollowUser = useUnFollow(id)
 
   if (data.data.id === id) return null
 
