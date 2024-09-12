@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { Divider } from 'antd'
 import { useLoaderData } from 'react-router-dom'
-import { createPortal } from 'react-dom'
 
 import theme from '../../styles/theme'
 import UserFollowButton from '../../components/UserProfile/UserFollowButton'
@@ -20,47 +19,45 @@ export default function ReviewDetailPage() {
 
   return (
     <Article>
-      {createPortal(
-        <ReviewFloatButton />,
-        document.getElementById('root-aside')
-      )}
-      <ReviewImageSection images={review.images} />
-      <ReviewInfoBlock
-        review={review}
-        canEdit={review.user.id === client.data.id}
-      />
-      <Divider />
-      <ReviewMiddleBlock
-        address={review.address}
-        price={review.price}
-        currency={review.currency}
-      />
-      <Divider />
-      <Description>
-        <p>{review.description}</p>
-      </Description>
-      <Divider />
-      <UserProfile
-        userData={review.user}
-        profileButton={<UserFollowButton id={review.user.id} />}
-      />
-      <Divider />
-      <Comment userData={client.data} />
+      <div>
+        <ReviewImageSection images={review.images} />
+        <ReviewInfoBlock
+          review={review}
+          canEdit={review.user.id === client.data.id}
+        />
+        <Divider />
+        <ReviewMiddleBlock
+          address={review.address}
+          price={review.price}
+          currency={review.currency}
+        />
+        <Divider />
+        <Description>
+          <p>{review.description}</p>
+        </Description>
+        <Divider />
+        <UserProfile
+          userData={review.user}
+          profileButton={<UserFollowButton id={review.user.id} />}
+        />
+        <Divider />
+        <Comment userData={client.data} />
+      </div>
+      <ReviewFloatButton />
     </Article>
   )
 }
 
 const Article = styled.article`
-  width: 550px;
+  width: 600px;
   padding: 0 3.125rem;
   margin: 0 auto;
   position: relative;
+  align-items: start;
 
-  @media (max-width: 600px) {
-    .review--floatbutton {
-      display: none;
-    }
-  }
+  display: grid;
+  grid-template-columns: 550px auto;
+  grid-column-gap: 40px;
 
   & > h2 {
     font-style: ${theme.style.mainEB};
