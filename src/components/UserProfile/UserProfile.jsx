@@ -11,7 +11,7 @@ export default function UserProfile({ userData, profileButton }) {
   return (
     <ProfileSection>
       <ProfileImage
-        src={userData.image.url}
+        src={userData.image?.url}
         $size="4.375rem"
         onClick={() => navigate(`/users/${userData.id}`)}
       />
