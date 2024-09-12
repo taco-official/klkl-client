@@ -15,7 +15,7 @@ function UserEditPage() {
   const setUserData = useUserStore((state) => state.setUserData)
 
   setUserData({
-    profileUrl: data.image.url || '',
+    profileUrl: data.image?.url || '',
     name: data.name,
     description: data.description,
   })

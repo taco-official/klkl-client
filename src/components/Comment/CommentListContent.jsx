@@ -18,7 +18,7 @@ export default function CommentListContent({ comment, canEdit }) {
   return (
     <CommentListContentWrapper>
       <ProfileImage
-        src={comment.user.image.url}
+        src={comment.user.image?.url}
         $size="2.5rem"
         onClick={() => navigate(`/users/${comment.user.id}`)}
       />

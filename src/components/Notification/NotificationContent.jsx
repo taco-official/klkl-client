@@ -32,7 +32,7 @@ function NotificationContent({ content }) {
   return (
     <ContentWrapper onClick={onClick}>
       <ContentImage
-        src={content.product.image.url}
+        src={content.product.image?.url}
         $isRead={content.isRead}
         className="noti--img"
       />

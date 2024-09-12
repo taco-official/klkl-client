@@ -25,7 +25,7 @@ export default function Comment({ userData }) {
       <h2>
         댓글 (<span>{Object.keys(comments.data).length}</span>)
       </h2>
-      <CommentInput profile={userData.image.url} />
+      <CommentInput profile={userData.image?.url} />
       <CommentList
         comments={comments.data}
         userId={userData.id}

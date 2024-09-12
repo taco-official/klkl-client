@@ -20,7 +20,7 @@ export default function ReviewImageBlock({ images }) {
             key={image}
           >
             <Image
-              src={image.url}
+              src={image?.url}
               width="100%"
               height="100%"
               style={{
