@@ -17,7 +17,7 @@ function ReviewList({ selectedMenu }) {
     `${selectedMenu}?page=${currentPage.requestPage}`,
     null,
     undefined,
-    { staleTime: 0 }
+    { gcTime: 0 }
   )
 
   if (!productList) return null

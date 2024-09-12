@@ -6,7 +6,7 @@ const useNewReview = () => {
     'products?sort_by=created_at&sort_direction=DESC&size=12',
     null,
     undefined,
-    { staleTime: 0 }
+    { gcTime: 0 }
   )
 
   if (isError) return [<div>{error}</div>]

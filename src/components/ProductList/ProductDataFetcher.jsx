@@ -26,7 +26,7 @@ function ProductDataFetcher({ children }) {
     requestQuery,
     undefined,
     {
-      staleTime: 0,
+      gcTime: 0,
       refetchOnMount: false,
     }
   )

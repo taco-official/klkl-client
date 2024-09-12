@@ -22,7 +22,7 @@ const useFetchProductList = (currentUser) => {
     `users/${currentUser}/products`,
     null,
     ['users', currentUser, 'products'],
-    { staleTime: 0, enabled: !!currentUser }
+    { gcTime: 0, enabled: !!currentUser }
   )
 
   if (!productList) return null
@@ -94,7 +94,7 @@ function FollowingList() {
     'users/me/following',
     null,
     undefined,
-    { staleTime: 0 }
+    { gcTime: 0 }
   )
 
   if (isLoading) return null
