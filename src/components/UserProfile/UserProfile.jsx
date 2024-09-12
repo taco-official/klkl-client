@@ -1,18 +1,28 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import { useNavigate } from 'react-router-dom'
 import ProfileImage from './ProfileImage'
 import theme from '../../styles/theme'
 
 export default function UserProfile({ userData, profileButton }) {
+  const navigate = useNavigate()
+
   return (
     <ProfileSection>
       <ProfileImage
-        src={userData.profile}
-        $size="3.75rem"
+        src={userData.profileUrl}
+        $size="4.375rem"
+        onClick={() => navigate(`/users/${userData.id}`)}
       />
       <SimpleUserInfo>
-        <div className="profile--user__nickname">{userData.name}</div>
+        <div
+          aria-hidden
+          className="profile--user__nickname"
+          onClick={() => navigate(`/users/${userData.id}`)}
+        >
+          {userData.name}
+        </div>
         <div className="profile--user__like">
           <span>♥</span> {userData.totalLikeCount}
         </div>
@@ -25,7 +35,7 @@ export default function UserProfile({ userData, profileButton }) {
 UserProfile.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.number,
-    profile: PropTypes.string,
+    profileUrl: PropTypes.string,
     name: PropTypes.string,
     description: PropTypes.string,
     totalLikeCount: PropTypes.number,
@@ -55,6 +65,7 @@ const SimpleUserInfo = styled.div`
   .profile--user__nickname {
     font-family: ${theme.style.mainBold};
     font-size: ${theme.size.titleSM};
+    cursor: pointer;
   }
 
   .profile--user__like {

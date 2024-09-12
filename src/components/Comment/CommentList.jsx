@@ -4,13 +4,14 @@ import PropTypes from 'prop-types'
 
 import CommentListContent from './CommentListContent'
 
-export default function CommentList({ comments }) {
+export default function CommentList({ comments, userId }) {
   return (
     <CommentListWrapper>
       {comments.map((comment) => (
         <CommentListContent
           key={comment.id}
           comment={comment}
+          canEdit={comment.user.id === userId}
         />
       ))}
     </CommentListWrapper>
@@ -29,6 +30,7 @@ CommentList.propTypes = {
       }),
     })
   ).isRequired,
+  userId: PropTypes.number.isRequired,
 }
 
 const CommentListWrapper = styled.ul`

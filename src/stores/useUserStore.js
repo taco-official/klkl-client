@@ -1,26 +1,30 @@
 import { create } from 'zustand'
 
 const initialState = {
-  loginState: false,
-  userId: 42,
-  profile: '',
-  nickname: '',
+  profileUrl: '',
+  name: '',
   description: '',
 }
 
 const useUserStore = create((set) => ({
   ...initialState,
-  setNickname: (nickname) =>
+  setName: (name) =>
     set(() => ({
-      nickname,
+      name,
     })),
   setDescription: (description) =>
     set(() => ({
       description,
     })),
-  setProfile: (profile) =>
+  setProfile: (profileUrl) =>
     set(() => ({
-      profile,
+      profileUrl,
+    })),
+  setUserData: ({ profileUrl, name, description }) =>
+    set(() => ({
+      profileUrl,
+      name,
+      description,
     })),
 }))
 

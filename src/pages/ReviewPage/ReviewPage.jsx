@@ -4,6 +4,7 @@ import { Divider } from 'antd'
 import { useLoaderData } from 'react-router-dom'
 import { createPortal } from 'react-dom'
 
+import { toInteger } from 'lodash-es'
 import theme from '../../styles/theme'
 import UserFollowButton from '../../components/UserProfile/UserFollowButton'
 import ReviewFloatButton from './ReviewFloatButton'
@@ -12,9 +13,11 @@ import ReviewInfoBlock from './ReviewInfo'
 import ReviewMiddleBlock from './ReviewMiddle'
 import UserProfile from '../../components/UserProfile/UserProfile'
 import Comment from '../../components/Comment/Comment'
+import useUserData from '../../hooks/useUserData'
 
 export default function ReviewDetailPage() {
   const { data: review } = useLoaderData()
+  const { data: client } = useUserData()
 
   return (
     <Article>
@@ -23,7 +26,10 @@ export default function ReviewDetailPage() {
         document.getElementById('root-aside')
       )}
       <ReviewImageSection images={review.imageUrls} />
-      <ReviewInfoBlock review={review} />
+      <ReviewInfoBlock
+        review={review}
+        canEdit={toInteger(review.user.id) === client.data.id}
+      />
       <Divider />
       <ReviewMiddleBlock
         address={review.address}
@@ -37,10 +43,10 @@ export default function ReviewDetailPage() {
       <Divider />
       <UserProfile
         userData={review.user}
-        profileButton={<UserFollowButton />}
+        profileButton={<UserFollowButton id={review.user.id} />}
       />
       <Divider />
-      <Comment />
+      <Comment userData={client.data} />
     </Article>
   )
 }

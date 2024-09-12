@@ -9,7 +9,9 @@ function UserEditButton() {
   return (
     <Button
       onClick={() =>
-        naviagte('/user/edit', { state: { from: window.location.pathname } })
+        naviagte('/me/edit', {
+          state: { from: window.location.pathname },
+        })
       }
       type="text"
       style={{

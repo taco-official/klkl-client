@@ -1,30 +1,26 @@
 import { useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLoaderData } from 'react-router-dom'
 import useFormStore from '../stores/useFormStore'
-import { kyInstance } from './kyInstance'
 
 const useInitialData = () => {
   const resetFormContents = useFormStore((state) => state.resetFormContents)
   const setFormContents = useFormStore((state) => state.setFormContents)
-  const { id } = useParams()
+  const data = useLoaderData()
 
   useEffect(() => {
     if (window.location.pathname !== '/submit') {
-      const getReviewData = async () => {
-        const { data: review } = await kyInstance.get(`products/${id}`).json()
-        setFormContents({
-          images: review.imageUrls,
-          name: review.name,
-          description: review.description,
-          address: review.address,
-          price: review.price,
-          rating: review.rating,
-          currencyId: review.currency.id,
-          tags: new Set(review.tags.map((tag) => tag.id)),
-        })
-      }
+      const review = data.data
 
-      getReviewData()
+      setFormContents({
+        images: review.imageUrls,
+        name: review.name,
+        description: review.description,
+        address: review.address,
+        price: review.price,
+        rating: review.rating,
+        currencyId: review.currency?.id,
+        tags: new Set(review.tags.map((tag) => tag.id)),
+      })
     }
 
     return () => {

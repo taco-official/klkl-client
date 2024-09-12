@@ -1,18 +1,30 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Divider, Button } from 'antd'
-import theme from '../../styles/theme'
+import { useLoaderData } from 'react-router-dom'
+import { Divider } from 'antd'
 
-import DescriptionInput from './DescriptionInput'
-import NicknameInput from './NicknameInput'
+import theme from '../../styles/theme'
 import ProfileEditBlock from './ProfileEditBlock'
+import NicknameInput from './NicknameInput'
+import DescriptionInput from './DescriptionInput'
+import SaveButton from './SaveButton'
+import useUserStore from '../../stores/useUserStore'
 
 function UserEditPage() {
+  const { data } = useLoaderData()
+  const setUserData = useUserStore((state) => state.setUserData)
+
+  setUserData({
+    profileUrl: data.profileUrl || '',
+    name: data.name,
+    description: data.description,
+  })
+
   return (
     <UserEditPageWrapper>
-      <h1>프로필 관리</h1>
+      <h1>프로필 수정</h1>
       <Divider />
-      <ProfileEditBlock />
+      <ProfileEditBlock name={data.name} />
       <div>
         <NicknameInput />
         <DescriptionInput />
@@ -36,12 +48,6 @@ const UserEditPageWrapper = styled.div`
     font-size: ${theme.size.titleXL};
     font-family: ${theme.style.mainEB};
   }
-`
-
-const SaveButton = styled(Button).attrs({ type: 'text' })`
-  font-family: ${theme.style.mainBold};
-  border: 1px solid ${theme.color.lineGrey};
-  width: 7.5rem;
 `
 
 export default UserEditPage

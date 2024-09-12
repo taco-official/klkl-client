@@ -1,7 +1,7 @@
 import React from 'react'
 import { styled } from 'styled-components'
-import { useNavigate } from 'react-router-dom'
 
+import router from '../../router'
 import { useModalStore, useCurrentPageStore } from '../../stores/navbarStores'
 import Notification from './components/Notification'
 import theme from '../../styles/theme'
@@ -20,15 +20,15 @@ export default function NavList() {
     (state) => state.setSearchModalState
   )
 
-  const navigate = useNavigate()
-
   return (
     <NavUl>
       <NavButtonLi
         $isbold={currentPage === pageIndex.FLIGHT}
         onClick={() => {
           setCurrentPage(pageIndex.FLIGHT)
-          navigate('/feed', { state: { from: window.location.pathname } })
+          router.navigate('/feed', {
+            state: { from: window.location.pathname },
+          })
         }}
       >
         <Icons>flight_takeoff</Icons>

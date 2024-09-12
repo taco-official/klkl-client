@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import CommentEdit from './CommentEdit'
+import { useNavigate } from 'react-router-dom'
 
+import CommentEdit from './CommentEdit'
 import dateParser from '../../utils/dateParser'
 import ProfileImage from '../UserProfile/ProfileImage'
 import CommentOptions from './CommentOptions'
 import theme from '../../styles/theme'
 
-export default function CommentListContent({ comment }) {
+export default function CommentListContent({ comment, canEdit }) {
+  const navigate = useNavigate()
   const [isEdit, setEditState] = useState(false)
 
   const enableEditMode = () => setEditState(true)
@@ -17,8 +19,9 @@ export default function CommentListContent({ comment }) {
   return (
     <CommentListContentWrapper>
       <ProfileImage
-        src={comment.user.profile}
-        $size="50px"
+        src={comment.user.profileUrl}
+        $size="2.5rem"
+        onClick={() => navigate(`/users/${comment.user.id}`)}
       />
       {isEdit ? (
         <CommentEdit
@@ -29,14 +32,22 @@ export default function CommentListContent({ comment }) {
       ) : (
         <ContentBox>
           <div className="comment--info__user">
-            {comment.user.name}
+            <span
+              aria-hidden
+              className="comment--info__name"
+              onClick={() => navigate(`/users/${comment.user.id}`)}
+            >
+              {comment.user.name}
+            </span>
             <span className="comment--info__date">
               {dateParser(comment.createdAt)}
             </span>
-            <CommentOptions
-              commentId={comment.id}
-              setEditMode={enableEditMode}
-            />
+            {canEdit && (
+              <CommentOptions
+                commentId={comment.id}
+                setEditMode={enableEditMode}
+              />
+            )}
           </div>
           <div className="comment--info__content">{comment.content}</div>
         </ContentBox>
@@ -52,9 +63,10 @@ CommentListContent.propTypes = {
     user: PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
-      profile: PropTypes.string,
+      profileUrl: PropTypes.string,
     }),
   }).isRequired,
+  canEdit: PropTypes.bool.isRequired,
 }
 
 const CommentListContentWrapper = styled.li`
@@ -62,7 +74,7 @@ const CommentListContentWrapper = styled.li`
   display: flex;
 
   div {
-    margin-left: 10px;
+    margin-left: 0.4375rem;
   }
 `
 
@@ -71,15 +83,19 @@ const ContentBox = styled.div`
 
   .comment--info__user {
     font-family: ${theme.style.mainBold};
-    margin-bottom: 10px;
+    margin-bottom: 0.3125rem;
     display: flex;
     align-items: center;
+  }
+
+  .comment--info__name {
+    cursor: pointer;
   }
 
   .comment--info__date {
     font-size: ${theme.size.text2XS};
     color: ${theme.color.textGrey};
-    margin-left: 10px;
+    margin-left: 0.625rem;
   }
 
   .comment--info__content {

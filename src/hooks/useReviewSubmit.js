@@ -59,7 +59,7 @@ const useReviewSubmit = (httpMethod, uri) => {
       }
 
       resetReviewContents()
-      navigate(`/products/${id}`)
+      navigate(`/products/${id}`, { state: { from: window.location.pathname } })
     } catch (err) {
       console.log(err)
     }

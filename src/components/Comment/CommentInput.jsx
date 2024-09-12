@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { Input, Button, ConfigProvider } from 'antd'
 import styled from 'styled-components'
 
@@ -19,7 +20,7 @@ const inputTheme = {
   },
 }
 
-export default function CommentInput() {
+export default function CommentInput({ profile }) {
   const [inputValue, setInputValue] = useState('')
   const location = `${window.location.pathname.slice(1)}/comments`
   const { mutateAsync } = useKyMutation(method.POST, location)
@@ -42,8 +43,8 @@ export default function CommentInput() {
   return (
     <CommentInputBox>
       <ProfileImage
-        src=""
-        $size="3.125rem"
+        src={profile}
+        $size="2.5rem"
       />
       <ConfigProvider theme={inputTheme}>
         <Input.TextArea
@@ -67,6 +68,9 @@ export default function CommentInput() {
       </ConfigProvider>
     </CommentInputBox>
   )
+}
+CommentInput.propTypes = {
+  profile: PropTypes.string.isRequired,
 }
 
 const CommentInputBox = styled.div`

@@ -7,6 +7,7 @@ const ProfileImage = styled.img`
   border-radius: 50%;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   object-fit: cover;
+  cursor: pointer;
 `
 
 export default ProfileImage

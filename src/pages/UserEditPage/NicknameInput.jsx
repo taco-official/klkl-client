@@ -5,16 +5,18 @@ import theme from '../../styles/theme'
 import useUserStore from '../../stores/useUserStore'
 
 function NicknameInput() {
-  const setNickname = useUserStore((state) => state.setNickname)
+  const name = useUserStore((state) => state.name)
+  const setName = useUserStore((state) => state.setName)
 
   return (
     <InfoBox>
       닉네임
       <StyledInput
         showCount
+        defaultValue={name}
         maxLength={15}
         placeholder="닉네임 변경"
-        onChange={(e) => setNickname(e.target.value)}
+        onBlur={(e) => setName(e.target.value)}
       />
     </InfoBox>
   )
