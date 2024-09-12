@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import theme from '../../styles/theme'
@@ -37,21 +38,17 @@ const useFetchProductList = (currentUser) => {
   )
 }
 
-function FollowingList() {
-  const { data: followingList } = useKyQuery('users/me/following')
-  const [currentUser, setCurrentUser] = useState()
+function FollowingListContent({ followingList }) {
+  const [currentUser, setCurrentUser] = useState(followingList?.[0]?.id)
   const productList = useFetchProductList(currentUser)
 
-  useEffect(() => {
-    if (followingList) setCurrentUser(followingList.data[0].id)
-  }, [followingList])
-
-  if (!followingList) return null
+  if (followingList.length === 0)
+    return <Wrapper>팔로잉 하고 있는 유저가 없습니다</Wrapper>
 
   return (
     <>
       <Wrapper>
-        {followingList.data.map((user) => (
+        {followingList.map((user) => (
           <ProfileButton key={user.id}>
             <ProfileImage
               src={user.image?.url}
@@ -67,9 +64,30 @@ function FollowingList() {
     </>
   )
 }
+FollowingListContent.propTypes = {
+  followingList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      image: PropTypes.shape({ url: PropTypes.string }),
+    })
+  ).isRequired,
+}
+
+function FollowingList() {
+  const { data: followingList, isLoading } = useKyQuery('users/me/following')
+
+  if (isLoading) return null
+
+  return <FollowingListContent followingList={followingList.data} />
+}
 
 const Wrapper = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
+  color: ${theme.color.textGrey};
+  height: 100%;
 `
 
 const ProfileButton = styled(PlainButton)`
