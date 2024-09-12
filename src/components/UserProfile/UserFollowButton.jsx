@@ -12,16 +12,17 @@ const useCheckFollow = (id) => {
     data: following,
     isLoading,
     isError,
-  } = useKyQuery('users/me/following')
+  } = useKyQuery(`users/me/following/${id}`, null, ['users/me/following', id])
 
   if (isLoading || isError) return null
 
-  return following.data.some((user) => user.id === id)
+  return following.data.isFollowing
 }
 
 const useFollow = (id) => {
   const { mutateAsync } = useKyMutation('post', `users/me/following/${id}`, [
     'users/me/following',
+    id,
   ])
 
   const followUser = async () => {
@@ -45,6 +46,7 @@ const useFollow = (id) => {
 const useUnFollow = (id) => {
   const { mutateAsync } = useKyMutation('delete', `users/me/following/${id}`, [
     'users/me/following',
+    id,
   ])
 
   const unFollowUser = async () => {
