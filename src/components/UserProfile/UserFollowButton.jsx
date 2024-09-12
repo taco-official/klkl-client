@@ -9,7 +9,11 @@ import useKyQuery from '../../hooks/useKyQuery'
 import useKyMutation from '../../hooks/useKyMutation'
 
 const useCheckFollow = (id) => {
-  const { data: following, isLoading, isError } = useKyQuery('users/following')
+  const {
+    data: following,
+    isLoading,
+    isError,
+  } = useKyQuery('users/me/following')
 
   if (isLoading || isError) return null
 
@@ -17,13 +21,13 @@ const useCheckFollow = (id) => {
 }
 
 const useFollow = (id) => {
-  const { mutateAsync } = useKyMutation('post', 'users/following', [
-    'users/following',
+  const { mutateAsync } = useKyMutation('post', `users/me/following/${id}`, [
+    'users/me/following',
   ])
 
   const followUser = async () => {
     try {
-      await mutateAsync(JSON.stringify({ userId: id }))
+      await mutateAsync()
       notification.success({
         message: `팔로우 되었습니다`,
         duration: 1,
@@ -40,13 +44,13 @@ const useFollow = (id) => {
 }
 
 const useUnFollow = (id) => {
-  const { mutateAsync } = useKyMutation('delete', `users/following/${id}`, [
-    'users/following',
+  const { mutateAsync } = useKyMutation('delete', `users/me/following/${id}`, [
+    'users/me/following',
   ])
 
   const unFollowUser = async () => {
     try {
-      await mutateAsync(JSON.stringify({ userId: id }))
+      await mutateAsync()
       notification.info({
         message: `팔로우를 취소했습니다`,
         duration: 1,

@@ -38,7 +38,7 @@ const useFetchProductList = (currentUser) => {
 }
 
 function FollowingList() {
-  const { data: followingList } = useKyQuery('users/following')
+  const { data: followingList } = useKyQuery('users/me/following')
   const [currentUser, setCurrentUser] = useState()
   const productList = useFetchProductList(currentUser)
 
@@ -54,7 +54,7 @@ function FollowingList() {
         {followingList.data.map((user) => (
           <ProfileButton key={user.id}>
             <ProfileImage
-              src={user.profileUrl}
+              src={user.image?.url}
               $size="60px"
               onClick={() => setCurrentUser(user.id)}
               className={currentUser === user.id ? 'selected' : null}
