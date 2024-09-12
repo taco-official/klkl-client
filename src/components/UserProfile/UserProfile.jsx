@@ -11,7 +11,7 @@ export default function UserProfile({ userData, profileButton }) {
   return (
     <ProfileSection>
       <ProfileImage
-        src={userData.profileUrl}
+        src={userData.image.url}
         $size="4.375rem"
         onClick={() => navigate(`/users/${userData.id}`)}
       />
@@ -35,7 +35,7 @@ export default function UserProfile({ userData, profileButton }) {
 UserProfile.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.number,
-    profileUrl: PropTypes.string,
+    image: PropTypes.shape({ url: PropTypes.string }),
     name: PropTypes.string,
     description: PropTypes.string,
     totalLikeCount: PropTypes.number,
