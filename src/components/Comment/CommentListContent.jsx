@@ -18,7 +18,7 @@ export default function CommentListContent({ comment, canEdit }) {
   return (
     <CommentListContentWrapper>
       <ProfileImage
-        src={comment.user.profileUrl}
+        src={comment.user.image.url}
         $size="2.5rem"
         onClick={() => navigate(`/users/${comment.user.id}`)}
       />
@@ -60,7 +60,7 @@ CommentListContent.propTypes = {
     user: PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
-      profileUrl: PropTypes.string,
+      image: PropTypes.shape({ url: PropTypes.string }),
     }),
   }).isRequired,
   canEdit: PropTypes.bool.isRequired,
