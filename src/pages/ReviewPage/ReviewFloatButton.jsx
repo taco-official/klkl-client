@@ -1,12 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { FloatButton, notification } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
 import Icons from '../../components/Icons/Icons'
 import theme from '../../styles/theme'
+import LikeButton from './LikeButton'
 
-export default function ReviewFloatButton() {
+export default function ReviewFloatButton({ productId }) {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href).then(() =>
       notification.success({
@@ -18,6 +20,7 @@ export default function ReviewFloatButton() {
       })
     )
   }
+
   const navigate = useNavigate()
 
   return (
@@ -28,11 +31,7 @@ export default function ReviewFloatButton() {
         tooltip="링크복사"
       />
 
-      <CustomFloatButton
-        icon={<Icons $empty>favorite</Icons>}
-        onClick={() => console.log('좋아요')}
-        tooltip="좋아요"
-      />
+      <LikeButton productId={productId} />
 
       <CustomFloatButton
         icon={<Icons $empty>edit_square</Icons>}
@@ -41,6 +40,9 @@ export default function ReviewFloatButton() {
       />
     </CustomFloatButtonGroup>
   )
+}
+ReviewFloatButton.propTypes = {
+  productId: PropTypes.number.isRequired,
 }
 
 const CustomFloatButton = styled(FloatButton)`
