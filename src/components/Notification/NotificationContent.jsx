@@ -33,7 +33,7 @@ function NotificationContent({ content }) {
   return (
     <ContentWrapper onClick={onClick}>
       <ContentImage
-        src={content.product.productImageUrl}
+        src={content.product.image}
         $isRead={content.isRead}
         className="noti--img"
       />
@@ -75,7 +75,7 @@ NotificationContent.propTypes = {
     product: PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
-      productImageUrl: PropTypes.string,
+      image: PropTypes.string,
     }),
   }).isRequired,
 }

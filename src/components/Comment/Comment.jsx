@@ -25,7 +25,7 @@ export default function Comment({ userData }) {
       <h2>
         댓글 (<span>{Object.keys(comments.data).length}</span>)
       </h2>
-      <CommentInput profile={userData.profileUrl} />
+      <CommentInput profile={userData.image} />
       <CommentList
         comments={comments.data}
         userId={userData.id}
@@ -37,7 +37,7 @@ Comment.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-    profileUrl: PropTypes.string,
+    image: PropTypes.string,
   }).isRequired,
 }
 

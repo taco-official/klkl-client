@@ -12,7 +12,7 @@ const useInitialData = () => {
       const review = data.data
 
       setFormContents({
-        images: review.imageUrls,
+        images: review.images,
         name: review.name,
         description: review.description,
         address: review.address,

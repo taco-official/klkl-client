@@ -4,7 +4,6 @@ import { Divider } from 'antd'
 import { useLoaderData } from 'react-router-dom'
 import { createPortal } from 'react-dom'
 
-import { toInteger } from 'lodash-es'
 import theme from '../../styles/theme'
 import UserFollowButton from '../../components/UserProfile/UserFollowButton'
 import ReviewFloatButton from './ReviewFloatButton'
@@ -25,10 +24,10 @@ export default function ReviewDetailPage() {
         <ReviewFloatButton />,
         document.getElementById('root-aside')
       )}
-      <ReviewImageSection images={review.imageUrls} />
+      <ReviewImageSection images={review.images} />
       <ReviewInfoBlock
         review={review}
-        canEdit={toInteger(review.user.id) === client.data.id}
+        canEdit={review.user.id === client.data.id}
       />
       <Divider />
       <ReviewMiddleBlock
