@@ -20,13 +20,8 @@ export default function CommentList({ comments, userId }) {
 CommentList.propTypes = {
   comments: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.number,
-      content: PropTypes.string,
-      createdAt: PropTypes.string,
       user: PropTypes.shape({
         id: PropTypes.number,
-        name: PropTypes.string,
-        profile: PropTypes.string,
       }),
     })
   ).isRequired,

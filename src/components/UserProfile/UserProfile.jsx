@@ -11,22 +11,19 @@ export default function UserProfile({ userData, profileButton }) {
   return (
     <ProfileSection>
       <ProfileImage
-        src={userData.profileUrl}
+        src={userData.image?.url}
         $size="4.375rem"
         onClick={() => navigate(`/users/${userData.id}`)}
       />
       <SimpleUserInfo>
-        <div
+        <p
           aria-hidden
           className="profile--user__nickname"
           onClick={() => navigate(`/users/${userData.id}`)}
         >
           {userData.name}
-        </div>
-        <div className="profile--user__like">
-          <span>♥</span> {userData.totalLikeCount}
-        </div>
-        <div className="profile--user__introduce">{userData.description}</div>
+        </p>
+        <p className="profile--user__introduce">{userData.description}</p>
       </SimpleUserInfo>
       {profileButton}
     </ProfileSection>
@@ -35,7 +32,7 @@ export default function UserProfile({ userData, profileButton }) {
 UserProfile.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.number,
-    profileUrl: PropTypes.string,
+    image: PropTypes.shape({ url: PropTypes.string }),
     name: PropTypes.string,
     description: PropTypes.string,
     totalLikeCount: PropTypes.number,
@@ -64,20 +61,12 @@ const SimpleUserInfo = styled.div`
 
   .profile--user__nickname {
     font-family: ${theme.style.mainBold};
-    font-size: ${theme.size.titleSM};
+    font-size: ${theme.size.textMD};
     cursor: pointer;
-  }
-
-  .profile--user__like {
-    font-size: ${theme.size.textXS};
-    color: ${theme.color.textGrey};
-    span {
-      color: red;
-    }
   }
 
   .profile--user__introduce {
     color: ${theme.color.textGrey};
-    font-size: ${theme.size.textXS};
+    font-size: ${theme.size.textSM};
   }
 `

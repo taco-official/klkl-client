@@ -5,7 +5,6 @@ import styled from 'styled-components'
 import router from '../../router'
 import { method } from '../../hooks/kyInstance'
 import useKyMutation from '../../hooks/useKyMutation'
-import dateParser from '../../utils/dateParser'
 import theme from '../../styles/theme'
 
 function NotificationContent({ content }) {
@@ -33,7 +32,7 @@ function NotificationContent({ content }) {
   return (
     <ContentWrapper onClick={onClick}>
       <ContentImage
-        src={content.product.productImageUrl}
+        src={content.product.image?.url}
         $isRead={content.isRead}
         className="noti--img"
       />
@@ -49,7 +48,7 @@ function NotificationContent({ content }) {
             className="noti--info__date"
             $isRead={content.isRead}
           >
-            {dateParser(content.comment.createdAt)}
+            {content.comment.createdAt}
           </Content>
         </Content>
         <Content
@@ -75,7 +74,7 @@ NotificationContent.propTypes = {
     product: PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
-      productImageUrl: PropTypes.string,
+      image: PropTypes.shape({ url: PropTypes.string }),
     }),
   }).isRequired,
 }

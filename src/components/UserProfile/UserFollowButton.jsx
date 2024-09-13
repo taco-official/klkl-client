@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, ConfigProvider, notification } from 'antd'
-import { toInteger } from 'lodash-es'
 
 import useUserData from '../../hooks/useUserData'
 import theme from '../../styles/theme'
@@ -9,21 +8,26 @@ import useKyQuery from '../../hooks/useKyQuery'
 import useKyMutation from '../../hooks/useKyMutation'
 
 const useCheckFollow = (id) => {
-  const { data: following, isLoading, isError } = useKyQuery('users/following')
+  const {
+    data: following,
+    isLoading,
+    isError,
+  } = useKyQuery(`users/me/following/${id}`, null, ['users/me/following', id])
 
   if (isLoading || isError) return null
 
-  return following.data.some((user) => user.id === id)
+  return following.data.isFollowing
 }
 
 const useFollow = (id) => {
-  const { mutateAsync } = useKyMutation('post', 'users/following', [
-    'users/following',
+  const { mutateAsync } = useKyMutation('post', `users/me/following/${id}`, [
+    'users/me/following',
+    id,
   ])
 
   const followUser = async () => {
     try {
-      await mutateAsync(JSON.stringify({ userId: id }))
+      await mutateAsync()
       notification.success({
         message: `팔로우 되었습니다`,
         duration: 1,
@@ -40,13 +44,14 @@ const useFollow = (id) => {
 }
 
 const useUnFollow = (id) => {
-  const { mutateAsync } = useKyMutation('delete', `users/following/${id}`, [
-    'users/following',
+  const { mutateAsync } = useKyMutation('delete', `users/me/following/${id}`, [
+    'users/me/following',
+    id,
   ])
 
   const unFollowUser = async () => {
     try {
-      await mutateAsync(JSON.stringify({ userId: id }))
+      await mutateAsync()
       notification.info({
         message: `팔로우를 취소했습니다`,
         duration: 1,
@@ -64,9 +69,9 @@ const useUnFollow = (id) => {
 
 function UserFollowButton({ id }) {
   const { data } = useUserData()
-  const isFollowed = useCheckFollow(toInteger(id))
-  const followUser = useFollow(toInteger(id))
-  const unFollowUser = useUnFollow(toInteger(id))
+  const isFollowed = useCheckFollow(id)
+  const followUser = useFollow(id)
+  const unFollowUser = useUnFollow(id)
 
   if (data.data.id === id) return null
 

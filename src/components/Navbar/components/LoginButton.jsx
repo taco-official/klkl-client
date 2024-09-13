@@ -22,7 +22,7 @@ export default function LoginButton() {
       }}
     >
       <ProfileImage
-        src={!data ? null : data.data.profileUrl}
+        src={!data ? null : data.data.image?.url}
         $size="2.1875rem"
       />
     </PlainButton>

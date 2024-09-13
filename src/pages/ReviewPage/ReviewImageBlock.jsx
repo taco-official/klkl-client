@@ -4,12 +4,13 @@ import { Image } from 'antd'
 import styled from 'styled-components'
 import StyledFlickity from '../../components/Carousel/Carousel'
 
-export default function ReviewImageBlock({ images }) {
-  const reviewImagesOptions = {
-    setGallerySize: false,
-    pauseAutoPlayOnHover: true,
-  }
+const reviewImagesOptions = {
+  setGallerySize: false,
+  pauseAutoPlayOnHover: true,
+  draggable: false,
+}
 
+export default function ReviewImageBlock({ images }) {
   return (
     <section>
       <ReviewImageCarousel options={reviewImagesOptions}>
@@ -19,7 +20,7 @@ export default function ReviewImageBlock({ images }) {
             key={image}
           >
             <Image
-              src={image}
+              src={image?.url}
               width="100%"
               height="100%"
               style={{
@@ -39,7 +40,11 @@ export default function ReviewImageBlock({ images }) {
   )
 }
 ReviewImageBlock.propTypes = {
-  images: PropTypes.arrayOf(PropTypes.string).isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string,
+    })
+  ).isRequired,
 }
 
 const ReviewImageCarousel = styled(StyledFlickity)`

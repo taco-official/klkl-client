@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 import theme from '../../styles/theme'
@@ -37,40 +38,69 @@ const useFetchProductList = (currentUser) => {
   )
 }
 
-function FollowingList() {
-  const { data: followingList } = useKyQuery('users/following')
+function FollowingListContent({ followingList }) {
   const [currentUser, setCurrentUser] = useState()
   const productList = useFetchProductList(currentUser)
 
   useEffect(() => {
-    if (followingList) setCurrentUser(followingList.data[0].id)
+    if (followingList.length > 0) setCurrentUser(followingList[0].id)
   }, [followingList])
 
-  if (!followingList) return null
+  if (followingList.length === 0)
+    return (
+      <div
+        style={{
+          display: 'flex',
+          height: '100%',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        팔로잉 하고 있는 유저가 없습니다
+      </div>
+    )
 
   return (
     <>
-      <Wrapper>
-        {followingList.data.map((user) => (
+      <div style={{ display: 'flex' }}>
+        {followingList.map((user) => (
           <ProfileButton key={user.id}>
             <ProfileImage
-              src={user.profileUrl}
-              $size="60px"
+              src={user.image?.url}
+              $size="3.75rem"
               onClick={() => setCurrentUser(user.id)}
               className={currentUser === user.id ? 'selected' : null}
             />
             {user.name}
           </ProfileButton>
         ))}
-      </Wrapper>
+      </div>
       {productList}
     </>
   )
 }
+FollowingListContent.propTypes = {
+  followingList: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      image: PropTypes.shape({ url: PropTypes.string }),
+    })
+  ).isRequired,
+}
 
-const Wrapper = styled.div`
-  display: flex;
-`
+function FollowingList() {
+  const { data: followingList, isLoading } = useKyQuery(
+    'users/me/following',
+    null,
+    undefined,
+    { staleTime: 0 }
+  )
+
+  if (isLoading) return null
+
+  return <FollowingListContent followingList={followingList.data} />
+}
 
 const ProfileButton = styled(PlainButton)`
   width: 3.75rem;

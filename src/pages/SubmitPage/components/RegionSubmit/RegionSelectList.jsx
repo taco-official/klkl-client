@@ -69,7 +69,7 @@ RegionSelectList.propTypes = {
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
     })
-  ).isRequired,
+  ),
 }
 
 const SelectBoxesWrapper = styled.div`

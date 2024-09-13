@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Divider } from 'antd'
 import { useParams, useLoaderData } from 'react-router-dom'
+import { toInteger } from 'lodash-es'
 
 import useKyQuery from '../../hooks/useKyQuery'
 import ProductDataStatusRenderer from '../../components/ProductList/ProductDataStatusRenderer'
@@ -18,7 +19,7 @@ const useContentFetch = (id) => {
     data: productList,
     isLoading,
     isError,
-  } = useKyQuery(`users/${id}/products`)
+  } = useKyQuery(`users/${id}/products`, null, undefined, { stleTime: 0 })
 
   return (
     <ProductDataStatusRenderer
@@ -41,7 +42,7 @@ function UserPage() {
       <ProfileWrapper>
         <UserProfile
           userData={userData}
-          profileButton={<UserFollowButton id={id} />}
+          profileButton={<UserFollowButton id={toInteger(id)} />}
         />
       </ProfileWrapper>
       <Divider style={{ gridArea: 'divider' }} />

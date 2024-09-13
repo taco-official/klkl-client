@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
 import CommentEdit from './CommentEdit'
-import dateParser from '../../utils/dateParser'
 import ProfileImage from '../UserProfile/ProfileImage'
 import CommentOptions from './CommentOptions'
 import theme from '../../styles/theme'
@@ -19,7 +18,7 @@ export default function CommentListContent({ comment, canEdit }) {
   return (
     <CommentListContentWrapper>
       <ProfileImage
-        src={comment.user.profileUrl}
+        src={comment.user.image?.url}
         $size="2.5rem"
         onClick={() => navigate(`/users/${comment.user.id}`)}
       />
@@ -39,9 +38,7 @@ export default function CommentListContent({ comment, canEdit }) {
             >
               {comment.user.name}
             </span>
-            <span className="comment--info__date">
-              {dateParser(comment.createdAt)}
-            </span>
+            <span className="comment--info__date">{comment.createdAt}</span>
             {canEdit && (
               <CommentOptions
                 commentId={comment.id}
@@ -63,7 +60,7 @@ CommentListContent.propTypes = {
     user: PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
-      profileUrl: PropTypes.string,
+      image: PropTypes.shape({ url: PropTypes.string }),
     }),
   }).isRequired,
   canEdit: PropTypes.bool.isRequired,

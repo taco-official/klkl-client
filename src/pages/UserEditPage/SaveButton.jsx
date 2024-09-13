@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
@@ -10,6 +10,7 @@ import useUserStore from '../../stores/useUserStore'
 import uploadeToS3 from '../../utils/uploadToS3'
 
 const useEditProfile = () => {
+  const [isLoading, setLoading] = useState(false)
   const navigate = useNavigate()
   const body = useUserStore((state) => ({
     name: state.name,
@@ -21,6 +22,7 @@ const useEditProfile = () => {
   const profileUrl = useUserStore((state) => state.profileUrl)
 
   const editProfile = async () => {
+    setLoading(true)
     try {
       if (typeof profileUrl !== 'string') {
         const { data } = await kyInstance
@@ -39,20 +41,27 @@ const useEditProfile = () => {
       }
 
       await mutateAsync(JSON.stringify(body))
-
+      setLoading(false)
       navigate('/me')
     } catch (error) {
       console.error(error)
     }
   }
 
-  return editProfile
+  return { editProfile, isLoading }
 }
 
 function SaveButton() {
-  const editProfile = useEditProfile()
+  const { editProfile, isLoading } = useEditProfile()
 
-  return <CustomButton onClick={editProfile}>저장</CustomButton>
+  return (
+    <CustomButton
+      onClick={editProfile}
+      loading={isLoading}
+    >
+      저장
+    </CustomButton>
+  )
 }
 
 const CustomButton = styled(Button).attrs({ type: 'text' })`
