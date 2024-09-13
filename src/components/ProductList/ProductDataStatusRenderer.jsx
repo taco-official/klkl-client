@@ -12,16 +12,17 @@ function ProductDataStatusRenderer() {
 
   return (
     <FeedContainer>
-      {isLoading && (
+      {isError && (
+        <StyledList className="empty">로딩에 실패했습니다.</StyledList>
+      )}
+      {(isLoading || (!data && !isError)) && (
         <StyledList>
           <LoadingContent />
         </StyledList>
       )}
-      {isError && (
-        <StyledList className="empty">로딩에 실패했습니다.</StyledList>
-      )}
       {!isLoading &&
         !isError &&
+        data &&
         (!data.data.content.length ? (
           <StyledList className="empty">해당 상품이 없습니다.</StyledList>
         ) : (

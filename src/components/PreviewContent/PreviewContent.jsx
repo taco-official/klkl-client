@@ -30,7 +30,7 @@ function PreviewContent({ userId = null, productData }) {
           <LikeButton
             userId={userId}
             productId={productData.id}
-            iconSize="1.5rem"
+            iconSize="1.3rem"
           />
         </ThumbnailContainer>
         <DescriptionContainer>

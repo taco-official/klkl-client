@@ -22,18 +22,6 @@ ProductList.propTypes = {
   dataList: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      thumbnail: PropTypes.string,
-      countryName: PropTypes.string.isRequired,
-      categoryName: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      tags: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          name: PropTypes.string.isRequired,
-        })
-      ),
-      rating: PropTypes.number,
-      likeCount: PropTypes.number,
     })
   ),
 }
