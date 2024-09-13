@@ -6,7 +6,7 @@ const usePopularReview = () => {
     'products?sort_by=like_count&sort_direction=DESC&size=12',
     null,
     undefined,
-    { gcTime: 0 }
+    { staleTime: 0 }
   )
 
   if (isError) return [<div>{error}</div>]
