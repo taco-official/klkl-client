@@ -27,6 +27,7 @@ const routes = [
   },
   {
     path: 'feed',
+    loader: loader.feedLoader,
     element: <pages.FeedPage />,
   },
   {
