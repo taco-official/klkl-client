@@ -5,7 +5,7 @@ import useFeedStore from '../../stores/useFeedStore'
 import inArray from '../../utils/inArray'
 import Thumbnail from './components/Thumbnail/Thumbnail'
 import BasicFilter from './components/BasicFilter/BasicFilter'
-import AdditionalFilter from './components/AdditionalFilter/AdditionalFilter'
+// import AdditionalFilter from './components/AdditionalFilter/AdditionalFilter'
 import SelectedField from './components/SelectedField/SelectedField'
 import ProductDataStatusRenderer from '../../components/ProductList/ProductDataStatusRenderer'
 import { FeedPageLayout, FeedPageContent, FeedArea } from './FeedPage.style'
@@ -99,7 +99,7 @@ function FeedPage() {
       <FeedPageContent>
         <BasicFilter />
         <FeedArea>
-          <AdditionalFilter />
+          {/* <AdditionalFilter /> */}
           <SelectedField />
           <ProductDataStatusRenderer />
         </FeedArea>
