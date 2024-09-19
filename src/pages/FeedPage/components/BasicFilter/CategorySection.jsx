@@ -86,6 +86,8 @@ CategoryCheckBox.propTypes = {
 function CategoryArray() {
   const { categoryData: data } = useLoaderData()
 
+  if (!data) return <div className="empty">불러오는 중입니다.</div>
+
   if (!data.data.length)
     return <div className="empty">카테고리가 없습니다.</div>
 

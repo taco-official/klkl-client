@@ -12,8 +12,7 @@ import { FeedPageLayout, FeedPageContent, FeedArea } from './FeedPage.style'
 
 function FeedPage() {
   const location = useLocation()
-  const { regionResponse: regionData, categoryResponse: categoryData } =
-    useLoaderData()
+  const { regionData, categoryData } = useLoaderData()
   const { selectedCity, selectedCategory, selectedSubCategory } = useFeedStore(
     useShallow((state) => ({
       selectedCity: state.selectedCity,

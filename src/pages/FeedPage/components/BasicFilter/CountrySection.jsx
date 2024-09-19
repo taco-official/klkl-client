@@ -102,6 +102,8 @@ RegionCollapse.propTypes = {
 function RegionArray() {
   const { regionData: data } = useLoaderData()
 
+  if (!data) return <div className="empty">불러오는 중입니다.</div>
+
   if (!data.data.length)
     return <SubTitle className="empty">지역이 없습니다.</SubTitle>
 
