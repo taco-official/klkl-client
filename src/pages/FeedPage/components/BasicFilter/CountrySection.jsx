@@ -1,11 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import { useShallow } from 'zustand/react/shallow'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
-import useKyQuery from '../../../../hooks/useKyQuery'
 import useFeedStore from '../../../../stores/useFeedStore'
-import inArray from '../../../../utils/inArray'
 import ShowHideButton from '../../../../components/Button/ShowHideButton'
 import theme from '../../../../styles/theme'
 import {
@@ -44,12 +40,6 @@ CountryRadio.propTypes = {
   country: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    cities: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-      })
-    ).isRequired,
   }).isRequired,
 }
 
@@ -68,13 +58,6 @@ CountryArray.propTypes = {
   countries: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      cities: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          name: PropTypes.string.isRequired,
-        })
-      ).isRequired,
     })
   ).isRequired,
 }
@@ -110,79 +93,12 @@ RegionCollapse.propTypes = {
   region: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    countries: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        cities: PropTypes.arrayOf(
-          PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-          })
-        ).isRequired,
-      })
-    ).isRequired,
+    countries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   }).isRequired,
   defaultOpenId: PropTypes.number,
 }
 
-function RegionArray() {
-  const { isLoading, data, isError } = useKyQuery('regions', null, undefined, {
-    gcTime: 24 * 60 * 60 * 1000,
-    staleTime: 24 * 60 * 60 * 1000,
-  })
-  const location = useLocation()
-  const { selectedCountry, selectedCity } = useFeedStore(
-    useShallow((state) => ({
-      selectedCountry: state.selectedCountry,
-      selectedCity: state.selectedCity,
-    }))
-  )
-  const { setSelectedCountry, addSelectedCity } = useFeedStore((state) => ({
-    setSelectedCountry: state.setSelectedCountry,
-    addSelectedCity: state.addSelectedCity,
-  }))
-  const [defaultOpenRegion, setDefaultOpenRegion] = useState(undefined)
-
-  useEffect(() => {
-    if (location.state?.data && !isLoading && !isError && data) {
-      if (location.state.data.countries.length) {
-        const searchedCountry = location.state.data.countries[0]
-        data.data.find((region) => {
-          if (inArray(region.countries, searchedCountry.id)) {
-            setSelectedCountry(searchedCountry)
-            if (region.id !== defaultOpenRegion) setDefaultOpenRegion(region.id)
-            return true
-          }
-          return false
-        })
-      }
-
-      if (location.state.data.cities.length) {
-        const searchedCity = location.state.data.cities[0]
-        data.data.find((region) =>
-          region.countries.find((country) => {
-            if (inArray(country.cities, searchedCity.id)) {
-              if (!inArray(selectedCity, searchedCity.id))
-                addSelectedCity(searchedCity)
-              if (!('id' in selectedCountry)) setSelectedCountry(country)
-              if (region.id !== defaultOpenRegion)
-                setDefaultOpenRegion(region.id)
-              return true
-            }
-            return false
-          })
-        )
-      }
-    }
-  }, [isLoading, isError, data])
-
-  if (isLoading)
-    return <SubTitle className="empty">불러오는 중입니다.</SubTitle>
-
-  if (isError)
-    return <SubTitle className="empty">로딩에 실패했습니다.</SubTitle>
-
+function RegionArray({ data, defaultOpenId = undefined }) {
   if (!data.data.length)
     return <SubTitle className="empty">지역이 없습니다.</SubTitle>
 
@@ -190,21 +106,40 @@ function RegionArray() {
     <SelectWrapper key={region.id}>
       <RegionCollapse
         region={region}
-        defaultOpenId={defaultOpenRegion}
+        defaultOpenId={defaultOpenId}
       />
     </SelectWrapper>
   ))
 }
 
-function CountrySection() {
+RegionArray.propTypes = {
+  data: PropTypes.shape({
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+  defaultOpenId: PropTypes.number,
+}
+
+function CountrySection({ data, defaultOpenId = undefined }) {
   return (
     <SectionContainer>
       <div className="title">국가</div>
       <RegionContainer>
-        <RegionArray />
+        <RegionArray
+          data={data}
+          defaultOpenId={defaultOpenId}
+        />
       </RegionContainer>
     </SectionContainer>
   )
+}
+
+CountrySection.propTypes = {
+  data: PropTypes.shape({}).isRequired,
+  defaultOpenId: PropTypes.number,
 }
 
 export default CountrySection

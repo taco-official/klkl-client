@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useShallow } from 'zustand/react/shallow'
-import { useLocation } from 'react-router-dom'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
-import useKyQuery from '../../../../hooks/useKyQuery'
 import useFeedStore from '../../../../stores/useFeedStore'
 import inArray from '../../../../utils/inArray'
 import SubCategoryArray from './SubCategoryArray'
@@ -80,71 +78,11 @@ CategoryCheckBox.propTypes = {
   category: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    subcategories: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-      })
-    ).isRequired,
+    subcategories: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   }).isRequired,
 }
 
-function CategoryArray() {
-  const { isLoading, data, isError } = useKyQuery(
-    'categories',
-    null,
-    undefined,
-    {
-      gcTime: 24 * 60 * 60 * 1000,
-      staleTime: 24 * 60 * 60 * 1000,
-    }
-  )
-  const location = useLocation()
-  const { selectedCategory, selectedSubCategory } = useFeedStore(
-    useShallow((state) => ({
-      selectedCategory: state.selectedCategory,
-      selectedSubCategory: state.selectedSubCategory,
-    }))
-  )
-  const { addSelectedCategory, addSelectedSubCategory } = useFeedStore(
-    (state) => ({
-      addSelectedCategory: state.addSelectedCategory,
-      addSelectedSubCategory: state.addSelectedSubCategory,
-    })
-  )
-
-  useEffect(() => {
-    if (location.state?.data && !isLoading && !isError && data) {
-      if (location.state.data.categories.length) {
-        const searchedCategory = location.state.data.categories[0]
-        if (!inArray(selectedCategory, searchedCategory.id)) {
-          addSelectedCategory(searchedCategory)
-        }
-      }
-
-      if (location.state.data.subcategories.length) {
-        const searchedSubCategory = location.state.data.subcategories[0]
-        data.data.find((category) => {
-          if (inArray(category.subcategories, searchedSubCategory.id)) {
-            if (!inArray(selectedSubCategory, searchedSubCategory.id))
-              addSelectedSubCategory({
-                ...searchedSubCategory,
-                categoryId: category.id,
-              })
-            if (!inArray(selectedCategory, category.id))
-              addSelectedCategory(category)
-            return true
-          }
-          return false
-        })
-      }
-    }
-  }, [isLoading, isError, data])
-
-  if (isLoading) return <div className="empty">불러오는 중입니다.</div>
-
-  if (isError) return <div className="empty">로딩에 실패했습니다.</div>
-
+function CategoryArray({ data }) {
   if (!data.data.length)
     return <div className="empty">카테고리가 없습니다.</div>
 
@@ -155,15 +93,29 @@ function CategoryArray() {
   ))
 }
 
-function CategorySection() {
+CategoryArray.propTypes = {
+  data: PropTypes.shape({
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+      })
+    ).isRequired,
+  }).isRequired,
+}
+
+function CategorySection({ data }) {
   return (
     <SectionContainer>
       <div className="title">상품</div>
       <SelectContainer>
-        <CategoryArray />
+        <CategoryArray data={data} />
       </SelectContainer>
     </SectionContainer>
   )
+}
+
+CategorySection.propTypes = {
+  data: PropTypes.shape({}).isRequired,
 }
 
 export default CategorySection
