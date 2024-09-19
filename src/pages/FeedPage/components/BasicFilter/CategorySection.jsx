@@ -1,4 +1,5 @@
 import React from 'react'
+import { useLoaderData } from 'react-router-dom'
 import { useShallow } from 'zustand/react/shallow'
 import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
@@ -82,7 +83,9 @@ CategoryCheckBox.propTypes = {
   }).isRequired,
 }
 
-function CategoryArray({ data }) {
+function CategoryArray() {
+  const { categoryData: data } = useLoaderData()
+
   if (!data.data.length)
     return <div className="empty">카테고리가 없습니다.</div>
 
@@ -93,29 +96,15 @@ function CategoryArray({ data }) {
   ))
 }
 
-CategoryArray.propTypes = {
-  data: PropTypes.shape({
-    data: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
-}
-
-function CategorySection({ data }) {
+function CategorySection() {
   return (
     <SectionContainer>
       <div className="title">상품</div>
       <SelectContainer>
-        <CategoryArray data={data} />
+        <CategoryArray />
       </SelectContainer>
     </SectionContainer>
   )
-}
-
-CategorySection.propTypes = {
-  data: PropTypes.shape({}).isRequired,
 }
 
 export default CategorySection

@@ -12,6 +12,7 @@ const initialState = {
     sortBy: 'created_at',
     sortDirection: 'DESC',
   },
+  defaultOpenRegion: undefined,
 }
 
 const useFeedStore = create((set) => ({
@@ -74,6 +75,8 @@ const useFeedStore = create((set) => ({
   resetSelectedTag: () => set({ selectedTag: initialState.selectedTag }),
 
   setSelectedSort: (state) => set({ selectedSort: state }),
+
+  setDefaultOpenRegion: (state) => set({ defaultOpenRegion: state }),
 
   resetSelectedField: () => set({ ...initialState }),
 }))

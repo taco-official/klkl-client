@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useLoaderData, useLocation } from 'react-router-dom'
 import { useShallow } from 'zustand/react/shallow'
 import useFeedStore from '../../stores/useFeedStore'
@@ -27,14 +27,15 @@ function FeedPage() {
     addSelectedCategory,
     addSelectedSubCategory,
     resetSelectedField,
+    setDefaultOpenRegion,
   } = useFeedStore((state) => ({
     setSelectedCountry: state.setSelectedCountry,
     addSelectedCity: state.addSelectedCity,
     addSelectedCategory: state.addSelectedCategory,
     addSelectedSubCategory: state.addSelectedSubCategory,
     resetSelectedField: state.resetSelectedField,
+    setDefaultOpenRegion: state.setDefaultOpenRegion,
   }))
-  const [defaultOpenRegion, setDefaultOpenRegion] = useState(undefined)
 
   useEffect(() => {
     if ('data' in location.state) {
@@ -97,11 +98,7 @@ function FeedPage() {
     <FeedPageLayout>
       <Thumbnail />
       <FeedPageContent>
-        <BasicFilter
-          regionData={regionData}
-          categoryData={categoryData}
-          defaultOpenRegion={defaultOpenRegion}
-        />
+        <BasicFilter />
         <FeedArea>
           <AdditionalFilter />
           <SelectedField />

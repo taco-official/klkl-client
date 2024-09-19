@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useLoaderData } from 'react-router-dom'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
 import useFeedStore from '../../../../stores/useFeedStore'
@@ -62,13 +63,14 @@ CountryArray.propTypes = {
   ).isRequired,
 }
 
-function RegionCollapse({ region, defaultOpenId = undefined }) {
+function RegionCollapse({ region }) {
   const [isOpen, setIsOpen] = useState(false)
+  const DefaultOpenRegion = useFeedStore((state) => state.DefaultOpenRegion)
   const toggleRegion = () => setIsOpen((prev) => !prev)
 
   useEffect(() => {
-    setIsOpen(region.id === defaultOpenId)
-  }, [defaultOpenId])
+    setIsOpen(region.id === DefaultOpenRegion)
+  }, [DefaultOpenRegion])
 
   return (
     <>
@@ -95,51 +97,30 @@ RegionCollapse.propTypes = {
     name: PropTypes.string.isRequired,
     countries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   }).isRequired,
-  defaultOpenId: PropTypes.number,
 }
 
-function RegionArray({ data, defaultOpenId = undefined }) {
+function RegionArray() {
+  const { regionData: data } = useLoaderData()
+
   if (!data.data.length)
     return <SubTitle className="empty">지역이 없습니다.</SubTitle>
 
   return data.data.map((region) => (
     <SelectWrapper key={region.id}>
-      <RegionCollapse
-        region={region}
-        defaultOpenId={defaultOpenId}
-      />
+      <RegionCollapse region={region} />
     </SelectWrapper>
   ))
 }
 
-RegionArray.propTypes = {
-  data: PropTypes.shape({
-    data: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-      })
-    ).isRequired,
-  }).isRequired,
-  defaultOpenId: PropTypes.number,
-}
-
-function CountrySection({ data, defaultOpenId = undefined }) {
+function CountrySection() {
   return (
     <SectionContainer>
       <div className="title">국가</div>
       <RegionContainer>
-        <RegionArray
-          data={data}
-          defaultOpenId={defaultOpenId}
-        />
+        <RegionArray />
       </RegionContainer>
     </SectionContainer>
   )
-}
-
-CountrySection.propTypes = {
-  data: PropTypes.shape({}).isRequired,
-  defaultOpenId: PropTypes.number,
 }
 
 export default CountrySection
