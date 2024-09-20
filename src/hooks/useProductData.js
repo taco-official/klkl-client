@@ -9,7 +9,7 @@ function useProductData() {
     size: 9,
   })
   const { queryArray: selectedQueryArray } = useProductQuery()
-  const { loading: isLoading, data, error: isError, fetchData } = useKy()
+  const { loading: isLoading, data, error, fetchData } = useKy()
 
   useEffect(() => {
     if (pageData.requestPage === 0) return
@@ -26,7 +26,7 @@ function useProductData() {
           url: 'products',
           searchParams: query,
         }),
-      300
+      100
     ),
     []
   )
@@ -39,7 +39,7 @@ function useProductData() {
     })
   }, [pageData, selectedQueryArray])
 
-  return { isLoading, data, pageData, setPageData, isError }
+  return { isLoading, data, pageData, setPageData, error }
 }
 
 export default useProductData

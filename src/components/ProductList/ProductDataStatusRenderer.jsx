@@ -1,27 +1,29 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Pagination, ConfigProvider } from 'antd'
-import useProductData from '../../hooks/useProductData'
 import LoadingContent from '../PreviewContent/LoadingContent'
 import ProductList from './ProductList'
 import StyledList from './ProductList.style'
 import { FeedContainer } from '../../pages/FeedPage/FeedPage.style'
 import theme from '../../styles/theme'
 
-function ProductDataStatusRenderer() {
-  const { isLoading, data, pageData, setPageData, isError } = useProductData()
-
+function ProductDataStatusRenderer({
+  isLoading,
+  data,
+  pageData,
+  setPageData,
+  error,
+}) {
   return (
     <FeedContainer>
-      {isError && (
-        <StyledList className="empty">로딩에 실패했습니다.</StyledList>
-      )}
-      {(isLoading || (!data && !isError)) && (
+      {error && <StyledList className="empty">로딩에 실패했습니다.</StyledList>}
+      {(isLoading || (!data && !error)) && (
         <StyledList>
           <LoadingContent />
         </StyledList>
       )}
       {!isLoading &&
-        !isError &&
+        !error &&
         data &&
         (!data.data.content.length ? (
           <StyledList className="empty">해당 상품이 없습니다.</StyledList>
@@ -54,6 +56,22 @@ function ProductDataStatusRenderer() {
       </ConfigProvider>
     </FeedContainer>
   )
+}
+
+ProductDataStatusRenderer.propTypes = {
+  isLoading: PropTypes.bool,
+  data: PropTypes.shape({
+    data: PropTypes.shape({
+      content: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+      pageSize: PropTypes.number.isRequired,
+      totalElements: PropTypes.number.isRequired,
+    }),
+  }),
+  pageData: PropTypes.shape({
+    requestPage: PropTypes.number.isRequired,
+  }),
+  setPageData: PropTypes.func,
+  error: PropTypes.shape({}),
 }
 
 export default ProductDataStatusRenderer
