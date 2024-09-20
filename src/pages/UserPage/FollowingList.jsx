@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import theme from '../../styles/theme'
 import useKyQuery from '../../hooks/useKyQuery'
-import ProductDataStatusRenderer from '../../components/ProductList/ProductDataStatusRenderer'
+import PagedProductList from '../../components/ProductList/PagedProductList'
 import ProfileImage from '../../components/UserProfile/ProfileImage'
 import PlainButton from '../../components/Button/PlainButton'
 
@@ -28,7 +28,7 @@ const useFetchProductList = (currentUser) => {
   if (!productList) return null
 
   return (
-    <ProductDataStatusRenderer
+    <PagedProductList
       isLoading={isLoading}
       isError={isError}
       data={productList}
