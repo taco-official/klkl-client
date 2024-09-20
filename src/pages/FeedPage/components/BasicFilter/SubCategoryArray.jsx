@@ -5,63 +5,63 @@ import useFeedStore from '../../../../stores/useFeedStore'
 import inArray from '../../../../utils/inArray'
 import { SelectWrapper } from './BasicFilter.style'
 
-function SubCategoryCheckbox({ categoryId, subCategory }) {
-  const selectedSubCategory = useFeedStore((state) => state.selectedSubCategory)
-  const [addSelectedSubCategory, deleteSelectedSubCategory] = useFeedStore(
-    (state) => [state.addSelectedSubCategory, state.deleteSelectedSubCategory]
+function SubcategoryCheckbox({ categoryId, subcategory }) {
+  const selectedSubcategory = useFeedStore((state) => state.selectedSubcategory)
+  const [addSelectedSubcategory, deleteSelectedSubcategory] = useFeedStore(
+    (state) => [state.addSelectedSubcategory, state.deleteSelectedSubcategory]
   )
 
-  const subCategoryInSelected = inArray(selectedSubCategory, subCategory.id)
+  const subcategoryInSelected = inArray(selectedSubcategory, subcategory.id)
 
   const handleCheckboxChange = () => {
-    if (subCategoryInSelected) {
-      deleteSelectedSubCategory(subCategory.id)
+    if (subcategoryInSelected) {
+      deleteSelectedSubcategory(subcategory.id)
     } else {
-      addSelectedSubCategory({ ...subCategory, categoryId })
+      addSelectedSubcategory({ ...subcategory, categoryId })
     }
   }
 
   return (
     <Checkbox
-      id={subCategory.id}
-      name={subCategory.name}
-      checked={subCategoryInSelected}
+      id={subcategory.id}
+      name={subcategory.name}
+      checked={subcategoryInSelected}
       onChange={handleCheckboxChange}
     >
-      {subCategory.name}
+      {subcategory.name}
     </Checkbox>
   )
 }
 
-SubCategoryCheckbox.propTypes = {
+SubcategoryCheckbox.propTypes = {
   categoryId: PropTypes.number.isRequired,
-  subCategory: PropTypes.shape({
+  subcategory: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
   }).isRequired,
 }
 
-function SubCategoryArray({ categoryId, subCategories }) {
-  if (!subCategories.length)
+function SubcategoryArray({ categoryId, subcategories }) {
+  if (!subcategories.length)
     return <div className="empty">카테고리가 없습니다.</div>
 
-  return subCategories.map((subCategory) => (
-    <SelectWrapper key={subCategory.id}>
-      <SubCategoryCheckbox
+  return subcategories.map((subcategory) => (
+    <SelectWrapper key={subcategory.id}>
+      <SubcategoryCheckbox
         categoryId={categoryId}
-        subCategory={subCategory}
+        subcategory={subcategory}
       />
     </SelectWrapper>
   ))
 }
 
-SubCategoryArray.propTypes = {
+SubcategoryArray.propTypes = {
   categoryId: PropTypes.number.isRequired,
-  subCategories: PropTypes.arrayOf(
+  subcategories: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
     })
   ).isRequired,
 }
 
-export default SubCategoryArray
+export default SubcategoryArray

@@ -5,7 +5,7 @@ import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
 import useFeedStore from '../../../../stores/useFeedStore'
 import inArray from '../../../../utils/inArray'
-import SubCategoryArray from './SubCategoryArray'
+import SubcategoryArray from './SubcategoryArray'
 import {
   SectionContainer,
   SelectContainer,
@@ -14,22 +14,22 @@ import {
 } from './BasicFilter.style'
 
 function CategoryCheckBox({ category }) {
-  const [selectedCategory, selectedSubCategory] = useFeedStore(
-    useShallow((state) => [state.selectedCategory, state.selectedSubCategory])
+  const [selectedCategory, selectedSubcategory] = useFeedStore(
+    useShallow((state) => [state.selectedCategory, state.selectedSubcategory])
   )
   const [
     addSelectedCategory,
     deleteSelectedCategory,
-    deleteSelectedSubCategoriesByCategoryId,
+    deleteSelectedSubcategoriesByCategoryId,
   ] = useFeedStore((state) => [
     state.addSelectedCategory,
     state.deleteSelectedCategory,
-    state.deleteSelectedSubCategoriesByCategoryId,
+    state.deleteSelectedSubcategoriesByCategoryId,
   ])
 
-  const subCategoryLength = category.subcategories.length
+  const subcategoryLength = category.subcategories.length
 
-  const selectedSubCategoryLength = selectedSubCategory.filter(
+  const selectedSubcategoryLength = selectedSubcategory.filter(
     (selected) => selected.categoryId === category.id
   ).length
 
@@ -37,14 +37,9 @@ function CategoryCheckBox({ category }) {
 
   const handleCategoryCheckboxChange = () => {
     if (categoryInSelected) {
-      deleteSelectedSubCategoriesByCategoryId(category.id)
+      deleteSelectedSubcategoriesByCategoryId(category.id)
       deleteSelectedCategory(category.id)
-    } else
-      addSelectedCategory({
-        id: category.id,
-        name: category.name,
-        subCategories: category.subcategories,
-      })
+    } else addSelectedCategory(category)
   }
 
   return (
@@ -53,11 +48,11 @@ function CategoryCheckBox({ category }) {
         id={category.id}
         name={category.name}
         checked={
-          categoryInSelected || selectedSubCategoryLength === subCategoryLength
+          categoryInSelected || selectedSubcategoryLength === subcategoryLength
         }
         indeterminate={
-          selectedSubCategoryLength > 0 &&
-          selectedSubCategoryLength < subCategoryLength
+          selectedSubcategoryLength > 0 &&
+          selectedSubcategoryLength < subcategoryLength
         }
         onChange={handleCategoryCheckboxChange}
       >
@@ -65,9 +60,9 @@ function CategoryCheckBox({ category }) {
       </Checkbox>
       {categoryInSelected && (
         <SubSelectContainer>
-          <SubCategoryArray
+          <SubcategoryArray
             categoryId={category.id}
-            subCategories={category.subcategories}
+            subcategories={category.subcategories}
           />
         </SubSelectContainer>
       )}

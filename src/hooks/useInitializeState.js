@@ -7,24 +7,30 @@ import inArray from '../utils/inArray'
 const useInitializeState = () => {
   const location = useLocation()
   const { regionData, categoryData } = useLoaderData()
-  const { selectedCity, selectedCategory, selectedSubCategory } = useFeedStore(
+  const {
+    selectedCountry,
+    selectedCity,
+    selectedCategory,
+    selectedSubcategory,
+  } = useFeedStore(
     useShallow((state) => ({
+      selectedCountry: state.selectedCountry,
       selectedCity: state.selectedCity,
       selectedCategory: state.selectedCategory,
-      selectedSubCategory: state.selectedSubCategory,
+      selectedSubcategory: state.selectedSubcategory,
     }))
   )
   const {
     setSelectedCountry,
     addSelectedCity,
     addSelectedCategory,
-    addSelectedSubCategory,
+    addSelectedSubcategory,
     setDefaultOpenRegion,
   } = useFeedStore((state) => ({
     setSelectedCountry: state.setSelectedCountry,
     addSelectedCity: state.addSelectedCity,
     addSelectedCategory: state.addSelectedCategory,
-    addSelectedSubCategory: state.addSelectedSubCategory,
+    addSelectedSubcategory: state.addSelectedSubcategory,
     setDefaultOpenRegion: state.setDefaultOpenRegion,
   }))
 
@@ -32,54 +38,63 @@ const useInitializeState = () => {
     if ('data' in location.state) {
       if (location.state.data.countries.length) {
         const searchedCountry = location.state.data.countries[0]
-        regionData.data.find((region) => {
-          if (inArray(region.countries, searchedCountry.id)) {
-            setSelectedCountry(searchedCountry)
-            setDefaultOpenRegion(region.id)
-            return true
-          }
-          return false
+        const foundRegion = regionData.data.find((region) => {
+          const foundCountry = region.countries.find(
+            (country) => country.id === searchedCountry.id
+          )
+          if (!foundCountry) return false
+          if (selectedCountry?.id !== foundCountry.id)
+            setSelectedCountry(foundCountry)
+          return true
         })
+        if (foundRegion) setDefaultOpenRegion(foundRegion.id)
       }
 
       if (location.state.data.cities.length) {
         const searchedCity = location.state.data.cities[0]
-        regionData.data.find((region) =>
-          region.countries.find((country) => {
-            if (inArray(country.cities, searchedCity.id)) {
-              if (!inArray(selectedCity, searchedCity.id))
-                addSelectedCity(searchedCity)
-              setSelectedCountry(country)
-              setDefaultOpenRegion(region.id)
-              return true
-            }
-            return false
+        const foundRegion = regionData.data.find((region) => {
+          const foundCountry = region.countries.find((country) => {
+            const foundCity = country.cities.find(
+              (city) => city.id === searchedCity.id
+            )
+            if (!foundCity) return false
+            if (!inArray(selectedCity, foundCity.id))
+              addSelectedCity(searchedCity)
+            return true
           })
-        )
+          if (!foundCountry) return false
+          if (selectedCountry?.id !== foundCountry.id)
+            setSelectedCountry(foundCountry)
+          return true
+        })
+        if (foundRegion) setDefaultOpenRegion(foundRegion.id)
       }
 
       if (location.state.data.categories.length) {
         const searchedCategory = location.state.data.categories[0]
-        if (!inArray(selectedCategory, searchedCategory.id)) {
-          addSelectedCategory(searchedCategory)
-        }
+        const foundCategory = categoryData.data.find(
+          (category) => category.id === searchedCategory.id
+        )
+        if (foundCategory && !inArray(selectedCategory, foundCategory.id))
+          addSelectedCategory(foundCategory)
       }
 
       if (location.state.data.subcategories.length) {
-        const searchedSubCategory = location.state.data.subcategories[0]
-        categoryData.data.find((category) => {
-          if (inArray(category.subcategories, searchedSubCategory.id)) {
-            if (!inArray(selectedSubCategory, searchedSubCategory.id))
-              addSelectedSubCategory({
-                ...searchedSubCategory,
-                categoryId: category.id,
-              })
-            if (!inArray(selectedCategory, category.id))
-              addSelectedCategory(category)
-            return true
-          }
-          return false
+        const searchedSubcategory = location.state.data.subcategories[0]
+        const foundCategory = categoryData.data.find((category) => {
+          const foundSubcategory = category.subcategories.find(
+            (subcategory) => subcategory.id === searchedSubcategory.id
+          )
+          if (!foundSubcategory) return false
+          if (!inArray(selectedSubcategory, foundSubcategory.id))
+            addSelectedSubcategory({
+              ...foundSubcategory,
+              categoryId: category.id,
+            })
+          return true
         })
+        if (foundCategory && !inArray(selectedCategory, foundCategory.id))
+          addSelectedCategory(foundCategory)
       }
     }
   }, [])

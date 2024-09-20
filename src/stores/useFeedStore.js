@@ -4,7 +4,7 @@ const initialState = {
   selectedCountry: {},
   selectedCity: [],
   selectedCategory: [],
-  selectedSubCategory: [],
+  selectedSubcategory: [],
   selectedTag: [],
   selectedSort: {
     key: 0,
@@ -45,24 +45,24 @@ const useFeedStore = create((set) => ({
   resetSelectedCategory: () =>
     set({ selectedCategory: initialState.selectedCategory }),
 
-  addSelectedSubCategory: (subCategory) =>
+  addSelectedSubcategory: (subcategory) =>
     set((state) => ({
-      selectedSubCategory: [...state.selectedSubCategory, subCategory],
+      selectedSubcategory: [...state.selectedSubcategory, subcategory],
     })),
-  deleteSelectedSubCategory: (subCategoryId) =>
+  deleteSelectedSubcategory: (subcategoryId) =>
     set((state) => ({
-      selectedSubCategory: state.selectedSubCategory.filter(
-        (selected) => selected.id !== subCategoryId
+      selectedSubcategory: state.selectedSubcategory.filter(
+        (selected) => selected.id !== subcategoryId
       ),
     })),
-  deleteSelectedSubCategoriesByCategoryId: (categoryId) =>
+  deleteSelectedSubcategoriesByCategoryId: (categoryId) =>
     set((state) => ({
-      selectedSubCategory: state.selectedSubCategory.filter(
+      selectedSubcategory: state.selectedSubcategory.filter(
         (selected) => selected.categoryId !== categoryId
       ),
     })),
-  resetSelectedSubCategory: () =>
-    set({ selectedSubCategory: initialState.selectedSubCategory }),
+  resetSelectedSubcategory: () =>
+    set({ selectedSubcategory: initialState.selectedSubcategory }),
 
   addSelectedTag: (Tag) =>
     set((state) => ({ selectedTag: [...state.selectedTag, Tag] })),
