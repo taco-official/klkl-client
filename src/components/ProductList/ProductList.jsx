@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import PreviewContent from '../PreviewContent/PreviewContent'
-import { user } from '../../test/data/DummyData'
 import StyledList from './ProductList.style'
 
 function ProductList({ dataList }) {
@@ -10,7 +9,6 @@ function ProductList({ dataList }) {
       {dataList.map((content) => (
         <PreviewContent
           key={content.id}
-          userId={user.id}
           productData={content}
         />
       ))}
