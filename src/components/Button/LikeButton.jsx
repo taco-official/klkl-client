@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
-// import { kyInstance } from '../../hooks/kyInstance'
+import useUserData from '../../hooks/useUserData'
+import { kyInstance } from '../../hooks/kyInstance'
 import IconTextButton from './IconTextButton'
 import theme from '../../styles/theme'
 
@@ -12,24 +13,25 @@ const LikeButtonContainer = styled.div`
   mix-blend-mode: ${(props) => (props.$isLiked ? 'normal' : 'plus-darker')};
 `
 
-function LikeButton({ productId, userId = null, iconSize = '1.3rem' }) {
+function LikeButton({ productId, iconSize = '1.3rem' }) {
+  const { data: userData } = useUserData()
   const [isLiked, setIsLiked] = useState(false)
 
   useEffect(() => {
-    /*
     const fetchLikeContent = async (product) => {
-      const response = await kyInstance.get(`products/${product}/likes`).json()
-      return response.data.isLiked
+      try {
+        const responseData = await kyInstance
+          .get(`products/${product}/likes`)
+          .json()
+        setIsLiked(responseData.data.isLiked)
+      } catch (error) {
+        setIsLiked(false)
+      }
     }
-    */
 
-    if (userId === 0) {
-      // const isLikedContent = fetchLikeContent(productId)
-      // if (isLikedContent) {
-      //   setIsLiked(isLikedContent)
-      console.log('is liked')
-    }
-  }, [userId])
+    if (!userData) return
+    fetchLikeContent(productId)
+  }, [])
 
   const handleLiked = useCallback(() => {
     // const postLikeContent = async (product) => {
@@ -57,22 +59,25 @@ function LikeButton({ productId, userId = null, iconSize = '1.3rem' }) {
     }
     */
 
-    if (userId === null) {
+    if (!userData) {
       alert('로그인이 필요합니다.')
-    } else if (!isLiked) {
+      return
+    }
+    if (!isLiked) {
       // const responseData = postLikeContent(productId)
       // if ('isLiked' in responseData) setIsLiked(responseData.isLiked)
       console.log('post like', productId)
-      setIsLiked(true)
+      // setIsLiked(true)
     } else {
       // const responseData = deleteLikeContent(userId, productId)
       // if ('isLiked' in response) setIsLiked(responseData.isLiked)
-      console.log('delete like')
-      setIsLiked(false)
+      console.log('delete like', productId)
+      // setIsLiked(false)
     }
-  }, [userId, isLiked])
+    setIsLiked((prev) => !prev)
+  }, [isLiked])
 
-  const iconAttr = useMemo(() => ({ onClick: handleLiked }), [handleLiked])
+  const iconAttr = { onClick: handleLiked }
   const iconValue = useMemo(
     () => ({ size: iconSize, attr: iconAttr }),
     [iconSize, iconAttr]
@@ -90,7 +95,6 @@ function LikeButton({ productId, userId = null, iconSize = '1.3rem' }) {
 
 LikeButton.propTypes = {
   productId: PropTypes.number.isRequired,
-  userId: PropTypes.number,
   iconSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 
