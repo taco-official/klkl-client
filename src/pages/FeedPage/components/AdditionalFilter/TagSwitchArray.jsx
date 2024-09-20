@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ConfigProvider, Button, theme as antdTheme } from 'antd'
 import useFeedStore from '../../../../stores/useFeedStore'
+import useTagData from '../../../../hooks/useTagData'
 import inArray from '../../../../utils/inArray'
+import MessageBox from './TagSwitch.style'
 import theme from '../../../../styles/theme'
 import { buttonTheme } from '../../FeedPage.style'
 
@@ -44,7 +46,11 @@ TagSwitch.propTypes = {
   }).isRequired,
 }
 
-function TagSwitchList({ tags }) {
+function TagSwitchArray() {
+  const tags = useTagData()
+
+  if (!tags.length) return <MessageBox>선택 가능한 태그가 없습니다.</MessageBox>
+
   return (
     <ConfigProvider theme={buttonTheme}>
       {tags.map((tag) => (
@@ -57,13 +63,4 @@ function TagSwitchList({ tags }) {
   )
 }
 
-TagSwitchList.propTypes = {
-  tags: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-    })
-  ).isRequired,
-}
-
-export default TagSwitchList
+export default TagSwitchArray
