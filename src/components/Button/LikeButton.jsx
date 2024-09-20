@@ -43,35 +43,28 @@ function LikeButton({ productId, iconSize = '1.3rem' }) {
           .json()
         setIsLiked(responseData.data.isLiked)
       } catch (error) {
-        alert('좋아요 등록에 실패했습니다.\n잠시 후 다시 시도해주세요.')
+        alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.')
       }
     }
 
-    /*
-    const deleteLikeContent = async (user, product) => {
-      const response = await kyInstance
-        .delete(`products/${product}/likes`, {
-          body: JSON.stringify({
-            user_id: user,
-            product_id: product,
-          }),
-        })
-        .json()
-      return response.data.isLiked
+    const deleteLikeContent = async (product) => {
+      try {
+        const responseData = await kyInstance
+          .delete(`products/${product}/likes`)
+          .json()
+        setIsLiked(responseData.isLiked)
+      } catch (error) {
+        alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.')
+      }
     }
-    */
 
     if (!userData) {
       alert('로그인이 필요합니다.')
       return
     }
+
     if (!isLiked) postLikeContent(productId)
-    else {
-      // const responseData = deleteLikeContent(userId, productId)
-      // if ('isLiked' in response) setIsLiked(responseData.isLiked)
-      console.log('delete like', productId)
-      // setIsLiked(false)
-    }
+    else deleteLikeContent(productId)
     setIsLiked((prev) => !prev)
   }, [isLiked])
 
