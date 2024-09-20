@@ -1,15 +1,14 @@
-function parseQueryParams(endPoint, requestQueryArray) {
+function parseQueryParams(endPoint, requestQuery) {
   let uri = endPoint
 
-  if (requestQueryArray) {
-    if (Array.isArray(requestQueryArray) && requestQueryArray.length) {
-      const searchParams = new URLSearchParams()
-      requestQueryArray.forEach((element) => {
-        if (!element?.value.length) return
-        searchParams.append(element.key, element.value)
-      })
-      uri += `?${searchParams.toString()}`
-    }
+  if (requestQuery) {
+    const searchParams = new URLSearchParams()
+
+    Object.entries(requestQuery).forEach(([key, value]) => {
+      searchParams.append(key, value)
+    })
+
+    uri += `?${searchParams.toString()}`
   }
 
   return uri

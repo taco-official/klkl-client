@@ -1,45 +1,23 @@
-import { useState, useEffect, useCallback } from 'react'
-import { debounce } from 'lodash-es'
-import useKy from './useKy'
+import { useState } from 'react'
+import useKyQuery from './useKyQuery'
 import useProductQuery from './useProductQuery'
+import parseQueryParams from '../utils/parseQueryParams'
 
 function useProductData() {
+  const queryArray = useProductQuery()
+
   const [pageData, setPageData] = useState({
     requestPage: 0,
     size: 9,
   })
-  const { queryArray: selectedQueryArray } = useProductQuery()
-  const { loading: isLoading, data, error, fetchData } = useKy()
 
-  useEffect(() => {
-    if (pageData.requestPage === 0) return
-    setPageData((prev) => ({
-      ...prev,
-      requestPage: 0,
-    }))
-  }, [selectedQueryArray])
+  const uri = parseQueryParams('products', queryArray)
 
-  const debounceFetch = useCallback(
-    debounce(
-      (query) =>
-        fetchData({
-          url: 'products',
-          searchParams: query,
-        }),
-      100
-    ),
-    []
-  )
+  const { isError, isLoading, data } = useKyQuery(uri, null, undefined, {
+    staleTime: 0,
+  })
 
-  useEffect(() => {
-    debounceFetch({
-      page: pageData.requestPage,
-      size: pageData.size,
-      ...selectedQueryArray,
-    })
-  }, [pageData, selectedQueryArray])
-
-  return { isLoading, data, pageData, setPageData, error }
+  return { isLoading, isError, data, pageData, setPageData }
 }
 
 export default useProductData
