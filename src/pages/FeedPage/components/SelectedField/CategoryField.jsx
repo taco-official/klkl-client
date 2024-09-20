@@ -8,24 +8,24 @@ import {
   WhiteFieldTag,
 } from '../../../../components/Tags/Tags.style'
 
-function SubCategoryField({ selectedSubCategory, categoryId }) {
-  const deleteSelectedSubCategory = useFeedStore(
-    (state) => state.deleteSelectedSubCategory
+function SubcategoryField({ selectedSubcategory, categoryId }) {
+  const deleteSelectedSubcategory = useFeedStore(
+    (state) => state.deleteSelectedSubcategory
   )
 
-  return selectedSubCategory.map((selected) => {
+  return selectedSubcategory.map((selected) => {
     if (selected.categoryId !== categoryId) return null
     return (
       <BlueFieldTag key={selected.id}>
         <span>{selected.name}</span>
-        <CloseOutlined onClick={() => deleteSelectedSubCategory(selected.id)} />
+        <CloseOutlined onClick={() => deleteSelectedSubcategory(selected.id)} />
       </BlueFieldTag>
     )
   })
 }
 
-SubCategoryField.propTypes = {
-  selectedSubCategory: PropTypes.arrayOf(
+SubcategoryField.propTypes = {
+  selectedSubcategory: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
@@ -36,15 +36,15 @@ SubCategoryField.propTypes = {
 }
 
 function CategoryField() {
-  const [selectedCategory, selectedSubCategory] = useFeedStore(
-    useShallow((state) => [state.selectedCategory, state.selectedSubCategory])
+  const [selectedCategory, selectedSubcategory] = useFeedStore(
+    useShallow((state) => [state.selectedCategory, state.selectedSubcategory])
   )
   const deleteSelectedCategory = useFeedStore(
     (state) => state.deleteSelectedCategory
   )
 
-  const hasSelectedSubCategories = (categoryId) => {
-    return selectedSubCategory.some(
+  const hasSelectedSubcategories = (categoryId) => {
+    return selectedSubcategory.some(
       (selected) => selected.categoryId === categoryId
     )
   }
@@ -57,7 +57,7 @@ function CategoryField() {
     )
 
   return selectedCategory.map((selected) => {
-    if (!hasSelectedSubCategories(selected.id))
+    if (!hasSelectedSubcategories(selected.id))
       return (
         <BlueFieldTag key={selected.id}>
           <span>{selected.name} 전체</span>
@@ -65,9 +65,9 @@ function CategoryField() {
         </BlueFieldTag>
       )
     return (
-      <SubCategoryField
+      <SubcategoryField
         key={selected.id}
-        selectedSubCategory={selectedSubCategory}
+        selectedSubcategory={selectedSubcategory}
         categoryId={selected.id}
       />
     )

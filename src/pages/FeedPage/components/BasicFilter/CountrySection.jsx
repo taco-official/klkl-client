@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { useLoaderData } from 'react-router-dom'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
-import useKyQuery from '../../../../hooks/useKyQuery'
 import useFeedStore from '../../../../stores/useFeedStore'
 import ShowHideButton from '../../../../components/Button/ShowHideButton'
 import theme from '../../../../styles/theme'
@@ -41,12 +41,6 @@ CountryRadio.propTypes = {
   country: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    cities: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-      })
-    ).isRequired,
   }).isRequired,
 }
 
@@ -65,20 +59,18 @@ CountryArray.propTypes = {
   countries: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      cities: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.number.isRequired,
-          name: PropTypes.string.isRequired,
-        })
-      ).isRequired,
     })
   ).isRequired,
 }
 
 function RegionCollapse({ region }) {
   const [isOpen, setIsOpen] = useState(false)
+  const DefaultOpenRegion = useFeedStore((state) => state.DefaultOpenRegion)
   const toggleRegion = () => setIsOpen((prev) => !prev)
+
+  useEffect(() => {
+    setIsOpen(region.id === DefaultOpenRegion)
+  }, [DefaultOpenRegion])
 
   return (
     <>
@@ -103,29 +95,14 @@ RegionCollapse.propTypes = {
   region: PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    countries: PropTypes.arrayOf(
-      PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        cities: PropTypes.arrayOf(
-          PropTypes.shape({
-            id: PropTypes.number.isRequired,
-            name: PropTypes.string.isRequired,
-          })
-        ).isRequired,
-      })
-    ).isRequired,
+    countries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
   }).isRequired,
 }
 
 function RegionArray() {
-  const { isLoading, data, isError } = useKyQuery('regions')
+  const { regionData: data } = useLoaderData()
 
-  if (isLoading)
-    return <SubTitle className="empty">불러오는 중입니다.</SubTitle>
-
-  if (isError)
-    return <SubTitle className="empty">로딩에 실패했습니다.</SubTitle>
+  if (!data) return <div className="empty">불러오는 중입니다.</div>
 
   if (!data.data.length)
     return <SubTitle className="empty">지역이 없습니다.</SubTitle>

@@ -45,7 +45,7 @@ const FeedContainer = styled.div`
   display: flex;
   flex-direction: column;
   flex: 0 1;
-  row-gap: 1.1rem;
+  row-gap: 2.725rem;
 `
 
 const StyleSection = styled.section`

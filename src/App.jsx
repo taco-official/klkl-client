@@ -16,16 +16,16 @@ export default function App() {
     <>
       <GlobalStyle />
       <QueryClientProvider client={queryClient}>
-        <NavBar />
-        <StyledMain>
-          <RouterProvider router={router} />
-        </StyledMain>
-        <Footer />
         <ReactQueryDevtools
           initialIsOpen={false}
           position="bottom-right"
           style={{ top: '0px', position: 'absolute' }}
         />
+        <NavBar />
+        <StyledMain>
+          <RouterProvider router={router} />
+        </StyledMain>
+        <Footer />
       </QueryClientProvider>
     </>
   )

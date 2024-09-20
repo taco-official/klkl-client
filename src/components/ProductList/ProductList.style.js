@@ -4,7 +4,7 @@ import theme from '../../styles/theme'
 const StyledList = styled.article`
   min-width: 36rem;
   margin-top: 0.5rem;
-  margin-bottom: 3.125rem;
+  margin-bottom: 1.5rem;
   display: grid;
   grid-template-columns: repeat(3, minmax(auto, 11rem));
   gap: 1.4rem 1.5rem;

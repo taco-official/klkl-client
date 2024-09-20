@@ -8,7 +8,7 @@ const method = {
 }
 
 // const printLogUrl = (request) => {
-// console.log('request url', request.url)
+// console.log('request url:', request.url)
 // }
 
 // const printLogResponse = async (request, instance, response) => {

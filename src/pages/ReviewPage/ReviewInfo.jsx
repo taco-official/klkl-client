@@ -18,8 +18,16 @@ export default function ReviewInfoBlock({ review, canEdit }) {
     {
       title: (
         <Link
-          to="/"
-          state={{ from: window.location.pathname }}
+          to="/feed"
+          state={{
+            from: window.location.pathname,
+            data: {
+              countries: [],
+              cities: [review.city],
+              categories: [],
+              subcategories: [],
+            },
+          }}
         >
           {review.city.name}
         </Link>
@@ -28,8 +36,16 @@ export default function ReviewInfoBlock({ review, canEdit }) {
     {
       title: (
         <Link
-          to="/"
-          state={{ from: window.location.pathname }}
+          to="/feed"
+          state={{
+            from: window.location.pathname,
+            data: {
+              countries: [],
+              cities: [],
+              categories: [],
+              subcategories: [review.subcategory],
+            },
+          }}
         >
           {review.subcategory.name}
         </Link>
