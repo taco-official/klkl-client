@@ -25,7 +25,9 @@ function LikeButton({ productId, iconSize = '1.3rem' }) {
           .json()
         setIsLiked(responseData.data.isLiked)
       } catch (error) {
-        setIsLiked(false)
+        alert(
+          '좋아요 정보를 불러오는데 실패했습니다.\n잠시 후 다시 시도해주세요.'
+        )
       }
     }
 
@@ -34,16 +36,16 @@ function LikeButton({ productId, iconSize = '1.3rem' }) {
   }, [])
 
   const handleLiked = useCallback(() => {
-    // const postLikeContent = async (product) => {
-    // const response = await kyInstance
-    // .post(`products/${product}/likes`, {
-    // body: JSON.stringify({
-    // product_id: product,
-    // }),
-    // })
-    // .json()
-    // return response.data
-    // }
+    const postLikeContent = async (product) => {
+      try {
+        const responseData = await kyInstance
+          .post(`products/${product}/likes`)
+          .json()
+        setIsLiked(responseData.data.isLiked)
+      } catch (error) {
+        alert('좋아요 등록에 실패했습니다.\n잠시 후 다시 시도해주세요.')
+      }
+    }
 
     /*
     const deleteLikeContent = async (user, product) => {
@@ -63,12 +65,8 @@ function LikeButton({ productId, iconSize = '1.3rem' }) {
       alert('로그인이 필요합니다.')
       return
     }
-    if (!isLiked) {
-      // const responseData = postLikeContent(productId)
-      // if ('isLiked' in responseData) setIsLiked(responseData.isLiked)
-      console.log('post like', productId)
-      // setIsLiked(true)
-    } else {
+    if (!isLiked) postLikeContent(productId)
+    else {
       // const responseData = deleteLikeContent(userId, productId)
       // if ('isLiked' in response) setIsLiked(responseData.isLiked)
       console.log('delete like', productId)
