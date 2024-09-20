@@ -26,7 +26,7 @@ function useProductData() {
           url: 'products',
           searchParams: query,
         }),
-      500
+      300
     ),
     []
   )
