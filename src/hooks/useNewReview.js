@@ -4,7 +4,6 @@ import useKyQuery from './useKyQuery'
 const useNewReview = () => {
   const { data, isLoading, isError, error } = useKyQuery(
     'products?sort_by=created_at&sort_direction=DESC&size=12',
-    null,
     undefined,
     { staleTime: 0 }
   )

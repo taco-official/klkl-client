@@ -13,7 +13,7 @@ function useProductData() {
 
   const uri = parseQueryParams('products', queryArray)
 
-  const { isError, isLoading, data } = useKyQuery(uri, null, undefined, {
+  const { isError, isLoading, data } = useKyQuery(uri, undefined, {
     staleTime: 0,
   })
 

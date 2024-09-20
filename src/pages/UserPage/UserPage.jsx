@@ -19,7 +19,7 @@ const useContentFetch = (id) => {
     data: productList,
     isLoading,
     isError,
-  } = useKyQuery(`users/${id}/products`, null, undefined, { stleTime: 0 })
+  } = useKyQuery(`users/${id}/products`, undefined, { stleTime: 0 })
 
   return (
     <ProductDataStatusRenderer

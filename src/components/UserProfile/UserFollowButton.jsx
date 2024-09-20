@@ -12,7 +12,7 @@ const useCheckFollow = (id) => {
     data: following,
     isLoading,
     isError,
-  } = useKyQuery(`users/me/following/${id}`, null, ['users/me/following', id])
+  } = useKyQuery(`users/me/following/${id}`, ['users/me/following', id])
 
   if (isLoading || isError) return null
 
