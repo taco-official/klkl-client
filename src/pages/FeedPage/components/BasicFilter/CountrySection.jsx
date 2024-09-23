@@ -65,12 +65,12 @@ CountryArray.propTypes = {
 
 function RegionCollapse({ region }) {
   const [isOpen, setIsOpen] = useState(false)
-  const DefaultOpenRegion = useFeedStore((state) => state.DefaultOpenRegion)
+  const defaultOpenRegion = useFeedStore((state) => state.defaultOpenRegion)
   const toggleRegion = () => setIsOpen((prev) => !prev)
 
   useEffect(() => {
-    setIsOpen(region.id === DefaultOpenRegion)
-  }, [DefaultOpenRegion])
+    setIsOpen(region.id === defaultOpenRegion)
+  }, [defaultOpenRegion])
 
   return (
     <>
