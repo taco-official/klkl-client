@@ -1,0 +1,21 @@
+name: Deploy to AWS S3
+
+on:
+  push:
+    branches:
+      - KL-179/github-action
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.15.1'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build project
+        run: yarn build
