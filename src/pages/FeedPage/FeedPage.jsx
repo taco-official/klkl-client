@@ -17,6 +17,17 @@ function FeedPage() {
 
   useInitializeState()
   useEffect(() => {
+    const deleteDataState = (state) => {
+      if (!state || !state.usr) return state
+      const newState = { ...state, usr: { ...state.usr } }
+      if ('data' in newState.usr) delete newState.usr.data
+      return newState
+    }
+    const historyState = window.history.state
+    if (historyState) {
+      const newState = deleteDataState(historyState)
+      if (newState) window.history.replaceState(newState, '')
+    }
     return resetSelectedField
   }, [])
 
