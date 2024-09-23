@@ -16,23 +16,25 @@ import {
   IconBox,
 } from './PreviewContent.style'
 
-function PreviewContent({ userId = null, productData }) {
+function PreviewContent({ productData }) {
   return (
-    <Link
-      to={`/products/${productData.id}`}
-      state={{ from: window.location.pathname }}
-    >
-      <PreviewContainer>
-        <ThumbnailContainer
-          id="productThumbnail"
-          $url={productData.mainImageUrl}
+    <PreviewContainer>
+      <ThumbnailContainer id="productThumbnail">
+        <Link
+          to={`/products/${productData.id}`}
+          state={{ from: window.location.pathname }}
         >
-          <LikeButton
-            userId={userId}
-            productId={productData.id}
-            iconSize="1.3rem"
-          />
-        </ThumbnailContainer>
+          <img src={productData.image?.url} />
+        </Link>
+        <LikeButton
+          productId={productData.id}
+          iconSize="1.3rem"
+        />
+      </ThumbnailContainer>
+      <Link
+        to={`/products/${productData.id}`}
+        state={{ from: window.location.pathname }}
+      >
         <DescriptionContainer>
           <CategoryWrapper>
             {`${productData.countryName} ∙ ${productData.categoryName}`}
@@ -61,16 +63,17 @@ function PreviewContent({ userId = null, productData }) {
             </IconBox>
           </IconContainer>
         </DescriptionContainer>
-      </PreviewContainer>
-    </Link>
+      </Link>
+    </PreviewContainer>
   )
 }
 
 PreviewContent.propTypes = {
-  userId: PropTypes.number,
   productData: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    mainImageUrl: PropTypes.string.isRequired,
+    image: PropTypes.shape({
+      url: PropTypes.string,
+    }),
     countryName: PropTypes.string.isRequired,
     categoryName: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

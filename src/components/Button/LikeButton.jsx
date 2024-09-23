@@ -2,7 +2,8 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
-// import { kyInstance } from '../../hooks/kyInstance'
+import useUserData from '../../hooks/useUserData'
+import { kyInstance } from '../../hooks/kyInstance'
 import IconTextButton from './IconTextButton'
 import theme from '../../styles/theme'
 
@@ -12,67 +13,62 @@ const LikeButtonContainer = styled.div`
   mix-blend-mode: ${(props) => (props.$isLiked ? 'normal' : 'plus-darker')};
 `
 
-function LikeButton({ productId, userId = null, iconSize = '1.3rem' }) {
+function LikeButton({ productId, iconSize = '1.3rem' }) {
+  const { data: userData } = useUserData()
   const [isLiked, setIsLiked] = useState(false)
 
   useEffect(() => {
-    /*
     const fetchLikeContent = async (product) => {
-      const response = await kyInstance.get(`products/${product}/likes`).json()
-      return response.data.isLiked
+      try {
+        const responseData = await kyInstance
+          .get(`products/${product}/likes`)
+          .json()
+        setIsLiked(responseData.data.isLiked)
+      } catch (error) {
+        alert(
+          '좋아요 정보를 불러오는데 실패했습니다.\n잠시 후 다시 시도해주세요.'
+        )
+      }
     }
-    */
 
-    if (userId === 0) {
-      // const isLikedContent = fetchLikeContent(productId)
-      // if (isLikedContent) {
-      //   setIsLiked(isLikedContent)
-      console.log('is liked')
-    }
-  }, [userId])
+    if (!userData) return
+    fetchLikeContent(productId)
+  }, [])
 
   const handleLiked = useCallback(() => {
-    // const postLikeContent = async (product) => {
-    // const response = await kyInstance
-    // .post(`products/${product}/likes`, {
-    // body: JSON.stringify({
-    // product_id: product,
-    // }),
-    // })
-    // .json()
-    // return response.data
-    // }
-
-    /*
-    const deleteLikeContent = async (user, product) => {
-      const response = await kyInstance
-        .delete(`products/${product}/likes`, {
-          body: JSON.stringify({
-            user_id: user,
-            product_id: product,
-          }),
-        })
-        .json()
-      return response.data.isLiked
+    const postLikeContent = async (product) => {
+      try {
+        const responseData = await kyInstance
+          .post(`products/${product}/likes`)
+          .json()
+        setIsLiked(responseData.data.isLiked)
+      } catch (error) {
+        alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.')
+      }
     }
-    */
 
-    if (userId === null) {
+    const deleteLikeContent = async (product) => {
+      try {
+        const responseData = await kyInstance
+          .delete(`products/${product}/likes`)
+          .json()
+        setIsLiked(responseData.isLiked)
+      } catch (error) {
+        alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.')
+      }
+    }
+
+    if (!userData) {
       alert('로그인이 필요합니다.')
-    } else if (!isLiked) {
-      // const responseData = postLikeContent(productId)
-      // if ('isLiked' in responseData) setIsLiked(responseData.isLiked)
-      console.log('post like', productId)
-      setIsLiked(true)
-    } else {
-      // const responseData = deleteLikeContent(userId, productId)
-      // if ('isLiked' in response) setIsLiked(responseData.isLiked)
-      console.log('delete like')
-      setIsLiked(false)
+      return
     }
-  }, [userId, isLiked])
 
-  const iconAttr = useMemo(() => ({ onClick: handleLiked }), [handleLiked])
+    if (!isLiked) postLikeContent(productId)
+    else deleteLikeContent(productId)
+    setIsLiked((prev) => !prev)
+  }, [isLiked])
+
+  const iconAttr = { onClick: handleLiked }
   const iconValue = useMemo(
     () => ({ size: iconSize, attr: iconAttr }),
     [iconSize, iconAttr]
@@ -90,7 +86,6 @@ function LikeButton({ productId, userId = null, iconSize = '1.3rem' }) {
 
 LikeButton.propTypes = {
   productId: PropTypes.number.isRequired,
-  userId: PropTypes.number,
   iconSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 

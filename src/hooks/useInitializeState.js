@@ -35,7 +35,7 @@ const useInitializeState = () => {
   }))
 
   useEffect(() => {
-    if ('data' in location.state) {
+    if (location.state && 'data' in location.state) {
       if (location.state.data.countries.length) {
         const searchedCountry = location.state.data.countries[0]
         const foundRegion = regionData.data.find((region) => {
