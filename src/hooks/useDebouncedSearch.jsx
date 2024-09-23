@@ -56,8 +56,16 @@ const useDebouncedSearch = (setModalState) => {
                   key={content.name}
                   onClick={() => {
                     setModalState(false)
-                    router.navigate('/', {
-                      state: { from: window.location.pathname },
+                    router.navigate('/feed', {
+                      state: {
+                        from: window.location.pathname,
+                        data: {
+                          countries: data.data.countries,
+                          cities: data.data.cities,
+                          categories: data.data.categories,
+                          subcategories: data.data.subcategories,
+                        },
+                      },
                     })
                   }}
                 >
