@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import useFeedStore from '../../stores/useFeedStore'
 import useInitializeState from '../../hooks/useInitializeState'
 import useProductData from '../../hooks/useProductData'
@@ -16,6 +17,7 @@ function FeedPage() {
   }))
 
   useInitializeState()
+  const location = useLocation()
   useEffect(() => {
     const deleteDataState = (state) => {
       if (!state || !state.usr) return state
@@ -29,7 +31,7 @@ function FeedPage() {
       if (newState) window.history.replaceState(newState, '')
     }
     return resetSelectedField
-  }, [])
+  }, [location.state])
 
   return (
     <FeedPageLayout>
