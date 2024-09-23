@@ -97,7 +97,7 @@ const useInitializeState = () => {
           addSelectedCategory(foundCategory)
       }
     }
-  }, [])
+  }, [location.state])
 }
 
 export default useInitializeState
