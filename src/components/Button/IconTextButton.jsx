@@ -1,29 +1,40 @@
 import React from 'react'
-import styled from 'styled-components'
+import { Button } from 'antd'
 import PropTypes from 'prop-types'
 import { IconContext } from 'react-icons'
 
-const ButtonBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-`
-
-function IconTextButton({ iconValue = null, Icon = null, text = null }) {
+function IconTextButton({
+  value = null,
+  type = 'text',
+  shape = 'default',
+  size = 'small',
+  icon = null,
+  iconPosition = 'start',
+  handleClick = null,
+  text = null,
+}) {
   return (
-    <IconContext.Provider value={iconValue}>
-      <ButtonBox>
-        {Icon}
-        {text}
-      </ButtonBox>
-    </IconContext.Provider>
+    <Button
+      type={type}
+      shape={shape}
+      size={size}
+      icon={<IconContext.Provider value={value}>{icon}</IconContext.Provider>}
+      iconPosition={iconPosition}
+      onClick={handleClick}
+    >
+      {text}
+    </Button>
   )
 }
 
 IconTextButton.propTypes = {
-  iconValue: PropTypes.shape({}),
-  Icon: PropTypes.element,
+  value: PropTypes.shape({}),
+  type: PropTypes.oneOf(['primary', 'dashed', 'link', 'text', 'default']),
+  shape: PropTypes.oneOf(['circle', 'round', 'default']),
+  size: PropTypes.oneOf(['small', 'middle', 'large']),
+  icon: PropTypes.element,
+  iconPosition: PropTypes.oneOf(['start', 'end']),
+  handleClick: PropTypes.func,
   text: PropTypes.string,
 }
 

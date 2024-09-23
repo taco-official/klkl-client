@@ -1,58 +1,71 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import styled from 'styled-components'
+import React, {
+  // useState,
+  useEffect,
+} from 'react'
 import PropTypes from 'prop-types'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 import useUserData from '../../hooks/useUserData'
-import { kyInstance } from '../../hooks/kyInstance'
+import { method } from '../../hooks/kyInstance'
+import useKyQuery from '../../hooks/useKyQuery'
+import useKyMutation from '../../hooks/useKyMutation'
 import IconTextButton from './IconTextButton'
-import theme from '../../styles/theme'
 
-const LikeButtonContainer = styled.div`
-  color: ${(props) => (props.$isLiked ? 'red' : theme.color.lineGrey)};
-  gray-scale: ${(props) => (props.$isLiked ? '0' : '100%')};
-  mix-blend-mode: ${(props) => (props.$isLiked ? 'normal' : 'plus-darker')};
-`
-
-function LikeButton({ productId, iconSize = '1.3rem' }) {
+function LikeButton({
+  productId,
+  // likeContent = false,
+  iconSize = '1.3rem',
+}) {
   const { data: userData } = useUserData()
-  const [isLiked, setIsLiked] = useState(false)
+  // const [isLiked, setIsLiked] = useState(likeContent)
+  const { data: isLiked, refetch: getLike } = useKyQuery(
+    `products/${productId}/likes`,
+    null,
+    [`products/likes`, productId],
+    {
+      enabled: !!userData,
+      refetchOnWindowFocus: false,
+      initialData: { data: { isLiked: false } },
+      select: (data) => data.data.isLiked,
+    }
+  )
+  const { mutateAsync: postLike } = useKyMutation(
+    method.POST,
+    `products/${productId}/likes`,
+    ['products/likes', productId]
+  )
+  const { mutateAsync: deleteLike } = useKyMutation(
+    method.DELETE,
+    `products/${productId}/likes`,
+    ['products/likes', productId]
+  )
 
   useEffect(() => {
-    const fetchLikeContent = async (product) => {
+    const fetchLikeContent = async () => {
       try {
-        const responseData = await kyInstance
-          .get(`products/${product}/likes`)
-          .json()
-        setIsLiked(responseData.data.isLiked)
+        await getLike()
       } catch (error) {
-        alert(
-          '좋아요 정보를 불러오는데 실패했습니다.\n잠시 후 다시 시도해주세요.'
-        )
+        console.error(error)
       }
     }
 
     if (!userData) return
-    fetchLikeContent(productId)
+    fetchLikeContent()
   }, [])
 
-  const handleLiked = useCallback(() => {
-    const postLikeContent = async (product) => {
+  const handleLike = () => {
+    const postLikeContent = async () => {
       try {
-        const responseData = await kyInstance
-          .post(`products/${product}/likes`)
-          .json()
-        setIsLiked(responseData.data.isLiked)
+        await postLike()
+        // setIsLiked((prev) => !prev)
       } catch (error) {
         alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.')
       }
     }
 
-    const deleteLikeContent = async (product) => {
+    const deleteLikeContent = async () => {
       try {
-        const responseData = await kyInstance
-          .delete(`products/${product}/likes`)
-          .json()
-        setIsLiked(responseData.isLiked)
+        await deleteLike()
+        // setIsLiked((prev) => !prev)
       } catch (error) {
         alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.')
       }
@@ -62,29 +75,28 @@ function LikeButton({ productId, iconSize = '1.3rem' }) {
       alert('로그인이 필요합니다.')
       return
     }
+    if (!isLiked) postLikeContent()
+    else deleteLikeContent()
+  }
 
-    if (!isLiked) postLikeContent(productId)
-    else deleteLikeContent(productId)
-    setIsLiked((prev) => !prev)
-  }, [isLiked])
-
-  const iconAttr = { onClick: handleLiked }
-  const iconValue = useMemo(
-    () => ({ size: iconSize, attr: iconAttr }),
-    [iconSize, iconAttr]
-  )
+  const iconValue = {
+    color: isLiked ? 'red' : 'darkgray',
+    size: iconSize,
+  }
 
   return (
-    <LikeButtonContainer $isLiked={isLiked}>
+    <div>
       <IconTextButton
-        iconValue={iconValue}
-        Icon={isLiked ? <FaHeart /> : <FaRegHeart />}
+        value={iconValue}
+        icon={isLiked ? <FaHeart /> : <FaRegHeart />}
+        handleClick={handleLike}
       />
-    </LikeButtonContainer>
+    </div>
   )
 }
 
 LikeButton.propTypes = {
+  // likeContent: PropTypes.bool.isRequired,
   productId: PropTypes.number.isRequired,
   iconSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
