@@ -4,18 +4,29 @@ on:
   push:
     branches:
       - KL-179/github-action
+      - develop
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Node.js
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
           node-version: '20.15.1'
 
+      - name: Setup yarn
+        run: |
+          corepack enable
+          corepack prepare yarn@4.3.1 --activate  
+          echo "YARN_VERSION=$(yarn -v)" >> $GITHUB_OUTPUT
+
       - name: Install dependencies
-        run: yarn install
+        run: |
+          yarn install
 
       - name: Build project
         run: yarn build
