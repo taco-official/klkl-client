@@ -28,7 +28,8 @@ function PreviewContent({ productData }) {
         </Link>
         <LikeButton
           productId={productData.id}
-          iconSize="1.3rem"
+          // likeContent={productData.isLiked}
+          iconSize="1.2rem"
         />
       </ThumbnailContainer>
       <Link
@@ -74,6 +75,7 @@ PreviewContent.propTypes = {
     image: PropTypes.shape({
       url: PropTypes.string,
     }),
+    // isLiked: PropTypes.bool.isRequired,
     countryName: PropTypes.string.isRequired,
     categoryName: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

@@ -3,8 +3,7 @@ import { useLoaderData } from 'react-router-dom'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
 import useFeedStore from '../../../../stores/useFeedStore'
-import ShowHideButton from '../../../../components/Button/ShowHideButton'
-import theme from '../../../../styles/theme'
+import CollapseButton from '../../../../components/Button/CollapseButton'
 import {
   SectionContainer,
   RegionContainer,
@@ -66,7 +65,6 @@ CountryArray.propTypes = {
 function RegionCollapse({ region }) {
   const [isOpen, setIsOpen] = useState(false)
   const defaultOpenRegion = useFeedStore((state) => state.defaultOpenRegion)
-  const toggleRegion = () => setIsOpen((prev) => !prev)
 
   useEffect(() => {
     setIsOpen(region.id === defaultOpenRegion)
@@ -76,10 +74,9 @@ function RegionCollapse({ region }) {
     <>
       <SubTitle className="region">
         <div className="region">{region.name}</div>
-        <ShowHideButton
-          handleClick={toggleRegion}
-          iconColor={theme.color.lineGrey}
-          isOption={isOpen}
+        <CollapseButton
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
         />
       </SubTitle>
       {isOpen && (
