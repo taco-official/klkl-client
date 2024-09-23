@@ -47,8 +47,12 @@ const ThumbnailContainer = styled.div`
   &#productThumbnail {
     border-radius: 0.3rem;
     position: relative;
-    background: center/cover
-      ${(props) => (props.$url ? `url(${props.$url})` : 'white')};
+    & img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 0.3rem;
+    }
     & > div {
       position: absolute;
       bottom: 0.6rem;
