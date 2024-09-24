@@ -53,7 +53,7 @@ const ThumbnailContainer = styled.div`
       object-fit: cover;
       border-radius: 0.3rem;
     }
-    & > div {
+    & > button {
       position: absolute;
       bottom: 0.6rem;
       right: 0.8rem;
