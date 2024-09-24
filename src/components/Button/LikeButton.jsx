@@ -1,7 +1,4 @@
-import React, {
-  // useState,
-  useEffect,
-} from 'react'
+import React from 'react' // useState,
 import PropTypes from 'prop-types'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 import useUserData from '../../hooks/useUserData'
@@ -17,7 +14,7 @@ function LikeButton({
 }) {
   const { data: userData } = useUserData()
   // const [isLiked, setIsLiked] = useState(likeContent)
-  const { data: isLiked, refetch: getLike } = useKyQuery(
+  const { data: isLiked } = useKyQuery(
     `products/${productId}/likes`,
     null,
     [`products/likes`, productId],
@@ -39,24 +36,10 @@ function LikeButton({
     ['products/likes', productId]
   )
 
-  useEffect(() => {
-    const fetchLikeContent = async () => {
-      try {
-        await getLike()
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    if (!userData) return
-    fetchLikeContent()
-  }, [])
-
-  const handleLike = () => {
+  const handleLike = async () => {
     const postLikeContent = async () => {
       try {
         await postLike()
-        // setIsLiked((prev) => !prev)
       } catch (error) {
         alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.')
       }
@@ -65,7 +48,6 @@ function LikeButton({
     const deleteLikeContent = async () => {
       try {
         await deleteLike()
-        // setIsLiked((prev) => !prev)
       } catch (error) {
         alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.')
       }
@@ -75,8 +57,9 @@ function LikeButton({
       alert('로그인이 필요합니다.')
       return
     }
-    if (!isLiked) postLikeContent()
-    else deleteLikeContent()
+    if (!isLiked) await postLikeContent()
+    else await deleteLikeContent()
+    // setIsLiked((prev) => !prev)
   }
 
   const iconValue = {

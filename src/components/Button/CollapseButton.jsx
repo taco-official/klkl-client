@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { BiPlus, BiMinus } from 'react-icons/bi'
 import IconTextButton from './IconTextButton'
@@ -9,10 +9,7 @@ function CollapseButton({
   iconSize = '1.3rem',
 }) {
   const toggleOpen = () => setIsOpen((prev) => !prev)
-  const iconValue = useMemo(
-    () => ({ color: 'silver', size: iconSize }),
-    [iconSize]
-  )
+  const iconValue = { color: 'silver', size: iconSize }
 
   return (
     <div>
