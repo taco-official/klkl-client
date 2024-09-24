@@ -50,7 +50,7 @@ function LikeButton({
 
     if (!userData) return
     fetchLikeContent()
-  }, [])
+  }, [userData])
 
   const handleLike = async () => {
     const postLikeContent = async () => {
