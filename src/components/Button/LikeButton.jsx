@@ -1,4 +1,7 @@
-import React from 'react' // useState,
+import React, {
+  // useState,
+  useEffect,
+} from 'react'
 import PropTypes from 'prop-types'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 import useUserData from '../../hooks/useUserData'
@@ -14,7 +17,7 @@ function LikeButton({
 }) {
   const { data: userData } = useUserData()
   // const [isLiked, setIsLiked] = useState(likeContent)
-  const { data: isLiked } = useKyQuery(
+  const { data: isLiked, refetch: getLike } = useKyQuery(
     `products/${productId}/likes`,
     null,
     [`products/likes`, productId],
@@ -35,6 +38,19 @@ function LikeButton({
     `products/${productId}/likes`,
     ['products/likes', productId]
   )
+
+  useEffect(() => {
+    const fetchLikeContent = async () => {
+      try {
+        await getLike()
+      } catch (error) {
+        console.error(error)
+      }
+    }
+
+    if (!userData) return
+    fetchLikeContent()
+  }, [])
 
   const handleLike = async () => {
     const postLikeContent = async () => {
