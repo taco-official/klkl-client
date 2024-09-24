@@ -84,13 +84,11 @@ function LikeButton({
   }
 
   return (
-    <div>
-      <IconTextButton
-        value={iconValue}
-        icon={isLiked ? <FaHeart /> : <FaRegHeart />}
-        handleClick={handleLike}
-      />
-    </div>
+    <IconTextButton
+      value={iconValue}
+      icon={isLiked ? <FaHeart /> : <FaRegHeart />}
+      handleClick={handleLike}
+    />
   )
 }
 

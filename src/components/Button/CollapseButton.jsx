@@ -12,13 +12,11 @@ function CollapseButton({
   const iconValue = { color: 'silver', size: iconSize }
 
   return (
-    <div>
-      <IconTextButton
-        value={iconValue}
-        icon={isOpen ? <BiMinus /> : <BiPlus />}
-        handleClick={toggleOpen}
-      />
-    </div>
+    <IconTextButton
+      value={iconValue}
+      icon={isOpen ? <BiMinus /> : <BiPlus />}
+      handleClick={toggleOpen}
+    />
   )
 }
 

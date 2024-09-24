@@ -14,16 +14,18 @@ function IconTextButton({
   text = null,
 }) {
   return (
-    <Button
-      type={type}
-      shape={shape}
-      size={size}
-      icon={<IconContext.Provider value={value}>{icon}</IconContext.Provider>}
-      iconPosition={iconPosition}
-      onClick={handleClick}
-    >
-      {text}
-    </Button>
+    <div>
+      <Button
+        type={type}
+        shape={shape}
+        size={size}
+        icon={<IconContext.Provider value={value}>{icon}</IconContext.Provider>}
+        iconPosition={iconPosition}
+        onClick={handleClick}
+      >
+        {text}
+      </Button>
+    </div>
   )
 }
 
