@@ -12,7 +12,7 @@ import { FeedPageLayout, FeedPageContent, FeedArea } from './FeedPage.style'
 
 function FeedPage() {
   useInitializeState()
-  const { isLoading, data, isError, pageData, setPageData } = useProductData()
+  const { isLoading, data, isError, setPageData } = useProductData()
   const location = useLocation()
   const { resetSelectedField } = useFeedStore((state) => ({
     resetSelectedField: state.resetSelectedField,
@@ -45,7 +45,6 @@ function FeedPage() {
             isLoading={isLoading}
             data={data}
             isError={isError}
-            pageData={pageData}
             setPageData={setPageData}
           />
         </FeedArea>

@@ -19,7 +19,7 @@ function useProductData() {
     staleTime: 0,
   })
 
-  return { isLoading, data, isError, pageData, setPageData }
+  return { isLoading, data, isError, setPageData }
 }
 
 export default useProductData
