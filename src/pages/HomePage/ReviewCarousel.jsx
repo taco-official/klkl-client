@@ -23,10 +23,7 @@ export default function ReviewCarousels({ contents }) {
             className="carousel-cell"
             key={content.id}
           >
-            <PreviewContent
-              userId={content.id}
-              productData={content}
-            />
+            <PreviewContent productData={content} />
           </ReviewWrapper>
         )
       })}

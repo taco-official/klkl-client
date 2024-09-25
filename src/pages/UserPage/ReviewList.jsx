@@ -5,20 +5,17 @@ import ProductDataStatusRenderer from '../../components/ProductList/ProductDataS
 
 function ReviewList({ selectedMenu }) {
   const [currentPage, setCurrentPage] = useState({
+    page: 0,
     size: 9,
-    requestPage: 0,
   })
 
   const {
     data: productList,
     isLoading,
     isError,
-  } = useKyQuery(
-    `${selectedMenu}?page=${currentPage.requestPage}`,
-    null,
-    undefined,
-    { staleTime: 0 }
-  )
+  } = useKyQuery(`${selectedMenu}?page=${currentPage.page}`, null, undefined, {
+    staleTime: 0,
+  })
 
   if (!productList) return null
 

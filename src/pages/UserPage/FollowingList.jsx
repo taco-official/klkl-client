@@ -10,8 +10,8 @@ import PlainButton from '../../components/Button/PlainButton'
 
 const useFetchProductList = (currentUser) => {
   const [currentPage, setCurrentPage] = useState({
+    page: 0,
     size: 9,
-    requestPage: 0,
   })
 
   const {

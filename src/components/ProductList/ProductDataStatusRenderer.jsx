@@ -10,26 +10,27 @@ import theme from '../../styles/theme'
 function ProductDataStatusRenderer({
   isLoading,
   data,
+  isError,
   pageData,
   setPageData,
-  error,
 }) {
+  if (isLoading)
+    return (
+      <StyledList>
+        <LoadingContent />
+      </StyledList>
+    )
+
+  if (isError)
+    return <StyledList className="empty">로딩에 실패했습니다.</StyledList>
+
   return (
     <FeedContainer>
-      {error && <StyledList className="empty">로딩에 실패했습니다.</StyledList>}
-      {(isLoading || (!data && !error)) && (
-        <StyledList>
-          <LoadingContent />
-        </StyledList>
+      {!data.data.content.length ? (
+        <StyledList className="empty">해당 상품이 없습니다.</StyledList>
+      ) : (
+        <ProductList dataList={data.data.content} />
       )}
-      {!isLoading &&
-        !error &&
-        data &&
-        (!data.data.content.length ? (
-          <StyledList className="empty">해당 상품이 없습니다.</StyledList>
-        ) : (
-          <ProductList dataList={data.data.content} />
-        ))}
       <ConfigProvider
         theme={{
           token: {
@@ -41,7 +42,7 @@ function ProductDataStatusRenderer({
       >
         <Pagination
           align="center"
-          current={pageData.requestPage + 1}
+          current={pageData.page + 1}
           defaultPageSize={9}
           pageSize={data?.data.pageSize}
           total={data?.data.totalElements}
@@ -49,7 +50,7 @@ function ProductDataStatusRenderer({
           onChange={(pageNumber) =>
             setPageData((prev) => ({
               ...prev,
-              requestPage: pageNumber - 1,
+              page: pageNumber - 1,
             }))
           }
         />
@@ -67,11 +68,11 @@ ProductDataStatusRenderer.propTypes = {
       totalElements: PropTypes.number.isRequired,
     }),
   }),
+  isError: PropTypes.bool,
   pageData: PropTypes.shape({
-    requestPage: PropTypes.number.isRequired,
+    page: PropTypes.number.isRequired,
   }),
   setPageData: PropTypes.func,
-  error: PropTypes.shape({}),
 }
 
 export default ProductDataStatusRenderer

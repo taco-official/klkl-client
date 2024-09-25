@@ -11,15 +11,15 @@ import UserFollowButton from '../../components/UserProfile/UserFollowButton'
 
 const useContentFetch = (id) => {
   const [currentPage, setCurrentPage] = useState({
+    page: 0,
     size: 9,
-    requestPage: 0,
   })
 
   const {
     data: productList,
     isLoading,
     isError,
-  } = useKyQuery(`users/${id}/products`, null, undefined, { stleTime: 0 })
+  } = useKyQuery(`users/${id}/products`, null, undefined, { staleTime: 0 })
 
   return (
     <ProductDataStatusRenderer

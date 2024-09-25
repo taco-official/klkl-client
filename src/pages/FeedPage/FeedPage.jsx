@@ -11,13 +11,13 @@ import ProductDataStatusRenderer from '../../components/ProductList/ProductDataS
 import { FeedPageLayout, FeedPageContent, FeedArea } from './FeedPage.style'
 
 function FeedPage() {
-  const { isLoading, data, pageData, setPageData, error } = useProductData()
+  useInitializeState()
+  const { isLoading, data, isError, pageData, setPageData } = useProductData()
+  const location = useLocation()
   const { resetSelectedField } = useFeedStore((state) => ({
     resetSelectedField: state.resetSelectedField,
   }))
 
-  useInitializeState()
-  const location = useLocation()
   useEffect(() => {
     const deleteDataState = (state) => {
       if (!state || !state.usr) return state
@@ -44,9 +44,9 @@ function FeedPage() {
           <ProductDataStatusRenderer
             isLoading={isLoading}
             data={data}
+            isError={isError}
             pageData={pageData}
             setPageData={setPageData}
-            error={error}
           />
         </FeedArea>
       </FeedPageContent>
