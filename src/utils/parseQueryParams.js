@@ -4,7 +4,12 @@ function parseQueryParams(endPoint, requestQueryArray) {
   if (requestQueryArray) {
     const searchParams = new URLSearchParams()
     Object.entries(requestQueryArray).forEach(([key, value]) => {
-      if (!value || (Array.isArray(value) && !value.length)) return
+      if (
+        value == null ||
+        value === '' ||
+        (Array.isArray(value) && !value.length)
+      )
+        return
       searchParams.append(key, value)
     })
     const queryString = searchParams.toString()
