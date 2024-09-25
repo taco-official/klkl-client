@@ -5,10 +5,11 @@ import useProductQuery from './useProductQuery'
 
 function useProductData() {
   const [pageData, setPageData] = useState({
-    requestPage: 0,
-    size: 9,
+    page: 0,
+    size: 1,
+    sort: ['string'],
   })
-  const { queryArray: selectedQueryArray } = useProductQuery()
+  const selectedQueryArray = useProductQuery(pageData.page, setPageData)
   const { loading: isLoading, data, error, fetchData } = useKy()
 
   useEffect(() => {

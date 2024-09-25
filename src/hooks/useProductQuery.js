@@ -1,119 +1,92 @@
-import { useEffect, useState } from 'react'
+import { useRef } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 import useFeedStore from '../stores/useFeedStore'
 
 function useCityQuery() {
-  const initialState = {}
-  const [cityQuery, setCityQuery] = useState(initialState)
   const [selectedCountry, selectedCity] = useFeedStore(
     useShallow((state) => [state.selectedCountry, state.selectedCity])
   )
+  const cityQuery = {}
 
-  useEffect(() => {
-    if ('cities' in selectedCountry) {
-      if (!selectedCity.length) {
-        setCityQuery({
-          city_id: selectedCountry.cities.map((city) => city.id),
-        })
-      } else {
-        setCityQuery({
-          city_id: selectedCity.map((city) => city.id),
-        })
-      }
-    } else setCityQuery(initialState)
-  }, [selectedCountry, selectedCity])
+  if ('cities' in selectedCountry) {
+    if (!selectedCity.length)
+      cityQuery.city_id = selectedCountry.cities.map((city) => city.id)
+    else cityQuery.city_id = selectedCity.map((city) => city.id)
+  }
 
-  return { cityQuery }
+  return cityQuery
 }
 
 function useSubcategoryQuery() {
-  const initialState = {}
-  const [subcategoryQuery, setSubcategoryQuery] = useState(initialState)
   const [selectedCategory, selectedSubcategory] = useFeedStore(
     useShallow((state) => [state.selectedCategory, state.selectedSubcategory])
   )
+  const subcategoryQuery = {}
 
-  useEffect(() => {
-    if (selectedCategory.length) {
-      const subcategoryValue = selectedCategory.reduce((acc, selected) => {
-        if (
-          !selectedSubcategory.some(
-            (selectedSub) => selectedSub.categoryId === selected.id
-          )
+  if (selectedCategory.length) {
+    const subcategoryArray = selectedCategory.reduce((acc, selected) => {
+      if (
+        !selectedSubcategory.some(
+          (selectedSub) => selectedSub.categoryId === selected.id
         )
-          acc.push(
-            ...selected.subcategories.map((subcategory) => subcategory.id)
-          )
-        return acc
-      }, [])
-      subcategoryValue.push(
-        ...selectedSubcategory.map((selected) => selected.id)
       )
-      setSubcategoryQuery({
-        subcategory_id: subcategoryValue,
-      })
-    } else setSubcategoryQuery(initialState)
-  }, [selectedCategory, selectedSubcategory])
+        acc.push(...selected.subcategories.map((subcategory) => subcategory.id))
+      return acc
+    }, [])
+    subcategoryArray.push(...selectedSubcategory.map((selected) => selected.id))
+    if (subcategoryArray.length)
+      subcategoryQuery.subcategory_id = subcategoryArray
+  }
 
-  return { subcategoryQuery }
+  return subcategoryQuery
 }
 
 function useTagQuery() {
-  const initialState = {}
-  const [tagQuery, setTagQuery] = useState(initialState)
   const [selectedTag] = useFeedStore((state) => [state.selectedTag])
+  const tagQuery = {}
 
-  useEffect(() => {
-    if (selectedTag.length) {
-      setTagQuery({
-        tag_id: selectedTag.map((tag) => tag.id),
-      })
-    } else setTagQuery(initialState)
-  }, [selectedTag])
+  if (selectedTag.length) tagQuery.tag_id = selectedTag.map((tag) => tag.id)
 
-  return { tagQuery }
+  return tagQuery
 }
 
 function useSortQuery() {
-  const initialState = {
-    sort_by: 'created_at',
-    sort_direction: 'DESC',
-  }
-  const [sortQuery, setSortQuery] = useState(initialState)
   const [selectedSort] = useFeedStore((state) => [state.selectedSort])
+  const sortQuery = {
+    sort_by: selectedSort.sortBy,
+    sort_direction: selectedSort.sortDirection,
+  }
 
-  useEffect(() => {
-    setSortQuery({
-      sort_by: selectedSort.sortBy,
-      sort_direction: selectedSort.sortDirection,
-    })
-  }, [selectedSort])
-
-  return { sortQuery }
+  return sortQuery
 }
 
-function useProductQuery() {
-  const { cityQuery } = useCityQuery()
-  const { subcategoryQuery } = useSubcategoryQuery()
-  const { tagQuery } = useTagQuery()
-  const { sortQuery } = useSortQuery()
-  const [queryArray, setQueryArray] = useState({
+function useProductQuery(pageNumber, setPageData) {
+  const cityQuery = useCityQuery()
+  const subcategoryQuery = useSubcategoryQuery()
+  const tagQuery = useTagQuery()
+  const sortQuery = useSortQuery()
+  const prevSearchQuery = useRef({})
+  const newSearchQuery = {
     ...cityQuery,
     ...subcategoryQuery,
     ...tagQuery,
     ...sortQuery,
-  })
+  }
 
-  useEffect(() => {
-    setQueryArray({
-      ...cityQuery,
-      ...subcategoryQuery,
-      ...tagQuery,
-      ...sortQuery,
-    })
-  }, [cityQuery, subcategoryQuery, tagQuery, sortQuery])
+  if (
+    JSON.stringify(prevSearchQuery.current) !==
+      JSON.stringify(newSearchQuery) &&
+    Object.keys(newSearchQuery).length
+  ) {
+    prevSearchQuery.current = newSearchQuery
+    if (pageNumber !== 0)
+      setPageData((prev) => ({
+        ...prev,
+        page: 0,
+      }))
+  }
 
-  return { queryArray }
+  return prevSearchQuery.current
 }
 
 export default useProductQuery
