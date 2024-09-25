@@ -19,7 +19,6 @@ function LikeButton({
   // const [isLiked, setIsLiked] = useState(likeContent)
   const { data: isLiked, refetch: getLike } = useKyQuery(
     `products/${productId}/likes`,
-    null,
     [`products/likes`, productId],
     {
       enabled: !!userData,

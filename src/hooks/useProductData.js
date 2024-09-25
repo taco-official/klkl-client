@@ -15,7 +15,7 @@ function useProductData() {
     ...selectedQueryArray,
   })
 
-  const { isLoading, data, isError } = useKyQuery(uri, undefined, undefined, {
+  const { isLoading, data, isError } = useKyQuery(uri, undefined, {
     staleTime: 0,
   })
 

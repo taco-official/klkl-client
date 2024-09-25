@@ -20,7 +20,6 @@ const useFetchProductList = (currentUser) => {
     isError,
   } = useKyQuery(
     `users/${currentUser}/products`,
-    null,
     ['users', currentUser, 'products'],
     { staleTime: 0, enabled: !!currentUser }
   )
@@ -92,7 +91,6 @@ FollowingListContent.propTypes = {
 function FollowingList() {
   const { data: followingList, isLoading } = useKyQuery(
     'users/me/following',
-    null,
     undefined,
     { staleTime: 0 }
   )
