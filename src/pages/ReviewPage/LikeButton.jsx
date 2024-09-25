@@ -4,45 +4,23 @@ import PropTypes from 'prop-types'
 import { FloatButton } from 'antd'
 
 import Icons from '../../components/Icons/Icons'
-import useKyMutation from '../../hooks/useKyMutation'
 import useKyQuery from '../../hooks/useKyQuery'
-
-const useProductLikeFunc = (productId) => {
-  const { mutateAsync: like } = useKyMutation(
-    'post',
-    `products/${productId}/likes`
-  )
-  const { mutateAsync: unlike } = useKyMutation(
-    'delete',
-    `products/${productId}/likes`
-  )
-
-  const likeProduct = async () => {
-    try {
-      await like()
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  const unlikeProduct = async () => {
-    try {
-      await unlike()
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  return { likeProduct, unlikeProduct }
-}
+import useProductLikeFunc from '../../hooks/useProductLikeFunc'
 
 export default function ProductLikeButton({ productId }) {
-  const { data, isLoading } = useKyQuery(`products/${productId}/likes`)
+  const { data: isLiked, isLoading } = useKyQuery(
+    `products/${productId}/likes`,
+    ['products/likes', productId],
+    {
+      initialData: { data: { isLiked: false } },
+      select: (data) => data.data.isLiked,
+    }
+  )
   const { likeProduct, unlikeProduct } = useProductLikeFunc(productId)
 
   if (isLoading) return null
 
-  return data.data.isLiked ? (
+  return isLiked ? (
     <CustomFloatButton
       icon={<Icons style={{ color: 'red' }}>favorite</Icons>}
       onClick={unlikeProduct}

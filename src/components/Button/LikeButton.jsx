@@ -5,9 +5,8 @@ import React, {
 import PropTypes from 'prop-types'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 import useUserData from '../../hooks/useUserData'
-import { method } from '../../hooks/kyInstance'
 import useKyQuery from '../../hooks/useKyQuery'
-import useKyMutation from '../../hooks/useKyMutation'
+import useProductLikeFunc from '../../hooks/useProductLikeFunc'
 import IconTextButton from './IconTextButton'
 
 function LikeButton({
@@ -27,16 +26,7 @@ function LikeButton({
       select: (data) => data.data.isLiked,
     }
   )
-  const { mutateAsync: postLike } = useKyMutation(
-    method.POST,
-    `products/${productId}/likes`,
-    ['products/likes', productId]
-  )
-  const { mutateAsync: deleteLike } = useKyMutation(
-    method.DELETE,
-    `products/${productId}/likes`,
-    ['products/likes', productId]
-  )
+  const { likeProduct, unlikeProduct } = useProductLikeFunc(productId)
 
   useEffect(() => {
     const fetchLikeContent = async () => {
@@ -52,28 +42,12 @@ function LikeButton({
   }, [userData])
 
   const handleLike = async () => {
-    const postLikeContent = async () => {
-      try {
-        await postLike()
-      } catch (error) {
-        alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.')
-      }
-    }
-
-    const deleteLikeContent = async () => {
-      try {
-        await deleteLike()
-      } catch (error) {
-        alert('문제가 발생했습니다. 잠시 후 다시 시도해주세요.')
-      }
-    }
-
     if (!userData) {
       alert('로그인이 필요합니다.')
       return
     }
-    if (!isLiked) await postLikeContent()
-    else await deleteLikeContent()
+    if (!isLiked) await likeProduct()
+    else await unlikeProduct()
     // setIsLiked((prev) => !prev)
   }
 
