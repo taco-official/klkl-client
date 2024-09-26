@@ -43,7 +43,6 @@ const PreviewContainer = styled.div`
 const ThumbnailContainer = styled.div`
   width: 100%;
   aspect-ratio: 1;
-  border: 0.0625rem solid transparent;
   &#productThumbnail {
     border-radius: 0.3rem;
     position: relative;
@@ -101,10 +100,11 @@ const ProductNameBox = styled.div`
   &#productName {
     font-size: ${theme.size.textMD};
     font-family: ${theme.style.mainBold};
+    line-height: 1.5;
     white-space: wrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    word-break: break-word;
+    word-break: keep-all;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -117,7 +117,7 @@ const ProductNameBox = styled.div`
 `
 
 const TagsContainer = styled.div`
-  margin: 0.2rem 0;
+  margin: 0.1rem 0;
   display: flex;
   justify-content: flex-start;
   align-items: flex-start;
