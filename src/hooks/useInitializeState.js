@@ -27,7 +27,7 @@ const useInitializeCountry = (locationState, regionData) => {
       })
       if (foundRegion) setDefaultOpenRegion(foundRegion.id)
     }
-  }, [locationState])
+  }, [window.history.state])
 }
 
 const useInitializeCity = (locationState, regionData) => {
@@ -63,7 +63,7 @@ const useInitializeCity = (locationState, regionData) => {
       })
       if (foundRegion) setDefaultOpenRegion(foundRegion.id)
     }
-  }, [locationState])
+  }, [window.history.state])
 }
 
 const useInitializeCategory = (locationState, categoryData) => {
@@ -79,7 +79,7 @@ const useInitializeCategory = (locationState, categoryData) => {
       if (foundCategory && !inArray(selectedCategory, foundCategory.id))
         addSelectedCategory(foundCategory)
     }
-  }, [locationState])
+  }, [window.history.state])
 }
 
 const useInitializeSubcategory = (locationState, categoryData) => {
@@ -114,7 +114,7 @@ const useInitializeSubcategory = (locationState, categoryData) => {
       if (foundCategory && !inArray(selectedCategory, foundCategory.id))
         addSelectedCategory(foundCategory)
     }
-  }, [locationState])
+  }, [window.history.state])
 }
 
 const useInitializeState = () => {
