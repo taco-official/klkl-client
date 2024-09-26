@@ -13,6 +13,7 @@ import { FeedPageLayout, FeedPageContent, FeedArea } from './FeedPage.style'
 function FeedPage() {
   useInitializeState()
   const { isLoading, data, isError, setPageData } = useProductData()
+
   const location = useLocation()
   const { resetSelectedField } = useFeedStore((state) => ({
     resetSelectedField: state.resetSelectedField,
@@ -25,10 +26,10 @@ function FeedPage() {
       if ('data' in newState.usr) delete newState.usr.data
       return newState
     }
-    const historyState = window.history.state
-    if (historyState) {
-      const newState = deleteDataState(historyState)
-      if (newState) window.history.replaceState(newState, '')
+    const { history } = window
+    if (history.state) {
+      const newState = deleteDataState(history.state)
+      if (newState) history.replaceState(newState, '')
     }
     return resetSelectedField
   }, [location.state])
