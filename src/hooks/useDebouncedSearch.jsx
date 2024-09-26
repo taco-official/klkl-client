@@ -15,6 +15,17 @@ const SearchMapping = {
   countries: '국가',
 }
 
+const initializeSearchState = (searchedCategory, searchedContent) => {
+  const result = {
+    countries: [],
+    cities: [],
+    categories: [],
+    subcategories: [],
+  }
+  result[searchedCategory].push(searchedContent)
+  return result
+}
+
 const useDebouncedSearch = (setModalState) => {
   const [results, setResults] = useState([])
 
@@ -56,15 +67,11 @@ const useDebouncedSearch = (setModalState) => {
                   key={content.name}
                   onClick={() => {
                     setModalState(false)
+                    const searchState = initializeSearchState(category, content)
                     router.navigate('/feed', {
                       state: {
                         from: window.location.pathname,
-                        data: {
-                          countries: data.data.countries,
-                          cities: data.data.cities,
-                          categories: data.data.categories,
-                          subcategories: data.data.subcategories,
-                        },
+                        data: searchState,
                       },
                     })
                   }}
