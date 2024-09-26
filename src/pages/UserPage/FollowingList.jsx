@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import theme from '../../styles/theme'
 import useKyQuery from '../../hooks/useKyQuery'
-import ProductDataStatusRenderer from '../../components/ProductList/ProductDataStatusRenderer'
+import ProductDataRenderer from '../../components/ProductList/ProductDataRenderer'
 import ProfileImage from '../../components/UserProfile/ProfileImage'
 import PlainButton from '../../components/Button/PlainButton'
 
@@ -15,8 +15,8 @@ const useFetchProductList = (currentUser) => {
   })
 
   const {
-    data: productList,
     isLoading,
+    data: productList,
     isError,
   } = useKyQuery(
     `users/${currentUser}/products`,
@@ -27,10 +27,10 @@ const useFetchProductList = (currentUser) => {
   if (!productList) return null
 
   return (
-    <ProductDataStatusRenderer
+    <ProductDataRenderer
       isLoading={isLoading}
-      isError={isError}
       data={productList}
+      isError={isError}
       pageData={currentPage}
       setPageData={setCurrentPage}
     />

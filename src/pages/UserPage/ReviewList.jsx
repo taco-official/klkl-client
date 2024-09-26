@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import useKyQuery from '../../hooks/useKyQuery'
-import ProductDataStatusRenderer from '../../components/ProductList/ProductDataStatusRenderer'
+import ProductDataRenderer from '../../components/ProductList/ProductDataRenderer'
 
 function ReviewList({ selectedMenu }) {
   const [currentPage, setCurrentPage] = useState({
@@ -10,8 +10,8 @@ function ReviewList({ selectedMenu }) {
   })
 
   const {
-    data: productList,
     isLoading,
+    data: productList,
     isError,
   } = useKyQuery(`${selectedMenu}?page=${currentPage.page}`, undefined, {
     staleTime: 0,
@@ -20,10 +20,10 @@ function ReviewList({ selectedMenu }) {
   if (!productList) return null
 
   return (
-    <ProductDataStatusRenderer
+    <ProductDataRenderer
       isLoading={isLoading}
-      isError={isError}
       data={productList}
+      isError={isError}
       pageData={currentPage}
       setPageData={setCurrentPage}
     />

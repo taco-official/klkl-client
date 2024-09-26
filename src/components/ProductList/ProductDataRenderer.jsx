@@ -4,7 +4,7 @@ import StyledList from './ProductList.style'
 import LoadingContent from '../PreviewContent/LoadingContent'
 import PagedProductList from './PagedProductList'
 
-function ProductDataStatusRenderer({ isLoading, data, isError, setPageData }) {
+function ProductDataRenderer({ isLoading, data, isError, setPageData }) {
   if (isLoading)
     return (
       <StyledList>
@@ -23,7 +23,7 @@ function ProductDataStatusRenderer({ isLoading, data, isError, setPageData }) {
   )
 }
 
-ProductDataStatusRenderer.propTypes = {
+ProductDataRenderer.propTypes = {
   isLoading: PropTypes.bool,
   data: PropTypes.shape({
     data: PropTypes.shape({
@@ -36,4 +36,4 @@ ProductDataStatusRenderer.propTypes = {
   setPageData: PropTypes.func,
 }
 
-export default ProductDataStatusRenderer
+export default ProductDataRenderer

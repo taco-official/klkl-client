@@ -5,7 +5,7 @@ import { useParams, useLoaderData } from 'react-router-dom'
 import { toInteger } from 'lodash-es'
 
 import useKyQuery from '../../hooks/useKyQuery'
-import ProductDataStatusRenderer from '../../components/ProductList/ProductDataStatusRenderer'
+import ProductDataRenderer from '../../components/ProductList/ProductDataRenderer'
 import UserProfile from '../../components/UserProfile/UserProfile'
 import UserFollowButton from '../../components/UserProfile/UserFollowButton'
 
@@ -16,16 +16,16 @@ const useContentFetch = (id) => {
   })
 
   const {
-    data: productList,
     isLoading,
+    data: productList,
     isError,
   } = useKyQuery(`users/${id}/products`, undefined, { staleTime: 0 })
 
   return (
-    <ProductDataStatusRenderer
+    <ProductDataRenderer
       isLoading={isLoading}
-      isError={isError}
       data={productList}
+      isError={isError}
       pageData={currentPage}
       setPageData={setCurrentPage}
     />

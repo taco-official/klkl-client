@@ -7,7 +7,7 @@ import Thumbnail from './components/Thumbnail/Thumbnail'
 import BasicFilter from './components/BasicFilter/BasicFilter'
 import AdditionalFilter from './components/AdditionalFilter/AdditionalFilter'
 import SelectedField from './components/SelectedField/SelectedField'
-import ProductDataStatusRenderer from '../../components/ProductList/ProductDataStatusRenderer'
+import ProductDataRenderer from '../../components/ProductList/ProductDataRenderer'
 import { FeedPageLayout, FeedPageContent, FeedArea } from './FeedPage.style'
 
 function FeedPage() {
@@ -41,7 +41,7 @@ function FeedPage() {
         <FeedArea>
           <AdditionalFilter />
           <SelectedField />
-          <ProductDataStatusRenderer
+          <ProductDataRenderer
             isLoading={isLoading}
             data={data}
             isError={isError}
