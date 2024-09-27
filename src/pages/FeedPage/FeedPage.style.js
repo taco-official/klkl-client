@@ -41,13 +41,6 @@ const FeedArea = styled.section`
   row-gap: 1.1rem;
 `
 
-const FeedContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex: 0 1;
-  row-gap: 2.725rem;
-`
-
 const StyleSection = styled.section`
   width: 36rem;
   display: flex;
@@ -75,7 +68,6 @@ export {
   FeedPageLayout,
   FeedPageContent,
   FeedArea,
-  FeedContainer,
   StyleSection,
   ContentContainer,
 }

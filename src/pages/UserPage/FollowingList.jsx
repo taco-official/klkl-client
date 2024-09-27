@@ -4,42 +4,13 @@ import styled from 'styled-components'
 
 import theme from '../../styles/theme'
 import useKyQuery from '../../hooks/useKyQuery'
-import ProductDataRenderer from '../../components/ProductList/ProductDataRenderer'
+import useFetchContent from '../../hooks/useFetchContent'
 import ProfileImage from '../../components/UserProfile/ProfileImage'
 import PlainButton from '../../components/Button/PlainButton'
 
-const useFetchProductList = (currentUser) => {
-  const [currentPage, setCurrentPage] = useState({
-    page: 0,
-    size: 9,
-  })
-
-  const {
-    isLoading,
-    data: productList,
-    isError,
-  } = useKyQuery(
-    `users/${currentUser}/products`,
-    ['users', currentUser, 'products'],
-    { staleTime: 0, enabled: !!currentUser }
-  )
-
-  if (!productList) return null
-
-  return (
-    <ProductDataRenderer
-      isLoading={isLoading}
-      data={productList}
-      isError={isError}
-      pageData={currentPage}
-      setPageData={setCurrentPage}
-    />
-  )
-}
-
 function FollowingListContent({ followingList }) {
   const [currentUser, setCurrentUser] = useState()
-  const productList = useFetchProductList(currentUser)
+  const productList = useFetchContent(currentUser)
 
   useEffect(() => {
     if (followingList.length > 0) setCurrentUser(followingList[0].id)
