@@ -8,6 +8,7 @@ import NavBar from './components/Navbar/NavBar'
 import Footer from './components/Footer/Footer'
 import GlobalStyle from './styles/GlobalStyle'
 import router from './router'
+import './styles/font.css'
 
 const queryClient = new QueryClient()
 
