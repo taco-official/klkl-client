@@ -2,17 +2,15 @@ import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import useFeedStore from '../../stores/useFeedStore'
 import useInitializeState from '../../hooks/useInitializeState'
-import useProductData from '../../hooks/useProductData'
 import Thumbnail from './components/Thumbnail/Thumbnail'
 import BasicFilter from './components/BasicFilter/BasicFilter'
 import AdditionalFilter from './components/AdditionalFilter/AdditionalFilter'
 import SelectedField from './components/SelectedField/SelectedField'
-import ProductDataRenderer from '../../components/ProductList/ProductDataRenderer'
+import ProductDataRenderer from './components/ProductDataRenderer'
 import { FeedPageLayout, FeedPageContent, FeedArea } from './FeedPage.style'
 
 function FeedPage() {
   useInitializeState()
-  const { isLoading, data, isError, setPageData } = useProductData()
 
   const location = useLocation()
   const { resetSelectedField } = useFeedStore((state) => ({
@@ -21,7 +19,7 @@ function FeedPage() {
 
   useEffect(() => {
     const deleteDataState = (state) => {
-      if (!state || !state.usr) return state
+      if (!state?.usr) return state
       const newState = { ...state, usr: { ...state.usr } }
       if ('data' in newState.usr) delete newState.usr.data
       return newState
@@ -42,12 +40,7 @@ function FeedPage() {
         <FeedArea>
           <AdditionalFilter />
           <SelectedField />
-          <ProductDataRenderer
-            isLoading={isLoading}
-            data={data}
-            isError={isError}
-            setPageData={setPageData}
-          />
+          <ProductDataRenderer />
         </FeedArea>
       </FeedPageContent>
     </FeedPageLayout>
