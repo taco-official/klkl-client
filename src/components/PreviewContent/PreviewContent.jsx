@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { StarFilled } from '@ant-design/icons'
 import { FaHeart } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
-import LikeButton from '../Button/LikeButton'
+import PreviewLikeButton from '../Button/PreviewLikeButton'
 import { BlueTag } from '../Tags/Tags.style'
 import {
   PreviewContainer,
@@ -16,7 +16,7 @@ import {
   IconBox,
 } from './PreviewContent.style'
 
-function PreviewContent({ productData }) {
+function PreviewContent({ userData, productData }) {
   return (
     <PreviewContainer>
       <ThumbnailContainer id="productThumbnail">
@@ -26,7 +26,8 @@ function PreviewContent({ productData }) {
         >
           <img src={productData.image?.url} />
         </Link>
-        <LikeButton
+        <PreviewLikeButton
+          userData={userData}
           productId={productData.id}
           // likeContent={productData.isLiked}
           iconSize="1.2rem"
@@ -70,6 +71,7 @@ function PreviewContent({ productData }) {
 }
 
 PreviewContent.propTypes = {
+  userData: PropTypes.shape({}),
   productData: PropTypes.shape({
     id: PropTypes.number.isRequired,
     image: PropTypes.shape({

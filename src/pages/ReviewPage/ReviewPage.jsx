@@ -43,7 +43,10 @@ export default function ReviewDetailPage() {
         <Divider />
         <Comment userData={client.data} />
       </div>
-      <ReviewFloatButton productId={review.id} />
+      <ReviewFloatButton
+        userData={client}
+        productId={review.id}
+      />
     </Article>
   )
 }
