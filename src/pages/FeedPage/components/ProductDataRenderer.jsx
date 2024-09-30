@@ -3,7 +3,7 @@ import useUserData from '../../../hooks/useUserData'
 import useProductData from '../../../hooks/useProductData'
 import LoadingFeed from '../../../components/ProductFeed/LoadingFeed'
 import ProductFeed from '../../../components/ProductFeed/ProductFeed'
-import StyledFeed from '../../../components/ProductFeed/ProductFeed.style'
+import { StyledFeed } from '../../../components/ProductFeed/ProductFeed.style'
 
 function ProductDataRenderer() {
   const { data: userData } = useUserData()
