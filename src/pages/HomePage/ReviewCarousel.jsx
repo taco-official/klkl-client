@@ -1,6 +1,7 @@
 import { React } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import useUserData from '../../hooks/useUserData'
 import StyledFlickity from '../../components/Carousel/Carousel'
 import PreviewContent from '../../components/PreviewContent/PreviewContent'
 
@@ -15,6 +16,7 @@ const flickityOptions = {
 }
 
 export default function ReviewCarousels({ contents }) {
+  const userData = useUserData()
   return (
     <ReviewCarousel options={flickityOptions}>
       {contents.map((content) => {
@@ -23,7 +25,10 @@ export default function ReviewCarousels({ contents }) {
             className="carousel-cell"
             key={content.id}
           >
-            <PreviewContent productData={content} />
+            <PreviewContent
+              userData={userData}
+              productData={content}
+            />
           </ReviewWrapper>
         )
       })}
