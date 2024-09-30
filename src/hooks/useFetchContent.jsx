@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from 'react'
+import initialPageData from '../constants/initialPageData'
 import useUserData from './useUserData'
 import useKyQuery from './useKyQuery'
 import parseQueryParams from '../utils/parseQueryParams'
 import ProductFeed from '../components/ProductFeed/ProductFeed'
 
 const useFetchContent = (id) => {
-  const [currentPage, setCurrentPage] = useState({
-    page: 0,
-    size: 1,
-    sort: ['string'],
-  })
+  const [currentPage, setCurrentPage] = useState(initialPageData)
   const { data: userData } = useUserData()
   const url = parseQueryParams(`users/${id}/products`, currentPage)
   const { data: productList } = useKyQuery(url, undefined, {

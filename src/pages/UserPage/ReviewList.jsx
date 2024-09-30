@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import initialPageData from '../../constants/initialPageData'
 import useUserData from '../../hooks/useUserData'
 import useKyQuery from '../../hooks/useKyQuery'
 import parseQueryParams from '../../utils/parseQueryParams'
 import ProductFeed from '../../components/ProductFeed/ProductFeed'
 
 function ReviewList({ selectedMenu }) {
-  const [currentPage, setCurrentPage] = useState({
-    page: 0,
-    size: 1,
-    sort: ['string'],
-  })
+  const [currentPage, setCurrentPage] = useState(initialPageData)
   const { data: userData } = useUserData()
   const url = parseQueryParams(`${selectedMenu}`, currentPage)
   const { data: productList } = useKyQuery(url, undefined, {

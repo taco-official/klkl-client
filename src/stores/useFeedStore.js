@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import sortStandard from '../constants/sortStandard'
 
 const initialState = {
   selectedCountry: {},
@@ -6,12 +7,7 @@ const initialState = {
   selectedCategory: [],
   selectedSubcategory: [],
   selectedTag: [],
-  selectedSort: {
-    key: 0,
-    label: '최신 순',
-    sortBy: 'created_at',
-    sortDirection: 'DESC',
-  },
+  selectedSort: sortStandard[0],
   defaultOpenRegion: undefined,
 }
 
