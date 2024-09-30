@@ -1,17 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Modal, ConfigProvider } from 'antd'
-import { useShallow } from 'zustand/react/shallow'
 
+import { modalIndex } from '../../../constants/navIndex'
+import { useModalStore } from '../../../stores/navbarStores'
+import useDebouncedSearch from '../../../hooks/useDebouncedSearch'
 import Icons from '../../Icons/Icons'
 import theme from '../../../styles/theme'
-
-import {
-  useModalStore,
-  useCurrentPageStore,
-} from '../../../stores/navbarStores'
-
-import useDebouncedSearch from '../../../hooks/useDebouncedSearch'
 
 const ModalTheme = {
   components: {
@@ -27,20 +22,14 @@ const ModalTheme = {
 }
 
 export default function SearchModal() {
-  const [modalState, setModalState] = useModalStore(
-    useShallow((state) => [state.searchModalState, state.setSearchModalState])
-  )
-  const setCurrentPage = useCurrentPageStore((state) => state.setCurrentPage)
+  const { modalState, setModalState } = useModalStore()
   const [results, debouncedSearch] = useDebouncedSearch(setModalState)
 
   return (
     <ConfigProvider theme={ModalTheme}>
       <Modal
-        open={modalState}
-        onCancel={() => {
-          setModalState(false)
-          setCurrentPage(0)
-        }}
+        open={modalState === modalIndex.SEARCH}
+        onCancel={() => setModalState(modalIndex.NONE)}
         width="600px"
         footer={null}
         closable={false}

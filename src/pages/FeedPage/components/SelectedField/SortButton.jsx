@@ -23,7 +23,10 @@ function SortButton() {
 
   return (
     <ConfigProvider theme={buttonTheme}>
-      <Dropdown menu={menuProps}>
+      <Dropdown
+        menu={menuProps}
+        trigger={['click']}
+      >
         <Button
           shape="round"
           size="small"

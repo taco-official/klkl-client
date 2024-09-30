@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { Divider } from 'antd'
 import { debounce } from 'lodash-es'
 
+import router from '../router'
+import { modalIndex } from '../constants/navIndex'
 import { kyInstance } from './kyInstance'
 import theme from '../styles/theme'
-import router from '../router'
 
 const SearchMapping = {
   products: '리뷰',
@@ -66,7 +67,7 @@ const useDebouncedSearch = (setModalState) => {
                 <ResultRow
                   key={content.name}
                   onClick={() => {
-                    setModalState(false)
+                    setModalState(modalIndex.NONE)
                     const searchState = initializeSearchState(category, content)
                     router.navigate('/feed', {
                       state: {

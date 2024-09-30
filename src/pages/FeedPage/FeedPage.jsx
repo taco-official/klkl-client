@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
+import { navIndex } from '../../constants/navIndex'
 import useFeedStore from '../../stores/useFeedStore'
+import { useCurrentPageStore } from '../../stores/navbarStores'
 import useInitializeState from '../../hooks/useInitializeState'
 import Thumbnail from './components/Thumbnail/Thumbnail'
 import BasicFilter from './components/BasicFilter/BasicFilter'
@@ -13,9 +15,15 @@ function FeedPage() {
   useInitializeState()
 
   const location = useLocation()
+  const { currentPage, setCurrentPage } = useCurrentPageStore()
   const { resetSelectedField } = useFeedStore((state) => ({
     resetSelectedField: state.resetSelectedField,
   }))
+
+  useEffect(() => {
+    if (currentPage !== navIndex.FEED) setCurrentPage(navIndex.FEED)
+    return () => setCurrentPage(navIndex.NONE)
+  }, [])
 
   useEffect(() => {
     const deleteDataState = (state) => {

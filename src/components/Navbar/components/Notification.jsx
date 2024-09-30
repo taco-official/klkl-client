@@ -2,11 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import { Dropdown, Badge } from 'antd'
 
+import { modalIndex } from '../../../constants/navIndex'
+import { useModalStore } from '../../../stores/navbarStores'
 import useNotificationFetch from '../../../hooks/useNotificationFetch'
 import Icons from '../../Icons/Icons'
 
 function Notification() {
   const notificationItems = useNotificationFetch()
+  const setModalState = useModalStore((state) => state.setModalState)
 
   return (
     <Dropdown
@@ -16,6 +19,11 @@ function Notification() {
       }}
       trigger={['click']}
       placement="bottom"
+      onOpenChange={(open) => {
+        if (!open) {
+          setModalState(modalIndex.NONE)
+        }
+      }}
     >
       <StyledBadge
         dot={
