@@ -23,7 +23,7 @@ export default function ReviewDetailPage() {
         <ReviewImageSection images={review.images} />
         <ReviewInfoBlock
           review={review}
-          canEdit={review.user.id === client.data.id}
+          canEdit={review.member.id === client?.data.id}
         />
         <Divider />
         <ReviewMiddleBlock
@@ -37,11 +37,11 @@ export default function ReviewDetailPage() {
         </Description>
         <Divider />
         <UserProfile
-          userData={review.user}
-          profileButton={<UserFollowButton id={review.user.id} />}
+          userData={review.member}
+          profileButton={<UserFollowButton id={review.member.id} />}
         />
         <Divider />
-        <Comment userData={client.data} />
+        <Comment userData={client?.data} />
       </div>
       <ReviewFloatButton
         userData={client}

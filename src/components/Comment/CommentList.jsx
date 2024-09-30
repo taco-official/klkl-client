@@ -11,7 +11,7 @@ export default function CommentList({ comments, userId }) {
         <CommentListContent
           key={comment.id}
           comment={comment}
-          canEdit={comment.user.id === userId}
+          canEdit={comment.member.id === userId}
         />
       ))}
     </CommentListWrapper>

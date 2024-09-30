@@ -8,7 +8,7 @@ import ProductFeed from '../components/ProductFeed/ProductFeed'
 const useFetchContent = (id) => {
   const [currentPage, setCurrentPage] = useState(initialPageData)
   const { data: userData } = useUserData()
-  const url = parseQueryParams(`users/${id}/products`, currentPage)
+  const url = parseQueryParams(`members/${id}/products`, currentPage)
   const { data: productList } = useKyQuery(url, undefined, {
     staleTime: 0,
     enabled: !!id,
