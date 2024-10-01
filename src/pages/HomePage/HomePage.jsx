@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { FloatButton } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLoaderData } from 'react-router-dom'
 
-import usePopularReview from '../../hooks/usePopularReview'
-import useNewReview from '../../hooks/useNewReview'
 import Icons from '../../components/Icons/Icons'
+import useUserData from '../../hooks/useUserData'
 import MainBanner from './MainBanner'
 import ReviewCarousels from './ReviewCarousel'
 import theme from '../../styles/theme'
@@ -37,11 +36,10 @@ const ImageArr = [
 ]
 
 export default function HomePage() {
+  const { popularReviews, newReviews } = useLoaderData()
+  const userData = useUserData()
   const [bannerImages] = useState(ImageArr)
   const navigate = useNavigate()
-
-  const popularReview = usePopularReview()
-  const newReview = useNewReview()
 
   return (
     <>
@@ -49,11 +47,17 @@ export default function HomePage() {
       <MainArea>
         <div>
           <h1>인기 리뷰</h1>
-          <ReviewCarousels contents={popularReview} />
+          <ReviewCarousels
+            contents={popularReviews.data.content}
+            userData={userData}
+          />
         </div>
         <div>
           <h1>신규 리뷰</h1>
-          <ReviewCarousels contents={newReview} />
+          <ReviewCarousels
+            contents={newReviews.data.content}
+            userData={userData}
+          />
         </div>
       </MainArea>
       {createPortal(

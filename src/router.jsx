@@ -9,6 +9,7 @@ import ErrorPage from './pages/ErrorPage'
 const routes = [
   {
     path: '',
+    loader: loader.homeLoader,
     element: <pages.HomePage />,
   },
   {
