@@ -1,6 +1,6 @@
 const userMenuKeys = {
-  MY_REVIEW: 'users/me/products',
-  LIKED_REVIEW: 'users/me/likes',
+  MY_REVIEW: 'members/me/products',
+  LIKED_REVIEW: 'members/me/likes',
   FOLLOWED_LIST: '3',
   WIDTHDRAW: '4',
 }

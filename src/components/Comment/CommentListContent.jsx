@@ -18,9 +18,9 @@ export default function CommentListContent({ comment, canEdit }) {
   return (
     <CommentListContentWrapper>
       <ProfileImage
-        src={comment.user.image?.url}
+        src={comment.member.image?.url}
         $size="2.5rem"
-        onClick={() => navigate(`/users/${comment.user.id}`)}
+        onClick={() => navigate(`/users/${comment.member.id}`)}
       />
       {isEdit ? (
         <CommentEdit
@@ -34,9 +34,9 @@ export default function CommentListContent({ comment, canEdit }) {
             <span
               aria-hidden
               className="comment--info__name"
-              onClick={() => navigate(`/users/${comment.user.id}`)}
+              onClick={() => navigate(`/users/${comment.member.id}`)}
             >
-              {comment.user.name}
+              {comment.member.name}
             </span>
             <span className="comment--info__date">{comment.createdAt}</span>
             {canEdit && (
@@ -57,7 +57,7 @@ CommentListContent.propTypes = {
     id: PropTypes.number,
     content: PropTypes.string,
     createdAt: PropTypes.string,
-    user: PropTypes.shape({
+    member: PropTypes.shape({
       id: PropTypes.number,
       name: PropTypes.string,
       image: PropTypes.shape({ url: PropTypes.string }),

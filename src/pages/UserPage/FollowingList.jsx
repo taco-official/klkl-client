@@ -61,7 +61,7 @@ FollowingListContent.propTypes = {
 
 function FollowingList() {
   const { data: followingList, isLoading } = useKyQuery(
-    'users/me/following',
+    'members/me/following',
     undefined,
     { staleTime: 0 }
   )

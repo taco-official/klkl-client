@@ -57,7 +57,7 @@ function LoginModal() {
           <Button
             style={KaKaoStyle}
             onClick={async () => {
-              const data = await kyInstance.get('oauth/kakao')
+              const data = await kyInstance.get('oauth2/authorization/kakao')
               console.log(data)
             }}
           >
