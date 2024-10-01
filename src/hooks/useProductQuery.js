@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useShallow } from 'zustand/react/shallow'
+import { isEqual } from 'lodash-es'
 import useFeedStore from '../stores/useFeedStore'
 
 function useCityQuery() {
@@ -74,8 +75,7 @@ function useProductQuery(pageNumber, setPageData) {
   }
 
   if (
-    JSON.stringify(prevSearchQuery.current) !==
-      JSON.stringify(newSearchQuery) &&
+    !isEqual(prevSearchQuery.current, newSearchQuery) &&
     Object.keys(newSearchQuery).length
   ) {
     prevSearchQuery.current = newSearchQuery
