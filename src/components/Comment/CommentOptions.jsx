@@ -2,10 +2,10 @@ import React from 'react'
 import { Modal, notification } from 'antd'
 import PropTypes from 'prop-types'
 
-import { method } from '../../hooks/kyInstance'
-import useKyMutation from '../../hooks/useKyMutation'
+import { method } from '@hooks/kyInstance'
+import useKyMutation from '@hooks/useKyMutation'
 import OptionDropdown from '../OptionDropdown/OptionDropdown'
-import theme from '../../styles/theme'
+import theme from '@styles/theme'
 
 function CommentOptions({ commentId, setEditMode }) {
   const productURL = window.location.pathname.slice(1)

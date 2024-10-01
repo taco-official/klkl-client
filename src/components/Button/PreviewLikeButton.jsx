@@ -1,7 +1,7 @@
 import React from 'react' // useState,
 import PropTypes from 'prop-types'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
-import useProductLike from '../../hooks/useProductLike'
+import useProductLike from '@hooks/useProductLike'
 import IconTextButton from './IconTextButton'
 
 function PreviewLikeButton({

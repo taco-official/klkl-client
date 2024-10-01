@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 import { Input, Button, ConfigProvider } from 'antd'
 import styled from 'styled-components'
 
-import { method } from '../../hooks/kyInstance'
-import useLoginModal from '../../hooks/useLoginModal'
-import useKyMutation from '../../hooks/useKyMutation'
-import theme from '../../styles/theme'
+import { method } from '@hooks/kyInstance'
+import useLoginModal from '@hooks/useLoginModal'
+import useKyMutation from '@hooks/useKyMutation'
+import theme from '@styles/theme'
 import ProfileImage from '../UserProfile/ProfileImage'
 
 const inputTheme = {

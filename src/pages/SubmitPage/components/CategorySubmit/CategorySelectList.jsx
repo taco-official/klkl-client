@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useShallow } from 'zustand/react/shallow'
 import PropTypes from 'prop-types'
 
-import useFormStore from '../../../../stores/useFormStore'
+import useFormStore from '@stores/useFormStore'
 import SelectionList from '../RegionSubmit/SelectionList'
 
 const useCategorySetter = () => {

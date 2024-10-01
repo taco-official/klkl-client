@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import { FloatButton, notification } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-import useLoginModal from '../../hooks/useLoginModal'
-import Icons from '../../components/Icons/Icons'
-import theme from '../../styles/theme'
+import useLoginModal from '@hooks/useLoginModal'
+import Icons from '@components/Icons/Icons'
+import theme from '@styles/theme'
 import ReviewLikeButton from './ReviewLikeButton'
 
 export default function ReviewFloatButton({ userData, productId }) {

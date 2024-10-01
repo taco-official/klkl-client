@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { InputNumber, Select, ConfigProvider } from 'antd'
 
-import useKyQuery from '../../../../hooks/useKyQuery'
-import useFormStore from '../../../../stores/useFormStore'
-import theme from '../../../../styles/theme'
+import useKyQuery from '@hooks/useKyQuery'
+import useFormStore from '@stores/useFormStore'
+import theme from '@styles/theme'
 
 const useDefaultCurrency = (setFormContents) => {
   const country = useFormStore((state) => state.country)

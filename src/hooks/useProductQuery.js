@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { useShallow } from 'zustand/react/shallow'
 import { isEqual } from 'lodash-es'
-import useFeedStore from '../stores/useFeedStore'
+import useFeedStore from '@stores/useFeedStore'
 
 function useCityQuery() {
   const [selectedCountry, selectedCity] = useFeedStore(

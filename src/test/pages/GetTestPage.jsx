@@ -1,5 +1,5 @@
 import React, { useState, useCallback, useEffect } from 'react'
-import useKy from '../../hooks/useKy'
+import useKy from '@hooks/useKy'
 
 function GetTestPage() {
   const [movies, setMovies] = useState([])

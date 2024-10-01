@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { useShallow } from 'zustand/react/shallow'
-import useFeedStore from '../stores/useFeedStore'
+import useFeedStore from '@stores/useFeedStore'
 
 const useTagData = () => {
   const { categoryData: data } = useLoaderData()

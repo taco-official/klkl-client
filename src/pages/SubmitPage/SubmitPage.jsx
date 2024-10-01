@@ -3,11 +3,11 @@ import styled from 'styled-components'
 
 import * as Form from './components/index'
 import PostPage from './components/PostPage'
-import submitSteps from '../../constants/submitSteps'
+import submitSteps from '@constants/submitSteps'
 import PrevNextButtons from './components/PrevNextButtons'
 import SubmitSteps from './components/SubmitSteps'
-import theme from '../../styles/theme'
-import useInitialData from '../../hooks/useInitialData'
+import theme from '@styles/theme'
+import useInitialData from '@hooks/useInitialData'
 
 const pages = {
   [submitSteps.IMAGE]: <Form.ImageSubmitForm />,

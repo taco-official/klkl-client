@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
-import theme from '../../styles/theme'
-import useKyQuery from '../../hooks/useKyQuery'
-import useFetchContent from '../../hooks/useFetchContent'
-import ProfileImage from '../../components/UserProfile/ProfileImage'
-import PlainButton from '../../components/Button/PlainButton'
+import theme from '@styles/theme'
+import useKyQuery from '@hooks/useKyQuery'
+import useFetchContent from '@hooks/useFetchContent'
+import ProfileImage from '@components/UserProfile/ProfileImage'
+import PlainButton from '@components/Button/PlainButton'
 
 function FollowingListContent({ followingList }) {
   const [currentUser, setCurrentUser] = useState()

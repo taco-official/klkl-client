@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Button, ConfigProvider } from 'antd'
-import theme from '../../../../styles/theme'
+import theme from '@styles/theme'
 
 const buttonTheme = {
   token: {

@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { Input, Button, ConfigProvider } from 'antd'
 import styled from 'styled-components'
 
-import { method } from '../../hooks/kyInstance'
-import useKyMutation from '../../hooks/useKyMutation'
-import theme from '../../styles/theme'
+import { method } from '@hooks/kyInstance'
+import useKyMutation from '@hooks/useKyMutation'
+import theme from '@styles/theme'
 
 const inputTheme = {
   components: {

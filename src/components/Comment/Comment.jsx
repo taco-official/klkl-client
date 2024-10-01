@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { useParams } from 'react-router-dom'
 
-import theme from '../../styles/theme'
-import useKyQuery from '../../hooks/useKyQuery'
+import theme from '@styles/theme'
+import useKyQuery from '@hooks/useKyQuery'
 import CommentInput from './CommentInput'
 import CommentList from './CommentList'
 

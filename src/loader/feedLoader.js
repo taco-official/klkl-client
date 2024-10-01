@@ -1,4 +1,4 @@
-import { kyInstance } from '../hooks/kyInstance'
+import { kyInstance } from '@hooks/kyInstance'
 
 const feedLoader = async () => {
   try {

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import { Breadcrumb, Rate } from 'antd'
 import { Link } from 'react-router-dom'
 
-import { BlueTag } from '../../components/Tags/Tags.style'
-import theme from '../../styles/theme'
+import { BlueTag } from '@components/Tags/Tags.style'
+import theme from '@styles/theme'
 import ReviewOptions from './ReviewOptions'
 
 const breadCrumbStyle = {

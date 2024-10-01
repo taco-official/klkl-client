@@ -4,12 +4,12 @@ import styled from 'styled-components'
 import { FloatButton } from 'antd'
 import { useNavigate, useLoaderData } from 'react-router-dom'
 
-import Icons from '../../components/Icons/Icons'
-import useUserData from '../../hooks/useUserData'
+import Icons from '@components/Icons/Icons'
+import useUserData from '@hooks/useUserData'
 import MainBanner from './MainBanner'
 import ReviewCarousels from './ReviewCarousel'
-import theme from '../../styles/theme'
-import useLoginModal from '../../hooks/useLoginModal'
+import theme from '@styles/theme'
+import useLoginModal from '@hooks/useLoginModal'
 
 const ImageArr = [
   {

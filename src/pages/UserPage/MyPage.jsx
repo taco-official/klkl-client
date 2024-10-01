@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { Divider } from 'antd'
 
 import MyMenu from './MyMenu'
-import UserEditButton from '../../components/UserProfile/UserEditButton'
-import UserProfile from '../../components/UserProfile/UserProfile'
-import useUserData from '../../hooks/useUserData'
+import UserEditButton from '@components/UserProfile/UserEditButton'
+import UserProfile from '@components/UserProfile/UserProfile'
+import useUserData from '@hooks/useUserData'
 
 function MyPage() {
   const { data: userData, isLoading, isError } = useUserData()

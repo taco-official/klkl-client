@@ -2,9 +2,9 @@ import React, { useRef } from 'react'
 import styled from 'styled-components'
 import { Image } from 'antd'
 
-import Icon from '../../../../components/Icons/Icons'
-import theme from '../../../../styles/theme'
-import useFormStore from '../../../../stores/useFormStore'
+import Icon from '@components/Icons/Icons'
+import theme from '@styles/theme'
+import useFormStore from '@stores/useFormStore'
 
 const MAX_COUNT = 3
 

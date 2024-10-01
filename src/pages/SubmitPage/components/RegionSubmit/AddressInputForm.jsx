@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import { Input } from 'antd'
 import { useShallow } from 'zustand/react/shallow'
 
-import useFormStore from '../../../../stores/useFormStore'
-import theme from '../../../../styles/theme'
+import useFormStore from '@stores/useFormStore'
+import theme from '@styles/theme'
 
 export default function RegionSubmitPage() {
   const [city, address, setAddress] = useFormStore(

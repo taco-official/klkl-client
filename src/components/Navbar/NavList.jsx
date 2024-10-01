@@ -1,12 +1,12 @@
 import React from 'react'
 import { styled } from 'styled-components'
 
-import useUserData from '../../hooks/useUserData'
-import router from '../../router'
-import { navIndex, modalIndex } from '../../constants/navIndex'
-import { useCurrentPageStore, useModalStore } from '../../stores/navbarStores'
+import useUserData from '@hooks/useUserData'
+import { navIndex, modalIndex } from '@constants/navIndex'
+import { useCurrentPageStore, useModalStore } from '@stores/navbarStores'
+import theme from '@styles/theme'
+import router from '@/router'
 import Notification from './components/Notification'
-import theme from '../../styles/theme'
 import Icons from '../Icons/Icons'
 
 export default function NavList() {

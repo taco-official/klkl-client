@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useLoaderData } from 'react-router-dom'
 import { Radio } from 'antd'
 import PropTypes from 'prop-types'
-import useFeedStore from '../../../../stores/useFeedStore'
-import CollapseButton from '../../../../components/Button/CollapseButton'
+import useFeedStore from '@stores/useFeedStore'
+import CollapseButton from '@components/Button/CollapseButton'
 import {
   SectionContainer,
   RegionContainer,

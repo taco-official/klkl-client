@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { Button } from 'antd'
 import PropTypes from 'prop-types'
 
-import theme from '../../styles/theme'
-import ProfileImage from '../../components/UserProfile/ProfileImage'
-import useUserStore from '../../stores/useUserStore'
+import theme from '@styles/theme'
+import ProfileImage from '@components/UserProfile/ProfileImage'
+import useUserStore from '@stores/useUserStore'
 
 function ProfileEditBlock({ name }) {
   const inputRef = useRef()

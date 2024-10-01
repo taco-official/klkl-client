@@ -4,7 +4,7 @@ import { useShallow } from 'zustand/react/shallow'
 import PropTypes from 'prop-types'
 
 import SelectionList from './SelectionList'
-import useFormStore from '../../../../stores/useFormStore'
+import useFormStore from '@stores/useFormStore'
 
 const useRegionState = () => {
   const [region, country, city] = useFormStore(

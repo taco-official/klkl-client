@@ -1,9 +1,9 @@
 import React from 'react'
 import { Button, ConfigProvider } from 'antd'
 import PropTypes from 'prop-types'
-import theme from '../../../styles/theme'
-import submitSteps from '../../../constants/submitSteps'
-import useFormStore from '../../../stores/useFormStore'
+import theme from '@styles/theme'
+import submitSteps from '@constants/submitSteps'
+import useFormStore from '@stores/useFormStore'
 
 const checkCanNext = (step, review) => {
   switch (step) {

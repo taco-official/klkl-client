@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Checkbox } from 'antd'
-import useFeedStore from '../../../../stores/useFeedStore'
-import inArray from '../../../../utils/inArray'
+import useFeedStore from '@stores/useFeedStore'
+import inArray from '@utils/inArray'
 import { SelectWrapper } from './BasicFilter.style'
 
 function SubcategoryCheckbox({ categoryId, subcategory }) {

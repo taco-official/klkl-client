@@ -1,4 +1,4 @@
-import { kyInstance } from '../hooks/kyInstance'
+import { kyInstance } from '@hooks/kyInstance'
 
 const homeLoader = async () => {
   try {
