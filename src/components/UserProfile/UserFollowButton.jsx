@@ -14,7 +14,7 @@ const useCheckFollow = (id) => {
     isError,
   } = useKyQuery(`members/me/following/${id}`, ['members/me/following', id])
 
-  if (isLoading || isError) return null
+  if (isLoading || isError) return false
 
   return following.data.isFollowing
 }
@@ -74,7 +74,7 @@ function UserFollowButton({ id }) {
   const followUser = useFollow(id)
   const unFollowUser = useUnFollow(id)
 
-  if (data.data.id === id) return null
+  if (data?.data.id === id) return null
 
   return (
     <ConfigProvider

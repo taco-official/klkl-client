@@ -25,7 +25,7 @@ CommentList.propTypes = {
       }),
     })
   ).isRequired,
-  userId: PropTypes.number.isRequired,
+  userId: PropTypes.number,
 }
 
 const CommentListWrapper = styled.ul`
