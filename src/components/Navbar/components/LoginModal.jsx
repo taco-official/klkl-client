@@ -5,7 +5,6 @@ import { Modal, Button, ConfigProvider } from 'antd'
 import { KakaoLogo, NaverLogo } from '../../../images/logos'
 import { modalIndex } from '../../../constants/navIndex'
 import { useModalStore } from '../../../stores/navbarStores'
-import { kyInstance } from '../../../hooks/kyInstance'
 import theme from '../../../styles/theme'
 
 const ModalTheme = {
@@ -56,9 +55,9 @@ function LoginModal() {
           </Button>
           <Button
             style={KaKaoStyle}
-            onClick={async () => {
-              const data = await kyInstance.get('oauth2/authorization/kakao')
-              console.log(data)
+            onClick={() => {
+              window.location.href =
+                'http://localhost:8080/v1/oauth2/authorization/kakao'
             }}
           >
             <KakaoLogo />
