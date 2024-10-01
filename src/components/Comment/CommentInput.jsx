@@ -4,6 +4,7 @@ import { Input, Button, ConfigProvider } from 'antd'
 import styled from 'styled-components'
 
 import { method } from '../../hooks/kyInstance'
+import useLoginModal from '../../hooks/useLoginModal'
 import useKyMutation from '../../hooks/useKyMutation'
 import theme from '../../styles/theme'
 import ProfileImage from '../UserProfile/ProfileImage'
@@ -20,10 +21,12 @@ const inputTheme = {
   },
 }
 
-export default function CommentInput({ profile }) {
+export default function CommentInput({ userData }) {
   const [inputValue, setInputValue] = useState('')
   const location = `${window.location.pathname.slice(1)}/comments`
   const { mutateAsync } = useKyMutation(method.POST, location)
+
+  const popLoginModal = useLoginModal()
 
   const addComment = async () => {
     if (inputValue === '') return
@@ -43,7 +46,7 @@ export default function CommentInput({ profile }) {
   return (
     <CommentInputBox>
       <ProfileImage
-        src={profile}
+        src={userData?.image}
         $size="2.5rem"
       />
       <ConfigProvider theme={inputTheme}>
@@ -54,14 +57,16 @@ export default function CommentInput({ profile }) {
           size="large"
           autoSize={{ maxRows: 1 }}
           value={inputValue}
-          onChange={(e) => {
-            setInputValue(e.target.value)
+          onChange={(e) => setInputValue(e.target.value)}
+          onClick={() => {
+            if (!userData) popLoginModal()
           }}
         />
         <SubmitButton
           type="text"
           onClick={addComment}
           $canSubmit={inputValue.length !== 0}
+          disabled={!userData}
         >
           등록
         </SubmitButton>
@@ -70,7 +75,7 @@ export default function CommentInput({ profile }) {
   )
 }
 CommentInput.propTypes = {
-  profile: PropTypes.string.isRequired,
+  userData: PropTypes.shape({ image: PropTypes.string }),
 }
 
 const CommentInputBox = styled.div`
@@ -79,6 +84,11 @@ const CommentInputBox = styled.div`
   align-items: center;
   justify-content: space-between;
   margin-bottom: 30px;
+
+  div {
+    font-size: ${theme.size.textSM};
+    color: ${theme.color.textGrey};
+  }
 
   & > span {
     width: 85%;

@@ -25,11 +25,7 @@ export default function Comment({ userData }) {
       <h2>
         댓글 (<span>{Object.keys(comments.data).length}</span>)
       </h2>
-      {userData ? (
-        <CommentInput profile={userData.image?.url} />
-      ) : (
-        <div>로그인 후 댓글을 작성할 수 있습니다</div>
-      )}
+      <CommentInput userData={userData} />
       <CommentList
         comments={comments.data}
         userId={userData?.id}

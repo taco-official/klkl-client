@@ -9,6 +9,7 @@ import useUserData from '../../hooks/useUserData'
 import MainBanner from './MainBanner'
 import ReviewCarousels from './ReviewCarousel'
 import theme from '../../styles/theme'
+import useLoginModal from '../../hooks/useLoginModal'
 
 const ImageArr = [
   {
@@ -37,9 +38,10 @@ const ImageArr = [
 
 export default function HomePage() {
   const { popularReviews, newReviews } = useLoaderData()
-  const userData = useUserData()
+  const { data: userData } = useUserData()
   const [bannerImages] = useState(ImageArr)
   const navigate = useNavigate()
+  const popLoginModal = useLoginModal()
 
   return (
     <>
@@ -70,9 +72,11 @@ export default function HomePage() {
               edit_square
             </Icons>
           }
-          onClick={() =>
-            navigate('/submit', { state: { from: window.location.pathname } })
-          }
+          onClick={() => {
+            if (userData)
+              navigate('/submit', { state: { from: window.location.pathname } })
+            else popLoginModal()
+          }}
           type="primary"
           tooltip="리뷰 작성하러 가기"
           style={{ bottom: '10px' }}
