@@ -1,20 +1,21 @@
 import React from 'react'
 
+import router from '../../../router'
+import { modalIndex } from '../../../constants/navIndex'
 import { useModalStore } from '../../../stores/navbarStores'
 import useUserData from '../../../hooks/useUserData'
 import ProfileImage from '../../UserProfile/ProfileImage'
-import router from '../../../router'
 import PlainButton from '../../Button/PlainButton'
 
 export default function LoginButton() {
   const { data } = useUserData()
-  const setLoginModalState = useModalStore((store) => store.setLoginModalState)
+  const setModalState = useModalStore((store) => store.setModalState)
 
   return (
     <PlainButton
       onClick={() => {
         if (!data) {
-          setLoginModalState(true)
+          setModalState(modalIndex.LOGIN)
           return
         }
 

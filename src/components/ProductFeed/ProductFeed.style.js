@@ -1,7 +1,14 @@
 import styled from 'styled-components'
 import theme from '../../styles/theme'
 
-const StyledList = styled.article`
+const FeedContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 0 1;
+  row-gap: 2.725rem;
+`
+
+const StyledFeed = styled.article`
   min-width: 36rem;
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
@@ -19,4 +26,4 @@ const StyledList = styled.article`
   }
 `
 
-export default StyledList
+export { FeedContainer, StyledFeed }

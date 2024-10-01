@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom'
 
 import Icons from '../../components/Icons/Icons'
 import theme from '../../styles/theme'
-import LikeButton from './LikeButton'
+import ReviewLikeButton from './ReviewLikeButton'
 
-export default function ReviewFloatButton({ productId }) {
+export default function ReviewFloatButton({ userData, productId }) {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href).then(() =>
       notification.success({
@@ -31,7 +31,10 @@ export default function ReviewFloatButton({ productId }) {
         tooltip="링크복사"
       />
 
-      <LikeButton productId={productId} />
+      <ReviewLikeButton
+        userData={userData}
+        productId={productId}
+      />
 
       <CustomFloatButton
         icon={<Icons $empty>edit_square</Icons>}
@@ -42,6 +45,7 @@ export default function ReviewFloatButton({ productId }) {
   )
 }
 ReviewFloatButton.propTypes = {
+  userData: PropTypes.shape({}),
   productId: PropTypes.number.isRequired,
 }
 

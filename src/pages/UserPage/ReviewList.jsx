@@ -1,33 +1,33 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import initialPageData from '../../constants/initialPageData'
+import useUserData from '../../hooks/useUserData'
 import useKyQuery from '../../hooks/useKyQuery'
-import ProductDataStatusRenderer from '../../components/ProductList/ProductDataStatusRenderer'
+import parseQueryParams from '../../utils/parseQueryParams'
+import ProductFeed from '../../components/ProductFeed/ProductFeed'
 
 function ReviewList({ selectedMenu }) {
-  const [currentPage, setCurrentPage] = useState({
-    size: 9,
-    requestPage: 0,
+  const [currentPage, setCurrentPage] = useState(initialPageData)
+  const { data: userData } = useUserData()
+  const url = parseQueryParams(`${selectedMenu}`, currentPage)
+  const { data: productList } = useKyQuery(url, undefined, {
+    staleTime: 0,
   })
 
-  const {
-    data: productList,
-    isLoading,
-    isError,
-  } = useKyQuery(
-    `${selectedMenu}?page=${currentPage.requestPage}`,
-    null,
-    undefined,
-    { staleTime: 0 }
-  )
+  useEffect(() => {
+    if (currentPage.page === 0) return
+    setCurrentPage({
+      ...currentPage,
+      page: 0,
+    })
+  }, [selectedMenu])
 
   if (!productList) return null
 
   return (
-    <ProductDataStatusRenderer
-      isLoading={isLoading}
-      isError={isError}
-      data={productList}
-      pageData={currentPage}
+    <ProductFeed
+      userData={userData}
+      data={productList.data}
       setPageData={setCurrentPage}
     />
   )

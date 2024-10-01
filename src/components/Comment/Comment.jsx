@@ -15,7 +15,7 @@ export default function Comment({ userData }) {
     isError,
     error,
     isLoading,
-  } = useKyQuery(`products/${id}/comments`, null, undefined, { staleTime: 0 })
+  } = useKyQuery(`products/${id}/comments`, undefined, { staleTime: 0 })
 
   if (isError) return <div>{error}</div>
   if (isLoading) return <div>loading</div>
@@ -25,10 +25,14 @@ export default function Comment({ userData }) {
       <h2>
         댓글 (<span>{Object.keys(comments.data).length}</span>)
       </h2>
-      <CommentInput profile={userData.image?.url} />
+      {userData ? (
+        <CommentInput profile={userData.image?.url} />
+      ) : (
+        <div>로그인 후 댓글을 작성할 수 있습니다</div>
+      )}
       <CommentList
         comments={comments.data}
-        userId={userData.id}
+        userId={userData?.id}
       />
     </CommentSection>
   )
@@ -40,7 +44,7 @@ Comment.propTypes = {
     image: PropTypes.shape({
       url: PropTypes.string,
     }),
-  }).isRequired,
+  }),
 }
 
 const CommentSection = styled.section`

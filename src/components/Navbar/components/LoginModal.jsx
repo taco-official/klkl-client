@@ -1,11 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Modal, Button, ConfigProvider } from 'antd'
-import { useShallow } from 'zustand/react/shallow'
 
-import { kyInstance } from '../../../hooks/kyInstance'
 import { KakaoLogo, NaverLogo } from '../../../images/logos'
+import { modalIndex } from '../../../constants/navIndex'
 import { useModalStore } from '../../../stores/navbarStores'
+import { kyInstance } from '../../../hooks/kyInstance'
 import theme from '../../../styles/theme'
 
 const ModalTheme = {
@@ -34,15 +34,13 @@ const KaKaoStyle = {
 }
 
 function LoginModal() {
-  const [modalState, setModalState] = useModalStore(
-    useShallow((state) => [state.loginModalState, state.setLoginModalState])
-  )
+  const { modalState, setModalState } = useModalStore()
 
   return (
     <ConfigProvider theme={ModalTheme}>
       <Modal
-        open={modalState}
-        onCancel={() => setModalState(false)}
+        open={modalState === modalIndex.LOGIN}
+        onCancel={() => setModalState(modalIndex.NONE)}
         width="25rem"
         footer={null}
         destroyOnClose
@@ -59,7 +57,7 @@ function LoginModal() {
           <Button
             style={KaKaoStyle}
             onClick={async () => {
-              const data = await kyInstance.get('oauth/kakao')
+              const data = await kyInstance.get('oauth2/authorization/kakao')
               console.log(data)
             }}
           >

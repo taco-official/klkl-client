@@ -12,7 +12,7 @@ const routes = [
     element: <pages.HomePage />,
   },
   {
-    path: '/products/:id',
+    path: 'products/:id',
     loader: loader.productLoader,
     element: <pages.ReviewPage />,
   },

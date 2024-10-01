@@ -3,9 +3,10 @@ import styled from 'styled-components'
 import { Divider } from 'antd'
 import { debounce } from 'lodash-es'
 
+import router from '../router'
+import { modalIndex } from '../constants/navIndex'
 import { kyInstance } from './kyInstance'
 import theme from '../styles/theme'
-import router from '../router'
 
 const SearchMapping = {
   products: '리뷰',
@@ -13,6 +14,17 @@ const SearchMapping = {
   subcategories: '하위 카테고리',
   cities: '도시',
   countries: '국가',
+}
+
+const initializeSearchState = (searchedCategory, searchedContent) => {
+  const result = {
+    countries: [],
+    cities: [],
+    categories: [],
+    subcategories: [],
+  }
+  result[searchedCategory].push(searchedContent)
+  return result
 }
 
 const useDebouncedSearch = (setModalState) => {
@@ -55,16 +67,12 @@ const useDebouncedSearch = (setModalState) => {
                 <ResultRow
                   key={content.name}
                   onClick={() => {
-                    setModalState(false)
+                    setModalState(modalIndex.NONE)
+                    const searchState = initializeSearchState(category, content)
                     router.navigate('/feed', {
                       state: {
                         from: window.location.pathname,
-                        data: {
-                          countries: data.data.countries,
-                          cities: data.data.cities,
-                          categories: data.data.categories,
-                          subcategories: data.data.subcategories,
-                        },
+                        data: searchState,
                       },
                     })
                   }}

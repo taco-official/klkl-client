@@ -1,41 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Divider } from 'antd'
 import { useParams, useLoaderData } from 'react-router-dom'
 import { toInteger } from 'lodash-es'
-
-import useKyQuery from '../../hooks/useKyQuery'
-import ProductDataStatusRenderer from '../../components/ProductList/ProductDataStatusRenderer'
+import useFetchContent from '../../hooks/useFetchContent'
 import UserProfile from '../../components/UserProfile/UserProfile'
 import UserFollowButton from '../../components/UserProfile/UserFollowButton'
-
-const useContentFetch = (id) => {
-  const [currentPage, setCurrentPage] = useState({
-    size: 9,
-    requestPage: 0,
-  })
-
-  const {
-    data: productList,
-    isLoading,
-    isError,
-  } = useKyQuery(`users/${id}/products`, null, undefined, { stleTime: 0 })
-
-  return (
-    <ProductDataStatusRenderer
-      isLoading={isLoading}
-      isError={isError}
-      data={productList}
-      pageData={currentPage}
-      setPageData={setCurrentPage}
-    />
-  )
-}
 
 function UserPage() {
   const { id } = useParams()
   const { data: userData } = useLoaderData()
-  const content = useContentFetch(id)
+  const content = useFetchContent(id)
 
   return (
     <Wrapper>

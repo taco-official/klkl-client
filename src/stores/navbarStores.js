@@ -1,15 +1,14 @@
 import { create } from 'zustand'
-
-const useModalStore = create((set) => ({
-  loginModalState: false,
-  searchModalState: false,
-  setLoginModalState: (status) => set({ loginModalState: status }),
-  setSearchModalState: (status) => set({ searchModalState: status }),
-}))
+import { navIndex, modalIndex } from '../constants/navIndex'
 
 const useCurrentPageStore = create((set) => ({
-  currentPage: 0,
+  currentPage: navIndex.NONE,
   setCurrentPage: (currentPage) => set({ currentPage }),
 }))
 
-export { useModalStore, useCurrentPageStore }
+const useModalStore = create((set) => ({
+  modalState: modalIndex.NONE,
+  setModalState: (status) => set({ modalState: status }),
+}))
+
+export { useCurrentPageStore, useModalStore }
