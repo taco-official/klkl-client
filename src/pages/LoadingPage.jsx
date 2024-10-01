@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import theme from '../styles/theme'
-import Icons from '../components/Icons/Icons'
+import theme from '@styles/theme'
+import Icons from '@components/Icons/Icons'
 
 export default function LoadingPage() {
   return (

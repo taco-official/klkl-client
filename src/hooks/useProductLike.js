@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import useLoginModal from './useLoginModal'
 import { method } from './kyInstance'
 import useKyQuery from './useKyQuery'
 import useKyMutation from './useKyMutation'
@@ -24,6 +25,8 @@ const useProductLike = (userData, productId) => {
     `products/${productId}/likes`,
     ['products/likes', productId]
   )
+
+  const popLoginModal = useLoginModal()
 
   const likeProduct = async () => {
     try {
@@ -57,7 +60,7 @@ const useProductLike = (userData, productId) => {
 
   const handleLike = async () => {
     if (!userData) {
-      alert('로그인이 필요합니다.')
+      popLoginModal()
       return
     }
     if (!isLiked) await likeProduct()

@@ -3,15 +3,15 @@ import styled from 'styled-components'
 import { Divider } from 'antd'
 import { useLoaderData } from 'react-router-dom'
 
-import theme from '../../styles/theme'
-import UserFollowButton from '../../components/UserProfile/UserFollowButton'
+import theme from '@styles/theme'
+import UserFollowButton from '@components/UserProfile/UserFollowButton'
 import ReviewFloatButton from './ReviewFloatButton'
 import ReviewImageSection from './ReviewImageBlock'
 import ReviewInfoBlock from './ReviewInfo'
 import ReviewMiddleBlock from './ReviewMiddle'
-import UserProfile from '../../components/UserProfile/UserProfile'
-import Comment from '../../components/Comment/Comment'
-import useUserData from '../../hooks/useUserData'
+import UserProfile from '@components/UserProfile/UserProfile'
+import Comment from '@components/Comment/Comment'
+import useUserData from '@hooks/useUserData'
 
 export default function ReviewDetailPage() {
   const { data: review } = useLoaderData()

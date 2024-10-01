@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 import { FloatButton, notification } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
-import Icons from '../../components/Icons/Icons'
-import theme from '../../styles/theme'
+import useLoginModal from '@hooks/useLoginModal'
+import Icons from '@components/Icons/Icons'
+import theme from '@styles/theme'
 import ReviewLikeButton from './ReviewLikeButton'
 
 export default function ReviewFloatButton({ userData, productId }) {
@@ -22,6 +23,7 @@ export default function ReviewFloatButton({ userData, productId }) {
   }
 
   const navigate = useNavigate()
+  const popLoginModal = useLoginModal()
 
   return (
     <CustomFloatButtonGroup>
@@ -38,7 +40,10 @@ export default function ReviewFloatButton({ userData, productId }) {
 
       <CustomFloatButton
         icon={<Icons $empty>edit_square</Icons>}
-        onClick={() => navigate('/submit')}
+        onClick={() => {
+          if (userData) navigate('/submit')
+          else popLoginModal()
+        }}
         tooltip="리뷰 작성하러 가기"
       />
     </CustomFloatButtonGroup>

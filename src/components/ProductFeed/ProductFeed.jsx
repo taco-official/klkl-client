@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Pagination, ConfigProvider } from 'antd'
 import PreviewContent from '../PreviewContent/PreviewContent'
 import { FeedContainer, StyledFeed } from './ProductFeed.style'
-import theme from '../../styles/theme'
+import theme from '@styles/theme'
 
 function ProductFeed({ userData, data, setPageData }) {
   return (

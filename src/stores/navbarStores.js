@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { navIndex, modalIndex } from '../constants/navIndex'
+import { navIndex, modalIndex } from '@constants/navIndex'
 
 const useCurrentPageStore = create((set) => ({
   currentPage: navIndex.NONE,

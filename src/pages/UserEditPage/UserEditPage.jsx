@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import { useLoaderData } from 'react-router-dom'
 import { Divider } from 'antd'
 
-import theme from '../../styles/theme'
+import theme from '@styles/theme'
 import ProfileEditBlock from './ProfileEditBlock'
 import NicknameInput from './NicknameInput'
 import DescriptionInput from './DescriptionInput'
 import SaveButton from './SaveButton'
-import useUserStore from '../../stores/useUserStore'
+import useUserStore from '@stores/useUserStore'
 
 function UserEditPage() {
   const { data } = useLoaderData()

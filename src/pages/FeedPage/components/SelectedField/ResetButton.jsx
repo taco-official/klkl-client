@@ -1,7 +1,7 @@
 import React from 'react'
 import { ConfigProvider, Button } from 'antd'
 import { GrPowerReset } from 'react-icons/gr'
-import useFeedStore from '../../../../stores/useFeedStore'
+import useFeedStore from '@stores/useFeedStore'
 import { buttonTheme } from '../../FeedPage.style'
 
 function ResetButton() {

@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import useKyQuery from '../../../../hooks/useKyQuery'
-import theme from '../../../../styles/theme'
+import useKyQuery from '@hooks/useKyQuery'
+import theme from '@styles/theme'
 import NameInput from './NameInput'
 import DescriptionInput from './DescriptionInput'
 import RatingInput from './RatingInput'

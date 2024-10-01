@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import initialPageData from '../constants/initialPageData'
+import initialPageData from '@constants/initialPageData'
+import parseQueryParams from '@utils/parseQueryParams'
 import useProductQuery from './useProductQuery'
 import useKyQuery from './useKyQuery'
-import parseQueryParams from '../utils/parseQueryParams'
 
 function useProductData() {
   const [pageData, setPageData] = useState(initialPageData)

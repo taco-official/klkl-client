@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Input } from 'antd'
-import theme from '../../styles/theme'
-import useUserStore from '../../stores/useUserStore'
+import theme from '@styles/theme'
+import useUserStore from '@stores/useUserStore'
 
 function NicknameInput() {
   const name = useUserStore((state) => state.name)

@@ -2,11 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useShallow } from 'zustand/react/shallow'
 import { CloseOutlined } from '@ant-design/icons'
-import useFeedStore from '../../../../stores/useFeedStore'
-import {
-  BlueFieldTag,
-  WhiteFieldTag,
-} from '../../../../components/Tags/Tags.style'
+import useFeedStore from '@stores/useFeedStore'
+import { BlueFieldTag, WhiteFieldTag } from '@components/Tags/Tags.style'
 
 function SubcategoryField({ selectedSubcategory, categoryId }) {
   const deleteSelectedSubcategory = useFeedStore(

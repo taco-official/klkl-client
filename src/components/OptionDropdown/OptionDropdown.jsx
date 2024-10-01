@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Dropdown } from 'antd'
 
 import Icons from '../Icons/Icons'
-import theme from '../../styles/theme'
+import theme from '@styles/theme'
 
 function OptionDropdown({ editOnclick, deleteOnclick }) {
   const items = [

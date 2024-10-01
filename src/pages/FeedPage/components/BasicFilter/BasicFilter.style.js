@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import theme from '../../../../styles/theme'
+import theme from '@styles/theme'
 
 const FilterContainer = styled.aside`
   min-width: 10.17rem;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import ProfileImage from './ProfileImage'
-import theme from '../../styles/theme'
+import theme from '@styles/theme'
 
 export default function UserProfile({ userData, profileButton }) {
   const navigate = useNavigate()

@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import sortStandard from '../constants/sortStandard'
+import sortStandard from '@constants/sortStandard'
 
 const initialState = {
   selectedCountry: {},

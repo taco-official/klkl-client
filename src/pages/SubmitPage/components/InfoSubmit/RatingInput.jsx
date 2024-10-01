@@ -1,6 +1,6 @@
 import React from 'react'
 import { Rate } from 'antd'
-import useFormStore from '../../../../stores/useFormStore'
+import useFormStore from '@stores/useFormStore'
 
 export default function InfoSubmitForm() {
   const rating = useFormStore((state) => state.rating)

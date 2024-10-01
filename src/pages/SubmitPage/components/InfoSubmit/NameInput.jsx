@@ -1,7 +1,7 @@
 import React from 'react'
 import { Input } from 'antd'
-import useFormStore from '../../../../stores/useFormStore'
-import theme from '../../../../styles/theme'
+import useFormStore from '@stores/useFormStore'
+import theme from '@styles/theme'
 
 function NameInput() {
   const name = useFormStore((state) => state.name)

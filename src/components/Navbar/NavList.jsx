@@ -1,14 +1,16 @@
 import React from 'react'
 import { styled } from 'styled-components'
 
-import router from '../../router'
-import { navIndex, modalIndex } from '../../constants/navIndex'
-import { useCurrentPageStore, useModalStore } from '../../stores/navbarStores'
+import useUserData from '@hooks/useUserData'
+import { navIndex, modalIndex } from '@constants/navIndex'
+import { useCurrentPageStore, useModalStore } from '@stores/navbarStores'
+import theme from '@styles/theme'
+import router from '@/router'
 import Notification from './components/Notification'
-import theme from '../../styles/theme'
 import Icons from '../Icons/Icons'
 
 export default function NavList() {
+  const { data: userData } = useUserData()
   const currentPage = useCurrentPageStore((state) => state.currentPage)
   const { modalState, setModalState } = useModalStore()
 
@@ -35,26 +37,18 @@ export default function NavList() {
         검색
       </NavButtonLi>
 
-      <NavButtonLi
-        $isbold={modalState === modalIndex.NOTIFICATION}
-        onClick={() => {
-          if (modalState === modalIndex.NOTIFICATION)
-            setModalState(modalIndex.NONE)
-          else setModalState(modalIndex.NOTIFICATION)
-        }}
-      >
-        <Notification />
-      </NavButtonLi>
-
-      <NavButtonLi
-        $isbold={
-          currentPage === navIndex.FAVORITE && modalState === modalIndex.NONE
-        }
-        onClick={() => {}}
-      >
-        <Icons $size="1.4em">favorite</Icons>
-        좋아요
-      </NavButtonLi>
+      {userData && (
+        <NavButtonLi
+          $isbold={modalState === modalIndex.NOTIFICATION}
+          onClick={() => {
+            if (modalState === modalIndex.NOTIFICATION)
+              setModalState(modalIndex.NONE)
+            else setModalState(modalIndex.NOTIFICATION)
+          }}
+        >
+          <Notification />
+        </NavButtonLi>
+      )}
     </NavUl>
   )
 }

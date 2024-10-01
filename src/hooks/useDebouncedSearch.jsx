@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { Divider } from 'antd'
 import { debounce } from 'lodash-es'
 
-import router from '../router'
-import { modalIndex } from '../constants/navIndex'
+import { modalIndex } from '@constants/navIndex'
+import theme from '@styles/theme'
+import router from '@/router'
 import { kyInstance } from './kyInstance'
-import theme from '../styles/theme'
 
 const SearchMapping = {
   products: '리뷰',

@@ -2,10 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, ConfigProvider, notification } from 'antd'
 
-import useUserData from '../../hooks/useUserData'
-import theme from '../../styles/theme'
-import useKyQuery from '../../hooks/useKyQuery'
-import useKyMutation from '../../hooks/useKyMutation'
+import useLoginModal from '@hooks/useLoginModal'
+import useUserData from '@hooks/useUserData'
+import theme from '@styles/theme'
+import useKyQuery from '@hooks/useKyQuery'
+import useKyMutation from '@hooks/useKyMutation'
 
 const useCheckFollow = (id) => {
   const {
@@ -69,12 +70,13 @@ const useUnFollow = (id) => {
 }
 
 function UserFollowButton({ id }) {
-  const { data } = useUserData()
+  const { data: userData } = useUserData()
   const isFollowed = useCheckFollow(id)
   const followUser = useFollow(id)
   const unFollowUser = useUnFollow(id)
+  const popLoginModal = useLoginModal()
 
-  if (data?.data.id === id) return null
+  if (userData?.data.id === id) return null
 
   return (
     <ConfigProvider
@@ -96,7 +98,10 @@ function UserFollowButton({ id }) {
       ) : (
         <Button
           type="primary"
-          onClick={followUser}
+          onClick={() => {
+            if (userData) followUser()
+            else popLoginModal()
+          }}
         >
           팔로우
         </Button>

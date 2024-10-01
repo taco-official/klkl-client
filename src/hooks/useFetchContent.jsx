@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import initialPageData from '../constants/initialPageData'
+import initialPageData from '@constants/initialPageData'
 import useUserData from './useUserData'
 import useKyQuery from './useKyQuery'
-import parseQueryParams from '../utils/parseQueryParams'
-import ProductFeed from '../components/ProductFeed/ProductFeed'
+import parseQueryParams from '@utils/parseQueryParams'
+import ProductFeed from '@components/ProductFeed/ProductFeed'
 
 const useFetchContent = (id) => {
   const [currentPage, setCurrentPage] = useState(initialPageData)

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button } from 'antd'
 import { useNavigate } from 'react-router-dom'
-import theme from '../../styles/theme'
+import theme from '@styles/theme'
 
 function UserEditButton() {
   const naviagte = useNavigate()

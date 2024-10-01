@@ -2,14 +2,14 @@ import React, { useState } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components'
 import { FloatButton } from 'antd'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLoaderData } from 'react-router-dom'
 
-import usePopularReview from '../../hooks/usePopularReview'
-import useNewReview from '../../hooks/useNewReview'
-import Icons from '../../components/Icons/Icons'
+import Icons from '@components/Icons/Icons'
+import useUserData from '@hooks/useUserData'
 import MainBanner from './MainBanner'
 import ReviewCarousels from './ReviewCarousel'
-import theme from '../../styles/theme'
+import theme from '@styles/theme'
+import useLoginModal from '@hooks/useLoginModal'
 
 const ImageArr = [
   {
@@ -37,11 +37,11 @@ const ImageArr = [
 ]
 
 export default function HomePage() {
+  const { popularReviews, newReviews } = useLoaderData()
+  const { data: userData } = useUserData()
   const [bannerImages] = useState(ImageArr)
   const navigate = useNavigate()
-
-  const popularReview = usePopularReview()
-  const newReview = useNewReview()
+  const popLoginModal = useLoginModal()
 
   return (
     <>
@@ -49,11 +49,17 @@ export default function HomePage() {
       <MainArea>
         <div>
           <h1>인기 리뷰</h1>
-          <ReviewCarousels contents={popularReview} />
+          <ReviewCarousels
+            contents={popularReviews.data.content}
+            userData={userData}
+          />
         </div>
         <div>
           <h1>신규 리뷰</h1>
-          <ReviewCarousels contents={newReview} />
+          <ReviewCarousels
+            contents={newReviews.data.content}
+            userData={userData}
+          />
         </div>
       </MainArea>
       {createPortal(
@@ -66,9 +72,11 @@ export default function HomePage() {
               edit_square
             </Icons>
           }
-          onClick={() =>
-            navigate('/submit', { state: { from: window.location.pathname } })
-          }
+          onClick={() => {
+            if (userData)
+              navigate('/submit', { state: { from: window.location.pathname } })
+            else popLoginModal()
+          }}
           type="primary"
           tooltip="리뷰 작성하러 가기"
           style={{ bottom: '10px' }}

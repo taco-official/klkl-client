@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { Divider } from 'antd'
 import { useParams, useLoaderData } from 'react-router-dom'
 import { toInteger } from 'lodash-es'
-import useFetchContent from '../../hooks/useFetchContent'
-import UserProfile from '../../components/UserProfile/UserProfile'
-import UserFollowButton from '../../components/UserProfile/UserFollowButton'
+import useFetchContent from '@hooks/useFetchContent'
+import UserProfile from '@components/UserProfile/UserProfile'
+import UserFollowButton from '@components/UserProfile/UserFollowButton'
 
 function UserPage() {
   const { id } = useParams()

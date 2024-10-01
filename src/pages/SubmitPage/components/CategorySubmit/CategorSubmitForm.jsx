@@ -1,5 +1,5 @@
 import React from 'react'
-import useKyQuery from '../../../../hooks/useKyQuery'
+import useKyQuery from '@hooks/useKyQuery'
 
 import CategorySelectList from './CategorySelectList'
 import TagSelectForm from './TagSelectForm'

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
+import { method } from '@hooks/kyInstance'
+import useReviewSubmit from '@hooks/useReviewSubmit'
 import LoadingPage from '../../LoadingPage'
-import { method } from '../../../hooks/kyInstance'
-import useReviewSubmit from '../../../hooks/useReviewSubmit'
 
 function PostPage() {
   const isCreate = window.location.pathname === '/submit'

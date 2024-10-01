@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLoaderData } from 'react-router-dom'
-import useFormStore from '../stores/useFormStore'
+import useFormStore from '@stores/useFormStore'
 
 const useInitialData = () => {
   const resetFormContents = useFormStore((state) => state.resetFormContents)

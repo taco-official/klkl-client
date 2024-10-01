@@ -3,8 +3,8 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { FloatButton } from 'antd'
 
-import Icons from '../../components/Icons/Icons'
-import useProductLike from '../../hooks/useProductLike'
+import Icons from '@components/Icons/Icons'
+import useProductLike from '@hooks/useProductLike'
 
 export default function ReviewLikeButton({ userData, productId }) {
   const { isLiked, handleLike } = useProductLike(userData, productId)

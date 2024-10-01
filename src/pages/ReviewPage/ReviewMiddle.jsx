@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import Icons from '../../components/Icons/Icons'
-import theme from '../../styles/theme'
+import Icons from '@components/Icons/Icons'
+import theme from '@styles/theme'
 
 function ReviewMiddleBlock({ address, price, currency }) {
   return (

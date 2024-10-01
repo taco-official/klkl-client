@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { useLoaderData, useLocation } from 'react-router-dom'
 import { useShallow } from 'zustand/react/shallow'
-import useFeedStore from '../stores/useFeedStore'
-import inArray from '../utils/inArray'
+import useFeedStore from '@stores/useFeedStore'
+import inArray from '@utils/inArray'
 
 const useInitializeCountry = (locationState, regionData) => {
   const selectedCountry = useFeedStore((state) => state.selectedCountry)
