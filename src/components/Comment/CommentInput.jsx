@@ -46,7 +46,7 @@ export default function CommentInput({ userData }) {
   return (
     <CommentInputBox>
       <ProfileImage
-        src={userData?.image}
+        src={userData?.image.url}
         $size="2.5rem"
       />
       <ConfigProvider theme={inputTheme}>
@@ -56,7 +56,6 @@ export default function CommentInput({ userData }) {
           maxLength={200}
           size="large"
           autoSize={{ maxRows: 1 }}
-          value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
           onClick={() => {
             if (!userData) popLoginModal()
@@ -75,7 +74,9 @@ export default function CommentInput({ userData }) {
   )
 }
 CommentInput.propTypes = {
-  userData: PropTypes.shape({ image: PropTypes.string }),
+  userData: PropTypes.shape({
+    image: PropTypes.shape({ url: PropTypes.string }),
+  }),
 }
 
 const CommentInputBox = styled.div`
