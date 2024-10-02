@@ -31,6 +31,7 @@ const kyInstance = ky.create({
     methods: ['get', 'post', 'put'],
     statusCodes: [500],
   },
+  credentials: 'include',
 })
 
 export { method, kyInstance }
