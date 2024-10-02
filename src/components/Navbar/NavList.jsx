@@ -1,16 +1,16 @@
 import React from 'react'
 import { styled } from 'styled-components'
 
-import useUserData from '@hooks/useUserData'
 import { navIndex, modalIndex } from '@constants/navIndex'
 import { useCurrentPageStore, useModalStore } from '@stores/navbarStores'
 import theme from '@styles/theme'
 import router from '@/router'
+import useLoginStatus from '@/stores/useLoginStatus'
 import Notification from './components/Notification'
 import Icons from '../Icons/Icons'
 
 export default function NavList() {
-  const { data: userData } = useUserData()
+  const isLogin = useLoginStatus((state) => state.isLogin)
   const currentPage = useCurrentPageStore((state) => state.currentPage)
   const { modalState, setModalState } = useModalStore()
 
@@ -37,7 +37,7 @@ export default function NavList() {
         검색
       </NavButtonLi>
 
-      {userData && (
+      {isLogin && (
         <NavButtonLi
           $isbold={modalState === modalIndex.NOTIFICATION}
           onClick={() => {
