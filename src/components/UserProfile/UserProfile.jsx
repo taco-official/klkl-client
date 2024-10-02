@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import ProfileImage from './ProfileImage'
 import theme from '@styles/theme'
+import ProfileImage from './ProfileImage'
 
 export default function UserProfile({ userData, profileButton }) {
   const navigate = useNavigate()
@@ -63,6 +63,7 @@ const SimpleUserInfo = styled.div`
     font-family: ${theme.style.mainBold};
     font-size: ${theme.size.textMD};
     cursor: pointer;
+    width: fit-content;
   }
 
   .profile--user__introduce {
