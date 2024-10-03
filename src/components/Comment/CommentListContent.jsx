@@ -2,11 +2,10 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
-
+import theme from '@styles/theme'
 import CommentEdit from './CommentEdit'
 import ProfileImage from '../UserProfile/ProfileImage'
 import CommentOptions from './CommentOptions'
-import theme from '@styles/theme'
 
 export default function CommentListContent({ comment, canEdit }) {
   const navigate = useNavigate()

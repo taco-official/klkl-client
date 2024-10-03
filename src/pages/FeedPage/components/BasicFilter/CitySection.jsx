@@ -1,8 +1,8 @@
 import React from 'react'
-import { Checkbox } from 'antd'
 import PropTypes from 'prop-types'
-import useFeedStore from '@stores/useFeedStore'
+import { Checkbox } from 'antd'
 import inArray from '@utils/inArray'
+import useFeedStore from '@stores/useFeedStore'
 import {
   SectionContainer,
   SelectContainer,

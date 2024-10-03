@@ -1,11 +1,10 @@
 import React, { useState, useCallback } from 'react'
 import styled from 'styled-components'
-import { Divider } from 'antd'
 import { debounce } from 'lodash-es'
-
-import { modalIndex } from '@constants/navIndex'
-import theme from '@styles/theme'
+import { Divider } from 'antd'
 import router from '@/router'
+import theme from '@styles/theme'
+import { modalIndex } from '@constants/navIndex'
 import { kyInstance } from './kyInstance'
 
 const SearchMapping = {

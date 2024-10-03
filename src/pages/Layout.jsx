@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { RouterProvider } from 'react-router-dom'
-
 import router from '@/router'
+import GlobalStyle from '@styles/GlobalStyle'
 import useLoginStatus from '@/stores/useLoginStatus'
+import useKyQuery from '@/hooks/useKyQuery'
 import NavBar from '@components/Navbar/NavBar'
 import Footer from '@components/Footer/Footer'
-import GlobalStyle from '@styles/GlobalStyle'
-import useKyQuery from '@/hooks/useKyQuery'
 
 export default function Layout() {
   const { isError, isLoading } = useKyQuery('me', undefined, {

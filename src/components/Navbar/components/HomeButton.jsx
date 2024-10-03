@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import theme from '@styles/theme'
 import router from '@/router'
+import theme from '@styles/theme'
 import PlainButton from '../../Button/PlainButton'
 
 export default function HomeButton() {

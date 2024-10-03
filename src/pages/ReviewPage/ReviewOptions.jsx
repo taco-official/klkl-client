@@ -1,10 +1,9 @@
 import React from 'react'
-import { Modal, notification } from 'antd'
 import { useNavigate, useLocation } from 'react-router-dom'
-
-import OptionDropdown from '@components/OptionDropdown/OptionDropdown'
-import { kyInstance } from '@hooks/kyInstance'
+import { Modal, notification } from 'antd'
 import theme from '@styles/theme'
+import { kyInstance } from '@hooks/kyInstance'
+import OptionDropdown from '@components/OptionDropdown/OptionDropdown'
 
 function ReviewOptions() {
   const location = useLocation()

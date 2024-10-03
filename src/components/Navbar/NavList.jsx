@@ -1,10 +1,9 @@
 import React from 'react'
-import { styled } from 'styled-components'
-
+import styled from 'styled-components'
+import router from '@/router'
+import theme from '@styles/theme'
 import { navIndex, modalIndex } from '@constants/navIndex'
 import { useCurrentPageStore, useModalStore } from '@stores/navbarStores'
-import theme from '@styles/theme'
-import router from '@/router'
 import useLoginStatus from '@/stores/useLoginStatus'
 import Notification from './components/Notification'
 import Icons from '../Icons/Icons'

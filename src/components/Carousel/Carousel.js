@@ -1,5 +1,5 @@
-import Flickity from 'react-flickity-component'
 import styled from 'styled-components'
+import Flickity from 'react-flickity-component'
 
 const StyledFlickity = styled(Flickity)`
   width: 100%;

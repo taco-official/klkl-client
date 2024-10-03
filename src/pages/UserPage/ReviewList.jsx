@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import initialPageData from '@constants/initialPageData'
+import parseQueryParams from '@utils/parseQueryParams'
 import useUserData from '@hooks/useUserData'
 import useKyQuery from '@hooks/useKyQuery'
-import parseQueryParams from '@utils/parseQueryParams'
 import ProductFeed from '@components/ProductFeed/ProductFeed'
 
 function ReviewList({ selectedMenu }) {

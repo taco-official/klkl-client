@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import { useLoaderData } from 'react-router-dom'
 import { Divider } from 'antd'
-
 import theme from '@styles/theme'
 import useUserStore from '@stores/useUserStore'
 import ProfileEditBlock from './ProfileEditBlock'

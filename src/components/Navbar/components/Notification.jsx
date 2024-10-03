@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Dropdown, Badge } from 'antd'
-
 import { modalIndex } from '@constants/navIndex'
 import { useModalStore } from '@stores/navbarStores'
 import useNotificationFetch from '@hooks/useNotificationFetch'

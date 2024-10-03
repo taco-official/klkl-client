@@ -1,7 +1,6 @@
-import { React } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-
 import CommentListContent from './CommentListContent'
 
 export default function CommentList({ comments, userId }) {

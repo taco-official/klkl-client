@@ -1,10 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { Dropdown } from 'antd'
-
-import Icons from '../Icons/Icons'
 import theme from '@styles/theme'
+import Icons from '../Icons/Icons'
 
 function OptionDropdown({ editOnclick, deleteOnclick }) {
   const items = [

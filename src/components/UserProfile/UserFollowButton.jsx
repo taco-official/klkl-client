@@ -1,12 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Button, ConfigProvider, notification } from 'antd'
-
-import useLoginModal from '@hooks/useLoginModal'
-import useUserData from '@hooks/useUserData'
 import theme from '@styles/theme'
+import useUserData from '@hooks/useUserData'
 import useKyQuery from '@hooks/useKyQuery'
 import useKyMutation from '@hooks/useKyMutation'
+import useLoginModal from '@hooks/useLoginModal'
 
 const useCheckFollow = (id) => {
   const {
