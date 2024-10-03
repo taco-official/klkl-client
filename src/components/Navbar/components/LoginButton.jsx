@@ -1,5 +1,5 @@
 import React from 'react'
-
+import router from '@/router'
 import { modalIndex } from '@constants/navIndex'
 import { useModalStore } from '@stores/navbarStores'
 import useUserData from '@hooks/useUserData'

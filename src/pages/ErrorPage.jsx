@@ -1,10 +1,9 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { useRouteError, useNavigate } from 'react-router-dom'
-
+import theme from '@styles/theme'
 import errorCode from '@/constants/errorCode'
 import ErrorImage from '@images/err.jpg'
-import theme from '@styles/theme'
 
 export default function ErrorPage() {
   const error = useRouteError()

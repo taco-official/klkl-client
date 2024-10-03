@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button, ConfigProvider } from 'antd'
 import PropTypes from 'prop-types'
+import { Button, ConfigProvider } from 'antd'
 import theme from '@styles/theme'
 import submitSteps from '@constants/submitSteps'
 import useFormStore from '@stores/useFormStore'

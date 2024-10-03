@@ -1,15 +1,14 @@
 import React, { useState } from 'react'
-import { createPortal } from 'react-dom'
 import styled from 'styled-components'
-import { FloatButton } from 'antd'
+import { createPortal } from 'react-dom'
 import { useNavigate, useLoaderData } from 'react-router-dom'
-
-import Icons from '@components/Icons/Icons'
+import { FloatButton } from 'antd'
+import theme from '@styles/theme'
 import useUserData from '@hooks/useUserData'
+import useLoginModal from '@hooks/useLoginModal'
+import Icons from '@components/Icons/Icons'
 import MainBanner from './MainBanner'
 import ReviewCarousels from './ReviewCarousel'
-import theme from '@styles/theme'
-import useLoginModal from '@hooks/useLoginModal'
 
 const ImageArr = [
   {

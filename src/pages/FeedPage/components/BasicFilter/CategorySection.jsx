@@ -1,10 +1,10 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { useLoaderData } from 'react-router-dom'
 import { useShallow } from 'zustand/react/shallow'
 import { Checkbox } from 'antd'
-import PropTypes from 'prop-types'
-import useFeedStore from '@stores/useFeedStore'
 import inArray from '@utils/inArray'
+import useFeedStore from '@stores/useFeedStore'
 import SubcategoryArray from './SubcategoryArray'
 import {
   SectionContainer,

@@ -1,6 +1,6 @@
-import { React } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import StyledFlickity from '@components/Carousel/Carousel'
 import PreviewContent from '@components/PreviewContent/PreviewContent'
 

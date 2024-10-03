@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
-
 import theme from '@styles/theme'
 import dateParser from '@utils/dateParser'
 import CommentEdit from './CommentEdit'

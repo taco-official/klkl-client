@@ -1,11 +1,10 @@
 import React, { useRef } from 'react'
 import styled from 'styled-components'
-import { Button } from 'antd'
 import PropTypes from 'prop-types'
-
+import { Button } from 'antd'
 import theme from '@styles/theme'
-import ProfileImage from '@components/UserProfile/ProfileImage'
 import useUserStore from '@stores/useUserStore'
+import ProfileImage from '@components/UserProfile/ProfileImage'
 
 function ProfileEditBlock({ name }) {
   const inputRef = useRef()

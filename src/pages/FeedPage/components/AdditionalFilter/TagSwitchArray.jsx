@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ConfigProvider, Button, theme as antdTheme } from 'antd'
+import theme from '@styles/theme'
+import inArray from '@utils/inArray'
 import useFeedStore from '@stores/useFeedStore'
 import useTagData from '@hooks/useTagData'
-import inArray from '@utils/inArray'
-import theme from '@styles/theme'
 import MessageBox from './TagSwitch.style'
 import { buttonTheme } from '../../FeedPage.style'
 

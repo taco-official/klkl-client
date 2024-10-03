@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
-import { Menu } from 'antd'
 import styled from 'styled-components'
-
+import { Menu } from 'antd'
 import theme from '@styles/theme'
 import userMenuKeys from '@constants/userMenuKeys'
 import Withdrawal from './Withdrawal'

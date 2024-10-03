@@ -1,7 +1,6 @@
 import React from 'react'
-import { createPortal } from 'react-dom'
 import styled from 'styled-components'
-
+import { createPortal } from 'react-dom'
 import theme from '@styles/theme'
 import NavList from './NavList'
 import LoginButton from './components/LoginButton'

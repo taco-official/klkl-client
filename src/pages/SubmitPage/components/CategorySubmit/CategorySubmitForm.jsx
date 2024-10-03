@@ -1,10 +1,9 @@
 import React from 'react'
 import useKyQuery from '@hooks/useKyQuery'
-
 import CategorySelectList from './CategorySelectList'
 import TagSelectForm from './TagSelectForm'
 
-export default function CategorSubmitForm() {
+export default function CategorySubmitForm() {
   const { data: categories } = useKyQuery('categories/hierarchy')
 
   return (

@@ -1,16 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Divider } from 'antd'
-
 import useCheckAuth from '@/hooks/useCheckAuth'
+import useUserData from '@hooks/useUserData'
 import UserEditButton from '@components/UserProfile/UserEditButton'
 import UserProfile from '@components/UserProfile/UserProfile'
-import useUserData from '@hooks/useUserData'
 import MyMenu from './MyMenu'
 
 function MyPage() {
-  const { data: userData } = useUserData()
   useCheckAuth()
+  const { data: userData } = useUserData()
 
   return (
     <Wrapper>

@@ -2,12 +2,11 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
-
+import theme from '@styles/theme'
+import uploadeToS3 from '@utils/uploadToS3'
+import useUserStore from '@stores/useUserStore'
 import { kyInstance } from '@hooks/kyInstance'
 import useKyMutation from '@hooks/useKyMutation'
-import theme from '@styles/theme'
-import useUserStore from '@stores/useUserStore'
-import uploadeToS3 from '@utils/uploadToS3'
 
 const useEditProfile = () => {
   const [isLoading, setLoading] = useState(false)
