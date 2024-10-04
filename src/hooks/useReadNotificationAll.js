@@ -10,6 +10,7 @@ function useReadNotificationAll() {
     try {
       await mutateAsync()
     } catch (error) {
+      alert('다시 시도해 주세요')
       console.log(error)
     }
   }

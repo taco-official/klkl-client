@@ -45,6 +45,8 @@ const useEditProfile = () => {
       navigate('/me')
     } catch (error) {
       console.error(error)
+      alert('다시 시도해 주세요')
+      setLoading(false)
     }
   }
 

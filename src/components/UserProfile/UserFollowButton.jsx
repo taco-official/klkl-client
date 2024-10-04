@@ -37,7 +37,8 @@ const useFollow = (id) => {
         closeIcon: false,
       })
     } catch (error) {
-      window.alert('다시 시도해 주세요')
+      console.error(error)
+      alert('다시 시도해 주세요')
     }
   }
 
@@ -62,7 +63,7 @@ const useUnFollow = (id) => {
         closeIcon: false,
       })
     } catch (error) {
-      window.alert('다시 시도해 주세요')
+      alert('다시 시도해 주세요')
     }
   }
 
