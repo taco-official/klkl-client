@@ -11,8 +11,8 @@ const homeLoader = async () => {
       .json()
 
     return { newReviews, popularReviews }
-  } catch {
-    throw Error('상품 정보를 불러오는 데에 실패했습니다')
+  } catch (error) {
+    throw Error(`${error.response.status}`)
   }
 }
 

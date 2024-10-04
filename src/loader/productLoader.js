@@ -7,7 +7,7 @@ const productLoader = async ({ params }) => {
     const response = await kyInstance.get(`products/${id}`).json()
     return response
   } catch (error) {
-    throw new Response('Not Found', { status: error.response.status })
+    throw Error(`${error.response.status}`)
   }
 }
 

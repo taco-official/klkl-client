@@ -7,7 +7,7 @@ const userLoader = async ({ params }) => {
     const response = await kyInstance.get(`members/${id}`).json()
     return response
   } catch (error) {
-    throw new Response('User Not Found', { status: error.response.status })
+    throw Error(`${error.response.status}`)
   }
 }
 

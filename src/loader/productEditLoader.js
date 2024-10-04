@@ -12,7 +12,7 @@ const productLoader = async ({ params }) => {
 
     return productData
   } catch (error) {
-    throw new Response('Not Found', { status: error.response.status })
+    throw Error(`${error.response.status}`)
   }
 }
 
