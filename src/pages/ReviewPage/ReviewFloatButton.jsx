@@ -9,7 +9,11 @@ import Icons from '@components/Icons/Icons'
 import theme from '@styles/theme'
 import ReviewLikeButton from './ReviewLikeButton'
 
-export default function ReviewFloatButton({ userData, productId }) {
+export default function ReviewFloatButton({
+  userData,
+  productId,
+  likeContent = false,
+}) {
   const copyToClipboard = () => {
     navigator.clipboard.writeText(window.location.href).then(() =>
       notification.success({
@@ -36,6 +40,7 @@ export default function ReviewFloatButton({ userData, productId }) {
       <ReviewLikeButton
         userData={userData}
         productId={productId}
+        likeContent={likeContent}
       />
 
       <CustomFloatButton
@@ -52,6 +57,7 @@ export default function ReviewFloatButton({ userData, productId }) {
 ReviewFloatButton.propTypes = {
   userData: PropTypes.shape({}),
   productId: PropTypes.number.isRequired,
+  likeContent: PropTypes.bool.isRequired,
 }
 
 const CustomFloatButton = styled(FloatButton)`

@@ -1,20 +1,7 @@
-import { useEffect } from 'react'
-import useLoginModal from './useLoginModal'
 import { method } from './kyInstance'
-import useKyQuery from './useKyQuery'
 import useKyMutation from './useKyMutation'
 
-const useProductLike = (userData, productId) => {
-  const { data: isLiked, refetch: getLike } = useKyQuery(
-    `products/${productId}/likes`,
-    ['products/likes', productId],
-    {
-      enabled: !!userData,
-      refetchOnWindowFocus: false,
-      initialData: { data: { isLiked: false } },
-      select: (data) => data.data.isLiked,
-    }
-  )
+const useProductLike = (productId) => {
   const { mutateAsync: like } = useKyMutation(
     method.POST,
     `products/${productId}/likes`,
@@ -25,8 +12,6 @@ const useProductLike = (userData, productId) => {
     `products/${productId}/likes`,
     ['products/likes', productId]
   )
-
-  const popLoginModal = useLoginModal()
 
   const likeProduct = async () => {
     try {
@@ -45,29 +30,7 @@ const useProductLike = (userData, productId) => {
     }
   }
 
-  useEffect(() => {
-    const fetchLikeContent = async () => {
-      try {
-        await getLike()
-      } catch (error) {
-        console.error(error)
-      }
-    }
-
-    if (!userData) return
-    fetchLikeContent()
-  }, [userData])
-
-  const handleLike = async () => {
-    if (!userData) {
-      popLoginModal()
-      return
-    }
-    if (!isLiked) await likeProduct()
-    else await unlikeProduct()
-  }
-
-  return { isLiked, handleLike }
+  return { likeProduct, unlikeProduct }
 }
 
 export default useProductLike
