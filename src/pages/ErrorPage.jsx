@@ -1,22 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import GlobalStyle from '@styles/GlobalStyle'
+import { useRouteError, useNavigate } from 'react-router-dom'
+
+import errorCode from '@/constants/errorCode'
 import ErrorImage from '@images/err.jpg'
 import theme from '@styles/theme'
 
 export default function ErrorPage() {
+  const error = useRouteError()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (error.message === errorCode.ERROR_UNAUTHORIZED) {
+      alert('로그인 후 이용해주세요')
+      navigate('/')
+    }
+  }, [])
+
+  if (error.message === errorCode.ERROR_UNAUTHORIZED) return null
+
   return (
-    <>
-      <GlobalStyle />
-      <ErrorBody>
-        <img src={ErrorImage} />
-        <div>
-          <span>404 not found</span>
-          <br />
-          <span>페이지를 찾을 수 없습니다</span>
-        </div>
-      </ErrorBody>
-    </>
+    <ErrorBody>
+      <img src={ErrorImage} />
+      <div>
+        <span>404 not found</span>
+        <br />
+        <span>페이지를 찾을 수 없습니다</span>
+      </div>
+    </ErrorBody>
   )
 }
 
