@@ -4,7 +4,7 @@ import uploadToS3 from '@utils/uploadToS3'
 import useFormStore from '@stores/useFormStore'
 import { kyInstance } from './kyInstance'
 
-const useReviewSubmit = (httpMethod, uri) => {
+const useReviewSubmit = (httpMethod, uri, goPrevStep) => {
   const reviewData = useFormStore((state) => ({
     name: state.name,
     description: state.description,
@@ -60,7 +60,10 @@ const useReviewSubmit = (httpMethod, uri) => {
       resetReviewContents()
       navigate(`/products/${id}`, { state: { from: window.location.pathname } })
     } catch (err) {
-      console.log(err)
+      alert(`이미지 업로드를 실패했습니다\n다시 시도해주세요`)
+      console.error(err)
+      await kyInstance.delete(`products/${id}`)
+      goPrevStep()
     }
   }
 
