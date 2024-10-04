@@ -17,7 +17,7 @@ const useEditProfile = () => {
     description: state.description,
   }))
 
-  const { mutateAsync } = useKyMutation('put', 'members/me')
+  const { mutateAsync } = useKyMutation('put', 'me')
 
   const profileUrl = useUserStore((state) => state.profileUrl)
 
@@ -26,7 +26,7 @@ const useEditProfile = () => {
     try {
       if (typeof profileUrl !== 'string') {
         const { data } = await kyInstance
-          .post('members/me/upload-url', {
+          .post('me/upload-url', {
             body: JSON.stringify({
               fileExtension: profileUrl.type.split('/')[1],
             }),
@@ -35,17 +35,17 @@ const useEditProfile = () => {
 
         await uploadeToS3([data], [profileUrl])
 
-        await kyInstance.post('members/me/upload-complete', {
+        await kyInstance.post('me/upload-complete', {
           body: JSON.stringify({ imageId: data.id }),
         })
       }
 
       await mutateAsync(JSON.stringify(body))
-      setLoading(false)
       navigate('/me')
     } catch (error) {
       console.error(error)
       alert('다시 시도해 주세요')
+    } finally {
       setLoading(false)
     }
   }

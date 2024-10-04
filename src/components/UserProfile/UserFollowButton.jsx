@@ -13,16 +13,16 @@ const useCheckFollow = (id) => {
     data: following,
     isLoading,
     isError,
-  } = useKyQuery(`members/me/following/${id}`, ['members/me/following', id])
+  } = useKyQuery(`me/following/${id}`, ['me/following', id])
 
-  if (isLoading || isError) return false
+  if (isLoading || isError) return undefined
 
   return following.data.isFollowing
 }
 
 const useFollow = (id) => {
-  const { mutateAsync } = useKyMutation('post', `members/me/following/${id}`, [
-    'members/me/following',
+  const { mutateAsync } = useKyMutation('post', `me/following/${id}`, [
+    'me/following',
     id,
   ])
 
@@ -46,11 +46,10 @@ const useFollow = (id) => {
 }
 
 const useUnFollow = (id) => {
-  const { mutateAsync } = useKyMutation(
-    'delete',
-    `members/me/following/${id}`,
-    ['members/me/following', id]
-  )
+  const { mutateAsync } = useKyMutation('delete', `me/following/${id}`, [
+    'me/following',
+    id,
+  ])
 
   const unFollowUser = async () => {
     try {
@@ -63,6 +62,7 @@ const useUnFollow = (id) => {
         closeIcon: false,
       })
     } catch (error) {
+      console.error(error)
       alert('다시 시도해 주세요')
     }
   }
@@ -76,6 +76,8 @@ function UserFollowButton({ id }) {
   const followUser = useFollow(id)
   const unFollowUser = useUnFollow(id)
   const popLoginModal = useLoginModal()
+
+  if (isFollowed === undefined) return null
 
   if (userData?.data.id === id) return null
 
