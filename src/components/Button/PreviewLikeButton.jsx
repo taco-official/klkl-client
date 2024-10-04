@@ -1,17 +1,33 @@
-import React from 'react' // useState,
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 import useProductLike from '@hooks/useProductLike'
+import useLoginModal from '@/hooks/useLoginModal'
 import IconTextButton from './IconTextButton'
 
 function PreviewLikeButton({
   userData,
   productId,
-  // likeContent = false,
+  likeContent = false,
   iconSize = '1.3rem',
 }) {
-  // const [isLiked, setIsLiked] = useState(likeContent)
-  const { isLiked, handleLike } = useProductLike(userData, productId)
+  const [isLiked, setIsLiked] = useState(likeContent)
+  const { likeProduct, unlikeProduct } = useProductLike(productId)
+  const popLoginModal = useLoginModal()
+
+  const handleLike = async () => {
+    if (!userData) {
+      popLoginModal()
+      return
+    }
+    if (!isLiked) {
+      await likeProduct()
+      setIsLiked(true)
+    } else {
+      await unlikeProduct()
+      setIsLiked(false)
+    }
+  }
 
   const iconValue = {
     color: isLiked ? 'red' : 'darkgray',
@@ -30,7 +46,7 @@ function PreviewLikeButton({
 PreviewLikeButton.propTypes = {
   userData: PropTypes.shape({}),
   productId: PropTypes.number.isRequired,
-  // likeContent: PropTypes.bool.isRequired,
+  likeContent: PropTypes.bool.isRequired,
   iconSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 

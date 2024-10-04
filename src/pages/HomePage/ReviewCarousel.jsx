@@ -26,6 +26,7 @@ export default function ReviewCarousels({ contents, userData }) {
             <PreviewContent
               userData={userData}
               productData={content}
+              likeContent={content.isLiked}
             />
           </ReviewWrapper>
         )

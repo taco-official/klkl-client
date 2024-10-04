@@ -1,13 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { FloatButton } from 'antd'
 
 import Icons from '@components/Icons/Icons'
 import useProductLike from '@hooks/useProductLike'
+import useLoginModal from '@/hooks/useLoginModal'
 
-export default function ReviewLikeButton({ userData, productId }) {
-  const { isLiked, handleLike } = useProductLike(userData, productId)
+export default function ReviewLikeButton({
+  userData,
+  productId,
+  likeContent = false,
+}) {
+  const [isLiked, setIsLiked] = useState(likeContent)
+  const { likeProduct, unlikeProduct } = useProductLike(productId)
+  const popLoginModal = useLoginModal()
+
+  const handleLike = async () => {
+    if (!userData) {
+      popLoginModal()
+      return
+    }
+    if (!isLiked) {
+      await likeProduct()
+      setIsLiked(true)
+    } else {
+      await unlikeProduct()
+      setIsLiked(false)
+    }
+  }
 
   return (
     <CustomFloatButton
@@ -26,6 +47,7 @@ export default function ReviewLikeButton({ userData, productId }) {
 ReviewLikeButton.propTypes = {
   userData: PropTypes.shape({}),
   productId: PropTypes.number.isRequired,
+  likeContent: PropTypes.bool.isRequired,
 }
 
 const CustomFloatButton = styled(FloatButton)`
