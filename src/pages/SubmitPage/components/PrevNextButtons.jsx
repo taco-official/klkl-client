@@ -8,7 +8,7 @@ import useFormStore from '@stores/useFormStore'
 const checkCanNext = (step, review) => {
   switch (step) {
     case submitSteps.IMAGE:
-      return true
+      return review.images.length !== 0
     case submitSteps.REGION:
       return review.region && review.country && review.city
     case submitSteps.INFO:
