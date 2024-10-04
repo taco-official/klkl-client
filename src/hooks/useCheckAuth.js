@@ -1,8 +1,8 @@
 import errorCode from '@constants/errorCode'
-import useLoginStatus from '@/stores/useLoginStatus'
+import useLoginStore from '@/stores/useLoginStore'
 
 const useCheckAuth = () => {
-  const isLogin = useLoginStatus((state) => state.isLogin)
+  const isLogin = useLoginStore((state) => state.isLogin)
 
   if (!isLogin) throw Error(errorCode.ERROR_UNAUTHORIZED)
 }

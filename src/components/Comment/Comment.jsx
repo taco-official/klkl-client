@@ -32,6 +32,7 @@ export default function Comment({ userData }) {
     </CommentSection>
   )
 }
+
 Comment.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.number,
