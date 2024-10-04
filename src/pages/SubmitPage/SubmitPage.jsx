@@ -1,21 +1,14 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 
-import * as Form from './components/index'
-import PostPage from './components/PostPage'
 import submitSteps from '@constants/submitSteps'
-import PrevNextButtons from './components/PrevNextButtons'
-import SubmitSteps from './components/SubmitSteps'
 import theme from '@styles/theme'
 import useInitialData from '@hooks/useInitialData'
-
-const pages = {
-  [submitSteps.IMAGE]: <Form.ImageSubmitForm />,
-  [submitSteps.REGION]: <Form.RegionSubmitForm />,
-  [submitSteps.INFO]: <Form.InfoSubmitForm />,
-  [submitSteps.CATEGORY]: <Form.CategorSubmitForm />,
-  [submitSteps.LOADING]: <PostPage />,
-}
+import useCheckAuth from '@/hooks/useCheckAuth'
+import * as Form from './components/index'
+import PostPage from './components/PostPage'
+import PrevNextButtons from './components/PrevNextButtons'
+import SubmitSteps from './components/SubmitSteps'
 
 const useStep = () => {
   const [step, setStep] = useState(0)
@@ -31,7 +24,17 @@ const useStep = () => {
 
 export default function SubmitPage() {
   const [step, goNextStep, goPrevStep] = useStep()
+
+  useCheckAuth()
   useInitialData()
+
+  const pages = {
+    [submitSteps.IMAGE]: <Form.ImageSubmitForm />,
+    [submitSteps.REGION]: <Form.RegionSubmitForm />,
+    [submitSteps.INFO]: <Form.InfoSubmitForm />,
+    [submitSteps.CATEGORY]: <Form.CategorSubmitForm />,
+    [submitSteps.LOADING]: <PostPage goPrevStep={goPrevStep} />,
+  }
 
   return (
     <Wrapper>

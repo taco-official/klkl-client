@@ -1,23 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
 import { Divider } from 'antd'
 
+import useCheckAuth from '@/hooks/useCheckAuth'
 import UserEditButton from '@components/UserProfile/UserEditButton'
 import UserProfile from '@components/UserProfile/UserProfile'
 import useUserData from '@hooks/useUserData'
 import MyMenu from './MyMenu'
 
 function MyPage() {
-  const { data: userData, isLoading, isError } = useUserData()
-  const navigate = useNavigate()
-
-  if (isError) {
-    alert('로그인 후 사용 가능합니다')
-    navigate('/')
-  }
-
-  if (isLoading) return null
+  const { data: userData } = useUserData()
+  useCheckAuth()
 
   return (
     <Wrapper>
