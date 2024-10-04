@@ -72,6 +72,7 @@ export default function CommentInput({ userData }) {
     </CommentInputBox>
   )
 }
+
 CommentInput.propTypes = {
   userData: PropTypes.shape({
     image: PropTypes.shape({ url: PropTypes.string }),

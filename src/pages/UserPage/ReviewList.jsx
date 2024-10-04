@@ -29,6 +29,7 @@ function ReviewList({ selectedMenu }) {
     />
   )
 }
+
 ReviewList.propTypes = {
   selectedMenu: PropTypes.string.isRequired,
 }

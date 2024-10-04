@@ -57,6 +57,7 @@ function ProfileEditBlock({ name }) {
     </ProfileEditBlockWrapper>
   )
 }
+
 ProfileEditBlock.propTypes = { name: PropTypes.string.isRequired }
 
 const ProfileEditBlockWrapper = styled.div`

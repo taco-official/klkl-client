@@ -62,6 +62,7 @@ function NotificationContent({ content }) {
     </ContentWrapper>
   )
 }
+
 NotificationContent.propTypes = {
   content: PropTypes.shape({
     id: PropTypes.number,

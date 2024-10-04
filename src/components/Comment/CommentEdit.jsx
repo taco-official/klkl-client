@@ -75,6 +75,7 @@ export default function CommentEdit({
     </CommentEditBox>
   )
 }
+
 CommentEdit.propTypes = {
   commentId: PropTypes.number.isRequired,
   commentContent: PropTypes.string.isRequired,

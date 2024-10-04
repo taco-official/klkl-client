@@ -48,6 +48,7 @@ function OptionDropdown({ editOnclick, deleteOnclick }) {
     </CustomDropdown>
   )
 }
+
 OptionDropdown.propTypes = {
   editOnclick: PropTypes.func.isRequired,
   deleteOnclick: PropTypes.func.isRequired,

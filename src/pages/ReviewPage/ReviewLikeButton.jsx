@@ -43,6 +43,7 @@ export default function ReviewLikeButton({
     />
   )
 }
+
 ReviewLikeButton.propTypes = {
   userData: PropTypes.shape({}),
   productId: PropTypes.number.isRequired,

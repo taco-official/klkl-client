@@ -43,6 +43,7 @@ function SubmitSteps({ step }) {
     </ConfigProvider>
   )
 }
+
 SubmitSteps.propTypes = {
   step: PropTypes.number.isRequired,
 }

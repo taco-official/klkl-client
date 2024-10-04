@@ -54,6 +54,7 @@ export default function CommentListContent({ comment, canEdit }) {
     </CommentListContentWrapper>
   )
 }
+
 CommentListContent.propTypes = {
   comment: PropTypes.shape({
     id: PropTypes.number,

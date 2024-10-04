@@ -60,6 +60,7 @@ export default function PrevNextButtons({ step, goNextStep, goPrevStep }) {
     </div>
   )
 }
+
 PrevNextButtons.propTypes = {
   step: PropTypes.number.isRequired,
   goNextStep: PropTypes.func.isRequired,

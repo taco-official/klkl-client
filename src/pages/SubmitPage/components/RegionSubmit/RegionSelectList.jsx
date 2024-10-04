@@ -62,6 +62,7 @@ function RegionSelectList({ regions }) {
     </>
   )
 }
+
 RegionSelectList.propTypes = {
   regions: PropTypes.arrayOf(
     PropTypes.shape({

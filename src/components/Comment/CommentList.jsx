@@ -16,6 +16,7 @@ export default function CommentList({ comments, userId }) {
     </CommentListWrapper>
   )
 }
+
 CommentList.propTypes = {
   comments: PropTypes.arrayOf(
     PropTypes.shape({

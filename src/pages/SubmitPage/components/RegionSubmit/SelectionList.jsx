@@ -27,6 +27,7 @@ export default function SelectionList({
     </SelectBoxes>
   )
 }
+
 SelectionList.propTypes = {
   optionList: PropTypes.arrayOf(Object),
   optionState: PropTypes.number,
