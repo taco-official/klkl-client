@@ -48,6 +48,7 @@ function FollowingListContent({ followingList }) {
     </>
   )
 }
+
 FollowingListContent.propTypes = {
   followingList: PropTypes.arrayOf(
     PropTypes.shape({

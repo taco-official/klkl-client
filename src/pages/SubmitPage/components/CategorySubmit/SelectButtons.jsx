@@ -34,6 +34,7 @@ function SelectButtons({ isSelected, enable, disable }) {
     </ConfigProvider>
   )
 }
+
 SelectButtons.propTypes = {
   isSelected: PropTypes.bool.isRequired,
   enable: PropTypes.func.isRequired,

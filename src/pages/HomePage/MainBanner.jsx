@@ -51,6 +51,7 @@ export default function MainBanner({ urls }) {
     </BannerContainer>
   )
 }
+
 MainBanner.propTypes = {
   urls: PropTypes.arrayOf(
     PropTypes.shape({

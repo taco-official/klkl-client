@@ -37,6 +37,7 @@ function NotificationHeader({ isEmpty }) {
     </>
   )
 }
+
 NotificationHeader.propTypes = {
   isEmpty: PropTypes.bool.isRequired,
 }

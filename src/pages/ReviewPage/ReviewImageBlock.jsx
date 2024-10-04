@@ -39,6 +39,7 @@ export default function ReviewImageBlock({ images }) {
     </section>
   )
 }
+
 ReviewImageBlock.propTypes = {
   images: PropTypes.arrayOf(
     PropTypes.shape({

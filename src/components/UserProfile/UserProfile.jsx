@@ -29,6 +29,7 @@ export default function UserProfile({ userData, profileButton }) {
     </ProfileSection>
   )
 }
+
 UserProfile.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.number,

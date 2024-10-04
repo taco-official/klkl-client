@@ -19,6 +19,7 @@ function ReviewMiddleBlock({ address, price, currency }) {
     </Section>
   )
 }
+
 ReviewMiddleBlock.propTypes = {
   address: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,

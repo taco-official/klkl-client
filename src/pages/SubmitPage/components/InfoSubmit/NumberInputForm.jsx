@@ -65,6 +65,7 @@ export default function NumberInputForm({ currencies }) {
     </ConfigProvider>
   )
 }
+
 NumberInputForm.propTypes = {
   currencies: PropTypes.arrayOf(
     PropTypes.shape({

@@ -82,6 +82,7 @@ export default function ReviewInfoBlock({ review, canEdit }) {
     </InfoWrapper>
   )
 }
+
 ReviewInfoBlock.propTypes = {
   review: PropTypes.shape({
     id: PropTypes.number,

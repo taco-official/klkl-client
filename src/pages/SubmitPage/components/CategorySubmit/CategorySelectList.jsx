@@ -41,6 +41,7 @@ function CategorySelectList({ categories }) {
     </ListWrapper>
   )
 }
+
 CategorySelectList.propTypes = {
   categories: PropTypes.arrayOf(
     PropTypes.shape({

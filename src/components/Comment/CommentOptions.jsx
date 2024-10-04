@@ -49,6 +49,7 @@ function CommentOptions({ commentId, setEditMode }) {
     />
   )
 }
+
 CommentOptions.propTypes = {
   commentId: PropTypes.number.isRequired,
   setEditMode: PropTypes.func.isRequired,

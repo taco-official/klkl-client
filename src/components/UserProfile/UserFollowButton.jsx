@@ -116,6 +116,7 @@ function UserFollowButton({ id }) {
     </ConfigProvider>
   )
 }
+
 UserFollowButton.propTypes = {
   id: PropTypes.number.isRequired,
 }

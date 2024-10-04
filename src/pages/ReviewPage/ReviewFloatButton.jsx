@@ -53,6 +53,7 @@ export default function ReviewFloatButton({
     </CustomFloatButtonGroup>
   )
 }
+
 ReviewFloatButton.propTypes = {
   userData: PropTypes.shape({}),
   productId: PropTypes.number.isRequired,
