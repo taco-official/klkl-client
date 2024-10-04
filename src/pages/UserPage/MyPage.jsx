@@ -1,21 +1,21 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Divider } from 'antd'
+import useLoginStore from '@/stores/useLoginStore'
 import useCheckAuth from '@/hooks/useCheckAuth'
-import useUserData from '@hooks/useUserData'
 import UserEditButton from '@components/UserProfile/UserEditButton'
 import UserProfile from '@components/UserProfile/UserProfile'
 import MyMenu from './MyMenu'
 
 function MyPage() {
   useCheckAuth()
-  const { data: userData } = useUserData()
+  const loginData = useLoginStore((state) => state.loginData)
 
   return (
     <Wrapper>
       <ProfileWrapper>
         <UserProfile
-          userData={userData.data}
+          userData={loginData}
           profileButton={<UserEditButton />}
         />
       </ProfileWrapper>

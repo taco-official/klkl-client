@@ -1,8 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useShallow } from 'zustand/react/shallow'
 import { Button, ConfigProvider, notification } from 'antd'
 import theme from '@styles/theme'
-import useUserData from '@hooks/useUserData'
+import useLoginStore from '@/stores/useLoginStore'
 import useKyQuery from '@hooks/useKyQuery'
 import useKyMutation from '@hooks/useKyMutation'
 import useLoginModal from '@hooks/useLoginModal'
@@ -70,15 +71,19 @@ const useUnFollow = (id) => {
 }
 
 function UserFollowButton({ id }) {
-  const { data: userData } = useUserData()
+  const { isLogin, loginData } = useLoginStore(
+    useShallow((state) => ({
+      isLogin: state.isLogin,
+      loginData: state.loginData,
+    }))
+  )
   const isFollowed = useCheckFollow(id)
   const followUser = useFollow(id)
   const unFollowUser = useUnFollow(id)
   const popLoginModal = useLoginModal()
 
   if (isFollowed === undefined) return null
-
-  if (userData?.data.id === id) return null
+  if (loginData?.id === id) return null
 
   return (
     <ConfigProvider
@@ -101,7 +106,7 @@ function UserFollowButton({ id }) {
         <Button
           type="primary"
           onClick={() => {
-            if (userData) followUser()
+            if (isLogin) followUser()
             else popLoginModal()
           }}
         >

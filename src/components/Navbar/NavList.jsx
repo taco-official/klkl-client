@@ -4,12 +4,12 @@ import router from '@/router'
 import theme from '@styles/theme'
 import { navIndex, modalIndex } from '@constants/navIndex'
 import { useCurrentPageStore, useModalStore } from '@stores/navbarStores'
-import useLoginStatus from '@/stores/useLoginStatus'
+import useLoginStore from '@/stores/useLoginStore'
 import Notification from './components/Notification'
 import Icons from '../Icons/Icons'
 
 export default function NavList() {
-  const isLogin = useLoginStatus((state) => state.isLogin)
+  const isLogin = useLoginStore((state) => state.isLogin)
   const currentPage = useCurrentPageStore((state) => state.currentPage)
   const { modalState, setModalState } = useModalStore()
 

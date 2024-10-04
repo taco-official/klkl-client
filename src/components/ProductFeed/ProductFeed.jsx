@@ -2,10 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Pagination, ConfigProvider } from 'antd'
 import theme from '@styles/theme'
+import useLoginStore from '@/stores/useLoginStore'
 import PreviewContent from '../PreviewContent/PreviewContent'
 import { FeedContainer, StyledFeed } from './ProductFeed.style'
 
-function ProductFeed({ userData, data, setPageData }) {
+function ProductFeed({ data, setPageData }) {
+  const loginData = useLoginStore((state) => state.loginData)
   return (
     <FeedContainer>
       {!data.content.length ? (
@@ -15,7 +17,7 @@ function ProductFeed({ userData, data, setPageData }) {
           {data.content.map((content) => (
             <PreviewContent
               key={content.id}
-              userData={userData}
+              userData={loginData}
               productData={content}
             />
           ))}

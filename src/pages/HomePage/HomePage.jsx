@@ -4,7 +4,7 @@ import { createPortal } from 'react-dom'
 import { useNavigate, useLoaderData } from 'react-router-dom'
 import { FloatButton } from 'antd'
 import theme from '@styles/theme'
-import useUserData from '@hooks/useUserData'
+import useLoginStore from '@/stores/useLoginStore'
 import useLoginModal from '@hooks/useLoginModal'
 import Icons from '@components/Icons/Icons'
 import MainBanner from './MainBanner'
@@ -37,7 +37,7 @@ const ImageArr = [
 
 export default function HomePage() {
   const { popularReviews, newReviews } = useLoaderData()
-  const { data: userData } = useUserData()
+  const isLogin = useLoginStore((state) => state.isLogin)
   const [bannerImages] = useState(ImageArr)
   const navigate = useNavigate()
   const popLoginModal = useLoginModal()
@@ -48,17 +48,11 @@ export default function HomePage() {
       <MainArea>
         <div>
           <h1>인기 리뷰</h1>
-          <ReviewCarousels
-            contents={popularReviews.data.content}
-            userData={userData}
-          />
+          <ReviewCarousels contents={popularReviews.data.content} />
         </div>
         <div>
           <h1>신규 리뷰</h1>
-          <ReviewCarousels
-            contents={newReviews.data.content}
-            userData={userData}
-          />
+          <ReviewCarousels contents={newReviews.data.content} />
         </div>
       </MainArea>
       {createPortal(
@@ -72,7 +66,7 @@ export default function HomePage() {
             </Icons>
           }
           onClick={() => {
-            if (userData)
+            if (isLogin)
               navigate('/submit', { state: { from: window.location.pathname } })
             else popLoginModal()
           }}
