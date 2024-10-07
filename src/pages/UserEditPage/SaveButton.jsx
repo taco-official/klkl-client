@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
 import theme from '@styles/theme'
-import uploadeToS3 from '@utils/uploadToS3'
+import uploadToS3 from '@utils/uploadToS3'
 import useUserStore from '@stores/useUserStore'
 import { kyInstance } from '@hooks/kyInstance'
 import useKyMutation from '@hooks/useKyMutation'
@@ -32,7 +32,7 @@ const useEditProfile = () => {
           })
           .json()
 
-        await uploadeToS3([data], [profileUrl])
+        await uploadToS3([data], [profileUrl])
 
         await kyInstance.post('me/upload-complete', {
           body: JSON.stringify({ imageId: data.id }),
