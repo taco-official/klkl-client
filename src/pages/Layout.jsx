@@ -10,7 +10,7 @@ import GlobalStyle from '@styles/GlobalStyle'
 import useKyQuery from '@/hooks/useKyQuery'
 
 export default function Layout() {
-  const { isError, isLoading } = useKyQuery('members/me', undefined, {
+  const { isError, isLoading } = useKyQuery('me', undefined, {
     staleTime: 1000 * 60 * 60,
     gcTime: 1000 * 60 * 60,
   })

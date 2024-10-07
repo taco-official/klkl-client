@@ -36,7 +36,7 @@ const PreviewContainer = styled.div`
   background-color: white;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   row-gap: 0.5rem;
 `
 

@@ -42,7 +42,7 @@ export default function CommentEdit({
       disableEditMode()
     } catch (error) {
       console.error(error.response)
-      window.alert('다시 시도해 주세요')
+      alert('다시 시도해 주세요')
     }
 
     setInputValue('')

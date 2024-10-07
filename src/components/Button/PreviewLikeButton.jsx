@@ -20,12 +20,14 @@ function PreviewLikeButton({
       popLoginModal()
       return
     }
-    if (!isLiked) {
-      await likeProduct()
-      setIsLiked(true)
-    } else {
-      await unlikeProduct()
-      setIsLiked(false)
+
+    try {
+      if (!isLiked) await likeProduct()
+      else await unlikeProduct()
+      setIsLiked((prev) => !prev)
+    } catch (error) {
+      console.error(error)
+      alert('다시 시도해 주세요')
     }
   }
 

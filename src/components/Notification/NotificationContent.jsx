@@ -23,9 +23,11 @@ function NotificationContent({ content }) {
       })
     } catch (error) {
       if (error.response.status === 404) {
-        window.alert('이미 삭제된 댓글입니다')
+        alert('이미 삭제된 댓글입니다')
+      } else {
+        alert('다시 시도해 주세요')
+        console.error(error.response)
       }
-      console.error(error.response)
     }
   }
 

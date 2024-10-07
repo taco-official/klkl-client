@@ -4,7 +4,7 @@ const productLoader = async ({ params }) => {
   const { id } = params
 
   try {
-    const clientData = await kyInstance.get('members/me').json()
+    const clientData = await kyInstance.get('me').json()
     const productData = await kyInstance.get(`products/${id}`).json()
 
     if (clientData.data.id !== productData.data.user.id)
@@ -12,7 +12,7 @@ const productLoader = async ({ params }) => {
 
     return productData
   } catch (error) {
-    throw new Response('Not Found', { status: error.response.status })
+    throw Error(`${error.response.status}`)
   }
 }
 

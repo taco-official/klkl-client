@@ -49,8 +49,8 @@ function ReviewOptions() {
             navigate(-1)
           else navigate('/')
         } catch (error) {
-          console.error(error, error.response)
-          window.alert('다시 시도해 주세요')
+          console.error(error)
+          alert('다시 시도해 주세요')
         }
       },
     })
