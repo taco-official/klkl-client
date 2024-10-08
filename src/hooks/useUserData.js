@@ -4,10 +4,14 @@ import useLoginStore from '@stores/useLoginStore'
 import useKyQuery from './useKyQuery'
 
 const useUserData = () => {
-  const { isLoading, data, isError } = useKyQuery('me', undefined, {
+  const {
+    isLoading,
+    data: userData,
+    isError,
+  } = useKyQuery('me', undefined, {
     staleTime: 1000 * 60 * 60,
     gcTime: 1000 * 60 * 60,
-    select: (userData) => userData.data,
+    select: (data) => data.data,
   })
   const { isLogin, loginData } = useLoginStore((state) => ({
     isLogin: state.isLogin,
@@ -21,12 +25,12 @@ const useUserData = () => {
 
   useEffect(() => {
     if (isLoading) return
-    if (data) {
-      if (!isLogin) setLogin(data)
-      else if (!isEqual(loginData, data)) setLoginData(data)
+    if (userData) {
+      if (!isLogin) setLogin(userData)
+      else if (!isEqual(loginData, userData)) setLoginData(userData)
     }
     if (isError && isLogin) setLogout()
-  }, [isLoading, data, isError])
+  }, [isLoading, userData, isError])
 }
 
 export default useUserData
