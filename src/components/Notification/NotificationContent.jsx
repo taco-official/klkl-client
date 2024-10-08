@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import router from '@/router'
 import theme from '@styles/theme'
-import { method } from '@hooks/kyInstance'
+import { method } from '@utils/kyInstance'
 import useKyMutation from '@hooks/useKyMutation'
 
 function NotificationContent({ content }) {

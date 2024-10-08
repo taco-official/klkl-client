@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { kyInstance } from './kyInstance'
+import { kyInstance } from '@utils/kyInstance'
 
 /**
  * Ky기반 useMutation 호출 훅

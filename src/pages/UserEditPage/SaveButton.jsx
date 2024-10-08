@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
 import theme from '@styles/theme'
+import { kyInstance } from '@utils/kyInstance'
 import uploadToS3 from '@utils/uploadToS3'
 import useUserStore from '@stores/useUserStore'
-import { kyInstance } from '@hooks/kyInstance'
 import useKyMutation from '@hooks/useKyMutation'
 
 const useEditProfile = () => {

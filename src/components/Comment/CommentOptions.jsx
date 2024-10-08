@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Modal, notification } from 'antd'
 import theme from '@styles/theme'
-import { method } from '@hooks/kyInstance'
+import { method } from '@utils/kyInstance'
 import useKyMutation from '@hooks/useKyMutation'
 import OptionDropdown from '../OptionDropdown/OptionDropdown'
 

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Breadcrumb, Rate } from 'antd'
 import theme from '@styles/theme'
+import dateParser from '@utils/dateParser'
 import { BlueTag } from '@components/Tags/Tags.style'
 import ReviewOptions from './ReviewOptions'
 
@@ -76,7 +77,7 @@ export default function ReviewInfoBlock({ review, canEdit }) {
           defaultValue={review.rating}
         />
         <div>
-          <p>{review.createdAt}</p> {canEdit && <ReviewOptions />}
+          <p>{dateParser(review.createdAt)}</p> {canEdit && <ReviewOptions />}
         </div>
       </EndWrapper>
     </InfoWrapper>
