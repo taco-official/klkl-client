@@ -2,12 +2,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
 import theme from '@styles/theme'
-import { method } from '@utils/kyInstance'
+import kyMethod from '@constants/kyMethod'
 import useKyMutation from '@hooks/useKyMutation'
 
 function UserEditButton() {
   const navigate = useNavigate()
-  const { mutateAsync } = useKyMutation(method.POST, 'logout', ['me'])
+  const { mutateAsync } = useKyMutation(kyMethod.POST, 'logout', ['me'])
 
   return (
     <>

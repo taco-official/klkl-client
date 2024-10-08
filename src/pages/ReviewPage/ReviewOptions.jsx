@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { Modal, notification } from 'antd'
 import theme from '@styles/theme'
-import { kyInstance } from '@utils/kyInstance'
+import kyInstance from '@utils/kyInstance'
 import OptionDropdown from '@components/OptionDropdown/OptionDropdown'
 
 function ReviewOptions() {

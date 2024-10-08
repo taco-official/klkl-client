@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Input, Button, ConfigProvider } from 'antd'
 import theme from '@styles/theme'
-import { method } from '@utils/kyInstance'
+import kyMethod from '@constants/kyMethod'
 import useKyMutation from '@hooks/useKyMutation'
 
 const inputTheme = {
@@ -26,7 +26,7 @@ export default function CommentEdit({
   const [inputValue, setInputValue] = useState(commentContent)
   const location = `${window.location.pathname.slice(1)}/comments`
   const { mutateAsync } = useKyMutation(
-    method.PUT,
+    kyMethod.PUT,
     `${location}/${commentId}`,
     [location]
   )

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Modal, notification } from 'antd'
 import theme from '@styles/theme'
-import { method } from '@utils/kyInstance'
+import kyMethod from '@constants/kyMethod'
 import useKyMutation from '@hooks/useKyMutation'
 import OptionDropdown from '../OptionDropdown/OptionDropdown'
 
@@ -10,7 +10,7 @@ function CommentOptions({ commentId, setEditMode }) {
   const productURL = window.location.pathname.slice(1)
 
   const { mutateAsync } = useKyMutation(
-    method.DELETE,
+    kyMethod.DELETE,
     `${productURL}/comments/${commentId}`,
     [`${productURL}/comments`]
   )

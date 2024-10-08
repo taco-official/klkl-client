@@ -1,8 +1,8 @@
-import { method } from '@utils/kyInstance'
+import kyMethod from '@constants/kyMethod'
 import useKyMutation from './useKyMutation'
 
 function useDeleteNotificationAll() {
-  const { mutateAsync } = useKyMutation(method.DELETE, 'notifications', [
+  const { mutateAsync } = useKyMutation(kyMethod.DELETE, 'notifications', [
     'notifications',
   ])
 

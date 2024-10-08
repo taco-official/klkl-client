@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Input, Button, ConfigProvider } from 'antd'
 import theme from '@styles/theme'
-import { method } from '@utils/kyInstance'
+import kyMethod from '@constants/kyMethod'
 import useLoginModal from '@hooks/useLoginModal'
 import useKyMutation from '@hooks/useKyMutation'
 import ProfileImage from '../UserProfile/ProfileImage'
@@ -23,7 +23,7 @@ const inputTheme = {
 export default function CommentInput({ userData }) {
   const [inputValue, setInputValue] = useState('')
   const location = `${window.location.pathname.slice(1)}/comments`
-  const { mutateAsync } = useKyMutation(method.POST, location)
+  const { mutateAsync } = useKyMutation(kyMethod.POST, location)
 
   const popLoginModal = useLoginModal()
 

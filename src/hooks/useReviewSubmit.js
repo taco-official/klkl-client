@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import uploadToS3 from '@utils/uploadToS3'
-import { kyInstance } from '@utils/kyInstance'
+import kyInstance from '@utils/kyInstance'
 import useFormStore from '@stores/useFormStore'
 
 const useReviewSubmit = (httpMethod, uri, goPrevStep) => {

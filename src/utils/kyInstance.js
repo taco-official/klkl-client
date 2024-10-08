@@ -1,11 +1,5 @@
 import ky from 'ky'
-
-const method = {
-  GET: 'get',
-  POST: 'post',
-  PUT: 'put',
-  DELETE: 'delete',
-}
+import kyMethod from '@constants/kyMethod'
 
 // const printLogUrl = (request) => {
 // console.log('request url:', request.url)
@@ -28,10 +22,10 @@ const kyInstance = ky.create({
   },
   retry: {
     limit: 0,
-    methods: ['get', 'post', 'put'],
+    methods: [kyMethod.GET, kyMethod.POST, kyMethod.PUT],
     statusCodes: [500],
   },
   credentials: 'include',
 })
 
-export { method, kyInstance }
+export default kyInstance
