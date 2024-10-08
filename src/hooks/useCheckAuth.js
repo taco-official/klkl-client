@@ -1,5 +1,5 @@
 import errorCode from '@constants/errorCode'
-import useLoginStore from '@/stores/useLoginStore'
+import useLoginStore from '@stores/useLoginStore'
 
 const useCheckAuth = () => {
   const isLogin = useLoginStore((state) => state.isLogin)

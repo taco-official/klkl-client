@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 import useProductLike from '@hooks/useProductLike'
-import useLoginModal from '@/hooks/useLoginModal'
+import useLoginModal from '@hooks/useLoginModal'
 import IconTextButton from './IconTextButton'
 
 function PreviewLikeButton({

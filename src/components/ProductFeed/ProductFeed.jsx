@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Pagination, ConfigProvider } from 'antd'
 import theme from '@styles/theme'
-import useLoginStore from '@/stores/useLoginStore'
+import useLoginStore from '@stores/useLoginStore'
 import PreviewContent from '../PreviewContent/PreviewContent'
 import { FeedContainer, StyledFeed } from './ProductFeed.style'
 

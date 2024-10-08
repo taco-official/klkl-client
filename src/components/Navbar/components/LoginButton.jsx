@@ -3,7 +3,7 @@ import { useShallow } from 'zustand/react/shallow'
 import router from '@/router'
 import { modalIndex } from '@constants/navIndex'
 import { useModalStore } from '@stores/navbarStores'
-import useLoginStore from '@/stores/useLoginStore'
+import useLoginStore from '@stores/useLoginStore'
 import PlainButton from '../../Button/PlainButton'
 import ProfileImage from '../../UserProfile/ProfileImage'
 

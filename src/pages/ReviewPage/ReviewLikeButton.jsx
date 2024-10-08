@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { FloatButton } from 'antd'
 import useProductLike from '@hooks/useProductLike'
-import useLoginModal from '@/hooks/useLoginModal'
+import useLoginModal from '@hooks/useLoginModal'
 import Icons from '@components/Icons/Icons'
 
 export default function ReviewLikeButton({
