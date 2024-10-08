@@ -5,7 +5,7 @@ import { Divider } from 'antd'
 import router from '@/router'
 import theme from '@styles/theme'
 import { modalIndex } from '@constants/navIndex'
-import { kyInstance } from './kyInstance'
+import { kyInstance } from '@utils/kyInstance'
 
 const SearchMapping = {
   products: '리뷰',

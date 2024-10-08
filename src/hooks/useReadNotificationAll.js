@@ -1,4 +1,4 @@
-import { method } from './kyInstance'
+import { method } from '@utils/kyInstance'
 import useKyMutation from './useKyMutation'
 
 function useReadNotificationAll() {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { method } from '@hooks/kyInstance'
+import { method } from '@utils/kyInstance'
 import useReviewSubmit from '@hooks/useReviewSubmit'
 import LoadingPage from '../../LoadingPage'
 

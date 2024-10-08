@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
 import theme from '@styles/theme'
-import { kyInstance } from '@hooks/kyInstance'
+import { kyInstance } from '@utils/kyInstance'
 
 function UserEditButton() {
   const naviagte = useNavigate()

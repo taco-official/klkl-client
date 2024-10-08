@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { kyInstance } from './kyInstance'
+import { kyInstance } from '@utils/kyInstance'
 
 function useKy(initialConfig = null, autoFetch = false, initialData = null) {
   const [loading, setLoading] = useState(true)

@@ -5,7 +5,7 @@ import { Button } from 'antd'
 import theme from '@styles/theme'
 import uploadToS3 from '@utils/uploadToS3'
 import useUserStore from '@stores/useUserStore'
-import { kyInstance } from '@hooks/kyInstance'
+import { kyInstance } from '@utils/kyInstance'
 import useKyMutation from '@hooks/useKyMutation'
 
 const useEditProfile = () => {
