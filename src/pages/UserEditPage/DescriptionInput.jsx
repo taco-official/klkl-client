@@ -18,7 +18,11 @@ function DescriptionInput() {
         maxLength={50}
         placeholder="자기소개 변경"
         autoSize={{ minRows: 2 }}
-        onBlur={(e) => setDescription(e.target.value)}
+        onBlur={(e) => {
+          const newDescription = e.target.value.trim()
+          if (newDescription && newDescription !== loginData.description)
+            setDescription(e.target.value)
+        }}
       />
     </InfoBox>
   )

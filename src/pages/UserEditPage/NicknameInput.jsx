@@ -17,7 +17,10 @@ function NicknameInput() {
         defaultValue={loginData.name}
         maxLength={15}
         placeholder="닉네임 변경"
-        onBlur={(e) => setName(e.target.value)}
+        onBlur={(e) => {
+          const newName = e.target.value.trim()
+          if (newName && newName !== loginData.name) setName(newName)
+        }}
       />
     </InfoBox>
   )
