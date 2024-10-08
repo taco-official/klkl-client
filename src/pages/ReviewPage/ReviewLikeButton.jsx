@@ -40,7 +40,7 @@ export default function ReviewLikeButton({
         )
       }
       onClick={handleLike}
-      tooltip={isLiked ? '좋아요' : '취소'}
+      tooltip={isLiked ? '취소' : '좋아요'}
     />
   )
 }
