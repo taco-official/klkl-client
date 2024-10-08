@@ -3,27 +3,30 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
 import theme from '@styles/theme'
-import { kyInstance } from '@utils/kyInstance'
+import { kyInstance, method } from '@utils/kyInstance'
 import uploadToS3 from '@utils/uploadToS3'
+import useLoginStore from '@stores/useLoginStore'
 import useUserStore from '@stores/useUserStore'
 import useKyMutation from '@hooks/useKyMutation'
 
 const useEditProfile = () => {
   const [isLoading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const { mutateAsync } = useKyMutation(method.PUT, 'me')
+  const loginData = useLoginStore((state) => state.loginData)
   const body = useUserStore((state) => ({
-    name: state.name,
-    description: state.description,
+    name: state.name || loginData.name,
+    description: state.description || '',
   }))
-
-  const { mutateAsync } = useKyMutation('put', 'me')
-
-  const profileUrl = useUserStore((state) => state.profileUrl)
+  const profileUrl = useUserStore(
+    (state) => state.profileUrl || loginData.image.url
+  )
+  const resetUserData = useUserStore((state) => state.resetUserData)
 
   const editProfile = async () => {
     setLoading(true)
     try {
-      if (typeof profileUrl !== 'string') {
+      if (!profileUrl) {
         const { data } = await kyInstance
           .post('me/upload-url', {
             body: JSON.stringify({
@@ -46,6 +49,7 @@ const useEditProfile = () => {
       alert('다시 시도해 주세요')
     } finally {
       setLoading(false)
+      resetUserData()
     }
   }
 

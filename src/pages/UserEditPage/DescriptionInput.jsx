@@ -2,10 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { Input } from 'antd'
 import theme from '@styles/theme'
+import useLoginStore from '@stores/useLoginStore'
 import useUserStore from '@stores/useUserStore'
 
 function DescriptionInput() {
-  const description = useUserStore((state) => state.description)
+  const loginData = useLoginStore((state) => state.loginData)
   const setDescription = useUserStore((state) => state.setDescription)
 
   return (
@@ -13,7 +14,7 @@ function DescriptionInput() {
       자기소개
       <StyledTextArea
         showCount
-        defaultValue={description}
+        defaultValue={loginData.description}
         maxLength={50}
         placeholder="자기소개 변경"
         autoSize={{ minRows: 2 }}

@@ -3,11 +3,13 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Button } from 'antd'
 import theme from '@styles/theme'
+import useLoginStore from '@stores/useLoginStore'
 import useUserStore from '@stores/useUserStore'
 import ProfileImage from '@components/UserProfile/ProfileImage'
 
 function ProfileEditBlock({ name }) {
   const inputRef = useRef()
+  const loginData = useLoginStore((state) => state.loginData)
   const profileUrl = useUserStore((state) => state.profileUrl)
   const setProfile = useUserStore((state) => state.setProfile)
 
@@ -25,9 +27,7 @@ function ProfileEditBlock({ name }) {
     <ProfileEditBlockWrapper>
       <ProfileImage
         src={
-          typeof profileUrl === 'string'
-            ? profileUrl
-            : URL.createObjectURL(profileUrl)
+          !profileUrl ? loginData.image.url : URL.createObjectURL(profileUrl)
         }
         height="100px"
         style={{ gridArea: 'profile' }}

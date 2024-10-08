@@ -2,10 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { Input } from 'antd'
 import theme from '@styles/theme'
+import useLoginStore from '@stores/useLoginStore'
 import useUserStore from '@stores/useUserStore'
 
 function NicknameInput() {
-  const name = useUserStore((state) => state.name)
+  const loginData = useLoginStore((state) => state.loginData)
   const setName = useUserStore((state) => state.setName)
 
   return (
@@ -13,7 +14,7 @@ function NicknameInput() {
       닉네임
       <StyledInput
         showCount
-        defaultValue={name}
+        defaultValue={loginData.name}
         maxLength={15}
         placeholder="닉네임 변경"
         onBlur={(e) => setName(e.target.value)}

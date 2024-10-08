@@ -1,9 +1,9 @@
 import { create } from 'zustand'
 
 const initialState = {
-  profileUrl: '',
-  name: '',
-  description: '',
+  profileUrl: null,
+  name: null,
+  description: null,
 }
 
 const useUserStore = create((set) => ({
@@ -26,6 +26,7 @@ const useUserStore = create((set) => ({
       name,
       description,
     })),
+  resetUserData: () => set(() => ({ ...initialState })),
 }))
 
 export default useUserStore
