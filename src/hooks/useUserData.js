@@ -1,4 +1,4 @@
-import useLoginStore from '@/stores/useLoginStore'
+import useLoginStore from '@stores/useLoginStore'
 import useKyQuery from './useKyQuery'
 
 const useUserData = () => {

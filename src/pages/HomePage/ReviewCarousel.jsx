@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import useLoginStore from '@stores/useLoginStore'
 import StyledFlickity from '@components/Carousel/Carousel'
 import PreviewContent from '@components/PreviewContent/PreviewContent'
-import useLoginStore from '@/stores/useLoginStore'
 
 const flickityOptions = {
   wrapAround: false,

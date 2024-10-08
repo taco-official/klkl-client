@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Modal, Button, ConfigProvider } from 'antd'
 import theme from '@styles/theme'
-import { KakaoLogo, NaverLogo } from '@images/logos'
 import { modalIndex } from '@constants/navIndex'
+import { KakaoLogo, NaverLogo } from '@images/logos'
 import { useModalStore } from '@stores/navbarStores'
 
 const ModalTheme = {
