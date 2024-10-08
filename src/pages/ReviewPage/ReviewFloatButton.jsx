@@ -1,12 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-import { FloatButton, notification } from 'antd'
 import { useNavigate } from 'react-router-dom'
-
+import { FloatButton, notification } from 'antd'
+import theme from '@styles/theme'
 import useLoginModal from '@hooks/useLoginModal'
 import Icons from '@components/Icons/Icons'
-import theme from '@styles/theme'
 import ReviewLikeButton from './ReviewLikeButton'
 
 export default function ReviewFloatButton({
@@ -54,6 +53,7 @@ export default function ReviewFloatButton({
     </CustomFloatButtonGroup>
   )
 }
+
 ReviewFloatButton.propTypes = {
   userData: PropTypes.shape({}),
   productId: PropTypes.number.isRequired,

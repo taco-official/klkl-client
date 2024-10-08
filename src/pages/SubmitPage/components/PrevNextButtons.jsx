@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button, ConfigProvider } from 'antd'
 import PropTypes from 'prop-types'
+import { Button, ConfigProvider } from 'antd'
 import theme from '@styles/theme'
 import submitSteps from '@constants/submitSteps'
 import useFormStore from '@stores/useFormStore'
@@ -60,6 +60,7 @@ export default function PrevNextButtons({ step, goNextStep, goPrevStep }) {
     </div>
   )
 }
+
 PrevNextButtons.propTypes = {
   step: PropTypes.number.isRequired,
   goNextStep: PropTypes.func.isRequired,

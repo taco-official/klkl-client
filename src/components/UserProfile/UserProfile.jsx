@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import theme from '@styles/theme'
 import ProfileImage from './ProfileImage'
@@ -29,6 +29,7 @@ export default function UserProfile({ userData, profileButton }) {
     </ProfileSection>
   )
 }
+
 UserProfile.propTypes = {
   userData: PropTypes.shape({
     id: PropTypes.number,

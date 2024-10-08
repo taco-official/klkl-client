@@ -1,7 +1,6 @@
-import { React } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
-
 import CommentListContent from './CommentListContent'
 
 export default function CommentList({ comments, userId }) {
@@ -17,6 +16,7 @@ export default function CommentList({ comments, userId }) {
     </CommentListWrapper>
   )
 }
+
 CommentList.propTypes = {
   comments: PropTypes.arrayOf(
     PropTypes.shape({

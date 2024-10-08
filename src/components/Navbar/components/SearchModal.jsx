@@ -1,11 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Modal, ConfigProvider } from 'antd'
-
+import theme from '@styles/theme'
 import { modalIndex } from '@constants/navIndex'
 import { useModalStore } from '@stores/navbarStores'
 import useDebouncedSearch from '@hooks/useDebouncedSearch'
-import theme from '@styles/theme'
 import Icons from '../../Icons/Icons'
 
 const ModalTheme = {

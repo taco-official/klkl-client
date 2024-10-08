@@ -1,7 +1,6 @@
 import React from 'react'
-
-import SelectButtons from './SelectButtons'
 import useFormStore from '@stores/useFormStore'
+import SelectButtons from './SelectButtons'
 
 function TagSelectForm() {
   const subcategory = useFormStore((state) => state.subcategory)

@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-
-import submitSteps from '@constants/submitSteps'
 import theme from '@styles/theme'
+import submitSteps from '@constants/submitSteps'
 import useInitialData from '@hooks/useInitialData'
-import useCheckAuth from '@/hooks/useCheckAuth'
+import useCheckAuth from '@hooks/useCheckAuth'
 import * as Form from './components/index'
 import PostPage from './components/PostPage'
 import PrevNextButtons from './components/PrevNextButtons'
@@ -32,7 +31,7 @@ export default function SubmitPage() {
     [submitSteps.IMAGE]: <Form.ImageSubmitForm />,
     [submitSteps.REGION]: <Form.RegionSubmitForm />,
     [submitSteps.INFO]: <Form.InfoSubmitForm />,
-    [submitSteps.CATEGORY]: <Form.CategorSubmitForm />,
+    [submitSteps.CATEGORY]: <Form.CategorySubmitForm />,
     [submitSteps.LOADING]: <PostPage goPrevStep={goPrevStep} />,
   }
 

@@ -2,10 +2,9 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { FloatButton } from 'antd'
-
-import Icons from '@components/Icons/Icons'
 import useProductLike from '@hooks/useProductLike'
-import useLoginModal from '@/hooks/useLoginModal'
+import useLoginModal from '@hooks/useLoginModal'
+import Icons from '@components/Icons/Icons'
 
 export default function ReviewLikeButton({
   userData,
@@ -44,6 +43,7 @@ export default function ReviewLikeButton({
     />
   )
 }
+
 ReviewLikeButton.propTypes = {
   userData: PropTypes.shape({}),
   productId: PropTypes.number.isRequired,

@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Steps, ConfigProvider } from 'antd'
-
 import theme from '@styles/theme'
 
 const stepsItems = [
@@ -44,6 +43,7 @@ function SubmitSteps({ step }) {
     </ConfigProvider>
   )
 }
+
 SubmitSteps.propTypes = {
   step: PropTypes.number.isRequired,
 }

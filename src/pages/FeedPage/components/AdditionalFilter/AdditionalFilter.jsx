@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSection, ContentContainer } from '../../FeedPage.style'
 import TagSwitchArray from './TagSwitchArray'
+import { StyleSection, ContentContainer } from '../../FeedPage.style'
 
 function AdditionalFilter() {
   return (

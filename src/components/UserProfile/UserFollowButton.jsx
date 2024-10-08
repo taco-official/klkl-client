@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useShallow } from 'zustand/react/shallow'
 import { Button, ConfigProvider, notification } from 'antd'
-
-import useLoginModal from '@hooks/useLoginModal'
-import useUserData from '@hooks/useUserData'
 import theme from '@styles/theme'
+import useLoginStore from '@stores/useLoginStore'
+import { method } from '@hooks/kyInstance'
 import useKyQuery from '@hooks/useKyQuery'
 import useKyMutation from '@hooks/useKyMutation'
+import useLoginModal from '@hooks/useLoginModal'
 
 const useCheckFollow = (id) => {
   const {
@@ -21,7 +22,7 @@ const useCheckFollow = (id) => {
 }
 
 const useFollow = (id) => {
-  const { mutateAsync } = useKyMutation('post', `me/following/${id}`, [
+  const { mutateAsync } = useKyMutation(method.POST, `me/following/${id}`, [
     'me/following',
     id,
   ])
@@ -46,7 +47,7 @@ const useFollow = (id) => {
 }
 
 const useUnFollow = (id) => {
-  const { mutateAsync } = useKyMutation('delete', `me/following/${id}`, [
+  const { mutateAsync } = useKyMutation(method.DELETE, `me/following/${id}`, [
     'me/following',
     id,
   ])
@@ -71,15 +72,19 @@ const useUnFollow = (id) => {
 }
 
 function UserFollowButton({ id }) {
-  const { data: userData } = useUserData()
+  const { isLogin, loginData } = useLoginStore(
+    useShallow((state) => ({
+      isLogin: state.isLogin,
+      loginData: state.loginData,
+    }))
+  )
   const isFollowed = useCheckFollow(id)
   const followUser = useFollow(id)
   const unFollowUser = useUnFollow(id)
   const popLoginModal = useLoginModal()
 
   if (isFollowed === undefined) return null
-
-  if (userData?.data.id === id) return null
+  if (loginData?.id === id) return null
 
   return (
     <ConfigProvider
@@ -102,7 +107,7 @@ function UserFollowButton({ id }) {
         <Button
           type="primary"
           onClick={() => {
-            if (userData) followUser()
+            if (isLogin) followUser()
             else popLoginModal()
           }}
         >
@@ -112,6 +117,7 @@ function UserFollowButton({ id }) {
     </ConfigProvider>
   )
 }
+
 UserFollowButton.propTypes = {
   id: PropTypes.number.isRequired,
 }

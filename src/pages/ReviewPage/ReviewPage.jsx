@@ -1,13 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Divider } from 'antd'
 import { useLoaderData } from 'react-router-dom'
-
+import { Divider } from 'antd'
 import theme from '@styles/theme'
-import UserFollowButton from '@components/UserProfile/UserFollowButton'
+import useLoginStore from '@stores/useLoginStore'
 import UserProfile from '@components/UserProfile/UserProfile'
+import UserFollowButton from '@components/UserProfile/UserFollowButton'
 import Comment from '@components/Comment/Comment'
-import useUserData from '@hooks/useUserData'
 import ReviewFloatButton from './ReviewFloatButton'
 import ReviewImageSection from './ReviewImageBlock'
 import ReviewInfoBlock from './ReviewInfo'
@@ -15,7 +14,7 @@ import ReviewMiddleBlock from './ReviewMiddle'
 
 export default function ReviewDetailPage() {
   const { data: review } = useLoaderData()
-  const { data: client } = useUserData()
+  const loginData = useLoginStore((state) => state.loginData)
 
   return (
     <Article>
@@ -23,7 +22,7 @@ export default function ReviewDetailPage() {
         <ReviewImageSection images={review.images} />
         <ReviewInfoBlock
           review={review}
-          canEdit={review.member.id === client?.data.id}
+          canEdit={review.member.id === loginData?.id}
         />
         <Divider />
         <ReviewMiddleBlock
@@ -41,10 +40,10 @@ export default function ReviewDetailPage() {
           profileButton={<UserFollowButton id={review.member.id} />}
         />
         <Divider />
-        <Comment userData={client?.data} />
+        <Comment userData={loginData} />
       </div>
       <ReviewFloatButton
-        userData={client}
+        userData={loginData}
         productId={review.id}
         likeContent={review.isLiked}
       />

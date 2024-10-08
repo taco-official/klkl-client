@@ -1,6 +1,7 @@
-import { React } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
+import useLoginStore from '@stores/useLoginStore'
 import StyledFlickity from '@components/Carousel/Carousel'
 import PreviewContent from '@components/PreviewContent/PreviewContent'
 
@@ -14,7 +15,9 @@ const flickityOptions = {
   cellAlign: 'left',
 }
 
-export default function ReviewCarousels({ contents, userData }) {
+export default function ReviewCarousels({ contents }) {
+  const loginData = useLoginStore((state) => state.loginData)
+
   return (
     <ReviewCarousel options={flickityOptions}>
       {contents.map((content) => {
@@ -24,7 +27,7 @@ export default function ReviewCarousels({ contents, userData }) {
             key={content.id}
           >
             <PreviewContent
-              userData={userData}
+              userData={loginData}
               productData={content}
               likeContent={content.isLiked}
             />
@@ -34,6 +37,7 @@ export default function ReviewCarousels({ contents, userData }) {
     </ReviewCarousel>
   )
 }
+
 ReviewCarousels.propTypes = {
   contents: PropTypes.arrayOf(
     PropTypes.shape({
@@ -51,11 +55,6 @@ ReviewCarousels.propTypes = {
       ),
     })
   ).isRequired,
-  userData: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    profileImageUrl: PropTypes.string,
-  }),
 }
 
 const ReviewWrapper = styled.div`

@@ -2,10 +2,9 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { InputNumber, Select, ConfigProvider } from 'antd'
-
-import useKyQuery from '@hooks/useKyQuery'
-import useFormStore from '@stores/useFormStore'
 import theme from '@styles/theme'
+import useFormStore from '@stores/useFormStore'
+import useKyQuery from '@hooks/useKyQuery'
 
 const useDefaultCurrency = (setFormContents) => {
   const country = useFormStore((state) => state.country)
@@ -66,6 +65,7 @@ export default function NumberInputForm({ currencies }) {
     </ConfigProvider>
   )
 }
+
 NumberInputForm.propTypes = {
   currencies: PropTypes.arrayOf(
     PropTypes.shape({

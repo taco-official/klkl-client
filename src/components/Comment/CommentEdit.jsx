@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
+import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Input, Button, ConfigProvider } from 'antd'
-import styled from 'styled-components'
-
+import theme from '@styles/theme'
 import { method } from '@hooks/kyInstance'
 import useKyMutation from '@hooks/useKyMutation'
-import theme from '@styles/theme'
 
 const inputTheme = {
   components: {
@@ -76,6 +75,7 @@ export default function CommentEdit({
     </CommentEditBox>
   )
 }
+
 CommentEdit.propTypes = {
   commentId: PropTypes.number.isRequired,
   commentContent: PropTypes.string.isRequired,

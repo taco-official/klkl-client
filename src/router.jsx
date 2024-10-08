@@ -1,6 +1,5 @@
 import React, { Suspense } from 'react'
 import { createBrowserRouter, Outlet } from 'react-router-dom'
-
 import * as pages from './pages/index'
 import * as loader from './loader/index'
 import LoadingPage from './pages/LoadingPage'
@@ -37,7 +36,6 @@ const routes = [
   },
   {
     path: 'me/edit',
-    loader: loader.meLoader,
     element: <pages.MyEditPage />,
   },
   {

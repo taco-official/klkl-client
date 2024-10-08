@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StarFilled } from '@ant-design/icons'
-import { FaHeart } from 'react-icons/fa6'
 import { Link } from 'react-router-dom'
+import { FaHeart } from 'react-icons/fa6'
+import { StarFilled } from '@ant-design/icons'
 import PreviewLikeButton from '../Button/PreviewLikeButton'
 import { BlueTag } from '../Tags/Tags.style'
 import {

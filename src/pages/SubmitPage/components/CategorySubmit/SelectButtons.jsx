@@ -1,6 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { Button, ConfigProvider } from 'antd'
 import theme from '@styles/theme'
 
@@ -34,6 +34,7 @@ function SelectButtons({ isSelected, enable, disable }) {
     </ConfigProvider>
   )
 }
+
 SelectButtons.propTypes = {
   isSelected: PropTypes.bool.isRequired,
   enable: PropTypes.func.isRequired,

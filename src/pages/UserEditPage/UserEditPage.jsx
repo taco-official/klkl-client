@@ -1,30 +1,33 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useLoaderData } from 'react-router-dom'
 import { Divider } from 'antd'
-
 import theme from '@styles/theme'
 import useUserStore from '@stores/useUserStore'
+import useLoginStore from '@stores/useLoginStore'
+import useCheckAuth from '@hooks/useCheckAuth'
 import ProfileEditBlock from './ProfileEditBlock'
 import NicknameInput from './NicknameInput'
 import DescriptionInput from './DescriptionInput'
 import SaveButton from './SaveButton'
 
 function UserEditPage() {
-  const { data } = useLoaderData()
+  useCheckAuth()
+  const loginData = useLoginStore((state) => state.loginData)
   const setUserData = useUserStore((state) => state.setUserData)
 
-  setUserData({
-    profileUrl: data.image?.url || '',
-    name: data.name,
-    description: data.description,
-  })
+  useEffect(() => {
+    setUserData({
+      profileUrl: loginData?.image?.url || '',
+      name: loginData?.name || '',
+      description: loginData?.description || '',
+    })
+  }, [loginData])
 
   return (
     <UserEditPageWrapper>
       <h1>프로필 수정</h1>
       <Divider />
-      <ProfileEditBlock name={data.name} />
+      <ProfileEditBlock name={loginData?.name || ''} />
       <div>
         <NicknameInput />
         <DescriptionInput />
