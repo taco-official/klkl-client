@@ -36,7 +36,6 @@ const routes = [
   },
   {
     path: 'me/edit',
-    loader: loader.meLoader,
     element: <pages.MyEditPage />,
   },
   {
