@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 
 const initialState = {
-  profileUrl: null,
+  profileFile: null,
   name: null,
   description: null,
 }
@@ -16,13 +16,13 @@ const useUserStore = create((set) => ({
     set(() => ({
       description,
     })),
-  setProfile: (profileUrl) =>
+  setProfile: (profileFile) =>
     set(() => ({
-      profileUrl,
+      profileFile,
     })),
-  setUserData: ({ profileUrl, name, description }) =>
+  setUserData: ({ profileFile, name, description }) =>
     set(() => ({
-      profileUrl,
+      profileFile,
       name,
       description,
     })),

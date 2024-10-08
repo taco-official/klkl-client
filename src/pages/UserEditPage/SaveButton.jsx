@@ -19,24 +19,22 @@ const useEditProfile = () => {
     name: state.name || loginData.name,
     description: state.description || '',
   }))
-  const profileUrl = useUserStore(
-    (state) => state.profileUrl || loginData.image.url
-  )
+  const profileFile = useUserStore((state) => state.profileFile)
   const resetUserData = useUserStore((state) => state.resetUserData)
 
   const editProfile = async () => {
     setLoading(true)
     try {
-      if (!profileUrl) {
+      if (profileFile) {
         const { data } = await kyInstance
           .post('me/upload-url', {
             body: JSON.stringify({
-              fileExtension: profileUrl.type.split('/')[1],
+              fileExtension: profileFile.type.split('/')[1],
             }),
           })
           .json()
 
-        await uploadToS3([data], [profileUrl])
+        await uploadToS3([data], [profileFile])
 
         await kyInstance.post('me/upload-complete', {
           body: JSON.stringify({ imageId: data.id }),
@@ -44,8 +42,8 @@ const useEditProfile = () => {
       }
 
       await mutateAsync(JSON.stringify(body))
-      resetUserData()
       navigate('/me')
+      resetUserData()
     } catch (error) {
       console.error(error)
       alert('다시 시도해 주세요')

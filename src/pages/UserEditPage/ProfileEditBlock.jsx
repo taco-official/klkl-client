@@ -10,7 +10,8 @@ import ProfileImage from '@components/UserProfile/ProfileImage'
 function ProfileEditBlock({ name }) {
   const inputRef = useRef()
   const loginData = useLoginStore((state) => state.loginData)
-  const profileUrl = useUserStore((state) => state.profileUrl)
+  const profileUrl = loginData.image.url || ''
+  const profileFile = useUserStore((state) => state.profileFile)
   const setProfile = useUserStore((state) => state.setProfile)
 
   const changeProfileButton = () => inputRef.current.click()
@@ -26,9 +27,7 @@ function ProfileEditBlock({ name }) {
   return (
     <ProfileEditBlockWrapper>
       <ProfileImage
-        src={
-          !profileUrl ? loginData.image.url : URL.createObjectURL(profileUrl)
-        }
+        src={profileFile ? URL.createObjectURL(profileFile) : profileUrl}
         height="100px"
         style={{ gridArea: 'profile' }}
       />
