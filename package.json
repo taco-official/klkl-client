@@ -55,7 +55,7 @@
     "eslint-plugin-react": "^7.34.3",
     "eslint-plugin-react-hooks": "^4.6.2",
     "prettier": "3.3.2",
-    "vite": "^5.4.4"
+    "vite": "^5.4.6"
   },
   "packageManager": "yarn@4.5.0"
 }
