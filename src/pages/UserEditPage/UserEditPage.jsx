@@ -17,10 +17,10 @@ function UserEditPage() {
     <UserEditPageWrapper>
       <h1>프로필 수정</h1>
       <Divider />
-      <ProfileEditBlock name={loginData?.name} />
+      <ProfileEditBlock loginData={loginData} />
       <div>
-        <NicknameInput />
-        <DescriptionInput />
+        <NicknameInput loginData={loginData} />
+        <DescriptionInput loginData={loginData} />
       </div>
       <SaveButton>저장</SaveButton>
     </UserEditPageWrapper>

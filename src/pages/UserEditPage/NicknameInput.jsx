@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { Input } from 'antd'
 import theme from '@styles/theme'
-import useLoginStore from '@stores/useLoginStore'
 import useUserStore from '@stores/useUserStore'
 
-function NicknameInput() {
-  const loginData = useLoginStore((state) => state.loginData)
+function NicknameInput({ loginData }) {
+  const prevName = loginData.name || ''
   const setName = useUserStore((state) => state.setName)
 
   return (
@@ -14,16 +14,22 @@ function NicknameInput() {
       닉네임
       <StyledInput
         showCount
-        defaultValue={loginData.name}
+        defaultValue={prevName}
         maxLength={15}
         placeholder="닉네임 변경"
         onBlur={(e) => {
           const newName = e.target.value.trim()
-          if (newName && newName !== loginData.name) setName(newName)
+          if (newName && newName !== prevName) setName(newName)
         }}
       />
     </InfoBox>
   )
+}
+
+NicknameInput.propTypes = {
+  loginData: PropTypes.shape({
+    name: PropTypes.string,
+  }).isRequired,
 }
 
 const InfoBox = styled.div`

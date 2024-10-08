@@ -3,14 +3,13 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import { Button } from 'antd'
 import theme from '@styles/theme'
-import useLoginStore from '@stores/useLoginStore'
 import useUserStore from '@stores/useUserStore'
 import ProfileImage from '@components/UserProfile/ProfileImage'
 
-function ProfileEditBlock({ name }) {
+function ProfileEditBlock({ loginData }) {
   const inputRef = useRef()
-  const loginData = useLoginStore((state) => state.loginData)
-  const profileUrl = loginData.image.url || ''
+  const name = loginData.name || ''
+  const prevProfile = loginData.image.url || ''
   const profileFile = useUserStore((state) => state.profileFile)
   const setProfile = useUserStore((state) => state.setProfile)
 
@@ -27,7 +26,7 @@ function ProfileEditBlock({ name }) {
   return (
     <ProfileEditBlockWrapper>
       <ProfileImage
-        src={profileFile ? URL.createObjectURL(profileFile) : profileUrl}
+        src={profileFile ? URL.createObjectURL(profileFile) : prevProfile}
         height="100px"
         style={{ gridArea: 'profile' }}
       />
@@ -57,7 +56,14 @@ function ProfileEditBlock({ name }) {
   )
 }
 
-ProfileEditBlock.propTypes = { name: PropTypes.string.isRequired }
+ProfileEditBlock.propTypes = {
+  loginData: PropTypes.shape({
+    name: PropTypes.string,
+    image: PropTypes.shape({
+      url: PropTypes.string,
+    }),
+  }).isRequired,
+}
 
 const ProfileEditBlockWrapper = styled.div`
   display: grid;

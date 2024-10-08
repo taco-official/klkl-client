@@ -1,12 +1,12 @@
 import React from 'react'
 import styled from 'styled-components'
+import PropTypes from 'prop-types'
 import { Input } from 'antd'
 import theme from '@styles/theme'
-import useLoginStore from '@stores/useLoginStore'
 import useUserStore from '@stores/useUserStore'
 
-function DescriptionInput() {
-  const loginData = useLoginStore((state) => state.loginData)
+function DescriptionInput({ loginData }) {
+  const prevDescription = loginData.description || ''
   const setDescription = useUserStore((state) => state.setDescription)
 
   return (
@@ -14,18 +14,24 @@ function DescriptionInput() {
       자기소개
       <StyledTextArea
         showCount
-        defaultValue={loginData.description}
+        defaultValue={prevDescription}
         maxLength={50}
         placeholder="자기소개 변경"
         autoSize={{ minRows: 2 }}
         onBlur={(e) => {
           const newDescription = e.target.value.trim()
-          if (newDescription && newDescription !== loginData.description)
-            setDescription(e.target.value)
+          if (newDescription && newDescription !== prevDescription)
+            setDescription(newDescription)
         }}
       />
     </InfoBox>
   )
+}
+
+DescriptionInput.propTypes = {
+  loginData: PropTypes.shape({
+    description: PropTypes.string,
+  }).isRequired,
 }
 
 const InfoBox = styled.div`
