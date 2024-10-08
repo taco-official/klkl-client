@@ -7,7 +7,7 @@ const useUserData = () => {
   return useKyQuery('me', undefined, {
     staleTime: 1000 * 60 * 60,
     gcTime: 1000 * 60 * 60,
-    retry: isLogin,
+    enabled: isLogin,
     select: (data) => data.data,
   })
 }
