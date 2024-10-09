@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
-import { kyInstance } from '@utils/kyInstance'
+import kyInstance from '@utils/kyInstance'
 
 /**
  * Ky기반 useQeury 호출 훅

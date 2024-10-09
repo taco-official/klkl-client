@@ -1,14 +1,14 @@
-import { method } from '@utils/kyInstance'
+import kyMethod from '@constants/kyMethod'
 import useKyMutation from './useKyMutation'
 
 const useProductLike = (productId) => {
   const { mutateAsync: likeProduct } = useKyMutation(
-    method.POST,
+    kyMethod.POST,
     `likes/${productId}`,
     ['likes', productId]
   )
   const { mutateAsync: unlikeProduct } = useKyMutation(
-    method.DELETE,
+    kyMethod.DELETE,
     `likes/${productId}`,
     ['likes', productId]
   )

@@ -3,36 +3,38 @@ import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
 import theme from '@styles/theme'
-import { kyInstance } from '@utils/kyInstance'
+import kyMethod from '@constants/kyMethod'
+import kyInstance from '@utils/kyInstance'
 import uploadToS3 from '@utils/uploadToS3'
+import useLoginStore from '@stores/useLoginStore'
 import useUserStore from '@stores/useUserStore'
 import useKyMutation from '@hooks/useKyMutation'
 
 const useEditProfile = () => {
   const [isLoading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const { mutateAsync } = useKyMutation(kyMethod.PUT, 'me')
+  const loginData = useLoginStore((state) => state.loginData)
   const body = useUserStore((state) => ({
-    name: state.name,
-    description: state.description,
+    name: state.name || loginData.name,
+    description: state.description || '',
   }))
-
-  const { mutateAsync } = useKyMutation('put', 'me')
-
-  const profileUrl = useUserStore((state) => state.profileUrl)
+  const profileFile = useUserStore((state) => state.profileFile)
+  const resetUserData = useUserStore((state) => state.resetUserData)
 
   const editProfile = async () => {
     setLoading(true)
     try {
-      if (typeof profileUrl !== 'string') {
+      if (profileFile) {
         const { data } = await kyInstance
           .post('me/upload-url', {
             body: JSON.stringify({
-              fileExtension: profileUrl.type.split('/')[1],
+              fileExtension: profileFile.type.split('/')[1],
             }),
           })
           .json()
 
-        await uploadToS3([data], [profileUrl])
+        await uploadToS3([data], [profileFile])
 
         await kyInstance.post('me/upload-complete', {
           body: JSON.stringify({ imageId: data.id }),
@@ -41,6 +43,7 @@ const useEditProfile = () => {
 
       await mutateAsync(JSON.stringify(body))
       navigate('/me')
+      resetUserData()
     } catch (error) {
       console.error(error)
       alert('다시 시도해 주세요')

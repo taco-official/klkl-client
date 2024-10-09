@@ -6,9 +6,11 @@ import theme from '@styles/theme'
 import useUserStore from '@stores/useUserStore'
 import ProfileImage from '@components/UserProfile/ProfileImage'
 
-function ProfileEditBlock({ name }) {
+function ProfileEditBlock({ loginData }) {
   const inputRef = useRef()
-  const profileUrl = useUserStore((state) => state.profileUrl)
+  const name = loginData.name || ''
+  const prevProfile = loginData.image.url || ''
+  const profileFile = useUserStore((state) => state.profileFile)
   const setProfile = useUserStore((state) => state.setProfile)
 
   const changeProfileButton = () => inputRef.current.click()
@@ -24,11 +26,7 @@ function ProfileEditBlock({ name }) {
   return (
     <ProfileEditBlockWrapper>
       <ProfileImage
-        src={
-          typeof profileUrl === 'string'
-            ? profileUrl
-            : URL.createObjectURL(profileUrl)
-        }
+        src={profileFile ? URL.createObjectURL(profileFile) : prevProfile}
         height="100px"
         style={{ gridArea: 'profile' }}
       />
@@ -58,7 +56,14 @@ function ProfileEditBlock({ name }) {
   )
 }
 
-ProfileEditBlock.propTypes = { name: PropTypes.string.isRequired }
+ProfileEditBlock.propTypes = {
+  loginData: PropTypes.shape({
+    name: PropTypes.string,
+    image: PropTypes.shape({
+      url: PropTypes.string,
+    }),
+  }).isRequired,
+}
 
 const ProfileEditBlockWrapper = styled.div`
   display: grid;

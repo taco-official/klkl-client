@@ -1,8 +1,8 @@
-import { method } from '@utils/kyInstance'
+import kyMethod from '@constants/kyMethod'
 import useKyMutation from './useKyMutation'
 
 function useReadNotificationAll() {
-  const { mutateAsync } = useKyMutation(method.PUT, 'notifications/read', [
+  const { mutateAsync } = useKyMutation(kyMethod.PUT, 'notifications/read', [
     'notifications',
   ])
 

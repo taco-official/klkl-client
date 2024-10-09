@@ -1,5 +1,5 @@
 import errorCode from '@constants/errorCode'
-import { kyInstance } from '@utils/kyInstance'
+import kyInstance from '@utils/kyInstance'
 
 const meLoader = async () => {
   try {

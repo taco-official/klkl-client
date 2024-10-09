@@ -2,16 +2,18 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'antd'
 import theme from '@styles/theme'
-import { kyInstance } from '@utils/kyInstance'
+import kyMethod from '@constants/kyMethod'
+import useKyMutation from '@hooks/useKyMutation'
 
 function UserEditButton() {
-  const naviagte = useNavigate()
+  const navigate = useNavigate()
+  const { mutateAsync } = useKyMutation(kyMethod.POST, 'logout', ['me'])
 
   return (
     <>
       <Button
         onClick={() =>
-          naviagte('/me/edit', {
+          navigate('/me/edit', {
             state: { from: window.location.pathname },
           })
         }
@@ -26,8 +28,8 @@ function UserEditButton() {
       <Button
         onClick={async () => {
           try {
-            await kyInstance.post('logout')
-            naviagte('/')
+            await mutateAsync()
+            navigate('/')
           } catch {
             alert('로그아웃 하지 못했습니다. 다시 시도해 주세요')
           }

@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { Divider } from 'antd'
 import theme from '@styles/theme'
-import useUserStore from '@stores/useUserStore'
 import useLoginStore from '@stores/useLoginStore'
 import useCheckAuth from '@hooks/useCheckAuth'
 import ProfileEditBlock from './ProfileEditBlock'
@@ -13,24 +12,15 @@ import SaveButton from './SaveButton'
 function UserEditPage() {
   useCheckAuth()
   const loginData = useLoginStore((state) => state.loginData)
-  const setUserData = useUserStore((state) => state.setUserData)
-
-  useEffect(() => {
-    setUserData({
-      profileUrl: loginData?.image?.url || '',
-      name: loginData?.name || '',
-      description: loginData?.description || '',
-    })
-  }, [loginData])
 
   return (
     <UserEditPageWrapper>
       <h1>프로필 수정</h1>
       <Divider />
-      <ProfileEditBlock name={loginData?.name || ''} />
+      <ProfileEditBlock loginData={loginData} />
       <div>
-        <NicknameInput />
-        <DescriptionInput />
+        <NicknameInput loginData={loginData} />
+        <DescriptionInput loginData={loginData} />
       </div>
       <SaveButton>저장</SaveButton>
     </UserEditPageWrapper>

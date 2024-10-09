@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useShallow } from 'zustand/react/shallow'
 import { Button, ConfigProvider, notification } from 'antd'
 import theme from '@styles/theme'
-import { method } from '@utils/kyInstance'
+import kyMethod from '@constants/kyMethod'
 import useLoginStore from '@stores/useLoginStore'
 import useKyQuery from '@hooks/useKyQuery'
 import useKyMutation from '@hooks/useKyMutation'
@@ -22,7 +22,7 @@ const useCheckFollow = (id) => {
 }
 
 const useFollow = (id) => {
-  const { mutateAsync } = useKyMutation(method.POST, `me/following/${id}`, [
+  const { mutateAsync } = useKyMutation(kyMethod.POST, `me/following/${id}`, [
     'me/following',
     id,
   ])
@@ -47,7 +47,7 @@ const useFollow = (id) => {
 }
 
 const useUnFollow = (id) => {
-  const { mutateAsync } = useKyMutation(method.DELETE, `me/following/${id}`, [
+  const { mutateAsync } = useKyMutation(kyMethod.DELETE, `me/following/${id}`, [
     'me/following',
     id,
   ])

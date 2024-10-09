@@ -3,12 +3,12 @@ import styled from 'styled-components'
 import PropTypes from 'prop-types'
 import router from '@/router'
 import theme from '@styles/theme'
-import { method } from '@utils/kyInstance'
+import kyMethod from '@constants/kyMethod'
 import useKyMutation from '@hooks/useKyMutation'
 
 function NotificationContent({ content }) {
   const { mutateAsync } = useKyMutation(
-    method.PUT,
+    kyMethod.PUT,
     `notifications/${content.id}/read`,
     ['notifications']
   )

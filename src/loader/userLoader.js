@@ -1,4 +1,4 @@
-import { kyInstance } from '@utils/kyInstance'
+import kyInstance from '@utils/kyInstance'
 
 const userLoader = async ({ params }) => {
   const { id } = params
