@@ -31,7 +31,7 @@ function FollowingListContent({ followingList }) {
 
   return (
     <>
-      <div style={{ display: 'flex' }}>
+      <div style={{ display: 'flex', marginBottom: '1.25rem' }}>
         {followingList.map((user) => (
           <ProfileButton key={user.id}>
             <ProfileImage

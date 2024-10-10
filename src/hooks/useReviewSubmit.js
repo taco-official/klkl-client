@@ -50,12 +50,13 @@ const useReviewSubmit = (httpMethod, uri, goPrevStep) => {
   const uploadImage = async (id) => {
     try {
       const sendImages = images.filter((image) => !('url' in image))
+      const presignedUrls = []
 
       if (sendImages.length !== 0) {
-        const presignedUrls = await getPresignedUrl(id, sendImages)
+        presignedUrls.push(...(await getPresignedUrl(id, sendImages)))
         await uploadToS3(presignedUrls, sendImages)
-        await sendUploadComplete(id, presignedUrls)
       }
+      await sendUploadComplete(id, presignedUrls)
 
       resetReviewContents()
       navigate(`/products/${id}`, { state: { from: window.location.pathname } })
