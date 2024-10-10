@@ -5,14 +5,6 @@ import { useShallow } from 'zustand/react/shallow'
 import useFormStore from '@stores/useFormStore'
 import SelectionList from './SelectionList'
 
-const useRegionState = () => {
-  const [region, country, city] = useFormStore(
-    useShallow((state) => [state.region, state.country, state.city])
-  )
-
-  return [region, country, city]
-}
-
 const useRegionSetter = () => {
   const setFormContents = useFormStore((state) => state.setFormContents)
 
@@ -25,7 +17,9 @@ const useRegionSetter = () => {
 }
 
 function RegionSelectList({ regions }) {
-  const [region, country, city] = useRegionState()
+  const [region, country, city] = useFormStore(
+    useShallow((state) => [state.region, state.country, state.city])
+  )
   const [setContinent, setCountry, setCity] = useRegionSetter()
 
   return (

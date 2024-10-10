@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useShallow } from 'zustand/react/shallow'
 import { Checkbox } from 'antd'
 import inArray from '@utils/inArray'
 import useFeedStore from '@stores/useFeedStore'
@@ -12,10 +13,9 @@ import {
 
 function CityCheckBox({ city }) {
   const selectedCity = useFeedStore((state) => state.selectedCity)
-  const [addSelectedCity, deleteSelectedCity] = useFeedStore((state) => [
-    state.addSelectedCity,
-    state.deleteSelectedCity,
-  ])
+  const [addSelectedCity, deleteSelectedCity] = useFeedStore(
+    useShallow((state) => [state.addSelectedCity, state.deleteSelectedCity])
+  )
 
   const cityInSelected = inArray(selectedCity, city.id)
 

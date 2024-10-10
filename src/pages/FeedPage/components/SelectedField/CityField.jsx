@@ -8,10 +8,12 @@ function CityField() {
   const [selectedCountry, selectedCity] = useFeedStore(
     useShallow((state) => [state.selectedCountry, state.selectedCity])
   )
-  const [deleteSelectedCountry, deleteSelectedCity] = useFeedStore((state) => [
-    state.deleteSelectedCountry,
-    state.deleteSelectedCity,
-  ])
+  const [deleteSelectedCountry, deleteSelectedCity] = useFeedStore(
+    useShallow((state) => [
+      state.deleteSelectedCountry,
+      state.deleteSelectedCity,
+    ])
+  )
 
   if (!Object.keys(selectedCountry).length)
     return (

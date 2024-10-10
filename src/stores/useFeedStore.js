@@ -8,7 +8,7 @@ const initialState = {
   selectedSubcategory: [],
   selectedTag: [],
   selectedSort: sortStandard[0],
-  defaultOpenRegion: undefined,
+  defaultOpenRegion: null,
 }
 
 const useFeedStore = create((set) => ({

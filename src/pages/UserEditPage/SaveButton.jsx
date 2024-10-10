@@ -15,11 +15,13 @@ const useEditProfile = () => {
   const navigate = useNavigate()
   const { mutateAsync } = useKyMutation(kyMethod.PUT, 'me')
   const loginData = useLoginStore((state) => state.loginData)
-  const body = useUserStore((state) => ({
-    name: state.name || loginData.name,
-    description: state.description || '',
-  }))
-  const profileFile = useUserStore((state) => state.profileFile)
+  const [profileFile, body] = useUserStore((state) => [
+    state.profileFile,
+    {
+      name: state.name || loginData.name,
+      description: state.description || '',
+    },
+  ])
   const resetUserData = useUserStore((state) => state.resetUserData)
 
   const editProfile = async () => {

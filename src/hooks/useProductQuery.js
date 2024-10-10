@@ -43,7 +43,7 @@ function useSubcategoryQuery() {
 }
 
 function useTagQuery() {
-  const [selectedTag] = useFeedStore((state) => [state.selectedTag])
+  const selectedTag = useFeedStore((state) => state.selectedTag)
   const tagQuery = {}
 
   if (selectedTag.length) tagQuery.tag_id = selectedTag.map((tag) => tag.id)
@@ -52,7 +52,7 @@ function useTagQuery() {
 }
 
 function useSortQuery() {
-  const [selectedSort] = useFeedStore((state) => [state.selectedSort])
+  const selectedSort = useFeedStore((state) => state.selectedSort)
   const sortQuery = {
     sort_by: selectedSort.sortBy,
     sort_direction: selectedSort.sortDirection,

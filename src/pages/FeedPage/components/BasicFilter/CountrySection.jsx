@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useLoaderData } from 'react-router-dom'
+import { useShallow } from 'zustand/react/shallow'
 import { Radio } from 'antd'
 import useFeedStore from '@stores/useFeedStore'
 import CollapseButton from '@components/Button/CollapseButton'
@@ -14,10 +15,9 @@ import {
 
 function CountryRadio({ country }) {
   const selectedCountry = useFeedStore((state) => state.selectedCountry)
-  const [setSelectedCountry, resetSelectedCity] = useFeedStore((state) => [
-    state.setSelectedCountry,
-    state.resetSelectedCity,
-  ])
+  const [setSelectedCountry, resetSelectedCity] = useFeedStore(
+    useShallow((state) => [state.setSelectedCountry, state.resetSelectedCity])
+  )
 
   const handleRadioChange = () => {
     resetSelectedCity()
