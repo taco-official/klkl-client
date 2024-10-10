@@ -7,7 +7,7 @@ const productLoader = async ({ params }) => {
     const clientData = await kyInstance.get('me').json()
     const productData = await kyInstance.get(`products/${id}`).json()
 
-    if (clientData.data.id !== productData.data.user.id)
+    if (clientData.data.id !== productData.data.member.id)
       throw new Response('Forbidden', { status: 403 })
 
     return productData

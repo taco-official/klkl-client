@@ -19,7 +19,7 @@ const checkCanNext = (step, review) => {
         review.rating !== 0
       )
     case submitSteps.CATEGORY:
-      return review.subcategoryId !== 0
+      return review.category && review.subcategory
     default:
       return false
   }

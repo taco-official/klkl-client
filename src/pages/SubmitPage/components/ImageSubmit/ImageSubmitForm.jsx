@@ -49,7 +49,9 @@ function ImageSubmitForm() {
             </CloseButton>
             <StyledImage
               src={
-                typeof image === 'string' ? image : URL.createObjectURL(image)
+                typeof image.url === 'string'
+                  ? image.url
+                  : URL.createObjectURL(image)
               }
             />
           </div>

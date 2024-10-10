@@ -37,7 +37,7 @@ const useReviewSubmit = (httpMethod, uri, goPrevStep) => {
     const imageIds = []
 
     images.forEach((image) => {
-      if (id in image) imageIds.push(image.id)
+      if ('id' in image) imageIds.push(image.id)
     })
 
     presignedUrls.forEach((presignedUrl) => imageIds.push(presignedUrl.id))
@@ -49,7 +49,7 @@ const useReviewSubmit = (httpMethod, uri, goPrevStep) => {
 
   const uploadImage = async (id) => {
     try {
-      const sendImages = images.filter((image) => typeof image !== 'string')
+      const sendImages = images.filter((image) => !('url' in image))
 
       if (sendImages.length !== 0) {
         const presignedUrls = await getPresignedUrl(id, sendImages)
@@ -62,7 +62,8 @@ const useReviewSubmit = (httpMethod, uri, goPrevStep) => {
     } catch (err) {
       alert(`이미지 업로드를 실패했습니다\n다시 시도해주세요`)
       console.error(err)
-      await kyInstance.delete(`products/${id}`)
+      if (window.location.pathname === '/submit')
+        await kyInstance.delete(`products/${id}`)
       goPrevStep()
     }
   }
