@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
+import { Button } from 'antd'
 import { useRouteError, useNavigate } from 'react-router-dom'
+
 import theme from '@styles/theme'
 import errorCode from '@constants/errorCode'
-import ErrorImage from '@images/err.jpg'
 
 export default function ErrorPage() {
   const error = useRouteError()
@@ -20,37 +21,37 @@ export default function ErrorPage() {
 
   return (
     <ErrorBody>
-      <img src={ErrorImage} />
-      <div>
-        <span>404 not found</span>
-        <br />
-        <span>페이지를 찾을 수 없습니다</span>
-      </div>
+      <h1>😟 저런!</h1>
+      <br />
+      <span>에러가 발생했습니다</span>
+      <Button
+        type="primary"
+        onClick={() => navigate('/')}
+      >
+        홈으로
+      </Button>
     </ErrorBody>
   )
 }
 
 const ErrorBody = styled.div`
+  height: 90vh;
+  font-family: ${theme.style.main};
+  font-size: 1.25rem;
   display: flex;
-  width: 100vw;
-  height: 100vh;
-
-  background-color: rgb(51, 51, 51);
-  color: white;
-  font-family: ${theme.style.bannerEN}, ${theme.style.bannerKO};
-  font-weight: 700;
-  font-size: 40px;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
 
-  div {
-    margin-left: 5%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  h1 {
+    font-family: ${theme.style.mainEB};
+    font-size: 2rem;
+    padding: 0;
   }
 
-  img {
-    width: 50%;
-    aspect-ratio: 1/1;
+  button {
+    margin-top: 1.25rem;
+    width: 150px;
+    font-family: ${theme.style.mainBold};
   }
 `

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Modal, Button, ConfigProvider } from 'antd'
 import theme from '@styles/theme'
 import { modalIndex } from '@constants/navIndex'
-import { KakaoLogo, NaverLogo } from '@images/logos'
+import { KakaoLogo } from '@images/logos'
 import { useModalStore } from '@stores/navbarStores'
 
 const ModalTheme = {
@@ -17,12 +17,6 @@ const ModalTheme = {
   token: {
     fontFamily: theme.style.mainBold,
   },
-}
-
-const NaverStyle = {
-  // backgroundColor: 'rgb(3, 199, 90)',
-  color: 'white',
-  width: '75%',
 }
 
 const KaKaoStyle = {
@@ -39,29 +33,29 @@ function LoginModal() {
       <Modal
         open={modalState === modalIndex.LOGIN}
         onCancel={() => setModalState(modalIndex.NONE)}
-        width="25rem"
         footer={null}
         destroyOnClose
       >
         <ModalContents>
-          <h1>로그인</h1>
-          <div>로그인 후 원활한 사용이 가능해용가뤼</div>
-          <Button
-            style={NaverStyle}
-            disabled
-          >
-            <NaverLogo /> 네이버 로그인
-          </Button>
-          <Button
-            style={KaKaoStyle}
-            onClick={() => {
-              window.location.href =
-                'http://localhost:8080/v1/oauth2/authorization/kakao'
-            }}
-          >
-            <KakaoLogo />
-            카카오 로그인
-          </Button>
+          <div>
+            <img src="" />
+          </div>
+          <div>
+            <h1>
+              로그인 후<br />
+              원활한 사용이 가능합니다
+            </h1>
+            <Button
+              style={KaKaoStyle}
+              onClick={() => {
+                window.location.href =
+                  'http://localhost:8080/v1/oauth2/authorization/kakao'
+              }}
+            >
+              <KakaoLogo />
+              카카오 로그인
+            </Button>
+          </div>
         </ModalContents>
       </Modal>
     </ConfigProvider>
@@ -69,16 +63,19 @@ function LoginModal() {
 }
 
 const ModalContents = styled.div`
-  width: 100%;
-  height: 18.75rem;
-
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  height: 250px;
 
-  h1 {
-    font-size: 21px;
-    font-family: ${theme.style.mainEB};
+  div {
+    font-size: 16px;
+    width: 21.875rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    gap: 2.5rem;
+    margin: 1.25rem 0;
   }
 
   button {
