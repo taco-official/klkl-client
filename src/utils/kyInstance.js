@@ -1,24 +1,13 @@
 import ky from 'ky'
 import kyMethod from '@constants/kyMethod'
 
-// const printLogUrl = (request) => {
-// console.log('request url:', request.url)
-// }
-
-// const printLogResponse = async (request, instance, response) => {
-// console.log('response', await response.json())
-// }
+const API_URL = import.meta.env.VITE_APP_API_URL
 
 const kyInstance = ky.create({
-  prefixUrl: 'http://localhost:8080/v1/',
+  prefixUrl: API_URL,
   timeout: 5000,
   headers: {
     'content-type': 'application/json',
-  },
-  hooks: {
-    // beforeRequest: [printLogUrl],
-    // afterResponse: [printLogResponse],
-    // beforeError: [],
   },
   retry: {
     limit: 0,

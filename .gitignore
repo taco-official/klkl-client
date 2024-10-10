@@ -3,6 +3,8 @@
 # remove deploy folder
 dist
 
+.env*
+
 # vscode
 .vscode/launch.json
 debug.log

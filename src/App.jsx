@@ -5,15 +5,18 @@ import '@styles/font.css'
 import Layout from '@pages/Layout'
 
 const queryClient = new QueryClient()
+const mode = import.meta.env.MODE
 
 export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools
-        initialIsOpen={false}
-        position="bottom-right"
-        style={{ top: '0px', position: 'absolute' }}
-      />
+      {mode === 'development' && (
+        <ReactQueryDevtools
+          initialIsOpen={false}
+          position="bottom-right"
+          style={{ top: '0px', position: 'absolute' }}
+        />
+      )}
       <Layout />
     </QueryClientProvider>
   )
