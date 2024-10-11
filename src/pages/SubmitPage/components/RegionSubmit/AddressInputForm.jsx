@@ -5,7 +5,7 @@ import { Input } from 'antd'
 import theme from '@styles/theme'
 import useFormStore from '@stores/useFormStore'
 
-export default function RegionSubmitPage() {
+export default function AddressInputForm() {
   const [city, address, setAddress] = useFormStore(
     useShallow((state) => [state.city, state.address, state.setFormContents])
   )
