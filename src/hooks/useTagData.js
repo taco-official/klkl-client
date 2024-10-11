@@ -5,11 +5,8 @@ import useFeedStore from '@stores/useFeedStore'
 
 const useTagData = () => {
   const { categoryData: data } = useLoaderData()
-  const { selectedCategory, selectedSubcategory } = useFeedStore(
-    useShallow((state) => ({
-      selectedCategory: state.selectedCategory,
-      selectedSubcategory: state.selectedSubcategory,
-    }))
+  const [selectedCategory, selectedSubcategory] = useFeedStore(
+    useShallow((state) => [state.selectedCategory, state.selectedSubcategory])
   )
   const [tagArray, setTagArray] = useState([])
 

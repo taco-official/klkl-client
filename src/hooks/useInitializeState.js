@@ -6,11 +6,11 @@ import useFeedStore from '@stores/useFeedStore'
 
 const useInitializeCountry = (locationState, regionData) => {
   const selectedCountry = useFeedStore((state) => state.selectedCountry)
-  const { setSelectedCountry, setDefaultOpenRegion } = useFeedStore(
-    (state) => ({
-      setSelectedCountry: state.setSelectedCountry,
-      setDefaultOpenRegion: state.setDefaultOpenRegion,
-    })
+  const [setSelectedCountry, setDefaultOpenRegion] = useFeedStore(
+    useShallow((state) => [
+      state.setSelectedCountry,
+      state.setDefaultOpenRegion,
+    ])
   )
 
   useEffect(() => {
@@ -31,18 +31,17 @@ const useInitializeCountry = (locationState, regionData) => {
 }
 
 const useInitializeCity = (locationState, regionData) => {
-  const { selectedCountry, selectedCity } = useFeedStore(
-    useShallow((state) => ({
-      selectedCountry: state.selectedCountry,
-      selectedCity: state.selectedCity,
-    }))
+  const [selectedCountry, selectedCity] = useFeedStore(
+    useShallow((state) => [state.selectedCountry, state.selectedCity])
   )
-  const { setSelectedCountry, addSelectedCity, setDefaultOpenRegion } =
-    useFeedStore((state) => ({
-      setSelectedCountry: state.setSelectedCountry,
-      addSelectedCity: state.addSelectedCity,
-      setDefaultOpenRegion: state.setDefaultOpenRegion,
-    }))
+  const [setSelectedCountry, addSelectedCity, setDefaultOpenRegion] =
+    useFeedStore(
+      useShallow((state) => [
+        state.setSelectedCountry,
+        state.addSelectedCity,
+        state.setDefaultOpenRegion,
+      ])
+    )
 
   useEffect(() => {
     if (locationState?.data?.cities.length) {
@@ -83,17 +82,14 @@ const useInitializeCategory = (locationState, categoryData) => {
 }
 
 const useInitializeSubcategory = (locationState, categoryData) => {
-  const { selectedCategory, selectedSubcategory } = useFeedStore(
-    useShallow((state) => ({
-      selectedCategory: state.selectedCategory,
-      selectedSubcategory: state.selectedSubcategory,
-    }))
+  const [selectedCategory, selectedSubcategory] = useFeedStore(
+    useShallow((state) => [state.selectedCategory, state.selectedSubcategory])
   )
-  const { addSelectedCategory, addSelectedSubcategory } = useFeedStore(
-    (state) => ({
-      addSelectedCategory: state.addSelectedCategory,
-      addSelectedSubcategory: state.addSelectedSubcategory,
-    })
+  const [addSelectedCategory, addSelectedSubcategory] = useFeedStore(
+    useShallow((state) => [
+      state.addSelectedCategory,
+      state.addSelectedSubcategory,
+    ])
   )
 
   useEffect(() => {

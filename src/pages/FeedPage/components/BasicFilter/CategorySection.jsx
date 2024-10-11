@@ -21,11 +21,13 @@ function CategoryCheckBox({ category }) {
     addSelectedCategory,
     deleteSelectedCategory,
     deleteSelectedSubcategoriesByCategoryId,
-  ] = useFeedStore((state) => [
-    state.addSelectedCategory,
-    state.deleteSelectedCategory,
-    state.deleteSelectedSubcategoriesByCategoryId,
-  ])
+  ] = useFeedStore(
+    useShallow((state) => [
+      state.addSelectedCategory,
+      state.deleteSelectedCategory,
+      state.deleteSelectedSubcategoriesByCategoryId,
+    ])
+  )
 
   const subcategoryLength = category.subcategories.length
 

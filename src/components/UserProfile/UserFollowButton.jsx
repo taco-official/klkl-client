@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useShallow } from 'zustand/react/shallow'
 import { Button, ConfigProvider, notification } from 'antd'
 import theme from '@styles/theme'
 import kyMethod from '@constants/kyMethod'
@@ -72,12 +71,7 @@ const useUnFollow = (id) => {
 }
 
 function UserFollowButton({ id }) {
-  const { isLogin, loginData } = useLoginStore(
-    useShallow((state) => ({
-      isLogin: state.isLogin,
-      loginData: state.loginData,
-    }))
-  )
+  const { isLogin, loginData } = useLoginStore()
   const isFollowed = useCheckFollow(id)
   const followUser = useFollow(id)
   const unFollowUser = useUnFollow(id)

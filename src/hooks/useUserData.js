@@ -13,23 +13,15 @@ const useUserData = () => {
     gcTime: 1000 * 60 * 60,
     select: (data) => data.data,
   })
-  const { isLogin, loginData } = useLoginStore((state) => ({
-    isLogin: state.isLogin,
-    loginData: state.loginData,
-  }))
-  const { setLogin, setLoginData, setLogout } = useLoginStore((state) => ({
-    setLogin: state.setLogin,
-    setLoginData: state.setLoginData,
-    setLogout: state.setLogout,
-  }))
+  const loginStore = useLoginStore()
 
   useEffect(() => {
     if (isLoading) return
-    if (userData) {
-      if (!isLogin) setLogin(userData)
-      else if (!isEqual(loginData, userData)) setLoginData(userData)
-    }
-    if (isError && isLogin) setLogout()
+    if (userData)
+      if (!loginStore.isLogin) loginStore.setLogin(userData)
+      else if (!isEqual(loginStore.loginData, userData))
+        loginStore.setLoginData(userData)
+    if (isError && loginStore.isLogin) loginStore.setLogout()
   }, [isLoading, userData, isError])
 }
 
