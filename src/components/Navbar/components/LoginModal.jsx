@@ -48,8 +48,7 @@ function LoginModal() {
             <Button
               style={KaKaoStyle}
               onClick={() => {
-                window.location.href =
-                  'http://localhost:8080/v1/oauth2/authorization/kakao'
+                window.location.href = `${import.meta.env.VITE_APP_API_URL}oauth2/authorization/kakao`
               }}
             >
               <KakaoLogo />
