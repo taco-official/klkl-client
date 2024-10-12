@@ -45,6 +45,6 @@ jobs:
           AWS_EC2_METADATA_DISABLED: true
         run: |
           aws s3 sync \
-            --region ap-northeast-2 \
-            dist s3://klkl-client \
+            --region us-east-1 \
+            dist s3://klkl-frontend \
             --delete
