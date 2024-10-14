@@ -4,7 +4,7 @@ const initialState = {
   images: [],
   name: '',
   description: '',
-  currencyId: 438,
+  currencyId: 1,
   price: 0,
   rating: 0,
 

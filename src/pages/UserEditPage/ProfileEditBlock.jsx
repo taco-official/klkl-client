@@ -21,7 +21,7 @@ function ProfileEditBlock({ loginData }) {
     setProfile(file)
   }
 
-  const deleteProfileImage = () => setProfile('')
+  // const deleteProfileImage = () => setProfile('')
 
   return (
     <ProfileEditBlockWrapper>
@@ -44,17 +44,18 @@ function ProfileEditBlock({ loginData }) {
         >
           이미지 변경
         </StyledButton>
-        <StyledButton
-          type="text"
-          style={{ color: 'red' }}
-          onClick={deleteProfileImage}
-        >
-          삭제
-        </StyledButton>
       </div>
     </ProfileEditBlockWrapper>
   )
 }
+
+// <StyledButton
+//   type="text"
+//   style={{ color: 'red' }}
+//   onClick={deleteProfileImage}
+// >
+//   삭제
+// </StyledButton>
 
 ProfileEditBlock.propTypes = {
   loginData: PropTypes.shape({
