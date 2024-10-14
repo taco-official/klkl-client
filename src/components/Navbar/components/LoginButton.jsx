@@ -6,6 +6,8 @@ import useLoginStore from '@stores/useLoginStore'
 import PlainButton from '../../Button/PlainButton'
 import ProfileImage from '../../UserProfile/ProfileImage'
 
+const defaultImage = import.meta.env.VITE_DEFAULT_IMAGE
+
 export default function LoginButton() {
   const { isLogin, loginData } = useLoginStore()
   const setModalState = useModalStore((store) => store.setModalState)
@@ -22,7 +24,7 @@ export default function LoginButton() {
       }}
     >
       <ProfileImage
-        src={!isLogin ? null : loginData.image?.url}
+        src={!isLogin ? defaultImage : loginData.image?.url}
         $size="2.1875rem"
       />
     </PlainButton>
