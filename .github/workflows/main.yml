@@ -27,6 +27,14 @@ jobs:
         run: |
           yarn install
 
+      - name: Set Environment Variables
+        env:
+          VITE_APP_API_URL: ${{ secrets.VITE_APP_API_URL }}
+          VITE_DEFAULT_IMAGE: ${{ secrets.VITE_DEFAULT_IMAGE }}
+        run: |
+          echo "VITE_APP_API_URL=${VITE_APP_API_URL}" >> .env
+          echo "VITE_DEFAULT_IMAGE=${VITE_DEFAULT_IMAGE}" >> .env
+
       - name: Build project
         run: yarn build
 
