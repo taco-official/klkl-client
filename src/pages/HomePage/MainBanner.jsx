@@ -47,7 +47,7 @@ export default function MainBanner({ urls }) {
         key={urls[curIndex].name}
         className="banner--word__country"
       >{`${urls[curIndex].name}`}</span>
-      <span className="banner--word__other"> 기념품을 둘러보세용가뤼</span>
+      <span className="banner--word__other">기념품을 만나보세요</span>
     </BannerContainer>
   )
 }
@@ -63,7 +63,8 @@ MainBanner.propTypes = {
 
 const BannerContainer = styled.div`
   width: 100%;
-  height: 47vh;
+  height: 60vh;
+  min-width: 900px;
   position: relative;
   overflow: hidden;
 
@@ -103,7 +104,7 @@ const BannerContainer = styled.div`
   .carousel-cell {
     border-radius: 0;
     margin: 0 5px;
-    height: 45vh;
+    height: 100%;
   }
 `
 
@@ -112,7 +113,7 @@ const StyledContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
   background-blend-mode: multiply;
   background-repeat: no-repeat;
-  background-position: top-right;
+  background-position: 50% 50%;
   background-size: 100%;
   transition: background-size ease-in-out 1.5s;
 

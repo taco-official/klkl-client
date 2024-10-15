@@ -6,7 +6,8 @@ import useLoginStore from '@stores/useLoginStore'
 import PlainButton from '../../Button/PlainButton'
 import ProfileImage from '../../UserProfile/ProfileImage'
 
-const defaultImage = import.meta.env.VITE_DEFAULT_IMAGE
+const defaultImage =
+  'https://del5h2y0q6wga.cloudfront.net/member_image/default.webp'
 
 export default function LoginButton() {
   const { isLogin, loginData } = useLoginStore()
