@@ -9,8 +9,8 @@ const useUserData = () => {
     data: userData,
     isError,
   } = useKyQuery('me', undefined, {
-    staleTime: 1000 * 60 * 60,
-    gcTime: 1000 * 60 * 60,
+    staleTime: 1000 * 60 * 10,
+    gcTime: 1000 * 60 * 10,
     select: (data) => data.data,
   })
   const loginStore = useLoginStore()
