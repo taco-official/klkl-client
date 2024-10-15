@@ -12,26 +12,24 @@ import ReviewCarousels from './ReviewCarousel'
 
 const ImageArr = [
   {
-    name: 'Namibia',
-    image:
-      'https://m.worldvision.or.kr/story/wp-content/uploads/2016/05/img_num1_bg-759x500.jpg',
+    name: '중국',
+    image: `https://del5h2y0q6wga.cloudfront.net/country_images/china.jpg`,
   },
   {
-    name: 'Czech',
-    image: `https://tourimage.interpark.com/BBS/Tour/FckUpload/201503/6356258929950226150.jpg`,
+    name: '일본',
+    image: 'https://del5h2y0q6wga.cloudfront.net/country_images/japan.jpg',
   },
   {
-    name: 'Korea',
-    image:
-      'https://korean.visitseoul.net/data/kukudocs/seoul2133/20220526/202205261429481961.jpg',
+    name: '베트남',
+    image: 'https://del5h2y0q6wga.cloudfront.net/country_images/vietnam.jpg',
   },
   {
-    name: 'Japan',
-    image: `https://i.namu.wiki/i/AIdI-1BBVmi_h5Kw6RIm-EGb0Z2VMRx3AXSsUMU0keeiRQ8K8q9PbPAU4gMXH7CIv59RU4raLLKmlChJCLFq8g.webp`,
+    name: '필리핀',
+    image: `https://del5h2y0q6wga.cloudfront.net/country_images/philippines.jpg`,
   },
   {
-    name: 'Russia',
-    image: `https://i.namu.wiki/i/qg3ZaB1AY0IMplOH3d0pVqsHiIymCO7dTkO6eq4-2HzphGa24QipxUs_0xaK6b6Kw_vmfDApBRktGvwzJenqTA.webp`,
+    name: '태국',
+    image: `https://del5h2y0q6wga.cloudfront.net/country_images/thailand.jpg`,
   },
 ]
 
