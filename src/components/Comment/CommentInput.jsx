@@ -34,12 +34,11 @@ export default function CommentInput({ userData }) {
 
     try {
       await mutateAsync(body)
+      setInputValue('')
     } catch (error) {
       console.error(error.response)
       alert('다시 시도해 주세요')
     }
-
-    setInputValue('')
   }
 
   return (
