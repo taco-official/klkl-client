@@ -6,6 +6,7 @@ import useKyQuery from './useKyQuery'
 const useUserData = () => {
   const {
     isLoading,
+    isFetched,
     data: userData,
     isError,
   } = useKyQuery('me', undefined, {
@@ -16,13 +17,14 @@ const useUserData = () => {
   const loginStore = useLoginStore()
 
   useEffect(() => {
-    if (isLoading) return
-    if (userData)
-      if (!loginStore.isLogin) loginStore.setLogin(userData)
-      else if (!isEqual(loginStore.loginData, userData))
+    if (userData) {
+      if (isFetched && !loginStore.isLogin) loginStore.setLogin(userData)
+      else if (loginStore.isLogin && !isEqual(userData, loginStore.loginData))
         loginStore.setLoginData(userData)
-    if (isError && loginStore.isLogin) loginStore.setLogout()
-  }, [isLoading, userData, isError])
+    } else if (isError && loginStore.isLogin) loginStore.setLogout()
+  }, [userData, isFetched, isError])
+
+  return isLoading
 }
 
 export default useUserData
