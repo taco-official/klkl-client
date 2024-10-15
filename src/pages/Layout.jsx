@@ -10,7 +10,6 @@ import LoadingPage from './LoadingPage'
 
 export default function Layout() {
   const isLoading = useUserData()
-
   return (
     <>
       <GlobalStyle />

@@ -7,6 +7,7 @@ const FeedPage = lazy(() => import('./FeedPage/FeedPage'))
 const MyPage = lazy(() => import('./UserPage/MyPage'))
 const MyEditPage = lazy(() => import('./UserEditPage/UserEditPage'))
 const UserPage = lazy(() => import('./UserPage/UserPage'))
+const LogoutPage = lazy(() => import('./LogoutPage/LogoutPage'))
 
 export {
   HomePage,
@@ -16,4 +17,5 @@ export {
   MyPage,
   MyEditPage,
   UserPage,
+  LogoutPage,
 }
