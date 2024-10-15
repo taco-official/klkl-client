@@ -1,6 +1,12 @@
 name: Deploy to AWS S3
 
 on:
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: string
+        default: manual
+        required: false
   push:
     branches:
       - main
