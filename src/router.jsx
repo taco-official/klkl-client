@@ -44,6 +44,10 @@ const routes = [
     element: <pages.UserPage />,
   },
   {
+    path: 'logout',
+    element: <pages.LogoutPage />,
+  },
+  {
     path: '*',
     element: <ErrorPage />,
   },

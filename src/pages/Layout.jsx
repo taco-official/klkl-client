@@ -6,16 +6,16 @@ import GlobalStyle from '@styles/GlobalStyle'
 import useUserData from '@hooks/useUserData'
 import NavBar from '@components/Navbar/NavBar'
 import Footer from '@components/Footer/Footer'
+import LoadingPage from './LoadingPage'
 
 export default function Layout() {
-  useUserData()
-
+  const isLoading = useUserData()
   return (
     <>
       <GlobalStyle />
       <NavBar />
       <StyledMain>
-        <RouterProvider router={router} />
+        {isLoading ? <LoadingPage /> : <RouterProvider router={router} />}
       </StyledMain>
       <Footer />
     </>
