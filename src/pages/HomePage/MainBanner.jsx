@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 import Flickity from 'flickity'
 import theme from '@styles/theme'
+import navigateWithState from '@utils/navigateWithState'
 import StyledFlickity from '@components/Carousel/Carousel'
 
 const flickityOptions = {
@@ -14,14 +16,13 @@ const flickityOptions = {
   prevNextButtons: false,
 }
 
-export default function MainBanner({ urls }) {
+export default function MainBanner({ contents }) {
   const [curIndex, setCurIndex] = useState(0)
-
+  const navigate = useNavigate()
   useEffect(() => {
     const flicktyContainer = new Flickity('.main-banner', flickityOptions)
 
     flicktyContainer.on('change', setCurIndex)
-
     return () => {
       flicktyContainer.off('change', setCurIndex)
     }
@@ -33,30 +34,32 @@ export default function MainBanner({ urls }) {
         options={flickityOptions}
         className="main-banner"
       >
-        {urls.map((country) => {
+        {contents.map((content) => {
           return (
             <StyledContainer
-              $url={country.image}
-              key={country.name}
+              key={content.id}
+              $url={content.wallpaper}
+              onClick={() => navigateWithState(navigate, 'countries', content)}
               className="carousel-cell"
             />
           )
         })}
       </StyledFlickity>
       <span
-        key={urls[curIndex].name}
+        key={contents[curIndex].id}
         className="banner--word__country"
-      >{`${urls[curIndex].name}`}</span>
+      >{`${contents[curIndex].name}`}</span>
       <span className="banner--word__other">기념품을 만나보세요</span>
     </BannerContainer>
   )
 }
 
 MainBanner.propTypes = {
-  urls: PropTypes.arrayOf(
+  contents: PropTypes.arrayOf(
     PropTypes.shape({
-      image: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
       name: PropTypes.string.isRequired,
+      wallpaper: PropTypes.string.isRequired,
     })
   ).isRequired,
 }

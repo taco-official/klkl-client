@@ -1,9 +1,7 @@
-import React, { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
-import { navIndex } from '@constants/navIndex'
-import { useCurrentPageStore } from '@stores/navbarStores'
-import useFeedStore from '@stores/useFeedStore'
+import React from 'react'
 import useInitializeState from '@hooks/useInitializeState'
+import useNavIndex from '@hooks/useNavIndex'
+import useInitializeLocationState from '@hooks/useInitializeLocationState'
 import Thumbnail from './components/Thumbnail/Thumbnail'
 import BasicFilter from './components/BasicFilter/BasicFilter'
 import AdditionalFilter from './components/AdditionalFilter/AdditionalFilter'
@@ -13,30 +11,8 @@ import { FeedPageLayout, FeedPageContent, FeedArea } from './FeedPage.style'
 
 function FeedPage() {
   useInitializeState()
-
-  const location = useLocation()
-  const { currentPage, setCurrentPage } = useCurrentPageStore()
-  const resetSelectedField = useFeedStore((state) => state.resetSelectedField)
-
-  useEffect(() => {
-    if (currentPage !== navIndex.FEED) setCurrentPage(navIndex.FEED)
-    return () => setCurrentPage(navIndex.NONE)
-  }, [])
-
-  useEffect(() => {
-    const deleteDataState = (state) => {
-      if (!state?.usr) return state
-      const newState = { ...state, usr: { ...state.usr } }
-      if ('data' in newState.usr) delete newState.usr.data
-      return newState
-    }
-    const { history } = window
-    if (history.state) {
-      const newState = deleteDataState(history.state)
-      if (newState) history.replaceState(newState, '')
-    }
-    return resetSelectedField
-  }, [location.state])
+  useNavIndex('FEED')
+  useInitializeLocationState()
 
   return (
     <FeedPageLayout>

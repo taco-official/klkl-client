@@ -1,10 +1,11 @@
 import styled from 'styled-components'
+import defaultWallpaper from '@constants/defaultWallpaper'
 
 const ThumbnailArea = styled.div`
   width: 100%;
   height: 50vh;
   background: 50% 4% / cover
-    ${(props) => (props.$url ? `url(${props.$url})` : 'white')};
+    ${(props) => `url(${props.$url})` || defaultWallpaper};
   display: flex;
   justify-content: center;
   position: relative;

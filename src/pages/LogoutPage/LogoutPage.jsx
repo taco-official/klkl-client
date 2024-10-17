@@ -7,15 +7,23 @@ import useKyMutation from '@hooks/useKyMutation'
 function LogoutPage() {
   const isLogin = useLoginStore((state) => state.isLogin)
   const setLogout = useLoginStore((state) => state.setLogout)
-  const { mutate } = useKyMutation(kyMethod.POST, 'logout', ['me'])
+  const { mutateAsync } = useKyMutation(kyMethod.POST, 'logout', ['me'])
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (isLogin) {
-      setLogout()
-      mutate()
+    const logout = async () => {
+      if (isLogin) {
+        try {
+          await mutateAsync()
+          setLogout()
+        } catch (error) {
+          alert('로그아웃에 실패했습니다. 다시 시도해주세요.')
+        }
+      }
+      navigate('/')
     }
-    navigate('/')
+
+    logout()
   }, [])
 }
 
