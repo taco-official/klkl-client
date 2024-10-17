@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { FaHeart, FaRegHeart } from 'react-icons/fa6'
 import useProductLike from '@hooks/useProductLike'
@@ -30,6 +30,10 @@ function PreviewLikeButton({
       alert('다시 시도해 주세요')
     }
   }
+
+  useEffect(() => {
+    setIsLiked(likeContent)
+  }, [likeContent])
 
   const iconValue = {
     color: isLiked ? 'red' : 'darkgray',
