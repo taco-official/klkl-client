@@ -10,24 +10,29 @@ import Icons from '@components/Icons/Icons'
 import MainBanner from './MainBanner'
 import ReviewCarousels from './ReviewCarousel'
 
-const ImageArr = [
+const bannerCountries = [
   {
+    id: 2,
     name: '중국',
     image: `https://del5h2y0q6wga.cloudfront.net/country_images/china.jpg`,
   },
   {
+    id: 1,
     name: '일본',
     image: 'https://del5h2y0q6wga.cloudfront.net/country_images/japan.jpg',
   },
   {
+    id: 5,
     name: '베트남',
     image: 'https://del5h2y0q6wga.cloudfront.net/country_images/vietnam.jpg',
   },
   {
+    id: 6,
     name: '필리핀',
     image: `https://del5h2y0q6wga.cloudfront.net/country_images/philippines.jpg`,
   },
   {
+    id: 7,
     name: '태국',
     image: `https://del5h2y0q6wga.cloudfront.net/country_images/thailand.jpg`,
   },
@@ -36,7 +41,7 @@ const ImageArr = [
 export default function HomePage() {
   const { popularReviews, newReviews } = useLoaderData()
   const isLogin = useLoginStore((state) => state.isLogin)
-  const [bannerImages] = useState(ImageArr)
+  const [bannerImages] = useState(bannerCountries)
   const navigate = useNavigate()
   const popLoginModal = useLoginModal()
 
