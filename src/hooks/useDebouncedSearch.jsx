@@ -6,6 +6,7 @@ import router from '@/router'
 import theme from '@styles/theme'
 import { modalIndex } from '@constants/navIndex'
 import kyInstance from '@utils/kyInstance'
+import initializeSearchState from '@utils/initializeSearchState'
 
 const SearchMapping = {
   products: '리뷰',
@@ -15,20 +16,8 @@ const SearchMapping = {
   countries: '국가',
 }
 
-const initializeSearchState = (searchedCategory, searchedContent) => {
-  const result = {
-    countries: [],
-    cities: [],
-    categories: [],
-    subcategories: [],
-  }
-  result[searchedCategory].push(searchedContent)
-  return result
-}
-
 const useDebouncedSearch = (setModalState) => {
   const [results, setResults] = useState([])
-
   const debouncedSearch = useCallback(
     debounce(async (inputValue) => {
       if (inputValue === '') {
@@ -44,7 +33,6 @@ const useDebouncedSearch = (setModalState) => {
             if (result.length === 0) return null
 
             const searchValues = []
-
             searchValues.push(
               <Divider
                 key={category}
@@ -81,11 +69,9 @@ const useDebouncedSearch = (setModalState) => {
                 </ResultRow>
               )
             )
-
             return searchValues
           }
         )
-
         setResults(newResult)
       } catch (error) {
         setResults([<ResultRow>오류가 발생했습니다</ResultRow>])
@@ -93,7 +79,6 @@ const useDebouncedSearch = (setModalState) => {
     }, 150),
     []
   )
-
   return [results, debouncedSearch]
 }
 
