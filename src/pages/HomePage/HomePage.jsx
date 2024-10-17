@@ -14,27 +14,28 @@ const bannerCountries = [
   {
     id: 2,
     name: '중국',
-    image: `https://del5h2y0q6wga.cloudfront.net/country_images/china.jpg`,
+    wallpaper: `https://del5h2y0q6wga.cloudfront.net/country_images/china.jpg`,
   },
   {
     id: 1,
     name: '일본',
-    image: 'https://del5h2y0q6wga.cloudfront.net/country_images/japan.jpg',
+    wallpaper: 'https://del5h2y0q6wga.cloudfront.net/country_images/japan.jpg',
   },
   {
     id: 5,
     name: '베트남',
-    image: 'https://del5h2y0q6wga.cloudfront.net/country_images/vietnam.jpg',
+    wallpaper:
+      'https://del5h2y0q6wga.cloudfront.net/country_images/vietnam.jpg',
   },
   {
     id: 6,
     name: '필리핀',
-    image: `https://del5h2y0q6wga.cloudfront.net/country_images/philippines.jpg`,
+    wallpaper: `https://del5h2y0q6wga.cloudfront.net/country_images/philippines.jpg`,
   },
   {
     id: 7,
     name: '태국',
-    image: `https://del5h2y0q6wga.cloudfront.net/country_images/thailand.jpg`,
+    wallpaper: `https://del5h2y0q6wga.cloudfront.net/country_images/thailand.jpg`,
   },
 ]
 
@@ -47,7 +48,7 @@ export default function HomePage() {
 
   return (
     <>
-      <MainBanner urls={bannerImages} />
+      <MainBanner contents={bannerImages} />
       <MainArea>
         <div>
           <h1>인기 리뷰</h1>
