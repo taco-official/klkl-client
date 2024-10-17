@@ -1,12 +1,11 @@
 import React from 'react'
+import defaultWallpaper from '@constants/defaultWallpaper'
 import useFeedStore from '@stores/useFeedStore'
 import useKyQuery from '@hooks/useKyQuery'
 import ThumbnailArea from './Thumbnail.style'
 
 function Thumbnail() {
   const selectedCountryId = useFeedStore((state) => state.selectedCountry.id)
-  const defaultWallpaper =
-    'https://image.fmkorea.com/files/attach/new3/20231020/3655109/5782408085/6302086124/a35751389c84e91bfa145bce6f81e5ba.jpg'
   const { data: wallpaper } = useKyQuery(
     `countries/${selectedCountryId}`,
     ['countryWallpaper', selectedCountryId],

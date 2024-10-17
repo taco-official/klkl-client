@@ -6,7 +6,7 @@ import router from '@/router'
 import theme from '@styles/theme'
 import { modalIndex } from '@constants/navIndex'
 import kyInstance from '@utils/kyInstance'
-import initializeSearchState from '@utils/initializeSearchState'
+import navigateWithState from '@utils/navigateWithState'
 
 const SearchMapping = {
   products: '리뷰',
@@ -55,13 +55,7 @@ const useDebouncedSearch = (setModalState) => {
                   key={content.name}
                   onClick={() => {
                     setModalState(modalIndex.NONE)
-                    const searchState = initializeSearchState(category, content)
-                    router.navigate('/feed', {
-                      state: {
-                        from: window.location.pathname,
-                        data: searchState,
-                      },
-                    })
+                    navigateWithState(router.navigate, category, content)
                   }}
                 >
                   {content.name}

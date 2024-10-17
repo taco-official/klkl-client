@@ -10,7 +10,7 @@ const useInitializeLocationState = () => {
     const deleteDataState = (state) => {
       if (!state?.usr) return state
       const newState = { ...state, usr: { ...state.usr } }
-      if ('data' in newState.usr) delete newState.usr.data
+      if ('data' in newState.usr) newState.usr.data = undefined
       return newState
     }
     const { history } = window

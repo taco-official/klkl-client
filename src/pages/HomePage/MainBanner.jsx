@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 import Flickity from 'flickity'
 import theme from '@styles/theme'
-import initializeSearchState from '@utils/initializeSearchState'
+import navigateWithState from '@utils/navigateWithState'
 import StyledFlickity from '@components/Carousel/Carousel'
 
 const flickityOptions = {
@@ -19,7 +19,6 @@ const flickityOptions = {
 export default function MainBanner({ contents }) {
   const [curIndex, setCurIndex] = useState(0)
   const navigate = useNavigate()
-
   useEffect(() => {
     const flicktyContainer = new Flickity('.main-banner', flickityOptions)
 
@@ -40,15 +39,7 @@ export default function MainBanner({ contents }) {
             <StyledContainer
               key={content.id}
               $url={content.wallpaper}
-              onClick={() => {
-                const searchState = initializeSearchState('countries', content)
-                navigate('/feed', {
-                  state: {
-                    from: window.location.pathname,
-                    data: searchState,
-                  },
-                })
-              }}
+              onClick={() => navigateWithState(navigate, 'countries', content)}
               className="carousel-cell"
             />
           )
