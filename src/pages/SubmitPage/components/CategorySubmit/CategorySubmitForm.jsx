@@ -4,7 +4,10 @@ import CategorySelectList from './CategorySelectList'
 import TagSelectForm from './TagSelectForm'
 
 export default function CategorySubmitForm() {
-  const { data: categories } = useKyQuery('categories/hierarchy')
+  const { data: categories } = useKyQuery('categories/hierarchy', {
+    gcTime: 300000,
+    staleTime: 300000,
+  })
 
   return (
     <>

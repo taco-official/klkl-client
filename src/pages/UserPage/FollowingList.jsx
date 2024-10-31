@@ -63,7 +63,10 @@ function FollowingList() {
   const { data: followingList, isLoading } = useKyQuery(
     'me/following',
     undefined,
-    { staleTime: 0 }
+    {
+      gcTime: 0,
+      staleTime: 0,
+    }
   )
 
   if (isLoading) return null

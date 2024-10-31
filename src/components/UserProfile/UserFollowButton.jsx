@@ -13,7 +13,10 @@ const useCheckFollow = (id) => {
     data: following,
     isLoading,
     isError,
-  } = useKyQuery(`me/following/${id}`, ['me/following', id])
+  } = useKyQuery(`me/following/${id}`, ['me/following', id], {
+    gcTime: 300000,
+    staleTime: 300000,
+  })
 
   if (isLoading || isError) return undefined
 

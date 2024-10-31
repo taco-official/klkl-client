@@ -14,7 +14,10 @@ export default function Comment({ userData }) {
     isError,
     error,
     isLoading,
-  } = useKyQuery(`products/${id}/comments`, undefined, { staleTime: 0 })
+  } = useKyQuery(`products/${id}/comments`, undefined, {
+    gcTime: 0,
+    staleTime: 0,
+  })
 
   if (isError) return <div>{error}</div>
   if (isLoading) return <div>loading</div>

@@ -13,8 +13,8 @@ const useKyQuery = (uri, queryKey = [uri], options = null) => {
   return useQuery({
     queryKey,
     queryFn: () => kyInstance.get(uri).json(),
-    gcTime: 300000,
-    staleTime: 300000,
+    gcTime: 0,
+    staleTime: 0,
     retry: false,
     ...options,
   })

@@ -13,6 +13,7 @@ function useProductData() {
   })
 
   const { isLoading, data, isError } = useKyQuery(uri, undefined, {
+    gcTime: 0,
     staleTime: 0,
   })
 

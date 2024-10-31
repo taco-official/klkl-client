@@ -8,7 +8,14 @@ import useKyQuery from '@hooks/useKyQuery'
 
 const useDefaultCurrency = (setFormContents) => {
   const country = useFormStore((state) => state.country)
-  const { data, isLoading } = useKyQuery(`currencies?country_id=${country.id}`)
+  const { data, isLoading } = useKyQuery(
+    `currencies?country_id=${country.id}`,
+    undefined,
+    {
+      gcTime: 300000,
+      staleTime: 300000,
+    }
+  )
 
   useEffect(() => {
     if (!isLoading) setFormContents({ currencyId: data.data[0].id })

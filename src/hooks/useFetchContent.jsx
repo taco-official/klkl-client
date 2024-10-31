@@ -8,6 +8,7 @@ const useFetchContent = (id) => {
   const [currentPage, setCurrentPage] = useState(initialPageData)
   const url = parseQueryParams(`members/${id}/products`, currentPage)
   const { data: productList } = useKyQuery(url, undefined, {
+    gcTime: 0,
     staleTime: 0,
     enabled: !!id,
   })

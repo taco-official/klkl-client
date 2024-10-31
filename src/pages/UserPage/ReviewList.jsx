@@ -9,6 +9,7 @@ function ReviewList({ selectedMenu }) {
   const [currentPage, setCurrentPage] = useState(initialPageData)
   const url = parseQueryParams(`${selectedMenu}`, currentPage)
   const { data: productList } = useKyQuery(url, undefined, {
+    gcTime: 0,
     staleTime: 0,
   })
 

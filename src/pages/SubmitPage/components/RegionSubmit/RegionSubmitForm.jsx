@@ -4,7 +4,10 @@ import RegionSelectList from './RegionSelectList'
 import AddressInputForm from './AddressInputForm'
 
 export default function RegionSubmitPage() {
-  const { data: regions } = useKyQuery('regions/hierarchy')
+  const { data: regions } = useKyQuery('regions/hierarchy', undefined, {
+    gcTime: 300000,
+    staleTime: 300000,
+  })
 
   return (
     <>

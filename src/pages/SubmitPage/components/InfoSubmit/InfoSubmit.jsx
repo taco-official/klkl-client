@@ -8,7 +8,10 @@ import RatingInput from './RatingInput'
 import NumberInputForm from './NumberInputForm'
 
 export default function InfoSubmitForm() {
-  const { data: currencies, isLoading } = useKyQuery('currencies')
+  const { data: currencies, isLoading } = useKyQuery('currencies', undefined, {
+    gcTime: 300000,
+    staleTime: 300000,
+  })
 
   return (
     <>
